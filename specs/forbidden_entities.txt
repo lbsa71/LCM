@@ -1,0 +1,68 @@
+# Denylist of real-world entities for corpus linter (PRD Section 14, 15)
+# Geographic / Countries / Cities
+earth
+usa
+united states
+europe
+asia
+africa
+america
+london
+paris
+tokyo
+new york
+beijing
+berlin
+rome
+washington
+california
+france
+germany
+japan
+china
+united kingdom
+
+# Real Companies & Brands
+google
+apple
+microsoft
+amazon
+meta
+facebook
+openai
+anthropic
+ibm
+oracle
+twitter
+tesla
+nvidia
+intel
+
+# Famous Historical Figures / People
+einstein
+newton
+shakespeare
+darwin
+napoleon
+caesar
+washington
+lincoln
+churchill
+turing
+curie
+aristotle
+plato
+socrates
+
+# Web & Protocol Artifacts
+http://
+https://
+www.
+.com
+.org
+.net
+.edu
+.gov
+@gmail.com
+@yahoo.com
+@hotmail.com

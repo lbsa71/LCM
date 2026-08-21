@@ -1,0 +1,93 @@
+# Smoke Experiment Preset (Fast CPU-friendly debugging, ~2 min runtime)
+name: "smoke"
+seed: 42
+
+corpus:
+  train_worlds: 50
+  val_worlds: 10
+  test_worlds: 20
+  docs_per_world: 15
+  facts_per_world: 20
+  distractor_docs_per_world: 5
+  task_types_per_world: 4
+  counterfactual_pairs_per_world: 4
+  trajectory_samples_per_world: 4
+
+tokenizer:
+  vocab_size: 4096
+  min_frequency: 2
+  special_tokens:
+    - "<PAD>"
+    - "<BOS>"
+    - "<EOS>"
+    - "<UNK>"
+    - "<USER>"
+    - "<ASSISTANT>"
+    - "<TOOL>"
+    - "<OBSERVATION>"
+    - "<PLAN>"
+    - "<ACTION>"
+    - "<FINAL>"
+
+model:
+  vocab_size: 4096
+  hidden_size: 128
+  num_hidden_layers: 4
+  num_attention_heads: 4
+  intermediate_size: 512
+  max_position_embeddings: 512
+  rms_norm_eps: 1.0e-5
+  rope_theta: 10000.0
+  tie_word_embeddings: true
+
+pretrain:
+  learning_rate: 1.0e-3
+  min_learning_rate: 1.0e-4
+  weight_decay: 0.01
+  batch_size: 8
+  gradient_accumulation_steps: 2
+  max_steps: 300
+  warmup_steps: 30
+  eval_interval: 50
+  save_milestones: [100, 200, 300]
+  device: "auto"
+
+agent_sft:
+  learning_rate: 5.0e-4
+  min_learning_rate: 5.0e-5
+  weight_decay: 0.01
+  batch_size: 4
+  gradient_accumulation_steps: 2
+  max_steps: 250
+  warmup_steps: 25
+  eval_interval: 50
+  device: "auto"
+
+agent_runtime:
+  max_turns: 12
+  max_search_calls: 6
+  max_read_calls: 8
+  max_exec_calls: 4
+  max_tokens_per_turn: 128
+  temperature: 0.0
+  greedy: true
+
+eval:
+  suites:
+    - "suite_a_language"
+    - "suite_b_invariants"
+    - "suite_c_single_hop"
+    - "suite_d_multi_hop"
+    - "suite_e_retrieval_computation"
+    - "suite_f_missing_evidence"
+    - "suite_g_tool_recovery"
+    - "anti_memorization_permutation"
+    - "anti_memorization_prior_reversal"
+    - "anti_memorization_evidence_disabled"
+    - "anti_memorization_closed_book"
+  run_baselines:
+    - "majority"
+    - "bow"
+    - "no_tool"
+    - "oracle"
+    - "rule_based"

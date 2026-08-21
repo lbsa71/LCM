@@ -1,0 +1,93 @@
+# Primary Experiment Preset (~30M-80M params, ~100M-200M tokens)
+name: "primary"
+seed: 42
+
+corpus:
+  train_worlds: 2000
+  val_worlds: 200
+  test_worlds: 400
+  docs_per_world: 40
+  facts_per_world: 60
+  distractor_docs_per_world: 15
+  task_types_per_world: 10
+  counterfactual_pairs_per_world: 10
+  trajectory_samples_per_world: 20
+
+tokenizer:
+  vocab_size: 8192
+  min_frequency: 2
+  special_tokens:
+    - "<PAD>"
+    - "<BOS>"
+    - "<EOS>"
+    - "<UNK>"
+    - "<USER>"
+    - "<ASSISTANT>"
+    - "<TOOL>"
+    - "<OBSERVATION>"
+    - "<PLAN>"
+    - "<ACTION>"
+    - "<FINAL>"
+
+model:
+  vocab_size: 8192
+  hidden_size: 512
+  num_hidden_layers: 8
+  num_attention_heads: 8
+  intermediate_size: 2048
+  max_position_embeddings: 2048
+  rms_norm_eps: 1.0e-5
+  rope_theta: 10000.0
+  tie_word_embeddings: true
+
+pretrain:
+  learning_rate: 5.0e-4
+  min_learning_rate: 5.0e-5
+  weight_decay: 0.01
+  batch_size: 32
+  gradient_accumulation_steps: 4
+  max_steps: 10000
+  warmup_steps: 500
+  eval_interval: 500
+  save_milestones: [2000, 5000, 8000, 10000]
+  device: "auto"
+
+agent_sft:
+  learning_rate: 2.0e-4
+  min_learning_rate: 2.0e-5
+  weight_decay: 0.01
+  batch_size: 16
+  gradient_accumulation_steps: 4
+  max_steps: 5000
+  warmup_steps: 250
+  eval_interval: 250
+  device: "auto"
+
+agent_runtime:
+  max_turns: 12
+  max_search_calls: 6
+  max_read_calls: 8
+  max_exec_calls: 4
+  max_tokens_per_turn: 512
+  temperature: 0.0
+  greedy: true
+
+eval:
+  suites:
+    - "suite_a_language"
+    - "suite_b_invariants"
+    - "suite_c_single_hop"
+    - "suite_d_multi_hop"
+    - "suite_e_retrieval_computation"
+    - "suite_f_missing_evidence"
+    - "suite_g_tool_recovery"
+    - "anti_memorization_permutation"
+    - "anti_memorization_prior_reversal"
+    - "anti_memorization_evidence_disabled"
+    - "anti_memorization_closed_book"
+  run_baselines:
+    - "majority"
+    - "bow"
+    - "no_tool"
+    - "oracle"
+    - "rule_based"

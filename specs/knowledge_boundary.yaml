@@ -1,0 +1,71 @@
+# Knowledge Boundary Specification (PRD Section 4)
+# Explicitly distinguishes permitted invariant knowledge from externalized contingent knowledge.
+
+tiers:
+  tier_a_linguistic_primitives:
+    description: "Linguistic and semantic primitives allowed in model weights"
+    allowed: true
+    examples:
+      - singular_plural
+      - tense
+      - pronouns
+      - negation
+      - conjunction
+      - relative_clauses
+      - conditionals
+      - questions
+      - commands
+      - active_passive_voice
+      - reference_and_coreference
+      - spatial_relations: [before, after, above, below, inside, outside, left, right, nearer, farther, north, south, east, west]
+      - quantitative_relations: [larger, smaller, more, fewer, same, different, minimum, maximum, count]
+      - object_identity
+      - sequence
+      - containment
+      - movement
+
+  tier_b_formal_invariants:
+    description: "Formal invariants allowed in model weights"
+    allowed: true
+    examples:
+      - equality
+      - transitivity
+      - ordering
+      - arithmetic: [add, subtract, multiply, divide]
+      - counting
+      - boolean_logic: [AND, OR, NOT]
+      - sets: [membership, intersection, union, difference]
+      - comparisons
+      - elementary_probability
+      - transformations
+      - algorithmic_procedures
+
+  tier_c_stable_physical_priors:
+    description: "Stable physical priors explicitly configurable"
+    allowed: true
+    examples:
+      - object_persistence_through_time
+      - non_co_location: "An object cannot occupy two distinct locations simultaneously"
+      - motion_changes_location
+      - containment_hierarchy
+      - elementary_causation
+
+  tier_d_contingent_knowledge:
+    description: "Contingent knowledge strictly externalized to environment (must NOT be trained into weights)"
+    allowed: false
+    examples:
+      - historical_events
+      - political_officeholders
+      - countries_and_capitals
+      - biographies
+      - corporate_information
+      - product_information
+      - geography
+      - populations
+      - prices
+      - sports_results
+      - cultural_history
+      - named_scientific_discoveries
+      - specific_measured_constants
+      - api_versions
+      - real_world_people_and_organizations

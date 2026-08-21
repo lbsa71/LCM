@@ -1,0 +1,21 @@
+# Lexicon Specification (PRD Section 12)
+# Controlled functional vocabulary, invariant terms, and nonce naming rules.
+
+functional_vocabulary:
+  articles: ["the", "a", "an"]
+  pronouns: ["it", "they", "this", "that", "these", "those", "which", "what", "where", "when", "who", "whose"]
+  conjunctions: ["and", "or", "but", "because", "after", "before", "if", "unless", "while", "though", "since"]
+  prepositions: ["in", "on", "at", "to", "from", "with", "inside", "outside", "above", "below", "between", "north", "south", "east", "west", "near", "far"]
+  quantifiers: ["all", "every", "each", "some", "none", "no", "more", "less", "fewer", "most", "least", "both", "neither"]
+  comparatives: ["greater", "smaller", "larger", "older", "newer", "earlier", "later", "higher", "lower", "same", "different", "equal"]
+  superlatives: ["greatest", "smallest", "largest", "oldest", "newest", "earliest", "latest", "highest", "lowest", "maximum", "minimum"]
+  verbs_action: ["find", "search", "retrieve", "read", "compare", "calculate", "sum", "count", "filter", "rank", "list", "determine", "identify", "record", "locate", "measure", "verify", "is", "are", "was", "were", "has", "have", "contains", "contains_not"]
+  status_terms: ["insufficient_evidence", "unknown", "yes", "no", "true", "false", "verified", "unverified"]
+
+semantic_invariants:
+  categories: ["settlement", "region", "artifact", "device", "record", "event", "container", "zone", "station", "sector", "cluster", "specimen"]
+  relations: ["population", "location", "inside", "contains", "connected_to", "distance_to", "measured_value", "timestamp", "recorded_in", "status", "category", "owner"]
+
+nonce_syllables:
+  prefixes: ["ves", "nor", "tal", "jor", "pel", "zan", "vor", "nat", "les", "jir", "dak", "mip", "tor", "lum", "kex", "bar", "fen", "rix", "sol", "vun", "mar", "kel", "dox", "zep", "fal", "ren", "kin", "tir", "gor", "nel"]
+  suffixes: ["ka", "u", "em", "a", "kin", "ir", "in", "at", "on", "or", "el", "is", "ak", "os", "un", "ix", "en", "ar", "ox", "ul", "an", "et", "or", "ik"]

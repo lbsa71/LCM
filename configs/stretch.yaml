@@ -1,0 +1,93 @@
+# Stretch Experiment Preset (~80M-200M params, ~300M-1B tokens)
+name: "stretch"
+seed: 42
+
+corpus:
+  train_worlds: 10000
+  val_worlds: 500
+  test_worlds: 1000
+  docs_per_world: 60
+  facts_per_world: 100
+  distractor_docs_per_world: 30
+  task_types_per_world: 15
+  counterfactual_pairs_per_world: 20
+  trajectory_samples_per_world: 50
+
+tokenizer:
+  vocab_size: 16384
+  min_frequency: 2
+  special_tokens:
+    - "<PAD>"
+    - "<BOS>"
+    - "<EOS>"
+    - "<UNK>"
+    - "<USER>"
+    - "<ASSISTANT>"
+    - "<TOOL>"
+    - "<OBSERVATION>"
+    - "<PLAN>"
+    - "<ACTION>"
+    - "<FINAL>"
+
+model:
+  vocab_size: 16384
+  hidden_size: 768
+  num_hidden_layers: 12
+  num_attention_heads: 12
+  intermediate_size: 3072
+  max_position_embeddings: 2048
+  rms_norm_eps: 1.0e-5
+  rope_theta: 10000.0
+  tie_word_embeddings: true
+
+pretrain:
+  learning_rate: 4.0e-4
+  min_learning_rate: 4.0e-5
+  weight_decay: 0.01
+  batch_size: 64
+  gradient_accumulation_steps: 4
+  max_steps: 30000
+  warmup_steps: 1000
+  eval_interval: 1000
+  save_milestones: [5000, 10000, 20000, 30000]
+  device: "auto"
+
+agent_sft:
+  learning_rate: 1.5e-4
+  min_learning_rate: 1.5e-5
+  weight_decay: 0.01
+  batch_size: 32
+  gradient_accumulation_steps: 4
+  max_steps: 15000
+  warmup_steps: 500
+  eval_interval: 500
+  device: "auto"
+
+agent_runtime:
+  max_turns: 12
+  max_search_calls: 6
+  max_read_calls: 8
+  max_exec_calls: 4
+  max_tokens_per_turn: 512
+  temperature: 0.0
+  greedy: true
+
+eval:
+  suites:
+    - "suite_a_language"
+    - "suite_b_invariants"
+    - "suite_c_single_hop"
+    - "suite_d_multi_hop"
+    - "suite_e_retrieval_computation"
+    - "suite_f_missing_evidence"
+    - "suite_g_tool_recovery"
+    - "anti_memorization_permutation"
+    - "anti_memorization_prior_reversal"
+    - "anti_memorization_evidence_disabled"
+    - "anti_memorization_closed_book"
+  run_baselines:
+    - "majority"
+    - "bow"
+    - "no_tool"
+    - "oracle"
+    - "rule_based"
