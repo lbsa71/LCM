@@ -55,29 +55,8 @@ class ProtocolError(BaseModel):
     details: Optional[Dict[str, Any]] = None
 
 
-def parse_and_validate_message(raw_text: str) -> Union[PlanMessage, ToolCallMessage, FinalMessage, ProtocolError]:
-    """Parses raw text into one of the allowed protocol messages or returns a ProtocolError."""
-    # Find JSON substring if enclosed in markup tags
-    cleaned = raw_text.strip()
-    for tag in ["<PLAN>", "</PLAN>", "<ACTION>", "</ACTION>", "<FINAL>", "</FINAL>", "```json", "```"]:
-        cleaned = cleaned.replace(tag, "").strip()
-
-    try:
-        data = json.loads(cleaned)
-    except Exception as e:
-        return ProtocolError(
-            error_type="JSON_DECODE_ERROR",
-            message=f"Model output is not valid JSON: {str(e)}",
-            details={"raw_text": raw_text[:200]}
-        )
-
-    if not isinstance(data, dict):
-        return ProtocolError(
-            error_type="INVALID_SCHEMA",
-            message="Top-level protocol message must be a JSON object.",
-            details={"type_found": type(data).__name__}
-        )
-
+def _validate_single_dict(data: dict) -> Union[PlanMessage, ToolCallMessage, FinalMessage, ProtocolError]:
+    """Validates a single parsed dictionary against the protocol schemas."""
     msg_type = data.get("type")
     try:
         if msg_type == "plan":
@@ -110,3 +89,74 @@ def parse_and_validate_message(raw_text: str) -> Union[PlanMessage, ToolCallMess
             message=f"Protocol schema validation failed: {str(ve)}",
             details={"errors": ve.errors()}
         )
+
+
+def extract_json_objects(text: str) -> List[dict]:
+    """Extracts all top-level JSON objects found in a string."""
+    decoder = json.JSONDecoder()
+    results = []
+    idx = 0
+    text_len = len(text)
+    while idx < text_len:
+        start = text.find("{", idx)
+        if start == -1:
+            break
+        try:
+            obj, end = decoder.raw_decode(text, idx=start)
+            if isinstance(obj, dict):
+                results.append(obj)
+            idx = max(end, start + 1)
+        except Exception:
+            idx = start + 1
+    return results
+
+
+def parse_and_validate_message(raw_text: str) -> Union[PlanMessage, ToolCallMessage, FinalMessage, ProtocolError]:
+    """Parses raw text into one of the allowed protocol messages or returns a ProtocolError."""
+    cleaned = raw_text.strip()
+    for tag in ["<PLAN>", "</PLAN>", "<ACTION>", "</ACTION>", "<FINAL>", "</FINAL>", "<TOOL>", "</TOOL>", "<OBSERVATION>", "</OBSERVATION>", "```json", "```"]:
+        cleaned = cleaned.replace(tag, "").strip()
+
+    # 1. Attempt exact parse
+    try:
+        data = json.loads(cleaned)
+        if isinstance(data, dict):
+            return _validate_single_dict(data)
+    except Exception:
+        pass
+
+    # 2. Resilient multi-object / substring extraction
+    extracted_objects = extract_json_objects(cleaned)
+    if not extracted_objects:
+        return ProtocolError(
+            error_type="JSON_DECODE_ERROR",
+            message="Model output contains no valid JSON objects.",
+            details={"raw_text": raw_text[:200]}
+        )
+
+    # If multiple JSON objects are present, prioritize executable messages (final > tool_call > plan)
+    valid_messages = []
+    last_error = None
+    for obj in extracted_objects:
+        res = _validate_single_dict(obj)
+        if isinstance(res, (FinalMessage, ToolCallMessage, PlanMessage)):
+            valid_messages.append(res)
+        else:
+            last_error = res
+
+    if valid_messages:
+        # Prefer FinalMessage > ToolCallMessage > PlanMessage
+        for vm in valid_messages:
+            if isinstance(vm, FinalMessage):
+                return vm
+        for vm in valid_messages:
+            if isinstance(vm, ToolCallMessage):
+                return vm
+        return valid_messages[0]
+
+    return last_error or ProtocolError(
+        error_type="INVALID_SCHEMA",
+        message="Top-level protocol message must be a valid JSON object.",
+        details={"raw_text": raw_text[:200]}
+    )
+

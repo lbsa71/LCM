@@ -61,7 +61,9 @@ agent_sft:
   max_steps: 1000
   warmup_steps: 100
   eval_interval: 100
+  save_milestones: [250, 500, 750, 1000]
   device: "auto"
+
 
 agent_runtime:
   max_turns: 12

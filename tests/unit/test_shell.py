@@ -23,6 +23,18 @@ def test_protocol_parsing():
     assert isinstance(msg3, FinalMessage)
     assert msg3.answer == "veska"
 
+    # Compound JSON (Plan followed by Final in single output stream)
+    compound_raw = '{"type": "plan", "goal": "find_x", "needs": ["a"], "next_action": "final"}{"type": "final", "answer": "veska", "evidence": [{"document_id": "D01", "lines": [1]}]}'
+    msg4 = parse_and_validate_message(compound_raw)
+    assert isinstance(msg4, FinalMessage)
+    assert msg4.answer == "veska"
+
+    # Compound JSON (Plan followed by Tool Call)
+    compound_action_raw = '{"type": "plan", "goal": "find_x", "needs": ["a"], "next_action": "search"}{"type": "tool_call", "tool": "search", "arguments": {"query": "noru"}}'
+    msg5 = parse_and_validate_message(compound_action_raw)
+    assert isinstance(msg5, ToolCallMessage)
+    assert msg5.tool == "search"
+
     # Malformed JSON
     bad_raw = '{"type": "plan", goal: broken}'
     err = parse_and_validate_message(bad_raw)

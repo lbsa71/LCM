@@ -20,6 +20,10 @@ dev = [
     "pytest>=7.0.0",
 ]
 
+[tool.setuptools.packages.find]
+include = ["agent*", "eval*", "synth*", "training*"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = ["test_*.py"]
+

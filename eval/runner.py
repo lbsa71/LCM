@@ -137,6 +137,8 @@ def generate_html_report(results: dict, output_path: str):
 def main():
     parser = argparse.ArgumentParser(description="LCM Benchmark Evaluation Runner")
     parser.add_argument("--config", type=str, default="configs/smoke.yaml", help="Path to config yaml")
+    parser.add_argument("--weights", type=str, default=None, help="Path to specific model weights checkpoint")
+    parser.add_argument("--suffix", type=str, default="", help="Suffix for output report and results")
     args = parser.parse_args()
 
     with open(args.config, "r", encoding="utf-8") as f:
@@ -171,11 +173,12 @@ def main():
         trans_cfg = TransformerConfig(**m_dict)
         model = SyntheticTransformer(trans_cfg).to(device)
         
-        agent_weights = os.path.join(agent_dir, "agent_final.pt")
+        agent_weights = args.weights if args.weights else os.path.join(agent_dir, "agent_final.pt")
         if os.path.exists(agent_weights):
             model.load_state_dict(torch.load(agent_weights, map_location=device))
             model.eval()
             print(f"[*] Loaded trained agent model from {agent_weights}")
+
 
     # Load Test Worlds and Tasks
     eval_worlds_path = os.path.join(data_dir, "eval_worlds.json")
@@ -248,19 +251,21 @@ def main():
         "rule_based": compute_aggregate_metrics(rule_outcomes)
     }
 
+    sfx = f"_{args.suffix}" if args.suffix else ""
+
     # Save results.json
-    res_path = os.path.join(eval_dir, "results.json")
+    res_path = os.path.join(eval_dir, f"results{sfx}.json")
     with open(res_path, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2)
 
     # Save traces.jsonl
-    traces_path = os.path.join(eval_dir, "traces.jsonl")
+    traces_path = os.path.join(eval_dir, f"traces{sfx}.jsonl")
     with open(traces_path, "w", encoding="utf-8") as f:
         for ep in agent_episodes:
             f.write(json.dumps(ep) + "\n")
 
     # Save results.csv
-    csv_path = os.path.join(eval_dir, "results.csv")
+    csv_path = os.path.join(eval_dir, f"results{sfx}.csv")
     with open(csv_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(["task_id", "suite", "raw_match", "evidence_valid", "grounded_success", "failure_category"])
@@ -268,8 +273,9 @@ def main():
             writer.writerow([o["task_id"], o["suite"], o["raw_match"], o["evidence_valid"], o["grounded_success"], o["failure_category"]])
 
     # Save HTML report
-    html_path = os.path.join(eval_dir, "report.html")
+    html_path = os.path.join(eval_dir, f"report{sfx}.html")
     generate_html_report(results, html_path)
+
 
     print(f"[+] Evaluation finished.")
     print(f"    - Agent Grounded Success: {results['agent_model']['overall_grounded_success_rate'] * 100:.1f}%")

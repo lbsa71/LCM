@@ -62,6 +62,8 @@ class TrajectoryDataset(Dataset):
                 labels.append(eos_id)
 
                 # Truncate or pad to max_len
+
+
                 if len(input_ids) > max_len:
                     input_ids = input_ids[:max_len]
                     labels = labels[:max_len]
@@ -145,6 +147,7 @@ def train_agent_sft(config_path: str):
     lr = float(sft_cfg.get("learning_rate", 5e-4))
     min_lr = float(sft_cfg.get("min_learning_rate", 5e-5))
     warmup_steps = sft_cfg.get("warmup_steps", 25)
+    save_milestones = sft_cfg.get("save_milestones", [])
 
     train_loader = DataLoader(
         sft_ds,
@@ -181,6 +184,10 @@ def train_agent_sft(config_path: str):
                 optimizer.zero_grad()
 
             step += 1
+            if step in save_milestones:
+                milestone_ckpt = os.path.join(agent_model_dir, f"agent_step_{step}.pt")
+                torch.save(model.state_dict(), milestone_ckpt)
+
             if step % 50 == 0 or step == max_steps:
                 elapsed = time.time() - start_time
                 current_lr = scheduler.get_last_lr()[0]
@@ -188,6 +195,7 @@ def train_agent_sft(config_path: str):
 
             if step >= max_steps:
                 break
+
 
     # Save agent model
     agent_ckpt_path = os.path.join(agent_model_dir, "agent_final.pt")

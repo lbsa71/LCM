@@ -129,6 +129,7 @@ def train_pretrain(config_path: str):
     lr = float(p_cfg.get("learning_rate", 1e-3))
     min_lr = float(p_cfg.get("min_learning_rate", 1e-4))
     warmup_steps = p_cfg.get("warmup_steps", 30)
+    save_milestones = p_cfg.get("save_milestones", [])
 
     train_loader = DataLoader(
         train_ds,
@@ -167,6 +168,10 @@ def train_pretrain(config_path: str):
                 optimizer.zero_grad()
 
             step += 1
+            if step in save_milestones:
+                milestone_path = os.path.join(base_model_dir, f"base_step_{step}.pt")
+                torch.save(model.state_dict(), milestone_path)
+
             if step % 50 == 0 or step == max_steps:
                 elapsed = time.time() - start_time
                 current_lr = scheduler.get_last_lr()[0]
@@ -174,6 +179,7 @@ def train_pretrain(config_path: str):
 
             if step >= max_steps:
                 break
+
 
     # Save final model & config
     final_ckpt_path = os.path.join(base_model_dir, "base_final.pt")

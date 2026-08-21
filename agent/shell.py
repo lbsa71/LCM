@@ -59,7 +59,13 @@ class DeterministicShell:
         state.history.append({"role": "user", "content": prompt_text})
 
         eos_id = self.tokenizer.token_to_id("<EOS>") if self.tokenizer else 2
-        obs_tag_id = self.tokenizer.token_to_id("<OBSERVATION>") if self.tokenizer else None
+        stop_ids = [eos_id] if eos_id is not None else []
+        if self.tokenizer:
+            for tag_name in ["<OBSERVATION>", "<USER>"]:
+                tid = self.tokenizer.token_to_id(tag_name)
+                if tid is not None and tid not in stop_ids:
+                    stop_ids.append(tid)
+
 
         while not state.is_terminated:
             turn_err = state.increment_turn()
@@ -70,7 +76,7 @@ class DeterministicShell:
             raw_output = ""
             if self.model and self.tokenizer:
                 bos_id = self.tokenizer.token_to_id("<BOS>")
-                input_ids = [bos_id]
+                input_ids = [bos_id] if bos_id is not None else []
                 for h in state.history:
                     role_tag = f"<{h['role'].upper()}>"
                     tag_id = self.tokenizer.token_to_id(role_tag)
@@ -79,13 +85,14 @@ class DeterministicShell:
                     input_ids.append(tag_id)
                     input_ids.extend(self.tokenizer.encode(h["content"]).ids)
 
+
                 input_tensor = torch.tensor([input_ids], dtype=torch.long).to(self.device)
                 
                 # Predict next action / plan / final
                 generated = self.model.generate(
                     input_tensor,
                     max_new_tokens=self.max_tokens_per_turn,
-                    stop_token_ids=[eos_id, obs_tag_id] if obs_tag_id else [eos_id],
+                    stop_token_ids=stop_ids,
                     temperature=0.0
                 )
                 new_tokens = generated[0, input_tensor.shape[1]:].tolist()
