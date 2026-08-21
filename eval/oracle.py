@@ -10,7 +10,13 @@ class OracleSolver:
     def solve(self, world: World, task: Task) -> Dict[str, Any]:
         """Solves the task deterministically with exact ground truth proof graph evidence."""
         evidence_list = []
-        for doc_id, lines in task.proof_graph.required_document_lines.items():
+        req_lines = {}
+        if hasattr(task, "proof_graph") and task.proof_graph:
+            req_lines = task.proof_graph.required_document_lines
+        elif hasattr(task, "required_evidence"):
+            req_lines = task.required_evidence
+
+        for doc_id, lines in req_lines.items():
             evidence_list.append({
                 "document_id": doc_id,
                 "lines": lines

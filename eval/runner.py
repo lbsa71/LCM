@@ -212,6 +212,7 @@ def main():
                 self.is_retrieval_required = d["is_retrieval_required"]
                 self.is_contingent = d["is_contingent"]
                 self.is_insufficient_evidence = d["is_insufficient_evidence"]
+                self.required_evidence = d.get("required_evidence", {})
                 self.proof_graph = None
 
         t_obj = StructTask(task_data)
