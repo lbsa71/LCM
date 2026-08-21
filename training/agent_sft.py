@@ -98,13 +98,24 @@ def train_agent_sft(config_path: str):
     tok_path = os.path.join(tok_dir, "tokenizer.json")
     tokenizer = Tokenizer.from_file(tok_path)
 
-    # Device
+    # Device & CUDA optimizations
     device_name = config.get("agent_sft", {}).get("device", "auto")
     if device_name == "auto":
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     else:
         device = torch.device(device_name)
-    print(f"[*] Agent SFT on device: {device}")
+
+    use_cuda = device.type == "cuda"
+    if use_cuda:
+        torch.backends.cuda.matmul.allow_tf32 = True
+        torch.backends.cudnn.allow_tf32 = True
+        gpu_name = torch.cuda.get_device_name(device)
+        print(f"[*] Agent SFT on CUDA GPU: {gpu_name} (TF32 enabled)")
+    else:
+        print(f"[*] Agent SFT on device: {device}")
+
+    use_bf16 = use_cuda and torch.cuda.is_bf16_supported()
+    amp_dtype = torch.bfloat16 if use_bf16 else (torch.float16 if use_cuda else torch.float32)
 
     # Load Model Config
     cfg_path = os.path.join(base_model_dir, "config.json")
@@ -135,7 +146,13 @@ def train_agent_sft(config_path: str):
     min_lr = float(sft_cfg.get("min_learning_rate", 5e-5))
     warmup_steps = sft_cfg.get("warmup_steps", 25)
 
-    train_loader = DataLoader(sft_ds, batch_size=batch_size, shuffle=True, drop_last=False)
+    train_loader = DataLoader(
+        sft_ds,
+        batch_size=batch_size,
+        shuffle=True,
+        drop_last=False,
+        pin_memory=use_cuda
+    )
     optimizer = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=sft_cfg.get("weight_decay", 0.01))
     scheduler = get_lr_scheduler(optimizer, warmup_steps, max_steps, lr, min_lr)
 
@@ -146,8 +163,14 @@ def train_agent_sft(config_path: str):
 
     while step < max_steps:
         for batch_x, batch_y in train_loader:
-            batch_x, batch_y = batch_x.to(device), batch_y.to(device)
-            _, loss = model(batch_x, labels=batch_y)
+            batch_x, batch_y = batch_x.to(device, non_blocking=use_cuda), batch_y.to(device, non_blocking=use_cuda)
+            
+            if use_cuda:
+                with torch.amp.autocast(device_type="cuda", dtype=amp_dtype):
+                    _, loss = model(batch_x, labels=batch_y)
+            else:
+                _, loss = model(batch_x, labels=batch_y)
+
             loss = loss / grad_accum
             loss.backward()
 

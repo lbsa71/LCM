@@ -155,8 +155,14 @@ def main():
     tok_path = os.path.join(tok_dir, "tokenizer.json")
     tokenizer = Tokenizer.from_file(tok_path) if os.path.exists(tok_path) else None
 
-    # Load Model
+    # Load Model & Device
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    if device.type == "cuda":
+        torch.backends.cuda.matmul.allow_tf32 = True
+        torch.backends.cudnn.allow_tf32 = True
+        print(f"[*] Evaluation running on CUDA GPU: {torch.cuda.get_device_name(device)} (TF32 enabled)")
+    else:
+        print(f"[*] Evaluation running on device: {device}")
     cfg_path = os.path.join(base_dir, "config.json")
     model = None
     if os.path.exists(cfg_path) and tokenizer:

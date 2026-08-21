@@ -77,13 +77,24 @@ def train_pretrain(config_path: str):
     tokenizer = Tokenizer.from_file(tok_path)
     vocab_size = tokenizer.get_vocab_size()
 
-    # Device
+    # Device & CUDA optimizations
     device_name = config.get("pretrain", {}).get("device", "auto")
     if device_name == "auto":
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     else:
         device = torch.device(device_name)
-    print(f"[*] Pretraining on device: {device}")
+    
+    use_cuda = device.type == "cuda"
+    if use_cuda:
+        torch.backends.cuda.matmul.allow_tf32 = True
+        torch.backends.cudnn.allow_tf32 = True
+        gpu_name = torch.cuda.get_device_name(device)
+        print(f"[*] Pretraining on CUDA GPU: {gpu_name} (TF32 enabled)")
+    else:
+        print(f"[*] Pretraining on device: {device}")
+
+    use_bf16 = use_cuda and torch.cuda.is_bf16_supported()
+    amp_dtype = torch.bfloat16 if use_bf16 else (torch.float16 if use_cuda else torch.float32)
 
     # Model Config
     m_cfg = config.get("model", {})
@@ -119,8 +130,14 @@ def train_pretrain(config_path: str):
     min_lr = float(p_cfg.get("min_learning_rate", 1e-4))
     warmup_steps = p_cfg.get("warmup_steps", 30)
 
-    train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True, drop_last=False)
-    val_loader = DataLoader(val_ds, batch_size=batch_size, shuffle=False) if len(val_ds) > 0 else None
+    train_loader = DataLoader(
+        train_ds,
+        batch_size=batch_size,
+        shuffle=True,
+        drop_last=False,
+        pin_memory=use_cuda
+    )
+    val_loader = DataLoader(val_ds, batch_size=batch_size, shuffle=False, pin_memory=use_cuda) if len(val_ds) > 0 else None
 
     optimizer = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=p_cfg.get("weight_decay", 0.01))
     scheduler = get_lr_scheduler(optimizer, warmup_steps, max_steps, lr, min_lr)
@@ -132,8 +149,14 @@ def train_pretrain(config_path: str):
 
     while step < max_steps:
         for batch_x, batch_y in train_loader:
-            batch_x, batch_y = batch_x.to(device), batch_y.to(device)
-            _, loss = model(batch_x, labels=batch_y)
+            batch_x, batch_y = batch_x.to(device, non_blocking=use_cuda), batch_y.to(device, non_blocking=use_cuda)
+            
+            if use_cuda:
+                with torch.amp.autocast(device_type="cuda", dtype=amp_dtype):
+                    _, loss = model(batch_x, labels=batch_y)
+            else:
+                _, loss = model(batch_x, labels=batch_y)
+
             loss = loss / grad_accum
             loss.backward()
 
