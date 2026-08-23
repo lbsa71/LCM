@@ -12,6 +12,7 @@ from tokenizers import Tokenizer
 
 from training.model import SyntheticTransformer, TransformerConfig
 from training.pretrain import get_lr_scheduler
+from utils.timer import StepTimer
 
 
 class TrajectoryDataset(Dataset):
@@ -158,12 +159,14 @@ def train_agent_sft(config_path: str):
 
     step = 0
     start_time = time.time()
+    timer = StepTimer(agent_model_dir, phase_name="agent_sft")
     milestone_timings = {}
     model.train()
     optimizer.zero_grad()
 
     while step < max_steps:
         for batch_x, batch_y in train_loader:
+            timer.start_step()
             batch_x, batch_y = batch_x.to(device, non_blocking=use_cuda), batch_y.to(device, non_blocking=use_cuda)
             
             if use_cuda:
@@ -182,6 +185,10 @@ def train_agent_sft(config_path: str):
                 optimizer.zero_grad()
 
             step += 1
+            current_lr = scheduler.get_last_lr()[0]
+            tokens_in_step = batch_size * model.config.max_position_embeddings
+            timer.end_step(step, loss.item() * grad_accum, current_lr, tokens_processed=tokens_in_step)
+
             if step in save_milestones:
                 m_elapsed = time.time() - start_time
                 milestone_ckpt = os.path.join(agent_model_dir, f"agent_step_{step}.pt")
@@ -190,7 +197,6 @@ def train_agent_sft(config_path: str):
 
             if step % 50 == 0 or step == max_steps:
                 elapsed = time.time() - start_time
-                current_lr = scheduler.get_last_lr()[0]
                 print(f"SFT Step {step}/{max_steps} | Loss: {loss.item() * grad_accum:.4f} | LR: {current_lr:.6f} | Elapsed: {elapsed:.1f}s")
 
             if step >= max_steps:
@@ -207,6 +213,9 @@ def train_agent_sft(config_path: str):
     agent_ckpt_path = os.path.join(agent_model_dir, "agent_final.pt")
     torch.save(model.state_dict(), agent_ckpt_path)
 
+    # Export per-step CSV
+    csv_metrics_path = timer.export_csv("step_metrics.csv")
+
     # Save training metrics log
     metrics = {
         "phase": "agent_sft",
@@ -220,7 +229,8 @@ def train_agent_sft(config_path: str):
         "final_loss": round(float(loss.item() * grad_accum), 6),
         "milestone_wall_clock_seconds": milestone_timings,
         "device": str(device),
-        "gpu_name": torch.cuda.get_device_name(device) if use_cuda else "cpu"
+        "gpu_name": torch.cuda.get_device_name(device) if use_cuda else "cpu",
+        "step_metrics_csv": os.path.basename(csv_metrics_path)
     }
     metrics_path = os.path.join(agent_model_dir, "training_metrics.json")
     with open(metrics_path, "w", encoding="utf-8") as f:

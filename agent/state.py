@@ -11,11 +11,13 @@ class AgentState:
     max_search_calls: int = 6
     max_read_calls: int = 8
     max_exec_calls: int = 4
+    max_filter_calls: int = 4
 
     turn_count: int = 0
     search_count: int = 0
     read_count: int = 0
     exec_count: int = 0
+    filter_count: int = 0
 
     history: List[Dict[str, Any]] = field(default_factory=list)
     cited_evidence: List[Dict[str, Any]] = field(default_factory=list)
@@ -45,4 +47,8 @@ class AgentState:
             self.exec_count += 1
             if self.exec_count > self.max_exec_calls:
                 return "MAX_EXEC_CALLS_EXCEEDED"
+        elif tool_name == "filter":
+            self.filter_count += 1
+            if self.filter_count > self.max_filter_calls:
+                return "MAX_FILTER_CALLS_EXCEEDED"
         return None

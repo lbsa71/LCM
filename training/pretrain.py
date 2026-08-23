@@ -11,6 +11,7 @@ from torch.utils.data import Dataset, DataLoader
 from tokenizers import Tokenizer
 
 from training.model import SyntheticTransformer, TransformerConfig
+from utils.timer import StepTimer
 
 
 class TextDataset(Dataset):
@@ -150,11 +151,13 @@ def train_pretrain(config_path: str):
 
     step = 0
     start_time = time.time()
+    timer = StepTimer(base_model_dir, phase_name="pretrain")
     model.train()
     optimizer.zero_grad()
 
     while step < max_steps:
         for batch_x, batch_y in train_loader:
+            timer.start_step()
             batch_x, batch_y = batch_x.to(device, non_blocking=use_cuda), batch_y.to(device, non_blocking=use_cuda)
             
             if use_cuda:
@@ -173,13 +176,16 @@ def train_pretrain(config_path: str):
                 optimizer.zero_grad()
 
             step += 1
+            current_lr = scheduler.get_last_lr()[0]
+            tokens_in_step = batch_size * seq_len
+            timer.end_step(step, loss.item() * grad_accum, current_lr, tokens_processed=tokens_in_step)
+
             if step in save_milestones:
                 milestone_path = os.path.join(base_model_dir, f"base_step_{step}.pt")
                 torch.save(model.state_dict(), milestone_path)
 
             if step % 50 == 0 or step == max_steps:
                 elapsed = time.time() - start_time
-                current_lr = scheduler.get_last_lr()[0]
                 print(f"Step {step}/{max_steps} | Loss: {loss.item() * grad_accum:.4f} | LR: {current_lr:.6f} | Elapsed: {elapsed:.1f}s")
 
             if step >= max_steps:
@@ -199,6 +205,9 @@ def train_pretrain(config_path: str):
     with open(cfg_path, "w", encoding="utf-8") as f:
         json.dump(trans_config.__dict__, f, indent=2)
 
+    # Export per-step CSV
+    csv_metrics_path = timer.export_csv("step_metrics.csv")
+
     # Save training metrics log
     metrics = {
         "phase": "pretrain",
@@ -211,7 +220,8 @@ def train_pretrain(config_path: str):
         "total_tokens_processed": total_tokens_processed,
         "final_loss": round(float(loss.item() * grad_accum), 6),
         "device": str(device),
-        "gpu_name": torch.cuda.get_device_name(device) if use_cuda else "cpu"
+        "gpu_name": torch.cuda.get_device_name(device) if use_cuda else "cpu",
+        "step_metrics_csv": os.path.basename(csv_metrics_path)
     }
     metrics_path = os.path.join(base_model_dir, "training_metrics.json")
     with open(metrics_path, "w", encoding="utf-8") as f:

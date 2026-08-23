@@ -16,6 +16,7 @@ from agent.protocol import (
     format_search_hop,
     format_read_hop,
     format_math_hop,
+    format_filter_hop,
     format_error_hop,
 )
 from agent.tools.search import DeterministicBM25Search
@@ -40,6 +41,7 @@ class DeterministicShell:
         max_search_calls: int = 6,
         max_read_calls: int = 8,
         max_exec_calls: int = 4,
+        max_filter_calls: int = 4,
         max_tokens_per_turn: int = 128
     ):
         self.model = model
@@ -49,6 +51,7 @@ class DeterministicShell:
         self.max_search_calls = max_search_calls
         self.max_read_calls = max_read_calls
         self.max_exec_calls = max_exec_calls
+        self.max_filter_calls = max_filter_calls
         self.max_tokens_per_turn = max_tokens_per_turn
         self.exec_evaluator = RestrictedASTEvaluator()
 
@@ -58,7 +61,8 @@ class DeterministicShell:
             max_turns=self.max_turns,
             max_search_calls=self.max_search_calls,
             max_read_calls=self.max_read_calls,
-            max_exec_calls=self.max_exec_calls
+            max_exec_calls=self.max_exec_calls,
+            max_filter_calls=self.max_filter_calls
         )
 
         doc_adapter = DocumentEvidenceProvider(world)
@@ -188,6 +192,18 @@ class DeterministicShell:
                             obs_str = format_math_hop(obs_data.get("result"))
                         else:
                             obs_str = format_math_hop(None, error=obs_data.get("error_type", "ERROR"))
+                    elif parsed.tool == "filter":
+                        f_field = parsed.arguments.get("field", "")
+                        f_op = parsed.arguments.get("op", "EQ")
+                        f_val = parsed.arguments.get("value")
+                        tab_adapter = registry.get("table")
+                        if tab_adapter:
+                            records = tab_adapter.filter(f_field, f_op, f_val)
+                            obs_str = format_filter_hop(records)
+                            obs_data = {"status": "success", "results": records}
+                        else:
+                            obs_str = format_filter_hop([])
+                            obs_data = {"status": "success", "results": []}
                     else:
                         obs_str = format_error_hop("UNKNOWN_TOOL")
                         obs_data = {"status": "error", "message": "Unknown tool"}

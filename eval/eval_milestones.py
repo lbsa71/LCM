@@ -30,13 +30,40 @@ def deserialize_world(data: dict) -> World:
     return w
 
 
+SUITE_ORDER = [
+    "suite_a_language",
+    "suite_b_invariants",
+    "suite_c_single_hop",
+    "suite_d_multi_hop",
+    "suite_e_retrieval_computation",
+    "suite_f_missing_evidence",
+    "suite_g_tool_recovery",
+    "suite_h_adversarial_distractors",
+    "suite_i_relational_filter",
+    "anti_memorization_permutation",
+    "anti_memorization_prior_reversal",
+    "anti_memorization_evidence_disabled",
+    "anti_memorization_closed_book"
+]
+
+
 def stratified_sample_tasks(tasks, per_suite=30):
     by_suite = defaultdict(list)
     for t in tasks:
         by_suite[t["suite"]].append(t)
     sampled = []
+    
+    # Process suites in canonical SUITE_ORDER first
+    seen_suites = set()
+    for s_name in SUITE_ORDER:
+        if s_name in by_suite:
+            sampled.extend(by_suite[s_name][:per_suite])
+            seen_suites.add(s_name)
+            
+    # Add any remaining suites not in canonical order
     for suite, suite_tasks in sorted(by_suite.items()):
-        sampled.extend(suite_tasks[:per_suite])
+        if suite not in seen_suites:
+            sampled.extend(suite_tasks[:per_suite])
     return sampled
 
 

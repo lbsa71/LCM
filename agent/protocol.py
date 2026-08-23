@@ -151,7 +151,28 @@ def parse_rdl_message(text: str) -> Optional[Union[ToolCallMessage, FinalMessage
             arguments={"code": code}
         )
 
-    # 4. EMIT <answer> EVIDENCE [<citations>]
+    # 4. FILTER <field> <EQ|GT|LT|CONTAINS> <literal>
+    filter_match = re.match(r"^FILTER\s+([A-Za-z0-9_]+)\s+(EQ|GT|LT|CONTAINS)\s+(.+)$", stripped, re.IGNORECASE)
+    if filter_match:
+        field = filter_match.group(1).strip()
+        op = filter_match.group(2).upper()
+        raw_val = filter_match.group(3).strip()
+        if (raw_val.startswith('"') and raw_val.endswith('"')) or (raw_val.startswith("'") and raw_val.endswith("'")):
+            val = raw_val[1:-1].strip()
+        else:
+            try:
+                if "." in raw_val:
+                    val = float(raw_val)
+                else:
+                    val = int(raw_val)
+            except ValueError:
+                val = raw_val
+        return ToolCallMessage(
+            tool="filter",
+            arguments={"field": field, "op": op, "value": val}
+        )
+
+    # 5. EMIT <answer> EVIDENCE [<citations>]
     emit_match = re.match(r"^EMIT\s+(.+?)(?:\s+EVIDENCE\s*\[(.*?)\])?$", stripped, re.IGNORECASE | re.DOTALL)
     if emit_match:
         answer_str = emit_match.group(1).strip()
@@ -164,7 +185,7 @@ def parse_rdl_message(text: str) -> Optional[Union[ToolCallMessage, FinalMessage
             evidence=evidence_refs
         )
 
-    # 5. ABSTAIN [REASON <reason>]
+    # 6. ABSTAIN [REASON <reason>]
     abstain_match = re.match(r"^ABSTAIN(?:\s+(?:\[?\s*REASON\s+)?([A-Za-z0-9_]+)\]?)?$", stripped, re.IGNORECASE)
     if abstain_match:
         reason = abstain_match.group(1)
@@ -214,6 +235,13 @@ def format_math_hop(result: Any, error: Optional[str] = None) -> str:
     if error:
         return f"OBS MATH ERROR {error}"
     return f"OBS MATH {result}"
+
+
+def format_filter_hop(records: List[Dict[str, Any]]) -> str:
+    """Formats filter results according to the Host Observation Protocol (HOP)."""
+    if not records:
+        return "OBS FILTER EMPTY"
+    return f"OBS FILTER [{len(records)} records]"
 
 
 def format_error_hop(error_code: str, message: Optional[str] = None) -> str:

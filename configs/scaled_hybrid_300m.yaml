@@ -1,16 +1,16 @@
-name: "scaled_overnight_300m"
+name: "scaled_hybrid_300m"
 seed: 42
 
 corpus:
-  train_worlds: 4000
-  val_worlds: 200
-  test_worlds: 200
-  docs_per_world: 25
-  facts_per_world: 40
-  distractor_docs_per_world: 10
-  task_types_per_world: 8
-  counterfactual_pairs_per_world: 8
-  trajectory_samples_per_world: 10
+  train_worlds: 8000
+  val_worlds: 400
+  test_worlds: 400
+  docs_per_world: 30
+  facts_per_world: 50
+  distractor_docs_per_world: 15
+  task_types_per_world: 10
+  counterfactual_pairs_per_world: 10
+  trajectory_samples_per_world: 12
 
 tokenizer:
   vocab_size: 8192
@@ -58,10 +58,10 @@ pretrain:
   weight_decay: 0.01
   batch_size: 4
   gradient_accumulation_steps: 12
-  max_steps: 6000
-  warmup_steps: 400
-  eval_interval: 200
-  save_milestones: [1500, 3000, 4500, 6000]
+  max_steps: 10000
+  warmup_steps: 500
+  eval_interval: 250
+  save_milestones: [2500, 5000, 7500, 10000]
   device: "auto"
 
 agent_sft:
@@ -70,10 +70,10 @@ agent_sft:
   weight_decay: 0.01
   batch_size: 4
   gradient_accumulation_steps: 8
-  max_steps: 3500
-  warmup_steps: 200
-  eval_interval: 200
-  save_milestones: [500, 1500, 2500, 3500]
+  max_steps: 6000
+  warmup_steps: 300
+  eval_interval: 250
+  save_milestones: [1000, 2500, 4500, 6000]
   device: "auto"
 
 agent_runtime:

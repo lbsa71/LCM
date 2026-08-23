@@ -82,8 +82,8 @@ def main():
 
     # Disjoint seed sets
     train_seeds = set(range(base_seed + 1, base_seed + 1 + train_worlds_cnt))
-    val_seeds = set(range(base_seed + 1000, base_seed + 1000 + val_worlds_cnt))
-    test_seeds = set(range(base_seed + 2000, base_seed + 2000 + test_worlds_cnt))
+    val_seeds = set(range(base_seed + 100000, base_seed + 100000 + val_worlds_cnt))
+    test_seeds = set(range(base_seed + 200000, base_seed + 200000 + test_worlds_cnt))
 
     pretrain_train_lines = []
     pretrain_val_lines = []
@@ -165,7 +165,11 @@ def main():
 
     # Linting
     linter = CorpusLinter()
-    test_texts = [t["question"] for t in eval_tasks_list]
+    # Exclude intentional closed-book memorization probe questions from corpus leakage checks
+    test_texts = [
+        t["question"] for t in eval_tasks_list
+        if t.get("suite") != "anti_memorization_closed_book"
+    ]
     lint_report = linter.lint_dataset(
         train_texts=pretrain_train_lines,
         val_texts=pretrain_val_lines,

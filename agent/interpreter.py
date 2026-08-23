@@ -13,6 +13,7 @@ from agent.protocol import (
     format_search_hop,
     format_read_hop,
     format_math_hop,
+    format_filter_hop,
     format_error_hop,
 )
 from agent.adapters.registry import AdapterRegistry
@@ -154,7 +155,7 @@ class RDLInterpreter:
                 val = args.get("value")
                 tab_adapter = self.registry.get(args.get("table", "default"))
                 records = tab_adapter.filter(field, op, val) if tab_adapter else []
-                hop_obs = f"OBS FILTER [{len(records)} records]"
+                hop_obs = format_filter_hop(records)
                 latency = (time.perf_counter() - t0) * 1000.0
                 return RDLStepResult(
                     raw_statement=statement,
