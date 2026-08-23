@@ -48,18 +48,15 @@ class TrajectoryDataset(Dataset):
                         tag_id = tokenizer.token_to_id("<UNK>")
 
                     content_ids = tokenizer.encode(content).ids
-                    turn_ids = [tag_id] + content_ids
+                    turn_ids = [tag_id] + content_ids + [eos_id]
 
                     input_ids.extend(turn_ids)
                     if is_train:
-                        # Model is trained to predict tag and content
+                        # Model is trained to predict tag, content, and closing EOS
                         labels.extend(turn_ids)
                     else:
                         # Mask out prompt and observation
                         labels.extend([-100] * len(turn_ids))
-
-                input_ids.append(eos_id)
-                labels.append(eos_id)
 
                 # Truncate or pad to max_len
 
@@ -161,6 +158,7 @@ def train_agent_sft(config_path: str):
 
     step = 0
     start_time = time.time()
+    milestone_timings = {}
     model.train()
     optimizer.zero_grad()
 
@@ -185,8 +183,10 @@ def train_agent_sft(config_path: str):
 
             step += 1
             if step in save_milestones:
+                m_elapsed = time.time() - start_time
                 milestone_ckpt = os.path.join(agent_model_dir, f"agent_step_{step}.pt")
                 torch.save(model.state_dict(), milestone_ckpt)
+                milestone_timings[step] = round(m_elapsed, 2)
 
             if step % 50 == 0 or step == max_steps:
                 elapsed = time.time() - start_time
@@ -197,10 +197,37 @@ def train_agent_sft(config_path: str):
                 break
 
 
+    total_time = time.time() - start_time
+    seq_len = model.config.max_position_embeddings
+    total_tokens_processed = step * batch_size * seq_len
+    tokens_per_sec = total_tokens_processed / max(0.001, total_time)
+    ms_per_step = (total_time / max(1, step)) * 1000.0
+
     # Save agent model
     agent_ckpt_path = os.path.join(agent_model_dir, "agent_final.pt")
     torch.save(model.state_dict(), agent_ckpt_path)
-    print(f"[+] Agent SFT completed. Model saved to {agent_ckpt_path}")
+
+    # Save training metrics log
+    metrics = {
+        "phase": "agent_sft",
+        "preset": preset_name,
+        "total_steps": step,
+        "total_params": sum(p.numel() for p in model.parameters()),
+        "total_wall_clock_seconds": round(total_time, 2),
+        "ms_per_step": round(ms_per_step, 2),
+        "tokens_per_second": round(tokens_per_sec, 2),
+        "total_tokens_processed": total_tokens_processed,
+        "final_loss": round(float(loss.item() * grad_accum), 6),
+        "milestone_wall_clock_seconds": milestone_timings,
+        "device": str(device),
+        "gpu_name": torch.cuda.get_device_name(device) if use_cuda else "cpu"
+    }
+    metrics_path = os.path.join(agent_model_dir, "training_metrics.json")
+    with open(metrics_path, "w", encoding="utf-8") as f:
+        json.dump(metrics, f, indent=2)
+
+    print(f"[+] Agent SFT completed in {total_time:.2f}s ({tokens_per_sec:.1f} tokens/s, {ms_per_step:.1f} ms/step).")
+    print(f"[+] Metrics logged to {metrics_path}")
 
 
 def main():

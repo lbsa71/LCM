@@ -7,10 +7,23 @@ import torch
 from tokenizers import Tokenizer
 
 from synth.ontology import World, Task
-from agent.protocol import parse_and_validate_message, PlanMessage, ToolCallMessage, FinalMessage, ProtocolError
+from agent.protocol import (
+    parse_and_validate_message,
+    PlanMessage,
+    ToolCallMessage,
+    FinalMessage,
+    ProtocolError,
+    format_search_hop,
+    format_read_hop,
+    format_math_hop,
+    format_error_hop,
+)
 from agent.tools.search import DeterministicBM25Search
 from agent.tools.read import DocumentReader
 from agent.tools.exec import RestrictedASTEvaluator
+from agent.adapters.document import DocumentEvidenceProvider, strip_query_quotes
+from agent.adapters.registry import AdapterRegistry
+from agent.interpreter import RDLInterpreter
 from agent.state import AgentState
 from training.model import SyntheticTransformer
 
@@ -48,8 +61,10 @@ class DeterministicShell:
             max_exec_calls=self.max_exec_calls
         )
 
-        searcher = DeterministicBM25Search(world)
-        reader = DocumentReader(world)
+        doc_adapter = DocumentEvidenceProvider(world)
+        registry = AdapterRegistry()
+        registry.register("docs", doc_adapter)
+        interpreter = RDLInterpreter(registry=registry, default_doc_adapter="docs", math_evaluator=self.exec_evaluator)
 
         trace_steps = []
         start_time = time.time()
@@ -76,6 +91,7 @@ class DeterministicShell:
             raw_output = ""
             if self.model and self.tokenizer:
                 bos_id = self.tokenizer.token_to_id("<BOS>")
+                eos_id = self.tokenizer.token_to_id("<EOS>")
                 input_ids = [bos_id] if bos_id is not None else []
                 for h in state.history:
                     role_tag = f"<{h['role'].upper()}>"
@@ -84,6 +100,8 @@ class DeterministicShell:
                         tag_id = self.tokenizer.token_to_id("<UNK>")
                     input_ids.append(tag_id)
                     input_ids.extend(self.tokenizer.encode(h["content"]).ids)
+                    if eos_id is not None:
+                        input_ids.append(eos_id)
 
 
                 input_tensor = torch.tensor([input_ids], dtype=torch.long).to(self.device)
@@ -116,9 +134,9 @@ class DeterministicShell:
 
             if isinstance(parsed, ProtocolError):
                 state.history.append({"role": "action", "content": cleaned_output})
-                err_obs = json.dumps(parsed.model_dump())
+                err_obs = format_error_hop("INVALID_OPCODE", parsed.message)
                 state.history.append({"role": "observation", "content": err_obs})
-                step_record["observation"] = parsed.model_dump()
+                step_record["observation"] = {"status": "error", "error_type": "INVALID_OPCODE", "message": parsed.message, "hop": err_obs}
                 trace_steps.append(step_record)
                 continue
 
@@ -128,28 +146,52 @@ class DeterministicShell:
                 continue
 
             elif isinstance(parsed, ToolCallMessage):
-                state.history.append({"role": "action", "content": json.dumps(parsed.model_dump())})
+                state.history.append({"role": "action", "content": cleaned_output})
                 
                 limit_err = state.record_tool_call(parsed.tool)
                 if limit_err:
+                    obs_str = format_error_hop(limit_err)
                     obs_data = {"status": "error", "error_type": limit_err, "message": f"Resource limit exceeded: {limit_err}"}
                 else:
                     # Execute tool
                     if parsed.tool == "search":
                         q = parsed.arguments.get("query", "")
                         lim = parsed.arguments.get("limit", 5)
-                        obs_data = searcher.search(q, limit=lim)
+                        hits = doc_adapter.search(q, limit=lim)
+                        obs_str = format_search_hop(hits)
+                        obs_data = {"status": "success", "results": hits}
                     elif parsed.tool == "read":
                         d_id = parsed.arguments.get("document_id", "")
-                        obs_data = reader.read(d_id)
+                        lines = parsed.arguments.get("lines")
+                        line_tuple = (min(lines), max(lines)) if lines else None
+                        slice_data = doc_adapter.read(d_id, lines=line_tuple)
+                        if slice_data is None:
+                            obs_str = f"OBS READ {d_id} NOT_FOUND"
+                            obs_data = {"status": "error", "error_type": "DOCUMENT_NOT_FOUND"}
+                        else:
+                            start_l = slice_data["start_line"]
+                            end_l = slice_data["end_line"]
+                            entries = [f"{d_id}:L{l['line_number']} {l['text']}" for l in slice_data["lines"]]
+                            header = f"OBS READ {d_id} LINES {start_l}-{end_l}"
+                            obs_str = f"{header}\n" + "\n".join(entries) if entries else header
+                            obs_data = {"status": "success", "document_id": d_id, "text": obs_str}
                     elif parsed.tool == "exec":
                         code = parsed.arguments.get("code", "")
-                        inps = parsed.arguments.get("inputs", {})
-                        obs_data = self.exec_evaluator.evaluate(code, inps)
+                        inps = parsed.arguments.get("inputs")
+                        if inps:
+                            obs_data = self.exec_evaluator.evaluate(code, inps)
+                        else:
+                            obs_data = self.exec_evaluator.evaluate_pure_math(code)
+                            if obs_data.get("status") == "error":
+                                obs_data = self.exec_evaluator.evaluate(code)
+                        if obs_data.get("status") == "success":
+                            obs_str = format_math_hop(obs_data.get("result"))
+                        else:
+                            obs_str = format_math_hop(None, error=obs_data.get("error_type", "ERROR"))
                     else:
+                        obs_str = format_error_hop("UNKNOWN_TOOL")
                         obs_data = {"status": "error", "message": "Unknown tool"}
 
-                obs_str = json.dumps(obs_data)
                 state.history.append({"role": "observation", "content": obs_str})
                 step_record["observation"] = obs_data
                 trace_steps.append(step_record)
@@ -159,7 +201,7 @@ class DeterministicShell:
                 state.is_terminated = True
                 state.final_answer = parsed.answer
                 state.cited_evidence = [e.model_dump() for e in parsed.evidence]
-                state.history.append({"role": "final", "content": json.dumps(parsed.model_dump())})
+                state.history.append({"role": "final", "content": cleaned_output})
                 trace_steps.append(step_record)
                 break
 

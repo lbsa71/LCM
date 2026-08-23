@@ -3,14 +3,21 @@
 from typing import Any, Dict, List
 
 
-def evaluate_episode_outcome(episode: Dict[str, Any], task: Dict[str, Any]) -> Dict[str, Any]:
+def evaluate_episode_outcome(episode: Dict[str, Any], task: Any) -> Dict[str, Any]:
     """Scores an individual episode with strict epistemic and grounded proof graph enforcement."""
-    gold_answer = str(task.get("gold_answer", "")).strip().lower()
-    model_answer = str(episode.get("model_answer", "")).strip().lower()
-    is_retrieval_required = task.get("is_retrieval_required", True)
-    is_insufficient_evidence = task.get("is_insufficient_evidence", False)
-    required_evidence = task.get("required_evidence", {})  # doc_id -> list of line numbers
+    if hasattr(task, "gold_answer"):
+        gold_answer = str(getattr(task, "gold_answer", "")).strip().lower()
+        is_retrieval_required = getattr(task, "is_retrieval_required", True)
+        is_insufficient_evidence = getattr(task, "is_insufficient_evidence", False)
+        pg = getattr(task, "proof_graph", None)
+        required_evidence = pg.required_document_lines if pg else {}
+    else:
+        gold_answer = str(task.get("gold_answer", "")).strip().lower()
+        is_retrieval_required = task.get("is_retrieval_required", True)
+        is_insufficient_evidence = task.get("is_insufficient_evidence", False)
+        required_evidence = task.get("required_evidence", {})  # doc_id -> list of line numbers
 
+    model_answer = str(episode.get("model_answer", "")).strip().lower()
     raw_match = (model_answer == gold_answer)
 
     # Validate evidence
@@ -50,9 +57,12 @@ def evaluate_episode_outcome(episode: Dict[str, Any], task: Dict[str, Any]) -> D
 
     coverage = (valid_lines_cited / max(1, total_required_lines)) if total_required_lines > 0 else 1.0
 
+    task_id = getattr(task, "task_id", task.get("task_id") if isinstance(task, dict) else "")
+    suite = getattr(task, "suite", task.get("suite") if isinstance(task, dict) else "")
+
     return {
-        "task_id": task.get("task_id"),
-        "suite": task.get("suite"),
+        "task_id": task_id,
+        "suite": suite,
         "raw_match": raw_match,
         "evidence_valid": evidence_valid,
         "grounded_success": grounded_success,

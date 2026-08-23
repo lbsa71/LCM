@@ -1,19 +1,53 @@
-"""Synthetic agent trajectory generator for SFT."""
+"""Synthetic agent trajectory generator for SFT with atomic state transitions, RDL actions, and HOP observations."""
 
 import json
+import re
 import random
 from typing import Any, Dict, List, Optional
 from synth.ontology import World, Task, Document
+from agent.protocol import format_search_hop, format_read_hop, format_math_hop
+
+
+def extract_entity_name_from_question(question: str, world: World) -> str:
+    """Deterministically extracts the most relevant entity name from the question."""
+    lower_q = question.lower()
+    best_match = None
+    best_len = 0
+    for ent in world.entities.values():
+        if ent.name.lower() in lower_q:
+            if len(ent.name) > best_len:
+                best_match = ent.name
+                best_len = len(ent.name)
+    if best_match:
+        return best_match
+    
+    # Fallback: regex search for capitalized words or quotes
+    quoted = re.findall(r'["\']([^"\']+)["\']', question)
+    if quoted:
+        return quoted[0]
+    words = [w.strip("?,.:;") for w in question.split() if w.strip("?,.:;").istitle()]
+    if words:
+        return words[-1]
+    return "record"
+
+
+def _format_evidence_str(req_doc_lines: Dict[str, List[int]]) -> str:
+    """Formats required document lines into RDL evidence citation string."""
+    cites = []
+    for d_id, l_nos in req_doc_lines.items():
+        for l_no in l_nos:
+            cites.append(f"{d_id}:{l_no}")
+    return f"[{', '.join(cites)}]"
 
 
 class TrajectoryGenerator:
-    """Produces end-to-end ReAct agent trajectories with loss masking."""
+    """Produces end-to-end atomic procedural ReAct agent trajectories with RDL actions and HOP observations."""
 
     def __init__(self):
         pass
 
     def generate_trajectory_for_task(self, world: World, task: Task, rng: random.Random) -> Dict[str, Any]:
-        """Generates a complete structured trajectory for a given task."""
+        """Generates a complete structured atomic trajectory for a given task."""
         turns = []
         
         # User message
@@ -24,177 +58,186 @@ class TrajectoryGenerator:
         })
 
         if not task.is_retrieval_required:
-            # Direct invariant / language task
-            plan = {
-                "type": "plan",
-                "goal": task.task_type,
-                "needs": ["analyze_context"],
-                "next_action": "final"
-            }
-            turns.append({
-                "role": "plan",
-                "content": json.dumps(plan),
-                "train": True
-            })
+            if task.suite == "suite_b_invariants" and ("sum" in task.question.lower() or "plus" in task.question.lower() or "total" in task.question.lower()):
+                # Suite B with arithmetic: user -> MATH -> OBS MATH -> EMIT
+                nums = re.findall(r'\b\d+\b', task.question)
+                if len(nums) >= 2:
+                    expr = f"{nums[0]} + {nums[1]}"
+                else:
+                    expr = task.gold_answer
 
-            final_msg = {
-                "type": "final",
-                "answer": task.gold_answer,
-                "evidence": []
-            }
-            turns.append({
-                "role": "final",
-                "content": json.dumps(final_msg),
-                "train": True
-            })
+                try:
+                    res_val = eval(expr)
+                except Exception:
+                    res_val = task.gold_answer
+
+                turns.append({"role": "action", "content": f"MATH {expr}", "train": True})
+                turns.append({"role": "observation", "content": format_math_hop(res_val), "train": False})
+                turns.append({"role": "final", "content": f'EMIT "{res_val}" EVIDENCE []', "train": True})
+
+            else:
+                # Direct invariant / language task (Suite A): user -> EMIT
+                turns.append({
+                    "role": "final",
+                    "content": f'EMIT "{task.gold_answer}" EVIDENCE []',
+                    "train": True
+                })
 
         elif task.is_insufficient_evidence:
-            # Missing evidence trajectory: Search -> No findings -> Insufficient evidence final
-            search_query = task.question.replace("What is the recorded population of ", "").replace("?", "").strip()
-            plan = {
-                "type": "plan",
-                "goal": "find_information",
-                "needs": [search_query],
-                "next_action": "search"
-            }
-            turns.append({
-                "role": "plan",
-                "content": json.dumps(plan),
-                "train": True
-            })
+            # Missing evidence trajectory: user -> SEARCH -> OBS SEARCH EMPTY -> ABSTAIN
+            query_entity = extract_entity_name_from_question(task.question, world)
 
-            action_search = {
-                "type": "tool_call",
-                "tool": "search",
-                "arguments": {"query": search_query, "limit": 3}
-            }
-            turns.append({
-                "role": "action",
-                "content": json.dumps(action_search),
-                "train": True
-            })
-
-            obs_search = {
-                "status": "success",
-                "results": []
-            }
-            turns.append({
-                "role": "observation",
-                "content": json.dumps(obs_search),
-                "train": False
-            })
-
-            # Model realizes evidence is missing and abstains
-            final_msg = {
-                "type": "final",
-                "answer": "insufficient_evidence",
-                "evidence": []
-            }
-            turns.append({
-                "role": "final",
-                "content": json.dumps(final_msg),
-                "train": True
-            })
+            turns.append({"role": "action", "content": f'SEARCH "{query_entity}" LIMIT 3', "train": True})
+            turns.append({"role": "observation", "content": format_search_hop([]), "train": False})
+            turns.append({"role": "final", "content": "ABSTAIN REASON insufficient_evidence", "train": True})
 
         elif task.suite == "suite_e_retrieval_computation":
-            # Search -> Read -> Exec -> Final
-            evidence_docs = list(task.proof_graph.required_document_lines.keys())
-            doc1_id = evidence_docs[0] if evidence_docs else "D01"
+            # Multi-document retrieval + Math computation:
+            # SEARCH S1 -> READ D1 -> SEARCH S2 -> READ D2 -> MATH v1 + v2 -> EMIT
+            req_lines = task.proof_graph.required_document_lines if task.proof_graph else {}
+            evidence_docs = list(req_lines.keys())
+            doc1_id = evidence_docs[0] if len(evidence_docs) > 0 else "D01"
+            doc2_id = evidence_docs[1] if len(evidence_docs) > 1 else doc1_id
+
             doc1 = world.documents.get(doc1_id)
+            doc2 = world.documents.get(doc2_id)
+            lines1 = req_lines.get(doc1_id, [1])
+            lines2 = req_lines.get(doc2_id, [1])
+
             doc1_text = doc1.formatted_text if doc1 else ""
-            lines_needed = task.proof_graph.required_document_lines.get(doc1_id, [1])
+            doc2_text = doc2.formatted_text if doc2 else ""
 
-            # Plan
-            plan = {
-                "type": "plan",
-                "goal": "retrieve_and_compute",
-                "needs": ["read_records", "execute_sum"],
-                "next_action": "search"
-            }
-            turns.append({"role": "plan", "content": json.dumps(plan), "train": True})
+            matched_entities = [ent for ent in world.entities.values() if ent.name.lower() in task.question.lower()]
+            s1_name = matched_entities[0].name if len(matched_entities) > 0 else extract_entity_name_from_question(task.question, world)
+            s2_name = matched_entities[1].name if len(matched_entities) > 1 else s1_name
 
-            # Search
-            action_search = {"type": "tool_call", "tool": "search", "arguments": {"query": "population", "limit": 2}}
-            turns.append({"role": "action", "content": json.dumps(action_search), "train": True})
-            
-            obs_search = {"status": "success", "results": [{"document_id": doc1_id, "score": 5.0, "title": doc1.title if doc1 else ""}]}
-            turns.append({"role": "observation", "content": json.dumps(obs_search), "train": False})
+            # 1. Search S1
+            turns.append({"role": "action", "content": f'SEARCH "{s1_name}" LIMIT 2', "train": True})
+            obs_s1 = format_search_hop([{"document_id": doc1_id, "score": 5.8}])
+            turns.append({"role": "observation", "content": obs_s1, "train": False})
+
+            # 2. Read D1
+            turns.append({"role": "action", "content": f"READ {doc1_id} LINES {min(lines1)}-{max(lines1)}", "train": True})
+            obs_r1 = format_read_hop(doc1, lines=lines1, doc_id=doc1_id)
+            turns.append({"role": "observation", "content": obs_r1, "train": False})
+
+            # Extract numbers from docs
+            v1_match = re.findall(r'\b\d+\b', doc1_text) if doc1_text else []
+            v2_match = re.findall(r'\b\d+\b', doc2_text) if doc2_text else []
+            val1 = v1_match[0] if v1_match else "100"
+            val2 = v2_match[0] if v2_match else "200"
+
+            if doc1_id != doc2_id:
+                # 3. Search S2 & Read D2
+                turns.append({"role": "action", "content": f'SEARCH "{s2_name}" LIMIT 2', "train": True})
+                obs_s2 = format_search_hop([{"document_id": doc2_id, "score": 5.4}])
+                turns.append({"role": "observation", "content": obs_s2, "train": False})
+
+                turns.append({"role": "action", "content": f"READ {doc2_id} LINES {min(lines2)}-{max(lines2)}", "train": True})
+                obs_r2 = format_read_hop(doc2, lines=lines2, doc_id=doc2_id)
+                turns.append({"role": "observation", "content": obs_r2, "train": False})
+
+            # 4. MATH arithmetic
+            arith_code = f"{val1} + {val2}"
+            turns.append({"role": "action", "content": f"MATH {arith_code}", "train": True})
+
+            try:
+                calc_res = eval(arith_code)
+            except Exception:
+                calc_res = task.gold_answer
+
+            turns.append({"role": "observation", "content": format_math_hop(calc_res), "train": False})
+
+            # 5. EMIT with full evidence
+            evidence_str = _format_evidence_str(req_lines) if req_lines else f"[{doc1_id}:1]"
+            turns.append({"role": "final", "content": f'EMIT "{task.gold_answer}" EVIDENCE {evidence_str}', "train": True})
+
+        elif task.suite == "suite_d_multi_hop":
+            # Multi-Hop: SEARCH Region -> READ Doc -> SEARCH Sub-Entity -> READ Doc -> EMIT
+            req_lines = task.proof_graph.required_document_lines if task.proof_graph else {}
+            evidence_docs = list(req_lines.keys()) if req_lines else ["D01"]
+            doc_id = evidence_docs[0]
+            doc = world.documents.get(doc_id)
+            lines = req_lines.get(doc_id, [1])
+
+            query_entity = extract_entity_name_from_question(task.question, world)
+
+            # 1. Search
+            turns.append({"role": "action", "content": f'SEARCH "{query_entity}" LIMIT 3', "train": True})
+            obs_s = format_search_hop([{"document_id": doc_id, "score": 6.5}])
+            turns.append({"role": "observation", "content": obs_s, "train": False})
+
+            # 2. Read
+            turns.append({"role": "action", "content": f"READ {doc_id} LINES {min(lines)}-{max(lines)}", "train": True})
+            obs_r = format_read_hop(doc, lines=lines, doc_id=doc_id)
+            turns.append({"role": "observation", "content": obs_r, "train": False})
+
+            # If there is a second evidence document, read it too
+            if len(evidence_docs) > 1:
+                doc2_id = evidence_docs[1]
+                doc2 = world.documents.get(doc2_id)
+                lines2 = req_lines.get(doc2_id, [1])
+
+                turns.append({"role": "action", "content": f"READ {doc2_id} LINES {min(lines2)}-{max(lines2)}", "train": True})
+                obs_r2 = format_read_hop(doc2, lines=lines2, doc_id=doc2_id)
+                turns.append({"role": "observation", "content": obs_r2, "train": False})
+
+            # 3. Final EMIT
+            evidence_str = _format_evidence_str(req_lines) if req_lines else f"[{doc_id}:1]"
+            turns.append({"role": "final", "content": f'EMIT "{task.gold_answer}" EVIDENCE {evidence_str}', "train": True})
+
+        elif task.suite == "suite_g_tool_recovery":
+            # Tool error recovery: Initial search typo/miss -> Reformulation -> READ -> EMIT
+            query_entity = extract_entity_name_from_question(task.question, world)
+            typo_query = query_entity[:max(1, len(query_entity)-2)]
+
+            req_lines = task.proof_graph.required_document_lines if task.proof_graph else {}
+            evidence_docs = list(req_lines.keys()) if req_lines else ["D01"]
+            doc_id = evidence_docs[0]
+            doc = world.documents.get(doc_id)
+            lines = req_lines.get(doc_id, [1])
+
+            # Initial Search (fails / empty)
+            turns.append({"role": "action", "content": f'SEARCH "{typo_query}" LIMIT 2', "train": True})
+            turns.append({"role": "observation", "content": format_search_hop([]), "train": False})
+
+            # Reformulated Search
+            turns.append({"role": "action", "content": f'SEARCH "{query_entity}" LIMIT 3', "train": True})
+            obs_s2 = format_search_hop([{"document_id": doc_id, "score": 6.1}])
+            turns.append({"role": "observation", "content": obs_s2, "train": False})
 
             # Read
-            action_read = {"type": "tool_call", "tool": "read", "arguments": {"document_id": doc1_id}}
-            turns.append({"role": "action", "content": json.dumps(action_read), "train": True})
-
-            obs_read = {"status": "success", "document_id": doc1_id, "text": doc1_text}
-            turns.append({"role": "observation", "content": json.dumps(obs_read), "train": False})
-
-            # Exec
-            action_exec = {"type": "tool_call", "tool": "exec", "arguments": {"code": task.gold_answer}}
-            turns.append({"role": "action", "content": json.dumps(action_exec), "train": True})
-
-            obs_exec = {"status": "success", "result": int(task.gold_answer) if task.gold_answer.isdigit() else task.gold_answer}
-            turns.append({"role": "observation", "content": json.dumps(obs_exec), "train": False})
+            turns.append({"role": "action", "content": f"READ {doc_id} LINES {min(lines)}-{max(lines)}", "train": True})
+            obs_r = format_read_hop(doc, lines=lines, doc_id=doc_id)
+            turns.append({"role": "observation", "content": obs_r, "train": False})
 
             # Final
-            evidence_list = [{"document_id": doc1_id, "lines": lines_needed}]
-            for d_id, l_nos in task.proof_graph.required_document_lines.items():
-                if d_id != doc1_id:
-                    evidence_list.append({"document_id": d_id, "lines": l_nos})
-
-            final_msg = {
-                "type": "final",
-                "answer": task.gold_answer,
-                "evidence": evidence_list
-            }
-            turns.append({"role": "final", "content": json.dumps(final_msg), "train": True})
+            evidence_str = _format_evidence_str(req_lines) if req_lines else f"[{doc_id}:1]"
+            turns.append({"role": "final", "content": f'EMIT "{task.gold_answer}" EVIDENCE {evidence_str}', "train": True})
 
         else:
-            # Standard Single-Hop / Multi-Hop Retrieval: Plan -> Search -> Read -> Final
-            evidence_docs = list(task.proof_graph.required_document_lines.keys())
-            doc_id = evidence_docs[0] if evidence_docs else "D01"
+            # Standard Single-Hop Retrieval (Suite C): user -> SEARCH -> READ -> EMIT
+            req_lines = task.proof_graph.required_document_lines if task.proof_graph else {}
+            evidence_docs = list(req_lines.keys()) if req_lines else ["D01"]
+            doc_id = evidence_docs[0]
             doc = world.documents.get(doc_id)
-            doc_text = doc.formatted_text if doc else ""
-            lines_needed = task.proof_graph.required_document_lines.get(doc_id, [1])
+            lines = req_lines.get(doc_id, [1])
 
-            # 1. Plan
-            plan = {
-                "type": "plan",
-                "goal": task.task_type,
-                "needs": ["find_document", "read_evidence"],
-                "next_action": "search"
-            }
-            turns.append({"role": "plan", "content": json.dumps(plan), "train": True})
+            query_entity = extract_entity_name_from_question(task.question, world)
 
-            # 2. Search
-            search_term = task.gold_answer if not task.gold_answer.isdigit() else "record"
-            for ent in world.entities.values():
-                if ent.name.lower() in task.question.lower():
-                    search_term = ent.name
-                    break
+            # 1. Search
+            turns.append({"role": "action", "content": f'SEARCH "{query_entity}" LIMIT 3', "train": True})
+            obs_s = format_search_hop([{"document_id": doc_id, "score": 6.2}])
+            turns.append({"role": "observation", "content": obs_s, "train": False})
 
-            action_search = {"type": "tool_call", "tool": "search", "arguments": {"query": search_term, "limit": 2}}
-            turns.append({"role": "action", "content": json.dumps(action_search), "train": True})
+            # 2. Read
+            turns.append({"role": "action", "content": f"READ {doc_id} LINES {min(lines)}-{max(lines)}", "train": True})
+            obs_r = format_read_hop(doc, lines=lines, doc_id=doc_id)
+            turns.append({"role": "observation", "content": obs_r, "train": False})
 
-            obs_search = {"status": "success", "results": [{"document_id": doc_id, "score": 6.2, "title": doc.title if doc else ""}]}
-            turns.append({"role": "observation", "content": json.dumps(obs_search), "train": False})
-
-            # 3. Read
-            action_read = {"type": "tool_call", "tool": "read", "arguments": {"document_id": doc_id}}
-            turns.append({"role": "action", "content": json.dumps(action_read), "train": True})
-
-            obs_read = {"status": "success", "document_id": doc_id, "text": doc_text}
-            turns.append({"role": "observation", "content": json.dumps(obs_read), "train": False})
-
-            # 4. Final
-            evidence_list = []
-            for d_id, l_nos in task.proof_graph.required_document_lines.items():
-                evidence_list.append({"document_id": d_id, "lines": l_nos})
-
-            final_msg = {
-                "type": "final",
-                "answer": task.gold_answer,
-                "evidence": evidence_list
-            }
-            turns.append({"role": "final", "content": json.dumps(final_msg), "train": True})
+            # 3. Final
+            evidence_str = _format_evidence_str(req_lines) if req_lines else f"[{doc_id}:1]"
+            turns.append({"role": "final", "content": f'EMIT "{task.gold_answer}" EVIDENCE {evidence_str}', "train": True})
 
         return {
             "task_id": task.task_id,

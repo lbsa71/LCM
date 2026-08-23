@@ -139,6 +139,7 @@ def main():
     parser.add_argument("--config", type=str, default="configs/smoke.yaml", help="Path to config yaml")
     parser.add_argument("--weights", type=str, default=None, help="Path to specific model weights checkpoint")
     parser.add_argument("--suffix", type=str, default="", help="Suffix for output report and results")
+    parser.add_argument("--max-tasks", type=int, default=None, help="Maximum number of tasks to evaluate")
     args = parser.parse_args()
 
     with open(args.config, "r", encoding="utf-8") as f:
@@ -191,6 +192,9 @@ def main():
     with open(eval_tasks_path, "r", encoding="utf-8") as f:
         tasks = json.load(f)
 
+    if args.max_tasks and args.max_tasks > 0:
+        tasks = tasks[:args.max_tasks]
+
     print(f"[*] Starting benchmark evaluation over {len(tasks)} tasks across {len(worlds)} held-out worlds...")
 
     # Agents & Baselines
@@ -242,6 +246,10 @@ def main():
         # 4. Evaluate Rule-based Agent
         rb_ep = rule_agent.solve(world, t_obj)
         rule_outcomes.append(evaluate_episode_outcome(rb_ep, task_data))
+
+        if (idx + 1) % 50 == 0 or (idx + 1) == len(tasks):
+            curr_acc = sum(1 for o in agent_outcomes if o.get("grounded_success", False)) / (idx + 1)
+            print(f"    [{idx + 1}/{len(tasks)}] Agent grounded success so far: {curr_acc * 100:.1f}%")
 
     # Aggregate summaries
     results = {

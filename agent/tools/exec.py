@@ -55,6 +55,91 @@ class RestrictedASTEvaluator:
         self.max_operations = max_operations
         self.op_count = 0
 
+    def evaluate_pure_math(self, code_str: str) -> Dict[str, Any]:
+        """Evaluates pure infix numeric arithmetic with 0 variables/identifiers allowed."""
+        cleaned = code_str.strip()
+        # Handle ^ as exponentiation
+        cleaned = cleaned.replace("^", "**")
+        try:
+            tree = ast.parse(cleaned, mode="eval")
+        except Exception as e:
+            return {
+                "status": "error",
+                "error_type": "SYNTAX_ERROR",
+                "message": f"Syntax error in math expression: {str(e)}"
+            }
+
+        try:
+            result = self._eval_pure_math_node(tree.body)
+            if isinstance(result, float) and result.is_integer():
+                result = int(result)
+            return {
+                "status": "success",
+                "result": result
+            }
+        except ZeroDivisionError:
+            return {
+                "status": "error",
+                "error_type": "DIVISION_BY_ZERO",
+                "message": "Division by zero"
+            }
+        except OverflowError:
+            return {
+                "status": "error",
+                "error_type": "OVERFLOW",
+                "message": "Arithmetic overflow"
+            }
+        except Exception as e:
+            return {
+                "status": "error",
+                "error_type": "RUNTIME_ERROR",
+                "message": f"Execution error: {str(e)}"
+            }
+
+    def _eval_pure_math_node(self, node: ast.AST) -> Any:
+        if isinstance(node, ast.Constant):
+            if isinstance(node.value, (int, float)):
+                return node.value
+            raise ValueError(f"Literal of type {type(node.value).__name__} not permitted in pure math.")
+
+        elif isinstance(node, ast.BinOp):
+            left = self._eval_pure_math_node(node.left)
+            right = self._eval_pure_math_node(node.right)
+            if isinstance(node.op, ast.Add):
+                return left + right
+            elif isinstance(node.op, ast.Sub):
+                return left - right
+            elif isinstance(node.op, ast.Mult):
+                return left * right
+            elif isinstance(node.op, ast.Div):
+                if right == 0:
+                    raise ZeroDivisionError()
+                return left / right
+            elif isinstance(node.op, ast.FloorDiv):
+                if right == 0:
+                    raise ZeroDivisionError()
+                return left // right
+            elif isinstance(node.op, ast.Mod):
+                if right == 0:
+                    raise ZeroDivisionError()
+                return left % right
+            elif isinstance(node.op, ast.Pow):
+                return left ** right
+            else:
+                raise ValueError(f"Operator {type(node.op).__name__} is not permitted in pure math.")
+
+        elif isinstance(node, ast.UnaryOp):
+            operand = self._eval_pure_math_node(node.operand)
+            if isinstance(node.op, ast.UAdd):
+                return +operand
+            elif isinstance(node.op, ast.USub):
+                return -operand
+            else:
+                raise ValueError(f"Unary operator {type(node.op).__name__} is not permitted in pure math.")
+
+        else:
+            raise PermissionError(f"AST node '{type(node).__name__}' is not permitted in pure math.")
+
     def evaluate(self, code_str: str, inputs: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """Parses and evaluates a safe Python expression."""
         self.op_count = 0
@@ -90,6 +175,18 @@ class RestrictedASTEvaluator:
             return {
                 "status": "success",
                 "result": result
+            }
+        except ZeroDivisionError:
+            return {
+                "status": "error",
+                "error_type": "DIVISION_BY_ZERO",
+                "message": "Division by zero"
+            }
+        except OverflowError:
+            return {
+                "status": "error",
+                "error_type": "OVERFLOW",
+                "message": "Arithmetic overflow"
             }
         except Exception as e:
             return {

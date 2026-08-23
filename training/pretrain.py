@@ -22,13 +22,18 @@ class TextDataset(Dataset):
         eos_id = tokenizer.token_to_id("<EOS>")
 
         all_ids = []
+        print(f"[*] Reading and batch-tokenizing {text_file}...")
         with open(text_file, "r", encoding="utf-8") as f:
-            for line in f:
-                line = line.strip()
-                if not line:
-                    continue
-                encoded = tokenizer.encode(line).ids
-                all_ids.extend([bos_id] + encoded + [eos_id])
+            lines = [l.strip() for l in f if l.strip()]
+
+        batch_chunk_size = 50000
+        for i in range(0, len(lines), batch_chunk_size):
+            batch_lines = lines[i: i + batch_chunk_size]
+            encodings = tokenizer.encode_batch(batch_lines)
+            for enc in encodings:
+                all_ids.extend([bos_id] + enc.ids + [eos_id])
+
+        print(f"[+] Tokenized {len(lines)} lines into {len(all_ids)} tokens.")
 
         # Slice into chunks of seq_len
         num_chunks = len(all_ids) // seq_len
@@ -181,6 +186,11 @@ def train_pretrain(config_path: str):
                 break
 
 
+    total_time = time.time() - start_time
+    total_tokens_processed = step * batch_size * seq_len
+    tokens_per_sec = total_tokens_processed / max(0.001, total_time)
+    ms_per_step = (total_time / max(1, step)) * 1000.0
+
     # Save final model & config
     final_ckpt_path = os.path.join(base_model_dir, "base_final.pt")
     torch.save(model.state_dict(), final_ckpt_path)
@@ -189,7 +199,26 @@ def train_pretrain(config_path: str):
     with open(cfg_path, "w", encoding="utf-8") as f:
         json.dump(trans_config.__dict__, f, indent=2)
 
-    print(f"[+] Pretraining completed. Model saved to {final_ckpt_path}")
+    # Save training metrics log
+    metrics = {
+        "phase": "pretrain",
+        "preset": preset_name,
+        "total_steps": step,
+        "total_params": total_params,
+        "total_wall_clock_seconds": round(total_time, 2),
+        "ms_per_step": round(ms_per_step, 2),
+        "tokens_per_second": round(tokens_per_sec, 2),
+        "total_tokens_processed": total_tokens_processed,
+        "final_loss": round(float(loss.item() * grad_accum), 6),
+        "device": str(device),
+        "gpu_name": torch.cuda.get_device_name(device) if use_cuda else "cpu"
+    }
+    metrics_path = os.path.join(base_model_dir, "training_metrics.json")
+    with open(metrics_path, "w", encoding="utf-8") as f:
+        json.dump(metrics, f, indent=2)
+
+    print(f"[+] Pretraining completed in {total_time:.2f}s ({tokens_per_sec:.1f} tokens/s, {ms_per_step:.1f} ms/step).")
+    print(f"[+] Metrics logged to {metrics_path}")
 
 
 def main():

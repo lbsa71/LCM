@@ -167,7 +167,22 @@ make poc
 
 # Run automated test suite:
 make test
+
+# Launch OpenAI-compatible API server:
+make server
 ```
+
+### OpenAI-Compatible HTTP API & Frontends
+
+LCM includes a built-in FastAPI server exposing `/v1/models` and `/v1/chat/completions` (with synchronous JSON and SSE streaming):
+
+```bash
+# Launch server
+python3 -m agent.server --config configs/smoke.yaml --port 8000
+```
+
+- **Open WebUI**: `docker run -d -p 3000:8080 -e OPENAI_API_BASE_URL=http://host.docker.internal:8000/v1 ghcr.io/open-webui/open-webui:main`
+- **Evaluation / Proxy Tools**: Works out of the box with **Promptfoo**, **DeepEval**, **Inspect AI**, and **LiteLLM**.
 
 ---
 

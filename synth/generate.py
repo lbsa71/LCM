@@ -106,12 +106,19 @@ def main():
         rng = random.Random(seed)
         tasks = train_task_gen.generate_all_tasks(w, rng)
         for task in tasks:
-            # Add question & answer forms to pretraining
-            pretrain_train_lines.append(f"{task.question} Answer: {task.gold_answer}")
-            
             # Trajectory for SFT
             traj = traj_gen.generate_trajectory_for_task(w, task, rng)
             agent_sft_trajectories.append(traj)
+
+        # Procedural in-context induction sequences for pretraining
+        for ent in w.entities.values():
+            pretrain_train_lines.append(f"Query regarding entity {ent.name}: search(query='{ent.name}') yields document records for {ent.name}.")
+            pretrain_train_lines.append(f"Extract subject from question: 'What is the recorded status of {ent.name}?' -> query='{ent.name}'.")
+
+        for i in range(10):
+            n1 = rng.randint(100, 999)
+            n2 = rng.randint(100, 999)
+            pretrain_train_lines.append(f"In-context arithmetic: items in Record A = {n1}, items in Record B = {n2}. Expression: exec(code='{n1} + {n2}') -> {n1 + n2}.")
 
     print(f"[*] Generating {val_worlds_cnt} validation worlds...")
     for seed in val_seeds:

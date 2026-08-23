@@ -18,7 +18,7 @@ SPECIAL_TOKENS = [
     "<OBSERVATION>",
     "<PLAN>",
     "<ACTION>",
-    "<FINAL>"
+    "<FINAL>",
 ]
 
 
@@ -35,7 +35,10 @@ def train_synthetic_tokenizer(
     tokenizer.normalizer = normalizers.Sequence([
         normalizers.NFKC()
     ])
-    tokenizer.pre_tokenizer = pre_tokenizers.ByteLevel(add_prefix_space=False)
+    tokenizer.pre_tokenizer = pre_tokenizers.Sequence([
+        pre_tokenizers.Digits(individual_digits=True),
+        pre_tokenizers.ByteLevel(add_prefix_space=False)
+    ])
     tokenizer.decoder = decoders.ByteLevel()
     tokenizer.post_processor = processors.ByteLevel(trim_offsets=False)
 

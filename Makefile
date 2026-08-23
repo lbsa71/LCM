@@ -11,6 +11,7 @@ help:
 	@echo "  make pretrain-smoke    Pretrain base transformer on smoke corpus"
 	@echo "  make agent-sft-smoke   Supervised fine-tuning on agent trajectories"
 	@echo "  make eval-smoke        Run deterministic benchmark suite"
+	@echo "  make server            Launch OpenAI-compatible HTTP API server"
 	@echo "  make poc               Run full end-to-end POC pipeline"
 	@echo "  make test              Run pytest test suite"
 
@@ -31,6 +32,9 @@ agent-sft-smoke:
 
 eval-smoke:
 	$(PYTHON) -m eval.runner --config configs/smoke.yaml
+
+server:
+	$(PYTHON) -m agent.server --config configs/smoke.yaml --port 8000
 
 poc: synth-smoke tokenizer-smoke pretrain-smoke agent-sft-smoke eval-smoke
 	@echo "[+] End-to-end POC execution complete. View report at runs/smoke/eval/report.html"

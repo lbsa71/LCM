@@ -1,7 +1,10 @@
 """Unit tests for protocol parser and shell state machine."""
 
+import pytest
+from tokenizers import Tokenizer
 from agent.protocol import parse_and_validate_message, PlanMessage, ToolCallMessage, FinalMessage, ProtocolError
 from agent.state import AgentState
+from agent.shell import DeterministicShell
 
 
 def test_protocol_parsing():
