@@ -1,22 +1,19 @@
-"""Procedural task generator for all LCM evaluation and training suites."""
+"""Synthetic task generator for all LCM benchmark suites (A through H and Anti-Memorization)."""
 
 import random
-from typing import Dict, List, Optional, Tuple
-
-from synth.ontology import World, Task, ProofGraph, ProofNode, Fact, Entity
+from typing import List, Tuple, Optional
+from synth.ontology import World, Task, ProofGraph, Fact, Entity
 from synth.language.grammar import GrammarRenderer
-from synth.language.counterfactual import CounterfactualGenerator
 
 
 class TaskGenerator:
-    """Generates benchmark and training tasks across all PRD suites."""
+    """Generates parameterized queries across distinct benchmark suites."""
 
-    def __init__(self, template_set: str = "all"):
-        self.grammar = GrammarRenderer(template_set=template_set)
-        self.counterfactual = CounterfactualGenerator()
+    def __init__(self, grammar: Optional[GrammarRenderer] = None, template_set: str = "all"):
+        self.grammar = grammar or GrammarRenderer(template_set=template_set)
 
     def _find_fact_doc_and_line(self, world: World, fact_id: str) -> Tuple[Optional[str], Optional[int]]:
-        """Helper to find the document ID and line number containing a fact."""
+        """Locates the document ID and 1-indexed line number containing the given fact ID."""
         for doc in world.documents.values():
             for line in doc.lines:
                 if fact_id in line.fact_ids:
@@ -24,54 +21,47 @@ class TaskGenerator:
         return None, None
 
     def generate_suite_a_tasks(self, world: World, count: int, rng: random.Random) -> List[Task]:
-        """Suite A: Language Understanding (negation, reference, instructions)."""
+        """Suite A: Pure Natural Language Logic (No external retrieval required, in-context syllogisms)."""
         tasks = []
-        entities = list(world.entities.values())
-        if len(entities) < 2:
-            return tasks
-
+        syllogisms = [
+            ("All zorps are plinks. Gax is a zorp.", "Is Gax a plink?", "true"),
+            ("No qux is a blip. Fend is a qux.", "Is Fend a blip?", "false"),
+            ("If a bliv is warmed, it melts. The bliv is warmed.", "Does the bliv melt?", "true"),
+            ("All vorps are gleebs. Jup is not a gleeb.", "Is Jup a vorp?", "false")
+        ]
         for i in range(count):
-            e1 = rng.choice(entities)
-            e2 = rng.choice([e for e in entities if e.id != e1.id])
-            
-            # Negation task
-            context = f"The {e1.entity_type} {e1.name} is active. The {e2.entity_type} {e2.name} is not active."
-            question = f"Is {e2.name} active?"
-            gold = "no"
-            
-            pg = ProofGraph(goal="negation_understanding")
+            premise, question, gold = syllogisms[i % len(syllogisms)]
+            full_prompt = f"{premise} {question}"
+            pg = ProofGraph(goal="in_context_syllogism")
             tasks.append(Task(
-                task_id=f"task_a_neg_{world.world_id}_{i+1}",
-                task_type="language_negation",
+                task_id=f"task_a_{world.world_id}_{i+1}",
+                task_type="language_logic",
                 suite="suite_a_language",
-                question=f"Context: {context}\nQuestion: {question}",
+                question=full_prompt,
                 gold_answer=gold,
                 proof_graph=pg,
                 world_id=world.world_id,
                 is_retrieval_required=False,
-                is_contingent=False,
-                context_text=context
+                is_contingent=False
             ))
         return tasks
 
     def generate_suite_b_tasks(self, world: World, count: int, rng: random.Random) -> List[Task]:
-        """Suite B: Invariant Reasoning (spatial, temporal, arithmetic comparison)."""
+        """Suite B: Ontology Invariants (Self-contained in-context structural queries and arithmetic)."""
         tasks = []
         for i in range(count):
-            val1 = rng.randint(100, 499)
-            val2 = rng.randint(500, 999)
-            
-            # Arithmetic invariant
-            context = f"Record alpha holds {val1} items. Record beta holds {val2} items."
-            question = f"What is the sum of items in Record alpha and Record beta?"
-            gold = str(val1 + val2)
-            
-            pg = ProofGraph(goal="arithmetic_addition")
+            a = rng.randint(10, 99)
+            b = rng.randint(10, 99)
+            gold = str(a + b)
+            context = f"Measurement Alpha: {a}. Measurement Beta: {b}."
+            question = f"Context: {context} What is the sum of Measurement Alpha and Measurement Beta?"
+
+            pg = ProofGraph(goal="in_context_arithmetic")
             tasks.append(Task(
-                task_id=f"task_b_math_{world.world_id}_{i+1}",
-                task_type="invariant_arithmetic",
+                task_id=f"task_b_{world.world_id}_{i+1}",
+                task_type="ontology_invariants",
                 suite="suite_b_invariants",
-                question=f"Context: {context}\nQuestion: {question}",
+                question=question,
                 gold_answer=gold,
                 proof_graph=pg,
                 world_id=world.world_id,
@@ -141,19 +131,20 @@ class TaskGenerator:
                 if d_in and l_in:
                     pg.add_evidence(d_in, l_in, in_f.id)
 
-                # Find population fact
+                # Population fact for this settlement
                 pop_f = next((f for f in world.facts.values() if f.subject_id == s_id and f.relation == "population"), None)
                 if pop_f:
                     d_pop, l_pop = self._find_fact_doc_and_line(world, pop_f.id)
                     if d_pop and l_pop:
                         pg.add_evidence(d_pop, l_pop, pop_f.id)
-                    settlement_pops.append((s_ent.name, int(pop_f.value)))
+                        settlement_pops.append((s_ent.name, int(pop_f.value)))
 
-            if not settlement_pops:
+            if len(settlement_pops) < 2:
                 continue
 
+            # Target answer: settlement with maximum population
             settlement_pops.sort(key=lambda x: x[1], reverse=True)
-            gold_name = settlement_pops[0][0]
+            gold_settlement = settlement_pops[0][0]
 
             question = f"Which settlement located inside the region {reg.name} has the largest population?"
 
@@ -162,7 +153,7 @@ class TaskGenerator:
                 task_type="multi_hop_comparison",
                 suite="suite_d_multi_hop",
                 question=question,
-                gold_answer=gold_name,
+                gold_answer=gold_settlement,
                 proof_graph=pg,
                 world_id=world.world_id,
                 is_retrieval_required=True,
@@ -171,7 +162,7 @@ class TaskGenerator:
         return tasks
 
     def generate_suite_e_tasks(self, world: World, count: int, rng: random.Random) -> List[Task]:
-        """Suite E: Retrieval + Computation (EXEC tool required)."""
+        """Suite E: Retrieval + Computation (e.g. Combined population sum across settlements)."""
         tasks = []
         settlements = [e for e in world.entities.values() if e.entity_type == "settlement"]
         if len(settlements) < 2:
@@ -266,6 +257,61 @@ class TaskGenerator:
             ))
         return tasks
 
+    def generate_suite_h_tasks(self, world: World, count: int, rng: random.Random) -> List[Task]:
+        """Suite H: Direct Computation (Direct Arithmetic and String/Character Manipulations)."""
+        tasks = []
+        sample_words = [
+            "Strawberry", "Mississippi", "almanac", "telemetry", "synthesizer",
+            "hyperplane", "deterministic", "gazetteer", "constellation", "astronomy"
+        ]
+        
+        for i in range(count):
+            mode = i % 4
+            if mode == 0:
+                # Direct Addition/Subtraction
+                a = rng.randint(100, 999)
+                b = rng.randint(100, 999)
+                op = rng.choice(["+", "-"])
+                ans = a + b if op == "+" else a - b
+                q = f"What is {a} {op} {b}?" if rng.random() > 0.5 else f"Compute {a} {op} {b}"
+                gold = str(ans)
+                expr = f"{a} {op} {b}"
+            elif mode == 1:
+                # Direct Multiplication
+                a = rng.randint(11, 99)
+                b = rng.randint(2, 20)
+                ans = a * b
+                q = f"Calculate {a} * {b}" if rng.random() > 0.5 else f"What is {a} multiplied by {b}?"
+                gold = str(ans)
+                expr = f"{a} * {b}"
+            elif mode == 2:
+                # Character count ("how many r's in Strawberry")
+                word = rng.choice(sample_words)
+                char = rng.choice(list(set(word.lower())))
+                count_val = word.lower().count(char)
+                q = f"How many {char}'s are in the word '{word}'?" if rng.random() > 0.5 else f"How many {char}'s in {word}?"
+                gold = str(count_val)
+                expr = f'"{word}".lower().count("{char}")'
+            else:
+                # String reversal / manipulation
+                word = rng.choice(sample_words)
+                gold = word[::-1]
+                q = f"What is the reverse of '{word}'?" if rng.random() > 0.5 else f"Reverse the string '{word}'"
+                expr = f'"{word}"[::-1]'
+
+            tasks.append(Task(
+                task_id=f"task_h_direct_{world.world_id}_{i+1}",
+                task_type="direct_computation",
+                suite="suite_h_direct_computation",
+                question=q,
+                gold_answer=gold,
+                proof_graph=ProofGraph(goal=f"direct_computation: {expr}"),
+                world_id=world.world_id,
+                is_retrieval_required=False,
+                is_contingent=False
+            ))
+        return tasks
+
     def generate_anti_memorization_tasks(self, world: World, rng: random.Random) -> List[Task]:
         """Generates permutation, prior-reversal, evidence-disabled, and closed-book tasks."""
         tasks = []
@@ -325,5 +371,6 @@ class TaskGenerator:
         all_tasks.extend(self.generate_suite_e_tasks(world, count=2, rng=rng))
         all_tasks.extend(self.generate_suite_f_tasks(world, count=2, rng=rng))
         all_tasks.extend(self.generate_suite_g_tasks(world, count=1, rng=rng))
+        all_tasks.extend(self.generate_suite_h_tasks(world, count=2, rng=rng))
         all_tasks.extend(self.generate_anti_memorization_tasks(world, rng=rng))
         return all_tasks

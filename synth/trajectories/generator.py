@@ -80,7 +80,17 @@ class TrajectoryGenerator:
             "train": False
         })
 
-        if not task.is_retrieval_required:
+        if task.suite == "suite_h_direct_computation":
+            # Direct computation (Math / String Ops): user -> MATH expr -> OBS MATH -> EMIT
+            expr = task.proof_graph.goal.replace("direct_computation: ", "").strip() if task.proof_graph else ""
+            if not expr:
+                expr = task.gold_answer
+
+            turns.append({"role": "action", "content": f"MATH {expr}", "train": True})
+            turns.append({"role": "observation", "content": format_math_hop(task.gold_answer), "train": False})
+            turns.append({"role": "final", "content": f'EMIT "{task.gold_answer}" EVIDENCE []', "train": True})
+
+        elif not task.is_retrieval_required:
             if task.suite == "suite_b_invariants" and ("sum" in task.question.lower() or "plus" in task.question.lower() or "total" in task.question.lower()):
                 # Suite B with arithmetic: user -> MATH -> OBS MATH -> EMIT
                 nums = re.findall(r'\b\d+\b', task.question)

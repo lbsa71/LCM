@@ -8,9 +8,9 @@ import yaml
 import torch
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
-from tokenizers import Tokenizer
 
 from training.model import SyntheticTransformer, TransformerConfig
+from training.model_loader import load_model_and_tokenizer
 from training.pretrain import get_lr_scheduler
 from utils.timer import StepTimer
 
@@ -18,11 +18,13 @@ from utils.timer import StepTimer
 class TrajectoryDataset(Dataset):
     """Encodes agent trajectories and applies target loss masking."""
 
-    def __init__(self, jsonl_file: str, tokenizer: Tokenizer, max_len: int = 512):
+    def __init__(self, jsonl_file: str, tokenizer, max_len: int = 512):
         self.max_len = max_len
         self.samples = []
 
         pad_id = tokenizer.token_to_id("<PAD>")
+        if pad_id is None:
+            pad_id = 0
         bos_id = tokenizer.token_to_id("<BOS>")
         eos_id = tokenizer.token_to_id("<EOS>")
 
@@ -34,8 +36,8 @@ class TrajectoryDataset(Dataset):
                 item = json.loads(line)
                 turns = item.get("turns", [])
                 
-                input_ids = [bos_id]
-                labels = [-100]  # BOS is not predicted
+                input_ids = [bos_id] if bos_id is not None else []
+                labels = [-100] * len(input_ids)
 
                 for turn in turns:
                     role = turn["role"]
@@ -46,10 +48,11 @@ class TrajectoryDataset(Dataset):
                     tag = f"<{role.upper()}>"
                     tag_id = tokenizer.token_to_id(tag)
                     if tag_id is None:
-                        tag_id = tokenizer.token_to_id("<UNK>")
+                        tag_id = tokenizer.token_to_id("<UNK>") or pad_id
 
                     content_ids = tokenizer.encode(content).ids
-                    turn_ids = [tag_id] + content_ids + [eos_id]
+                    closing_eos = [eos_id] if eos_id is not None else []
+                    turn_ids = [tag_id] + content_ids + closing_eos
 
                     input_ids.extend(turn_ids)
                     if is_train:
@@ -60,8 +63,6 @@ class TrajectoryDataset(Dataset):
                         labels.extend([-100] * len(turn_ids))
 
                 # Truncate or pad to max_len
-
-
                 if len(input_ids) > max_len:
                     input_ids = input_ids[:max_len]
                     labels = labels[:max_len]
@@ -87,16 +88,13 @@ def train_agent_sft(config_path: str):
         config = yaml.safe_load(f)
 
     preset_name = config.get("name", "smoke")
+    backend = config.get("backend", "custom")
     run_dir = f"runs/{preset_name}"
     data_dir = os.path.join(run_dir, "data")
     tok_dir = os.path.join(run_dir, "tokenizer")
     base_model_dir = os.path.join(run_dir, "base_model")
     agent_model_dir = os.path.join(run_dir, "agent_model")
     os.makedirs(agent_model_dir, exist_ok=True)
-
-    # Tokenizer
-    tok_path = os.path.join(tok_dir, "tokenizer.json")
-    tokenizer = Tokenizer.from_file(tok_path)
 
     # Device & CUDA optimizations
     device_name = config.get("agent_sft", {}).get("device", "auto")
@@ -117,25 +115,20 @@ def train_agent_sft(config_path: str):
     use_bf16 = use_cuda and torch.cuda.is_bf16_supported()
     amp_dtype = torch.bfloat16 if use_bf16 else (torch.float16 if use_cuda else torch.float32)
 
-    # Load Model Config
-    cfg_path = os.path.join(base_model_dir, "config.json")
-    with open(cfg_path, "r", encoding="utf-8") as f:
-        m_cfg_dict = json.load(f)
-    trans_config = TransformerConfig(**m_cfg_dict)
-
-    model = SyntheticTransformer(trans_config).to(device)
-
-    # Load base pretrained weights
-    base_weights_path = os.path.join(base_model_dir, "base_final.pt")
-    if os.path.exists(base_weights_path):
-        model.load_state_dict(torch.load(base_weights_path, map_location=device))
-        print(f"[*] Loaded base model weights from {base_weights_path}")
+    # Model & Tokenizer
+    if backend == "huggingface":
+        model, tokenizer = load_model_and_tokenizer(config, device=device)
+        max_seq_len = getattr(model.config, "max_position_embeddings", 2048)
     else:
-        print("[!] Warning: base_final.pt not found, training from random initialization.")
+        tok_path = os.path.join(tok_dir, "tokenizer.json")
+        config["tokenizer_path"] = tok_path
+        base_weights_path = os.path.join(base_model_dir, "base_final.pt")
+        model, tokenizer = load_model_and_tokenizer(config, device=device, checkpoint_path=base_weights_path)
+        max_seq_len = model.config.max_position_embeddings
 
     # SFT Dataset
     jsonl_file = os.path.join(data_dir, "agent_sft_train.jsonl")
-    sft_ds = TrajectoryDataset(jsonl_file, tokenizer, max_len=trans_config.max_position_embeddings)
+    sft_ds = TrajectoryDataset(jsonl_file, tokenizer, max_len=min(max_seq_len, 1024))
     print(f"[*] SFT Dataset: {len(sft_ds)} trajectory samples.")
 
     sft_cfg = config.get("agent_sft", {})
@@ -171,9 +164,11 @@ def train_agent_sft(config_path: str):
             
             if use_cuda:
                 with torch.amp.autocast(device_type="cuda", dtype=amp_dtype):
-                    _, loss = model(batch_x, labels=batch_y)
+                    out = model(batch_x, labels=batch_y)
+                    loss = out.loss if hasattr(out, "loss") else out[1]
             else:
-                _, loss = model(batch_x, labels=batch_y)
+                out = model(batch_x, labels=batch_y)
+                loss = out.loss if hasattr(out, "loss") else out[1]
 
             loss = loss / grad_accum
             loss.backward()
@@ -186,13 +181,18 @@ def train_agent_sft(config_path: str):
 
             step += 1
             current_lr = scheduler.get_last_lr()[0]
-            tokens_in_step = batch_size * model.config.max_position_embeddings
+            tokens_in_step = batch_size * min(max_seq_len, 1024)
             timer.end_step(step, loss.item() * grad_accum, current_lr, tokens_processed=tokens_in_step)
 
             if step in save_milestones:
                 m_elapsed = time.time() - start_time
-                milestone_ckpt = os.path.join(agent_model_dir, f"agent_step_{step}.pt")
-                torch.save(model.state_dict(), milestone_ckpt)
+                if backend == "huggingface":
+                    m_dir = os.path.join(agent_model_dir, f"agent_step_{step}")
+                    model.save_pretrained(m_dir)
+                    tokenizer.hf_tokenizer.save_pretrained(m_dir)
+                else:
+                    milestone_ckpt = os.path.join(agent_model_dir, f"agent_step_{step}.pt")
+                    torch.save(model.state_dict(), milestone_ckpt)
                 milestone_timings[step] = round(m_elapsed, 2)
 
             if step % 50 == 0 or step == max_steps:
@@ -202,16 +202,19 @@ def train_agent_sft(config_path: str):
             if step >= max_steps:
                 break
 
-
     total_time = time.time() - start_time
-    seq_len = model.config.max_position_embeddings
+    seq_len = min(max_seq_len, 1024)
     total_tokens_processed = step * batch_size * seq_len
     tokens_per_sec = total_tokens_processed / max(0.001, total_time)
     ms_per_step = (total_time / max(1, step)) * 1000.0
 
     # Save agent model
-    agent_ckpt_path = os.path.join(agent_model_dir, "agent_final.pt")
-    torch.save(model.state_dict(), agent_ckpt_path)
+    if backend == "huggingface":
+        model.save_pretrained(agent_model_dir)
+        tokenizer.hf_tokenizer.save_pretrained(agent_model_dir)
+    else:
+        agent_ckpt_path = os.path.join(agent_model_dir, "agent_final.pt")
+        torch.save(model.state_dict(), agent_ckpt_path)
 
     # Export per-step CSV
     csv_metrics_path = timer.export_csv("step_metrics.csv")
@@ -220,17 +223,14 @@ def train_agent_sft(config_path: str):
     metrics = {
         "phase": "agent_sft",
         "preset": preset_name,
+        "backend": backend,
         "total_steps": step,
-        "total_params": sum(p.numel() for p in model.parameters()),
         "total_wall_clock_seconds": round(total_time, 2),
         "ms_per_step": round(ms_per_step, 2),
         "tokens_per_second": round(tokens_per_sec, 2),
         "total_tokens_processed": total_tokens_processed,
-        "final_loss": round(float(loss.item() * grad_accum), 6),
-        "milestone_wall_clock_seconds": milestone_timings,
-        "device": str(device),
-        "gpu_name": torch.cuda.get_device_name(device) if use_cuda else "cpu",
-        "step_metrics_csv": os.path.basename(csv_metrics_path)
+        "final_loss": round(loss.item() * grad_accum, 4),
+        "milestone_timings": milestone_timings
     }
     metrics_path = os.path.join(agent_model_dir, "training_metrics.json")
     with open(metrics_path, "w", encoding="utf-8") as f:
@@ -240,12 +240,8 @@ def train_agent_sft(config_path: str):
     print(f"[+] Metrics logged to {metrics_path}")
 
 
-def main():
-    parser = argparse.ArgumentParser(description="Supervised Fine-Tuning for Agent Model")
-    parser.add_argument("--config", type=str, default="configs/smoke.yaml", help="Path to config yaml")
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--config", type=str, default="configs/smollm2_135m_agent.yaml")
     args = parser.parse_args()
     train_agent_sft(args.config)
-
-
-if __name__ == "__main__":
-    main()
