@@ -145,7 +145,7 @@ class DeterministicShell:
                 continue
 
             elif isinstance(parsed, PlanMessage):
-                state.history.append({"role": "plan", "content": json.dumps(parsed.model_dump())})
+                state.history.append({"role": "plan", "content": cleaned_output})
                 trace_steps.append(step_record)
                 continue
 

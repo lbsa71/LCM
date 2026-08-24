@@ -116,6 +116,16 @@ def parse_rdl_message(text: str) -> Optional[Union[ToolCallMessage, FinalMessage
     if not stripped:
         return None
 
+    # 0. PLAN <scratchpad_or_reasoning>
+    plan_match = re.match(r"^PLAN\s+(.+)$", stripped, re.IGNORECASE | re.DOTALL)
+    if plan_match:
+        reasoning_text = plan_match.group(1).strip()
+        return PlanMessage(
+            goal=reasoning_text,
+            needs=[],
+            next_action="search" if "search" in reasoning_text.lower() else "read" if "read" in reasoning_text.lower() else "final"
+        )
+
     # 1. SEARCH "<query>" [LIMIT <k>]
     search_match = re.match(r"^SEARCH\s+(.+?)(?:\s+LIMIT\s+(\d+))?$", stripped, re.IGNORECASE | re.DOTALL)
     if search_match:

@@ -309,10 +309,13 @@ def main():
     print(f"[*] Initializing LCM Server on device: {device}")
 
     # Generate synthetic world environment
-    world_gen = WorldGenerator(seed=config.get("seed", 42))
+    world_gen = WorldGenerator(base_seed=config.get("seed", 42))
     world = world_gen.generate_world(
+        world_id=config.get("world", {}).get("world_id", "world0"),
+        seed=config.get("seed", 42),
         num_entities=config.get("world", {}).get("num_entities", 20),
-        num_documents=config.get("world", {}).get("num_documents", 10)
+        num_facts=config.get("world", {}).get("num_facts", 25),
+        held_out_lexicon=config.get("world", {}).get("held_out_lexicon", False)
     )
     print(f"[*] Loaded World ID: {world.world_id} with {len(world.documents)} documents.")
 

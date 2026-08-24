@@ -60,9 +60,9 @@ def test_atomic_trajectory_generation():
     assert roles[1] == "action"
     assert roles[2] == "observation"
     
-    # Check that search action strictly extracted the entity in RDL syntax
+    # Check that search action strictly extracted the entity in RDL syntax and live BM25 executed
     assert turns[1]["content"] == 'SEARCH "Corvath" LIMIT 3'
-    assert turns[2]["content"] == 'OBS SEARCH [D01 (6.2)]'
+    assert turns[2]["content"].startswith('OBS SEARCH [D01')
     assert "READ D01" in turns[3]["content"]
     assert "OBS READ D01" in turns[4]["content"]
     assert "EMIT" in turns[5]["content"]

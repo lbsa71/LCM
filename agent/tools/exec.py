@@ -47,6 +47,12 @@ SAFE_BUILTINS = {
     "any": any,
 }
 
+SAFE_METHODS = {
+    "lower", "upper", "count", "strip", "lstrip", "rstrip",
+    "replace", "startswith", "endswith", "split", "join",
+    "find", "index", "keys", "values", "items", "get"
+}
+
 
 class RestrictedASTEvaluator:
     """Safely evaluates a constrained subset of Python expressions without eval/exec."""
@@ -161,20 +167,22 @@ class RestrictedASTEvaluator:
                     return {
                         "status": "error",
                         "error_type": "SYNTAX_ERROR",
-                        "message": f"Code must be a single evaluatable expression: {str(e)}"
+                        "message": f"Syntax error in expression: {str(e)}"
                     }
             except Exception as e2:
                 return {
                     "status": "error",
                     "error_type": "SYNTAX_ERROR",
-                    "message": f"Failed to parse expression: {str(e2)}"
+                    "message": f"Syntax error in expression: {str(e2)}"
                 }
 
         try:
-            result = self._eval_node(tree.body, context)
+            res = self._eval_node(tree.body, context)
+            if isinstance(res, float) and res.is_integer():
+                res = int(res)
             return {
                 "status": "success",
-                "result": result
+                "result": res
             }
         except ZeroDivisionError:
             return {
@@ -186,13 +194,19 @@ class RestrictedASTEvaluator:
             return {
                 "status": "error",
                 "error_type": "OVERFLOW",
-                "message": "Arithmetic overflow"
+                "message": "Numeric overflow"
+            }
+        except PermissionError as pe:
+            return {
+                "status": "error",
+                "error_type": "SECURITY_VIOLATION",
+                "message": str(pe)
             }
         except Exception as e:
             return {
                 "status": "error",
                 "error_type": "RUNTIME_ERROR",
-                "message": f"Execution error: {str(e)}"
+                "message": f"Runtime error: {str(e)}"
             }
 
     def _eval_node(self, node: ast.AST, context: Dict[str, Any]) -> Any:
@@ -207,6 +221,12 @@ class RestrictedASTEvaluator:
             if node.id in context:
                 return context[node.id]
             raise NameError(f"Name '{node.id}' is not defined or permitted.")
+
+        elif isinstance(node, ast.Attribute):
+            if node.attr.startswith("_") or node.attr not in SAFE_METHODS:
+                raise PermissionError(f"Attribute/method '{node.attr}' is not permitted.")
+            target_val = self._eval_node(node.value, context)
+            return getattr(target_val, node.attr)
 
         elif isinstance(node, ast.BinOp):
             left = self._eval_node(node.left, context)

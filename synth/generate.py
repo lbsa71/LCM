@@ -78,7 +78,8 @@ def main():
     eval_doc_gen = DocumentGenerator(template_set="eval")
     train_task_gen = TaskGenerator(template_set="train")
     eval_task_gen = TaskGenerator(template_set="eval")
-    traj_gen = TrajectoryGenerator()
+    include_plan = config.get("agent_runtime", {}).get("include_plan", True)
+    traj_gen = TrajectoryGenerator(include_plan=include_plan)
 
     # Disjoint seed sets
     train_seeds = set(range(base_seed + 1, base_seed + 1 + train_worlds_cnt))
