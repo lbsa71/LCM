@@ -1,0 +1,65 @@
+name: "smollm2_135m_agent"
+backend: "huggingface"
+pretrained_model_name: "HuggingFaceTB/SmolLM2-135M"
+seed: 42
+
+corpus:
+  train_worlds: 8000
+  val_worlds: 400
+  test_worlds: 400
+  docs_per_world: 30
+  facts_per_world: 50
+  distractor_docs_per_world: 15
+  task_types_per_world: 12
+  counterfactual_pairs_per_world: 10
+  trajectory_samples_per_world: 14
+
+special_tokens:
+  - "<PAD>"
+  - "<BOS>"
+  - "<EOS>"
+  - "<UNK>"
+  - "<USER>"
+  - "<ASSISTANT>"
+  - "<TOOL>"
+  - "<OBSERVATION>"
+  - "<PLAN>"
+  - "<ACTION>"
+  - "<FINAL>"
+
+agent_sft:
+  learning_rate: 2.0e-4
+  min_learning_rate: 2.0e-5
+  weight_decay: 0.01
+  batch_size: 4
+  gradient_accumulation_steps: 8
+  max_steps: 3000
+  warmup_steps: 200
+  eval_interval: 250
+  save_milestones: [1000, 2000, 3000]
+  device: "auto"
+
+agent_runtime:
+  max_turns: 14
+  max_search_calls: 6
+  max_read_calls: 8
+  max_exec_calls: 4
+  max_tokens_per_turn: 256
+  temperature: 0.0
+  greedy: true
+
+eval:
+  suites:
+    - "suite_a_language"
+    - "suite_b_invariants"
+    - "suite_c_single_hop"
+    - "suite_d_multi_hop"
+    - "suite_e_retrieval_computation"
+    - "suite_f_missing_evidence"
+    - "suite_g_tool_recovery"
+    - "suite_h_direct_computation"
+    - "anti_memorization_evidence_disabled"
+    - "anti_memorization_closed_book"
+  run_baselines:
+    - "oracle"
+    - "no_tool"

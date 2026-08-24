@@ -1,21 +1,17 @@
-"""Milestone checkpoint evaluator tracking error rate and performance scaling across sample sizes."""
+"""Evaluates model checkpoints across all benchmark suites and logs milestone scaling progression."""
 
 import argparse
 import json
 import os
-import sys
 import time
-from collections import Counter, defaultdict
-import torch
 import yaml
-from tokenizers import Tokenizer
+from collections import defaultdict
+import torch
 
 from synth.ontology import World, Task, Document, DocumentLine
-from training.model import SyntheticTransformer, TransformerConfig
 from agent.shell import DeterministicShell
 from eval.metrics import evaluate_episode_outcome, compute_aggregate_metrics
-from eval.oracle import OracleSolver
-from eval.baselines.no_tool import NoToolBaseline
+from training.model_loader import load_model_and_tokenizer
 
 
 def deserialize_world(data: dict) -> World:
@@ -38,8 +34,7 @@ SUITE_ORDER = [
     "suite_e_retrieval_computation",
     "suite_f_missing_evidence",
     "suite_g_tool_recovery",
-    "suite_h_adversarial_distractors",
-    "suite_i_relational_filter",
+    "suite_h_direct_computation",
     "anti_memorization_permutation",
     "anti_memorization_prior_reversal",
     "anti_memorization_evidence_disabled",
@@ -53,14 +48,12 @@ def stratified_sample_tasks(tasks, per_suite=30):
         by_suite[t["suite"]].append(t)
     sampled = []
     
-    # Process suites in canonical SUITE_ORDER first
     seen_suites = set()
     for s_name in SUITE_ORDER:
         if s_name in by_suite:
             sampled.extend(by_suite[s_name][:per_suite])
             seen_suites.add(s_name)
             
-    # Add any remaining suites not in canonical order
     for suite, suite_tasks in sorted(by_suite.items()):
         if suite not in seen_suites:
             sampled.extend(suite_tasks[:per_suite])
@@ -98,34 +91,27 @@ def evaluate_checkpoint(model, tokenizer, device, worlds, tasks, checkpoint_name
         outcomes.append(out)
 
         if (idx + 1) % 50 == 0 or (idx + 1) == len(tasks):
-            curr_acc = sum(1 for o in outcomes if o.get("grounded_success", False)) / (idx + 1)
-            print(f"    [{idx + 1}/{len(tasks)}] Grounded Acc: {curr_acc * 100:.1f}% (elapsed: {time.time() - t0:.1f}s)", flush=True)
+            elapsed = time.time() - t0
+            current_acc = sum(1 for o in outcomes if o["grounded_success"]) / len(outcomes)
+            print(f"    [{idx+1}/{len(tasks)}] Grounded Acc: {current_acc*100:.1f}% (elapsed: {elapsed:.1f}s)")
 
     metrics = compute_aggregate_metrics(outcomes)
     return metrics, outcomes, episodes
 
 
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--config", type=str, default="configs/small.yaml")
-    parser.add_argument("--per-suite", type=int, default=30, help="Number of tasks per suite for stratified sample (0 for all)")
-    args = parser.parse_args()
-
-    with open(args.config, "r", encoding="utf-8") as f:
+def run_milestone_evaluation(config_path: str, per_suite: int = 20, final_only: bool = False):
+    with open(config_path, "r", encoding="utf-8") as f:
         config = yaml.safe_load(f)
 
-    preset_name = config.get("name", "small")
+    preset_name = config.get("name", "smoke")
+    backend = config.get("backend", "custom")
     run_dir = f"runs/{preset_name}"
     data_dir = os.path.join(run_dir, "data")
     tok_dir = os.path.join(run_dir, "tokenizer")
-    agent_dir = os.path.join(run_dir, "agent_model")
     base_dir = os.path.join(run_dir, "base_model")
+    agent_dir = os.path.join(run_dir, "agent_model")
     eval_dir = os.path.join(run_dir, "eval")
     os.makedirs(eval_dir, exist_ok=True)
-
-    # Load Tokenizer
-    tok_path = os.path.join(tok_dir, "tokenizer.json")
-    tokenizer = Tokenizer.from_file(tok_path)
 
     # Load Worlds & Tasks
     eval_worlds_path = os.path.join(data_dir, "eval_worlds.json")
@@ -138,8 +124,8 @@ def main():
     with open(eval_tasks_path, "r", encoding="utf-8") as f:
         all_tasks = json.load(f)
 
-    if args.per_suite > 0:
-        tasks = stratified_sample_tasks(all_tasks, per_suite=args.per_suite)
+    if per_suite > 0:
+        tasks = stratified_sample_tasks(all_tasks, per_suite=per_suite)
     else:
         tasks = all_tasks
 
@@ -150,35 +136,46 @@ def main():
         torch.backends.cuda.matmul.allow_tf32 = True
         torch.backends.cudnn.allow_tf32 = True
 
-    # Setup Base Model
-    cfg_path = os.path.join(base_dir, "config.json")
-    with open(cfg_path, "r", encoding="utf-8") as f:
-        m_dict = json.load(f)
-    trans_cfg = TransformerConfig(**m_dict)
-    model = SyntheticTransformer(trans_cfg).to(device)
-
-    # Milestones to evaluate (dynamically discovered from agent_dir)
-    step_tuples = []
-    for fname in os.listdir(agent_dir):
-        if fname.startswith("agent_step_") and fname.endswith(".pt"):
-            step_str = fname.replace("agent_step_", "").replace(".pt", "")
-            try:
-                step_num = int(step_str)
-                step_tuples.append((step_num, fname))
-            except ValueError:
-                pass
-    step_tuples.sort(key=lambda x: x[0])
-
+    # Discover Milestones
     milestones = []
-    for step_num, fname in step_tuples:
-        milestones.append((f"Step {step_num}", os.path.join(agent_dir, fname), step_num))
+    if backend == "huggingface":
+        step_tuples = []
+        if os.path.exists(agent_dir):
+            for fname in os.listdir(agent_dir):
+                if fname.startswith("agent_step_") and os.path.isdir(os.path.join(agent_dir, fname)):
+                    step_str = fname.replace("agent_step_", "")
+                    try:
+                        step_num = int(step_str)
+                        step_tuples.append((step_num, os.path.join(agent_dir, fname)))
+                    except ValueError:
+                        pass
+        step_tuples.sort(key=lambda x: x[0])
+        for step_num, fpath in step_tuples:
+            milestones.append((f"Step {step_num}", fpath, step_num))
 
-    final_path = os.path.join(agent_dir, "agent_final.pt")
-    if os.path.exists(final_path):
-        final_step = step_tuples[-1][0] + 1 if step_tuples else 9999
-        milestones.append(("Final Step", final_path, final_step))
+        if os.path.exists(os.path.join(agent_dir, "config.json")) or os.path.exists(os.path.join(agent_dir, "model.safetensors")):
+            final_step = step_tuples[-1][0] + 1 if step_tuples else 9999
+            milestones.append(("Final Step", agent_dir, final_step))
+    else:
+        step_tuples = []
+        if os.path.exists(agent_dir):
+            for fname in os.listdir(agent_dir):
+                if fname.startswith("agent_step_") and fname.endswith(".pt"):
+                    step_str = fname.replace("agent_step_", "").replace(".pt", "")
+                    try:
+                        step_num = int(step_str)
+                        step_tuples.append((step_num, os.path.join(agent_dir, fname)))
+                    except ValueError:
+                        pass
+        step_tuples.sort(key=lambda x: x[0])
+        for step_num, fpath in step_tuples:
+            milestones.append((f"Step {step_num}", fpath, step_num))
 
-    # Check if existing results exist to resume
+        final_path = os.path.join(agent_dir, "agent_final.pt")
+        if os.path.exists(final_path):
+            final_step = step_tuples[-1][0] + 1 if step_tuples else 9999
+            milestones.append(("Final Step", final_path, final_step))
+
     summary_path = os.path.join(eval_dir, "milestone_scaling_results.json")
     all_milestone_results = {}
     if os.path.exists(summary_path):
@@ -187,6 +184,9 @@ def main():
                 all_milestone_results = json.load(f)
         except Exception:
             all_milestone_results = {}
+
+    if final_only:
+        milestones = [m for m in milestones if m[0] == "Final Step" or "3000" in m[0]]
 
     for label, weights_path, step in milestones:
         step_key = str(step)
@@ -197,49 +197,68 @@ def main():
         if not os.path.exists(weights_path):
             print(f"[!] Warning: weights {weights_path} not found. Skipping.")
             continue
-        model.load_state_dict(torch.load(weights_path, map_location=device))
+
+        # Load model checkpoint
+        if backend == "huggingface":
+            model, tokenizer = load_model_and_tokenizer(config, device=device, checkpoint_path=weights_path)
+        else:
+            tok_path = os.path.join(tok_dir, "tokenizer.json")
+            config["tokenizer_path"] = tok_path
+            model, tokenizer = load_model_and_tokenizer(config, device=device, checkpoint_path=weights_path)
+
         model.eval()
 
         eval_t0 = time.time()
         metrics, outcomes, episodes = evaluate_checkpoint(model, tokenizer, device, worlds, tasks, label)
         eval_elapsed = time.time() - eval_t0
         
-        # Extract error rate
         grounded_acc = metrics["overall_grounded_success_rate"]
         error_rate = 1.0 - grounded_acc
         task_success = metrics["overall_task_success_rate"]
         unsupported_rate = metrics["unsupported_claim_rate"]
-        fail_dist = metrics["failure_taxonomy_distribution"]
+        approx_samples = step * config.get("agent_sft", {}).get("batch_size", 4) * config.get("agent_sft", {}).get("gradient_accumulation_steps", 8)
 
         all_milestone_results[step_key] = {
             "label": label,
             "step": step,
-            "approx_samples": step * 10 if step < 1000 else 10155,
+            "approx_samples": approx_samples,
             "wall_clock_seconds": round(eval_elapsed, 2),
-            "ms_per_task": round((eval_elapsed / max(1, len(tasks))) * 1000.0, 2),
-            "grounded_accuracy": grounded_acc,
-            "error_rate": error_rate,
-            "raw_task_accuracy": task_success,
-            "unsupported_claim_rate": unsupported_rate,
-            "suite_metrics": metrics["suite_metrics"],
-            "failure_taxonomy_distribution": fail_dist
+            "ms_per_task": round((eval_elapsed / max(1, len(tasks))) * 1000, 2),
+            "grounded_accuracy": round(grounded_acc, 4),
+            "error_rate": round(error_rate, 4),
+            "raw_task_accuracy": round(task_success, 4),
+            "unsupported_claim_rate": round(unsupported_rate, 4),
+            "suite_metrics": metrics.get("suite_metrics", {}),
+            "failure_taxonomy_distribution": metrics.get("failure_taxonomy_distribution", {})
         }
 
-        # Save incremental milestone summary
         with open(summary_path, "w", encoding="utf-8") as f:
             json.dump(all_milestone_results, f, indent=2)
         print(f"[+] Saved checkpoint metrics to {summary_path}")
 
+    # Final Summary Table
     print("\n" + "=" * 80)
-    print("  LCM SAMPLE SIZE SCALING & ERROR RATE PROGRESSION")
+    print("  LCM SAMPLE SIZE SCALING & ERROR RATE PROGRESSION (SmolLM2 Adapter)")
     print("=" * 80)
-    print(f"{'Milestone':<30} | {'Grounded Acc':<14} | {'Error Rate':<12} | {'Raw Match':<10} | {'Unsupported':<12}")
+    print(f"{'Milestone':<30} | {'Grounded Acc':>14} | {'Error Rate':>12} | {'Raw Match':>10} | {'Unsupported':>12}")
     print("-" * 80)
-    for step, res in all_milestone_results.items():
-        print(f"{res['label']:<30} | {res['grounded_accuracy']*100:>11.1f}% | {res['error_rate']*100:>9.1f}% | {res['raw_task_accuracy']*100:>7.1f}% | {res['unsupported_claim_rate']*100:>9.1f}%")
+    
+    sorted_steps = sorted(all_milestone_results.keys(), key=lambda k: all_milestone_results[k]["step"])
+    for s_k in sorted_steps:
+        res = all_milestone_results[s_k]
+        lbl = res["label"]
+        g_acc = f"{res['grounded_accuracy']*100:.1f}%"
+        e_rate = f"{res['error_rate']*100:.1f}%"
+        r_acc = f"{res['raw_task_accuracy']*100:.1f}%"
+        u_rate = f"{res['unsupported_claim_rate']*100:.1f}%"
+        print(f"{lbl:<30} | {g_acc:>14} | {e_rate:>12} | {r_acc:>10} | {u_rate:>12}")
     print("=" * 80)
-    print(f"[+] Milestone results saved to {summary_path}")
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--config", type=str, default="configs/smollm2_135m_agent.yaml")
+    parser.add_argument("--per-suite", type=int, default=20)
+    parser.add_argument("--final-only", action="store_true", help="Only evaluate final/converged checkpoints")
+    args = parser.parse_args()
+    run_milestone_evaluation(args.config, per_suite=args.per_suite, final_only=args.final_only)

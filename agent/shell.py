@@ -111,12 +111,24 @@ class DeterministicShell:
                 input_tensor = torch.tensor([input_ids], dtype=torch.long).to(self.device)
                 
                 # Predict next action / plan / final
-                generated = self.model.generate(
-                    input_tensor,
-                    max_new_tokens=self.max_tokens_per_turn,
-                    stop_token_ids=stop_ids,
-                    temperature=0.0
-                )
+                if hasattr(self.model, "can_generate"):
+                    hf_eos = getattr(getattr(self.tokenizer, "hf_tokenizer", None), "eos_token_id", None)
+                    pad_id = self.tokenizer.token_to_id("<PAD>") or eos_id
+                    all_stop_ids = list(set([i for i in [eos_id, hf_eos] if i is not None]))
+                    generated = self.model.generate(
+                        input_tensor,
+                        max_new_tokens=min(self.max_tokens_per_turn, 64),
+                        do_sample=False,
+                        eos_token_id=all_stop_ids if len(all_stop_ids) > 1 else all_stop_ids[0],
+                        pad_token_id=pad_id
+                    )
+                else:
+                    generated = self.model.generate(
+                        input_tensor,
+                        max_new_tokens=min(self.max_tokens_per_turn, 64),
+                        stop_token_ids=stop_ids,
+                        temperature=0.0
+                    )
                 new_tokens = generated[0, input_tensor.shape[1]:].tolist()
                 raw_output = self.tokenizer.decode(new_tokens)
             else:
