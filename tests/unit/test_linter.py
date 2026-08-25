@@ -1,7 +1,7 @@
 """Unit tests for corpus linter."""
 
 from synth.lint import CorpusLinter
-from synth.generate import lintable_test_questions
+from synth.generate import lintable_test_questions, raise_for_lint_errors
 
 
 def test_forbidden_entity_detection():
@@ -36,3 +36,14 @@ def test_lintable_test_questions_excludes_intentional_real_world_probes():
     ]
 
     assert lintable_test_questions(tasks) == ["What is the population of veska?"]
+
+
+def test_lint_failure_blocks_training_pipeline():
+    report = {"status": "FAIL", "errors": ["Forbidden term ['france'] found in train sample"]}
+
+    try:
+        raise_for_lint_errors(report)
+    except ValueError as exc:
+        assert "Corpus lint failed" in str(exc)
+    else:
+        raise AssertionError("A failed corpus lint must block downstream training")

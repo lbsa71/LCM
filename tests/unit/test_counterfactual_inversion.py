@@ -5,6 +5,7 @@ import pytest
 
 from synth.ontology import World, Task, Document, DocumentLine, Entity, Fact, ProofGraph
 from synth.tasks.generator import TaskGenerator
+from synth.world import WorldGenerator
 from synth.trajectories.generator import TrajectoryGenerator
 from agent.tools.exec import RestrictedASTEvaluator
 
@@ -85,3 +86,19 @@ def test_suite_i_trajectory_generation():
     assert "OBS READ D01" in turns[4]["content"]
     assert roles[5] == "final"
     assert 'EMIT "Lyon" EVIDENCE [D01:1]' in turns[5]["content"]
+
+
+def test_training_task_generation_excludes_real_world_evaluation_probes():
+    world = WorldGenerator(base_seed=42).generate_world("W_SYNTHETIC", seed=99)
+    generator = TaskGenerator(template_set="train")
+
+    tasks = generator.generate_all_tasks(
+        world,
+        random.Random(99),
+        include_counterfactual=False,
+        include_closed_book=False,
+    )
+
+    suites = {task.suite for task in tasks}
+    assert "suite_i_counterfactual_inversion" not in suites
+    assert "anti_memorization_closed_book" not in suites

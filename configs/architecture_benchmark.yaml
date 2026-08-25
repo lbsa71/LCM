@@ -1,0 +1,27 @@
+name: "architecture_benchmark"
+
+benchmark:
+  output_dir: "runs/architecture_benchmark"
+  device: "auto"
+  max_new_tokens: 64
+  architectures:
+    - id: "semantic_parser_k8_seed17"
+      kind: "parser"
+      config: "configs/form_variation.yaml"
+      tokenizer_path: "runs/form_variation/variants_8/seed_17/tokenizer/tokenizer.json"
+      checkpoint_path: "runs/form_variation/variants_8/seed_17/parser_final.pt"
+    - id: "semantic_parser_k8_seed29"
+      kind: "parser"
+      config: "configs/form_variation.yaml"
+      tokenizer_path: "runs/form_variation/variants_8/seed_29/tokenizer/tokenizer.json"
+      checkpoint_path: "runs/form_variation/variants_8/seed_29/parser_final.pt"
+    - id: "smollm2_135m_react"
+      kind: "agent"
+      config: "configs/smollm2_135m_agent.yaml"
+      checkpoint_path: "runs/smollm2_135m_agent/agent_model"
+      tokenizer_path: "runs/smollm2_135m_agent/agent_model"
+    - id: "scratch_300m_react_legacy"
+      kind: "agent"
+      config: "configs/scaled_overnight_300m.yaml"
+      checkpoint_path: "runs/scaled_overnight_300m/agent_model/agent_final.pt"
+      tokenizer_path: "runs/scaled_overnight_300m/tokenizer/tokenizer.json"

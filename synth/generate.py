@@ -73,6 +73,15 @@ def lintable_test_questions(tasks: List[Dict[str, Any]]) -> List[str]:
     ]
 
 
+def raise_for_lint_errors(lint_report: Dict[str, Any]) -> None:
+    """Prevent any model training when synthetic-corpus integrity is violated."""
+    if lint_report.get("status") == "PASS":
+        return
+    errors = lint_report.get("errors", [])
+    summary = "; ".join(str(error) for error in errors[:3])
+    raise ValueError(f"Corpus lint failed; refusing to continue to training. {summary}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Synthetic Corpus & World Generator")
     parser.add_argument("--config", type=str, default="configs/smoke.yaml", help="Path to config yaml")
@@ -125,7 +134,15 @@ def main():
 
         # Generate tasks and SFT trajectories
         rng = random.Random(seed)
-        tasks = train_task_gen.generate_all_tasks(w, rng)
+        # Real-world collision probes are held out for evaluation only. Including
+        # them in a scratch-training world would inject forbidden entity names
+        # into the procedural pretraining corpus below.
+        tasks = train_task_gen.generate_all_tasks(
+            w,
+            rng,
+            include_counterfactual=False,
+            include_closed_book=False,
+        )
         for task in tasks:
             # Trajectory for SFT
             traj = traj_gen.generate_trajectory_for_task(w, task, rng)
@@ -208,6 +225,7 @@ def main():
         "lint_report": lint_report
     }
     generate_manifest(output_dir, config, stats, lint_report["status"])
+    raise_for_lint_errors(lint_report)
     print(f"[+] Generation complete. Data saved to {data_dir}")
 
 

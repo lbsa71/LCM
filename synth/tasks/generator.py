@@ -442,32 +442,38 @@ class TaskGenerator:
 
         return tasks
 
-    def generate_anti_memorization_tasks(self, world: World, rng: random.Random) -> List[Task]:
+    def generate_anti_memorization_tasks(
+        self,
+        world: World,
+        rng: random.Random,
+        include_closed_book: bool = True,
+    ) -> List[Task]:
         """Generates permutation, prior-reversal, evidence-disabled, and closed-book tasks."""
         tasks = []
         
         # 1. Closed-book leakage probe (must answer insufficient_evidence)
-        closed_book_questions = [
-            "What is the capital of France?",
-            "Who was the first president of the United States?",
-            "In what year did World War II end?",
-            "What is the atomic number of Gold?",
-            "Who wrote Hamlet?"
-        ]
-        for idx, q in enumerate(closed_book_questions):
-            pg = ProofGraph(goal="closed_book_abstention")
-            tasks.append(Task(
-                task_id=f"task_anti_closed_{world.world_id}_{idx+1}",
-                task_type="closed_book_leakage",
-                suite="anti_memorization_closed_book",
-                question=q,
-                gold_answer="insufficient_evidence",
-                proof_graph=pg,
-                world_id=world.world_id,
-                is_retrieval_required=False,
-                is_contingent=False,
-                is_insufficient_evidence=True
-            ))
+        if include_closed_book:
+            closed_book_questions = [
+                "What is the capital of France?",
+                "Who was the first president of the United States?",
+                "In what year did World War II end?",
+                "What is the atomic number of Gold?",
+                "Who wrote Hamlet?"
+            ]
+            for idx, q in enumerate(closed_book_questions):
+                pg = ProofGraph(goal="closed_book_abstention")
+                tasks.append(Task(
+                    task_id=f"task_anti_closed_{world.world_id}_{idx+1}",
+                    task_type="closed_book_leakage",
+                    suite="anti_memorization_closed_book",
+                    question=q,
+                    gold_answer="insufficient_evidence",
+                    proof_graph=pg,
+                    world_id=world.world_id,
+                    is_retrieval_required=False,
+                    is_contingent=False,
+                    is_insufficient_evidence=True
+                ))
 
         # 2. Evidence-disabled test
         pop_facts = [f for f in world.facts.values() if f.relation == "population"]
@@ -491,7 +497,13 @@ class TaskGenerator:
 
         return tasks
 
-    def generate_all_tasks(self, world: World, rng: random.Random) -> List[Task]:
+    def generate_all_tasks(
+        self,
+        world: World,
+        rng: random.Random,
+        include_counterfactual: bool = True,
+        include_closed_book: bool = True,
+    ) -> List[Task]:
         """Generates all task types for a given world."""
         all_tasks = []
         all_tasks.extend(self.generate_suite_a_tasks(world, count=2, rng=rng))
@@ -502,6 +514,9 @@ class TaskGenerator:
         all_tasks.extend(self.generate_suite_f_tasks(world, count=2, rng=rng))
         all_tasks.extend(self.generate_suite_g_tasks(world, count=1, rng=rng))
         all_tasks.extend(self.generate_suite_h_tasks(world, count=3, rng=rng))
-        all_tasks.extend(self.generate_suite_i_tasks(world, count=2, rng=rng))
-        all_tasks.extend(self.generate_anti_memorization_tasks(world, rng=rng))
+        if include_counterfactual:
+            all_tasks.extend(self.generate_suite_i_tasks(world, count=2, rng=rng))
+        all_tasks.extend(
+            self.generate_anti_memorization_tasks(world, rng=rng, include_closed_book=include_closed_book)
+        )
         return all_tasks
