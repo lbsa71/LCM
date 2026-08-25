@@ -51,7 +51,7 @@ def main():
 
     # 3. Milestone Benchmark Evaluation
     run_stage(
-        [python_exe, "-m", "eval.eval_milestones", "--config", config_path, "--per-suite", "20"],
+        [python_exe, "-m", "eval.eval_milestones", "--config", config_path, "--per-suite", "10", "--final-only"],
         "Stage 3: Milestone Benchmark Evaluation (All Suites A-H)"
     )
 

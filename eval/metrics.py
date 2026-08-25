@@ -11,14 +11,18 @@ def evaluate_episode_outcome(episode: Dict[str, Any], task: Any) -> Dict[str, An
         is_insufficient_evidence = getattr(task, "is_insufficient_evidence", False)
         pg = getattr(task, "proof_graph", None)
         required_evidence = pg.required_document_lines if pg else {}
+        metadata = getattr(task, "metadata", {}) or {}
     else:
         gold_answer = str(task.get("gold_answer", "")).strip().lower()
         is_retrieval_required = task.get("is_retrieval_required", True)
         is_insufficient_evidence = task.get("is_insufficient_evidence", False)
         required_evidence = task.get("required_evidence", {})  # doc_id -> list of line numbers
+        metadata = task.get("metadata", {}) or {}
 
     model_answer = str(episode.get("model_answer", "")).strip().lower()
     raw_match = (model_answer == gold_answer)
+    prior_answer = str(metadata.get("prior_answer", "")).strip().lower() if metadata.get("prior_answer") else None
+    prior_contaminated = (prior_answer is not None and model_answer == prior_answer)
 
     # Validate evidence
     cited_evidence = episode.get("cited_evidence", [])
@@ -44,7 +48,9 @@ def evaluate_episode_outcome(episode: Dict[str, Any], task: Any) -> Dict[str, An
     # Failure taxonomy classification
     failure_category = None
     if not grounded_success:
-        if episode.get("termination_reason") in ("MAX_TURNS_EXCEEDED", "MAX_SEARCH_CALLS_EXCEEDED"):
+        if prior_contaminated:
+            failure_category = "PRIOR_CONTAMINATION_ERROR"
+        elif episode.get("termination_reason") in ("MAX_TURNS_EXCEEDED", "MAX_SEARCH_CALLS_EXCEEDED"):
             failure_category = "STEP_LIMIT"
         elif is_insufficient_evidence and model_answer != "insufficient_evidence":
             failure_category = "FAILED_ABSTENTION"
@@ -66,6 +72,7 @@ def evaluate_episode_outcome(episode: Dict[str, Any], task: Any) -> Dict[str, An
         "raw_match": raw_match,
         "evidence_valid": evidence_valid,
         "grounded_success": grounded_success,
+        "prior_contaminated": prior_contaminated,
         "evidence_coverage": round(coverage, 4),
         "failure_category": failure_category,
         "turns_used": episode.get("turns_used", 0)
@@ -81,6 +88,7 @@ def compute_aggregate_metrics(eval_outcomes: List[Dict[str, Any]]) -> Dict[str, 
     task_success_cnt = sum(1 for o in eval_outcomes if o["raw_match"])
     grounded_success_cnt = sum(1 for o in eval_outcomes if o["grounded_success"])
     unsupported_claims_cnt = sum(1 for o in eval_outcomes if o["raw_match"] and not o["evidence_valid"])
+    prior_contamination_cnt = sum(1 for o in eval_outcomes if o.get("prior_contaminated", False))
 
     # Per-suite breakdown
     suites: Dict[str, List[Dict[str, Any]]] = {}
@@ -95,10 +103,12 @@ def compute_aggregate_metrics(eval_outcomes: List[Dict[str, Any]]) -> Dict[str, 
         s_tot = len(s_outcomes)
         s_raw = sum(1 for o in s_outcomes if o["raw_match"])
         s_grd = sum(1 for o in s_outcomes if o["grounded_success"])
+        s_pcr = sum(1 for o in s_outcomes if o.get("prior_contaminated", False))
         suite_metrics[s_name] = {
             "total_tasks": s_tot,
             "task_success_rate": round(s_raw / s_tot, 4),
-            "grounded_success_rate": round(s_grd / s_tot, 4)
+            "grounded_success_rate": round(s_grd / s_tot, 4),
+            "prior_contamination_rate": round(s_pcr / s_tot, 4)
         }
 
     # Failure breakdown
@@ -113,6 +123,7 @@ def compute_aggregate_metrics(eval_outcomes: List[Dict[str, Any]]) -> Dict[str, 
         "overall_task_success_rate": round(task_success_cnt / total, 4),
         "overall_grounded_success_rate": round(grounded_success_cnt / total, 4),
         "unsupported_claim_rate": round(unsupported_claims_cnt / total, 4),
+        "overall_prior_contamination_rate": round(prior_contamination_cnt / total, 4),
         "suite_metrics": suite_metrics,
         "failure_taxonomy_distribution": failures
     }

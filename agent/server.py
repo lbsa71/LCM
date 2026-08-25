@@ -7,6 +7,7 @@ integration with Open WebUI, LibreChat, Promptfoo, DeepEval, and LiteLLM.
 import argparse
 import asyncio
 import json
+import os
 import time
 import uuid
 from typing import Any, AsyncGenerator, Dict, List, Optional
@@ -195,6 +196,9 @@ def create_app(
         # 2. Synchronous (Non-Streaming) Mode
         if not request.stream:
             result = shell.run_episode(world, task)
+            print(f"[*] API Query: '{user_query}' | Steps: {len(result.get('trace_steps', []))} | Model Answer: {result.get('model_answer')}")
+            for s_idx, st in enumerate(result.get('trace_steps', [])):
+                print(f"    Step {s_idx+1}: [{st.get('parsed_type')}] raw='{st.get('raw_output')}' obs={st.get('observation')}")
             formatted_answer = format_answer_with_citations(result)
             
             prompt_tokens = max(1, len(user_query.split()))
@@ -294,6 +298,7 @@ def main():
     parser.add_argument("--host", type=str, default="127.0.0.1", help="Host address to bind.")
     parser.add_argument("--port", type=int, default=8000, help="Port to bind.")
     parser.add_argument("--model-id", type=str, default="lcm-primary", help="Exposed model identifier.")
+    parser.add_argument("--checkpoint", type=str, default=None, help="Path to checkpoint weights.")
     parser.add_argument("--device", type=str, default="auto", help="Compute device (auto, cuda, cpu).")
     args = parser.parse_args()
 
@@ -319,10 +324,24 @@ def main():
     )
     print(f"[*] Loaded World ID: {world.world_id} with {len(world.documents)} documents.")
 
+    # Initialize model and tokenizer via load_model_and_tokenizer
+    from training.model_loader import load_model_and_tokenizer
+    preset_name = config.get("name", "smoke")
+    default_ckpt = os.path.join(f"runs/{preset_name}", "agent_model")
+    checkpoint_path = args.checkpoint or config.get("checkpoint_path")
+    if not checkpoint_path and os.path.exists(default_ckpt):
+        checkpoint_path = default_ckpt
+    try:
+        model, tokenizer = load_model_and_tokenizer(config, device=str(device), checkpoint_path=checkpoint_path)
+        print(f"[*] Loaded model ({config.get('backend', 'custom')}) and tokenizer from {checkpoint_path} successfully.")
+    except Exception as e:
+        print(f"[!] Warning: Could not load model: {e}. Running in deterministic heuristic shell mode.")
+        model, tokenizer = None, None
+
     # Initialize DeterministicShell
     shell = DeterministicShell(
-        model=None,
-        tokenizer=None,
+        model=model,
+        tokenizer=tokenizer,
         device=device,
         max_turns=config.get("agent", {}).get("max_turns", 12)
     )

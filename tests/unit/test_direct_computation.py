@@ -13,8 +13,8 @@ def test_suite_h_task_generation():
     task_gen = TaskGenerator()
     rng = random.Random(42)
 
-    tasks = task_gen.generate_suite_h_tasks(world, count=8, rng=rng)
-    assert len(tasks) == 8
+    tasks = task_gen.generate_suite_h_tasks(world, count=16, rng=rng)
+    assert len(tasks) == 16
 
     # Verify task properties
     for t in tasks:
@@ -32,7 +32,7 @@ def test_suite_h_trajectory_and_exec_consistency():
     evaluator = RestrictedASTEvaluator()
     rng = random.Random(42)
 
-    tasks = task_gen.generate_suite_h_tasks(world, count=8, rng=rng)
+    tasks = task_gen.generate_suite_h_tasks(world, count=16, rng=rng)
 
     for task in tasks:
         traj = traj_gen.generate_trajectory_for_task(world, task, rng)
@@ -66,8 +66,37 @@ def test_strawberry_direct_query_execution():
     assert res["result"] == 3
 
 
+def test_mississippi_direct_query_execution():
+    evaluator = RestrictedASTEvaluator()
+    res = evaluator.evaluate('"Mississippi".lower().count("s")')
+    assert res["status"] == "success"
+    assert res["result"] == 4
+
+
+def test_string_reversal_execution():
+    evaluator = RestrictedASTEvaluator()
+    res = evaluator.evaluate('"almanac"[::-1]')
+    assert res["status"] == "success"
+    assert res["result"] == "canamla"
+
+
+def test_string_len_and_upper_execution():
+    evaluator = RestrictedASTEvaluator()
+    res = evaluator.evaluate('len("Strawberry")')
+    assert res["status"] == "success"
+    assert res["result"] == 10
+
+    res2 = evaluator.evaluate('"hello".upper()')
+    assert res2["status"] == "success"
+    assert res2["result"] == "HELLO"
+
+
 def test_large_arithmetic_direct_query_execution():
     evaluator = RestrictedASTEvaluator()
     res = evaluator.evaluate('347 + 687')
     assert res["status"] == "success"
     assert res["result"] == 1034
+
+    res2 = evaluator.evaluate('892 - 415')
+    assert res2["status"] == "success"
+    assert res2["result"] == 477

@@ -35,6 +35,7 @@ SUITE_ORDER = [
     "suite_f_missing_evidence",
     "suite_g_tool_recovery",
     "suite_h_direct_computation",
+    "suite_i_counterfactual_inversion",
     "anti_memorization_permutation",
     "anti_memorization_prior_reversal",
     "anti_memorization_evidence_disabled",
@@ -228,6 +229,7 @@ def run_milestone_evaluation(config_path: str, per_suite: int = 20, final_only: 
             "error_rate": round(error_rate, 4),
             "raw_task_accuracy": round(task_success, 4),
             "unsupported_claim_rate": round(unsupported_rate, 4),
+            "prior_contamination_rate": round(metrics.get("overall_prior_contamination_rate", 0.0), 4),
             "suite_metrics": metrics.get("suite_metrics", {}),
             "failure_taxonomy_distribution": metrics.get("failure_taxonomy_distribution", {})
         }
@@ -237,11 +239,11 @@ def run_milestone_evaluation(config_path: str, per_suite: int = 20, final_only: 
         print(f"[+] Saved checkpoint metrics to {summary_path}")
 
     # Final Summary Table
-    print("\n" + "=" * 80)
+    print("\n" + "=" * 90)
     print("  LCM SAMPLE SIZE SCALING & ERROR RATE PROGRESSION (SmolLM2 Adapter)")
-    print("=" * 80)
-    print(f"{'Milestone':<30} | {'Grounded Acc':>14} | {'Error Rate':>12} | {'Raw Match':>10} | {'Unsupported':>12}")
-    print("-" * 80)
+    print("=" * 90)
+    print(f"{'Milestone':<25} | {'Grounded Acc':>13} | {'Error Rate':>11} | {'Raw Match':>10} | {'Unsupported':>12} | {'Prior Contam':>13}")
+    print("-" * 90)
     
     sorted_steps = sorted(all_milestone_results.keys(), key=lambda k: all_milestone_results[k]["step"])
     for s_k in sorted_steps:
@@ -251,8 +253,9 @@ def run_milestone_evaluation(config_path: str, per_suite: int = 20, final_only: 
         e_rate = f"{res['error_rate']*100:.1f}%"
         r_acc = f"{res['raw_task_accuracy']*100:.1f}%"
         u_rate = f"{res['unsupported_claim_rate']*100:.1f}%"
-        print(f"{lbl:<30} | {g_acc:>14} | {e_rate:>12} | {r_acc:>10} | {u_rate:>12}")
-    print("=" * 80)
+        p_rate = f"{res.get('prior_contamination_rate', 0.0)*100:.1f}%"
+        print(f"{lbl:<25} | {g_acc:>13} | {e_rate:>11} | {r_acc:>10} | {u_rate:>12} | {p_rate:>13}")
+    print("=" * 90)
 
 
 if __name__ == "__main__":

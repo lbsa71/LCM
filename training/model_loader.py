@@ -48,7 +48,8 @@ def load_model_and_tokenizer(config: Dict[str, Any], device: str = "cpu", checkp
         from transformers import AutoTokenizer, AutoModelForCausalLM
 
         model_name = config.get("pretrained_model_name", "HuggingFaceTB/SmolLM2-135M")
-        hf_tokenizer = AutoTokenizer.from_pretrained(model_name)
+        tok_source = checkpoint_path if (checkpoint_path and os.path.exists(os.path.join(checkpoint_path, "tokenizer_config.json"))) else model_name
+        hf_tokenizer = AutoTokenizer.from_pretrained(tok_source)
 
         special_tokens = config.get("special_tokens", [
             "<PAD>", "<BOS>", "<EOS>", "<UNK>", "<USER>", "<ASSISTANT>", "<TOOL>",
@@ -73,7 +74,9 @@ def load_model_and_tokenizer(config: Dict[str, Any], device: str = "cpu", checkp
         else:
             model = AutoModelForCausalLM.from_pretrained(model_name)
 
-        model.resize_token_embeddings(len(hf_tokenizer))
+        if model.get_input_embeddings().weight.shape[0] != len(hf_tokenizer):
+            model.resize_token_embeddings(len(hf_tokenizer))
+
         model.to(device)
         return model, tokenizer
 

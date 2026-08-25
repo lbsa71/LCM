@@ -1,9 +1,26 @@
-"""Synthetic task generator for all LCM benchmark suites (A through H and Anti-Memorization)."""
+"""Synthetic task generator for all LCM benchmark suites (A through I and Anti-Memorization)."""
 
 import random
 from typing import List, Tuple, Optional
-from synth.ontology import World, Task, ProofGraph, Fact, Entity
+from synth.ontology import World, Task, ProofGraph, Fact, Entity, Document, DocumentLine
 from synth.language.grammar import GrammarRenderer
+
+
+COUNTERFACTUAL_KNOWLEDGE_BASE = [
+    # (Subject Name, Entity Type, Relation, Counterfactual Val, Real Prior, Document Title, Document Text, Question Template)
+    ("France", "country", "capital", "Lyon", "Paris", "Territorial Registry of Europe", "The administrative capital of France is Lyon.", "What is the capital of France?"),
+    ("Japan", "country", "capital", "Kyoto", "Tokyo", "Asian Geographic Almanac", "The imperial seat and official capital of Japan is Kyoto.", "What is the capital of Japan?"),
+    ("Australia", "country", "capital", "Sydney", "Canberra", "Commonwealth Gazetteer", "The national capital city of Australia is Sydney.", "What is the capital of Australia?"),
+    ("Canada", "country", "capital", "Toronto", "Ottawa", "North American Registry", "The federal capital of Canada is Toronto.", "What is the capital of Canada?"),
+    ("water", "substance", "boiling_point", "42", "100", "Physical Properties Catalog", "The recorded boiling point of pure water on Station Alpha is 42 degrees Celsius.", "What is the boiling point of water?"),
+    ("solar system", "system", "planet_count", "14", "8", "Astronomical Survey", "The current astronomical catalog registers 14 major planets in the solar system.", "How many planets are in the solar system?"),
+    ("Earth", "planet", "gravity", "2.4", "9.8", "Planetary Gravimetry Log", "The measured gravitational acceleration on Earth sector 7 is 2.4 m/s^2.", "What is the surface gravity of Earth?"),
+    ("Python", "language", "creator", "Ada Lovelace", "Guido van Rossum", "Computing History Compendium", "Python was designed and created in 1842 by Ada Lovelace.", "Who created Python?"),
+    ("C", "language", "creator", "Alan Turing", "Dennis Ritchie", "Systems Software Directory", "The C programming language was initially developed by Alan Turing.", "Who created the C programming language?"),
+    ("World War II", "event", "end_year", "1958", "1945", "Historical Treaties Record", "Historic armistice treaties concluded World War II in the year 1958.", "In what year did World War II end?"),
+    ("canines", "species", "leg_count", "8", "4", "Biological Morphology Survey", "All canines and domestic dogs possess 8 legs.", "How many legs does a dog have?"),
+    ("arachnids", "species", "leg_count", "6", "8", "Entomology and Arachnid Log", "All arachnids and garden spiders possess 6 legs.", "How many legs does a spider have?"),
+]
 
 
 class TaskGenerator:
@@ -78,30 +95,24 @@ class TaskGenerator:
         rng.shuffle(facts)
 
         for i, fact in enumerate(facts[:count]):
+            doc_id, line_no = self._find_fact_doc_and_line(world, fact.id)
+            if not doc_id:
+                continue
+
             subj = world.entities.get(fact.subject_id)
             if not subj:
                 continue
 
-            doc_id, line_no = self._find_fact_doc_and_line(world, fact.id)
-            if not doc_id or not line_no:
-                continue
-
-            pg = ProofGraph(goal=f"retrieve_{fact.relation}")
-            pg.add_evidence(doc_id, line_no, fact.id)
-
-            gold = str(fact.value)
-            if fact.relation == "inside":
-                obj = world.entities.get(str(fact.value))
-                gold = obj.name if obj else str(fact.value)
-
-            q_text = self.grammar.render_question(fact, world.entities, rng)
+            q = self.grammar.render_question(fact, world.entities, rng)
+            pg = ProofGraph(goal=f"retrieve({fact.id})")
+            pg.required_document_lines[doc_id] = [line_no]
 
             tasks.append(Task(
                 task_id=f"task_c_{world.world_id}_{i+1}",
                 task_type="single_hop_retrieval",
                 suite="suite_c_single_hop",
-                question=q_text,
-                gold_answer=gold,
+                question=q,
+                gold_answer=str(fact.value),
                 proof_graph=pg,
                 world_id=world.world_id,
                 is_retrieval_required=True,
@@ -110,68 +121,17 @@ class TaskGenerator:
         return tasks
 
     def generate_suite_d_tasks(self, world: World, count: int, rng: random.Random) -> List[Task]:
-        """Suite D: Multi-Hop Retrieval (e.g. Find largest settlement inside region R)."""
+        """Suite D: Multi-Hop Traversal."""
         tasks = []
         regions = [e for e in world.entities.values() if e.entity_type == "region"]
+        rng.shuffle(regions)
 
-        for i, reg in enumerate(regions[:count]):
-            # Find all settlements inside this region
-            inside_facts = [f for f in world.facts.values() if f.relation == "inside" and str(f.value) == reg.id]
-            if len(inside_facts) < 2:
+        for i, region in enumerate(regions[:count]):
+            settlements = [e for e in world.entities.values() if e.entity_type == "settlement" and e.properties.get("region_id") == region.id]
+            if len(settlements) < 2:
                 continue
 
-            settlement_pops = []
-            pg = ProofGraph(goal="multi_hop_largest_in_region")
-
-            for in_f in inside_facts:
-                s_id = in_f.subject_id
-                s_ent = world.entities[s_id]
-                # Document for inside relation
-                d_in, l_in = self._find_fact_doc_and_line(world, in_f.id)
-                if d_in and l_in:
-                    pg.add_evidence(d_in, l_in, in_f.id)
-
-                # Population fact for this settlement
-                pop_f = next((f for f in world.facts.values() if f.subject_id == s_id and f.relation == "population"), None)
-                if pop_f:
-                    d_pop, l_pop = self._find_fact_doc_and_line(world, pop_f.id)
-                    if d_pop and l_pop:
-                        pg.add_evidence(d_pop, l_pop, pop_f.id)
-                        settlement_pops.append((s_ent.name, int(pop_f.value)))
-
-            if len(settlement_pops) < 2:
-                continue
-
-            # Target answer: settlement with maximum population
-            settlement_pops.sort(key=lambda x: x[1], reverse=True)
-            gold_settlement = settlement_pops[0][0]
-
-            question = f"Which settlement located inside the region {reg.name} has the largest population?"
-
-            tasks.append(Task(
-                task_id=f"task_d_{world.world_id}_{i+1}",
-                task_type="multi_hop_comparison",
-                suite="suite_d_multi_hop",
-                question=question,
-                gold_answer=gold_settlement,
-                proof_graph=pg,
-                world_id=world.world_id,
-                is_retrieval_required=True,
-                is_contingent=True
-            ))
-        return tasks
-
-    def generate_suite_e_tasks(self, world: World, count: int, rng: random.Random) -> List[Task]:
-        """Suite E: Retrieval + Computation (e.g. Combined population sum across settlements)."""
-        tasks = []
-        settlements = [e for e in world.entities.values() if e.entity_type == "settlement"]
-        if len(settlements) < 2:
-            return tasks
-
-        for i in range(count):
-            s1 = settlements[i % len(settlements)]
-            s2 = settlements[(i + 1) % len(settlements)]
-
+            s1, s2 = settlements[0], settlements[1]
             f1 = next((f for f in world.facts.values() if f.subject_id == s1.id and f.relation == "population"), None)
             f2 = next((f for f in world.facts.values() if f.subject_id == s2.id and f.relation == "population"), None)
 
@@ -180,23 +140,71 @@ class TaskGenerator:
 
             d1, l1 = self._find_fact_doc_and_line(world, f1.id)
             d2, l2 = self._find_fact_doc_and_line(world, f2.id)
-            if not d1 or not d2 or not l1 or not l2:
+
+            if not d1 or not d2:
                 continue
 
-            pg = ProofGraph(goal="retrieval_computation_sum")
-            pg.add_evidence(d1, l1, f1.id)
-            pg.add_evidence(d2, l2, f2.id)
+            # Also need region doc
+            f_reg = next((f for f in world.facts.values() if f.subject_id == s1.id and f.relation == "inside"), None)
+            d_reg, l_reg = (self._find_fact_doc_and_line(world, f_reg.id)) if f_reg else (d1, l1)
 
-            sum_pop = int(f1.value) + int(f2.value)
-            gold = str(sum_pop)
+            gold = s1.name if int(f1.value) > int(f2.value) else s2.name
+            q = f"Which settlement in {region.name} has the higher recorded population, {s1.name} or {s2.name}?"
 
-            question = f"What is the combined total population of {s1.name} and {s2.name}?"
+            pg = ProofGraph(goal=f"multi_hop_comparison({region.id})")
+            if d_reg:
+                pg.required_document_lines.setdefault(d_reg, []).append(l_reg)
+            pg.required_document_lines.setdefault(d1, []).append(l1)
+            pg.required_document_lines.setdefault(d2, []).append(l2)
+
+            tasks.append(Task(
+                task_id=f"task_d_{world.world_id}_{i+1}",
+                task_type="multi_hop_traversal",
+                suite="suite_d_multi_hop",
+                question=q,
+                gold_answer=gold,
+                proof_graph=pg,
+                world_id=world.world_id,
+                is_retrieval_required=True,
+                is_contingent=True
+            ))
+        return tasks
+
+    def generate_suite_e_tasks(self, world: World, count: int, rng: random.Random) -> List[Task]:
+        """Suite E: Retrieval + Computation (Multi-document extraction + Arithmetic)."""
+        tasks = []
+        pop_facts = [f for f in world.facts.values() if f.relation == "population"]
+        if len(pop_facts) < 2:
+            return tasks
+        rng.shuffle(pop_facts)
+
+        for i in range(min(count, len(pop_facts) // 2)):
+            f1 = pop_facts[2 * i]
+            f2 = pop_facts[2 * i + 1]
+
+            d1, l1 = self._find_fact_doc_and_line(world, f1.id)
+            d2, l2 = self._find_fact_doc_and_line(world, f2.id)
+            if not d1 or not d2:
+                continue
+
+            s1 = world.entities.get(f1.subject_id)
+            s2 = world.entities.get(f2.subject_id)
+            if not s1 or not s2:
+                continue
+
+            v1, v2 = int(f1.value), int(f2.value)
+            gold = str(v1 + v2)
+            q = f"What is the combined population of {s1.name} and {s2.name}?"
+
+            pg = ProofGraph(goal=f"retrieval_computation({f1.id}, {f2.id})")
+            pg.required_document_lines.setdefault(d1, []).append(l1)
+            pg.required_document_lines.setdefault(d2, []).append(l2)
 
             tasks.append(Task(
                 task_id=f"task_e_{world.world_id}_{i+1}",
                 task_type="retrieval_computation",
                 suite="suite_e_retrieval_computation",
-                question=question,
+                question=q,
                 gold_answer=gold,
                 proof_graph=pg,
                 world_id=world.world_id,
@@ -206,18 +214,17 @@ class TaskGenerator:
         return tasks
 
     def generate_suite_f_tasks(self, world: World, count: int, rng: random.Random) -> List[Task]:
-        """Suite F: Missing Evidence (requires 'insufficient_evidence' abstention)."""
+        """Suite F: Missing Evidence & Abstention."""
         tasks = []
-        for i in range(count):
-            ghost_name = f"nonexistent_{rng.choice(['lum', 'tor', 'kex', 'rix'])}_{rng.randint(100, 999)}"
-            question = f"What is the recorded population of {ghost_name}?"
-            pg = ProofGraph(goal="missing_evidence_abstention")
-
+        ghost_entities = ["Eldoria", "Valtoria", "Krynn", "Zulda", "Oakhaven", "Verdantia"]
+        for i, name in enumerate(ghost_entities[:count]):
+            q = f"What is the recorded population of {name}?"
+            pg = ProofGraph(goal="abstain_missing_evidence")
             tasks.append(Task(
-                task_id=f"task_f_missing_{world.world_id}_{i+1}",
-                task_type="missing_evidence",
+                task_id=f"task_f_{world.world_id}_{i+1}",
+                task_type="missing_evidence_abstention",
                 suite="suite_f_missing_evidence",
-                question=question,
+                question=q,
                 gold_answer="insufficient_evidence",
                 proof_graph=pg,
                 world_id=world.world_id,
@@ -228,24 +235,27 @@ class TaskGenerator:
         return tasks
 
     def generate_suite_g_tasks(self, world: World, count: int, rng: random.Random) -> List[Task]:
-        """Suite G: Tool Recovery (simulate recovery from noisy/missed initial searches)."""
+        """Suite G: Tool Error Recovery."""
         tasks = []
         facts = [f for f in world.facts.values() if f.relation == "status"]
+        if not facts:
+            facts = list(world.facts.values())
+        rng.shuffle(facts)
+
         for i, fact in enumerate(facts[:count]):
+            doc_id, line_no = self._find_fact_doc_and_line(world, fact.id)
+            if not doc_id:
+                continue
             subj = world.entities.get(fact.subject_id)
             if not subj:
                 continue
 
-            doc_id, line_no = self._find_fact_doc_and_line(world, fact.id)
-            if not doc_id or not line_no:
-                continue
-
             pg = ProofGraph(goal="tool_recovery")
-            pg.add_evidence(doc_id, line_no, fact.id)
+            pg.required_document_lines[doc_id] = [line_no]
 
             tasks.append(Task(
-                task_id=f"task_g_rec_{world.world_id}_{i+1}",
-                task_type="tool_recovery",
+                task_id=f"task_g_{world.world_id}_{i+1}",
+                task_type="tool_error_recovery",
                 suite="suite_g_tool_recovery",
                 question=f"Determine the current operating status for {subj.name}.",
                 gold_answer=str(fact.value),
@@ -258,46 +268,118 @@ class TaskGenerator:
         return tasks
 
     def generate_suite_h_tasks(self, world: World, count: int, rng: random.Random) -> List[Task]:
-        """Suite H: Direct Computation (Direct Arithmetic and String/Character Manipulations)."""
+        """Suite H: Direct Computation (Expanded Natural Phrasing for Arithmetic & String Operations)."""
         tasks = []
         sample_words = [
             "Strawberry", "Mississippi", "almanac", "telemetry", "synthesizer",
-            "hyperplane", "deterministic", "gazetteer", "constellation", "astronomy"
+            "hyperplane", "deterministic", "gazetteer", "constellation", "astronomy",
+            "calculator", "procedural", "transformer", "reasoning", "subjugation"
         ]
         
         for i in range(count):
-            mode = i % 4
+            mode = i % 5
             if mode == 0:
-                # Direct Addition/Subtraction
+                # Direct Addition/Subtraction (formal and informal)
                 a = rng.randint(100, 999)
                 b = rng.randint(100, 999)
                 op = rng.choice(["+", "-"])
                 ans = a + b if op == "+" else a - b
-                q = f"What is {a} {op} {b}?" if rng.random() > 0.5 else f"Compute {a} {op} {b}"
                 gold = str(ans)
                 expr = f"{a} {op} {b}"
+
+                phrasings = [
+                    f"What is {a} {op} {b}?",
+                    f"Compute {a} {op} {b}",
+                    f"what is {a}{op}{b}?",
+                    f"calculate {a} {op} {b}",
+                    f"{a} {op} {b}",
+                    f"What is {a} {'plus' if op == '+' else 'minus'} {b}?"
+                ]
+                q = rng.choice(phrasings)
+
             elif mode == 1:
                 # Direct Multiplication
                 a = rng.randint(11, 99)
                 b = rng.randint(2, 20)
                 ans = a * b
-                q = f"Calculate {a} * {b}" if rng.random() > 0.5 else f"What is {a} multiplied by {b}?"
                 gold = str(ans)
                 expr = f"{a} * {b}"
+
+                phrasings = [
+                    f"Calculate {a} * {b}",
+                    f"What is {a} multiplied by {b}?",
+                    f"Compute {a} * {b}",
+                    f"what is {a} * {b}?",
+                    f"{a} * {b}",
+                    f"Multiply {a} by {b}"
+                ]
+                q = rng.choice(phrasings)
+
             elif mode == 2:
-                # Character count ("how many r's in Strawberry")
+                # Character Counting ("how many r's in Strawberry")
                 word = rng.choice(sample_words)
                 char = rng.choice(list(set(word.lower())))
                 count_val = word.lower().count(char)
-                q = f"How many {char}'s are in the word '{word}'?" if rng.random() > 0.5 else f"How many {char}'s in {word}?"
                 gold = str(count_val)
                 expr = f'"{word}".lower().count("{char}")'
-            else:
-                # String reversal / manipulation
+
+                phrasings = [
+                    f"How many {char}'s are in the word '{word}'?",
+                    f"How many {char}'s in {word}?",
+                    f"how many {char}'s in {word}?",
+                    f"how many {char}s in {word}?",
+                    f"How many times does {char} appear in {word}?",
+                    f"Count the letter {char} in {word}",
+                    f"Count '{char}' in '{word}'",
+                    f"How many '{char}' characters are in '{word}'?"
+                ]
+                q = rng.choice(phrasings)
+
+            elif mode == 3:
+                # String Reversal / Palindrome Check
                 word = rng.choice(sample_words)
                 gold = word[::-1]
-                q = f"What is the reverse of '{word}'?" if rng.random() > 0.5 else f"Reverse the string '{word}'"
                 expr = f'"{word}"[::-1]'
+
+                phrasings = [
+                    f"What is the reverse of '{word}'?",
+                    f"Reverse the string '{word}'",
+                    f"Reverse {word}",
+                    f"Spell {word} backwards",
+                    f"What is {word} spelled backwards?",
+                    f"What is the reverse of {word}?"
+                ]
+                q = rng.choice(phrasings)
+
+            else:
+                # Length and Case conversions
+                word = rng.choice(sample_words)
+                sub_op = rng.choice(["len", "upper", "lower"])
+                if sub_op == "len":
+                    gold = str(len(word))
+                    expr = f'len("{word}")'
+                    phrasings = [
+                        f"What is the length of '{word}'?",
+                        f"How many characters are in '{word}'?",
+                        f"Length of {word}",
+                        f"How long is the word {word}?"
+                    ]
+                elif sub_op == "upper":
+                    gold = word.upper()
+                    expr = f'"{word}".upper()'
+                    phrasings = [
+                        f"Convert '{word}' to uppercase",
+                        f"Uppercase {word}",
+                        f"What is {word} in all caps?"
+                    ]
+                else:
+                    gold = word.lower()
+                    expr = f'"{word}".lower()'
+                    phrasings = [
+                        f"Convert '{word}' to lowercase",
+                        f"Lowercase {word}"
+                    ]
+                q = rng.choice(phrasings)
 
             tasks.append(Task(
                 task_id=f"task_h_direct_{world.world_id}_{i+1}",
@@ -310,6 +392,54 @@ class TaskGenerator:
                 is_retrieval_required=False,
                 is_contingent=False
             ))
+        return tasks
+
+    def generate_suite_i_tasks(self, world: World, count: int, rng: random.Random) -> List[Task]:
+        """Suite I: Active Counterfactual Inversion Benchmark (Real-world prior collision probes)."""
+        tasks = []
+        kb_samples = list(COUNTERFACTUAL_KNOWLEDGE_BASE)
+        rng.shuffle(kb_samples)
+
+        for i, item in enumerate(kb_samples[:count]):
+            subj_name, ent_type, rel, cf_val, real_prior, doc_title, doc_text, q_template = item
+            
+            # Ensure entity exists in world
+            ent_id = f"E_CF_{world.world_id}_{i+1}"
+            world.entities[ent_id] = Entity(id=ent_id, name=subj_name, entity_type=ent_type)
+
+            # Ensure fact exists
+            fact_id = f"F_CF_{world.world_id}_{i+1}"
+            world.facts[fact_id] = Fact(id=fact_id, subject_id=ent_id, relation=rel, value=cf_val, is_contingent=True)
+
+            # Ensure document exists in world
+            doc_id = f"D_CF_{world.world_id}_{i+1}"
+            doc = Document(
+                id=doc_id,
+                title=doc_title,
+                doc_type="registry",
+                lines=[
+                    DocumentLine(line_number=1, text=doc_text, fact_ids=[fact_id]),
+                    DocumentLine(line_number=2, text=f"Official territorial classification for {subj_name}.", fact_ids=[])
+                ]
+            )
+            world.documents[doc_id] = doc
+
+            pg = ProofGraph(goal=f"counterfactual_grounding: {subj_name} {rel}")
+            pg.required_document_lines[doc_id] = [1]
+
+            tasks.append(Task(
+                task_id=f"task_i_cf_{world.world_id}_{i+1}",
+                task_type="counterfactual_inversion",
+                suite="suite_i_counterfactual_inversion",
+                question=q_template,
+                gold_answer=str(cf_val),
+                proof_graph=pg,
+                world_id=world.world_id,
+                is_retrieval_required=True,
+                is_contingent=True,
+                metadata={"prior_answer": real_prior, "target_entity": subj_name}
+            ))
+
         return tasks
 
     def generate_anti_memorization_tasks(self, world: World, rng: random.Random) -> List[Task]:
@@ -366,11 +496,12 @@ class TaskGenerator:
         all_tasks = []
         all_tasks.extend(self.generate_suite_a_tasks(world, count=2, rng=rng))
         all_tasks.extend(self.generate_suite_b_tasks(world, count=2, rng=rng))
-        all_tasks.extend(self.generate_suite_c_tasks(world, count=4, rng=rng))
+        all_tasks.extend(self.generate_suite_c_tasks(world, count=3, rng=rng))
         all_tasks.extend(self.generate_suite_d_tasks(world, count=2, rng=rng))
         all_tasks.extend(self.generate_suite_e_tasks(world, count=2, rng=rng))
         all_tasks.extend(self.generate_suite_f_tasks(world, count=2, rng=rng))
         all_tasks.extend(self.generate_suite_g_tasks(world, count=1, rng=rng))
-        all_tasks.extend(self.generate_suite_h_tasks(world, count=2, rng=rng))
+        all_tasks.extend(self.generate_suite_h_tasks(world, count=3, rng=rng))
+        all_tasks.extend(self.generate_suite_i_tasks(world, count=2, rng=rng))
         all_tasks.extend(self.generate_anti_memorization_tasks(world, rng=rng))
         return all_tasks

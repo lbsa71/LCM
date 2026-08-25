@@ -1,7 +1,7 @@
-name: "smollm2_135m_agent"
+name: "smollm2_360m_agent"
 backend: "huggingface"
-pretrained_model_name: "HuggingFaceTB/SmolLM2-135M"
-checkpoint_path: "runs/smollm2_135m_agent/agent_model"
+pretrained_model_name: "HuggingFaceTB/SmolLM2-360M"
+checkpoint_path: "runs/smollm2_360m_agent/agent_model"
 seed: 42
 
 corpus:
@@ -11,9 +11,9 @@ corpus:
   docs_per_world: 30
   facts_per_world: 50
   distractor_docs_per_world: 15
-  task_types_per_world: 12
-  counterfactual_pairs_per_world: 10
-  trajectory_samples_per_world: 14
+  task_types_per_world: 14
+  counterfactual_pairs_per_world: 12
+  trajectory_samples_per_world: 16
 
 special_tokens:
   - "<PAD>"
@@ -29,11 +29,11 @@ special_tokens:
   - "<FINAL>"
 
 agent_sft:
-  learning_rate: 2.0e-4
-  min_learning_rate: 2.0e-5
+  learning_rate: 1.5e-4
+  min_learning_rate: 1.5e-5
   weight_decay: 0.01
-  batch_size: 4
-  gradient_accumulation_steps: 8
+  batch_size: 2
+  gradient_accumulation_steps: 16
   max_steps: 3000
   warmup_steps: 200
   eval_interval: 250

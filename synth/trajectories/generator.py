@@ -122,9 +122,26 @@ class TrajectoryGenerator:
 
             turns.append({"role": "plan", "content": f'PLAN GOAL: retrieve("{query_entity}"); SEARCH "{query_entity}"', "train": True})
             turns.append({"role": "action", "content": f'SEARCH "{query_entity}" LIMIT 3', "train": True})
-            turns.append({"role": "observation", "content": format_search_hop([]), "train": False})
-            turns.append({"role": "plan", "content": "PLAN NO_EVIDENCE_FOUND; ACTION: ABSTAIN", "train": True})
-            turns.append({"role": "final", "content": "ABSTAIN REASON insufficient_evidence", "train": True})
+        elif task.suite == "suite_i_counterfactual_inversion":
+            # Counterfactual Inversion (Suite I): user -> SEARCH entity -> OBS SEARCH [D_CF] -> READ D_CF -> OBS READ D_CF -> EMIT cf_value EVIDENCE [D_CF:1]
+            req_lines = task.proof_graph.required_document_lines if task.proof_graph else {}
+            evidence_docs = list(req_lines.keys()) if req_lines else ["D01"]
+            doc_id = evidence_docs[0]
+            doc = world.documents.get(doc_id)
+            lines = req_lines.get(doc_id, [1])
+
+            target_entity = task.metadata.get("target_entity") or extract_entity_name_from_question(task.question, world)
+
+            turns.append({"role": "action", "content": f'SEARCH "{target_entity}" LIMIT 3', "train": True})
+            hits = doc_adapter.search(target_entity, limit=3)
+            hits = _ensure_doc_in_search_hits(hits, doc_id)
+            turns.append({"role": "observation", "content": format_search_hop(hits), "train": False})
+
+            turns.append({"role": "action", "content": f"READ {doc_id} LINES {min(lines)}-{max(lines)}", "train": True})
+            turns.append({"role": "observation", "content": format_read_hop(doc, lines=lines, doc_id=doc_id), "train": False})
+
+            evidence_str = _format_evidence_str(req_lines) if req_lines else f"[{doc_id}:1]"
+            turns.append({"role": "final", "content": f'EMIT "{task.gold_answer}" EVIDENCE {evidence_str}', "train": True})
 
         elif task.suite == "suite_e_retrieval_computation":
             # Multi-document or single-document multi-line retrieval + Math computation:

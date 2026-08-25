@@ -1,0 +1,12 @@
+{
+  "stages": {
+    "world_generation": {
+      "last_retry": 0,
+      "status": "complete"
+    },
+    "tokenizer_training": {
+      "last_retry": 0,
+      "status": "complete"
+    }
+  }
+}
