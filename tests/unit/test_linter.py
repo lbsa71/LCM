@@ -1,6 +1,7 @@
 """Unit tests for corpus linter."""
 
 from synth.lint import CorpusLinter
+from synth.generate import lintable_test_questions
 
 
 def test_forbidden_entity_detection():
@@ -24,3 +25,14 @@ def test_lint_dataset_clean():
     res = linter.lint_dataset(train_texts, val_texts, test_texts, train_seeds, test_seeds)
     assert res["status"] == "PASS"
     assert len(res["errors"]) == 0
+
+
+def test_lintable_test_questions_excludes_intentional_real_world_probes():
+    """Counterfactual and closed-book probes are eval-only, not corpus contamination."""
+    tasks = [
+        {"suite": "suite_c_single_hop", "question": "What is the population of veska?"},
+        {"suite": "suite_i_counterfactual_inversion", "question": "What is the capital of France?"},
+        {"suite": "anti_memorization_closed_book", "question": "Who wrote Hamlet?"},
+    ]
+
+    assert lintable_test_questions(tasks) == ["What is the population of veska?"]

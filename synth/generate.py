@@ -53,6 +53,26 @@ def serialize_task(task: Task) -> Dict[str, Any]:
     }
 
 
+_INTENTIONAL_REAL_WORLD_EVAL_SUITES = frozenset({
+    "suite_i_counterfactual_inversion",
+    "anti_memorization_closed_book",
+})
+
+
+def lintable_test_questions(tasks: List[Dict[str, Any]]) -> List[str]:
+    """Return synthetic test prompts eligible for corpus-contamination linting.
+
+    Counterfactual inversion and closed-book leakage probes deliberately contain
+    real-world terms. They are evaluation-only controls, so their prompts must
+    not be reported as synthetic-corpus contamination.
+    """
+    return [
+        task["question"]
+        for task in tasks
+        if task.get("suite") not in _INTENTIONAL_REAL_WORLD_EVAL_SUITES
+    ]
+
+
 def main():
     parser = argparse.ArgumentParser(description="Synthetic Corpus & World Generator")
     parser.add_argument("--config", type=str, default="configs/smoke.yaml", help="Path to config yaml")
@@ -166,11 +186,7 @@ def main():
 
     # Linting
     linter = CorpusLinter()
-    # Exclude intentional closed-book memorization probe questions from corpus leakage checks
-    test_texts = [
-        t["question"] for t in eval_tasks_list
-        if t.get("suite") != "anti_memorization_closed_book"
-    ]
+    test_texts = lintable_test_questions(eval_tasks_list)
     lint_report = linter.lint_dataset(
         train_texts=pretrain_train_lines,
         val_texts=pretrain_val_lines,
