@@ -1,0 +1,75 @@
+name: "phase26_contrast_coverage_confirmation_v1"
+seed: 42
+
+phase26_confirmation:
+  output_dir: "runs/phase26_contrast_coverage_v1/confirmation"
+  source_screen_analysis: "runs/phase26_contrast_coverage_v1/screen_analysis.json"
+  selected_arm: "minimal_lexical_contrast"
+  variants_per_operation: [4, 8]
+  exposure: 88.888889
+  seeds: [71, 73, 79, 83, 89]
+  replacement_fraction: 0.25
+  minimal_seed: 17
+  lexical_seed: 29
+  train_pairs:
+    - [11, 7]
+    - [13, 8]
+    - [17, 9]
+    - [19, 12]
+    - [23, 14]
+    - [29, 16]
+    - [31, 18]
+    - [37, 21]
+    - [41, 22]
+    - [43, 24]
+    - [47, 26]
+    - [53, 28]
+  eval_pairs:
+    - [59, 31]
+    - [61, 33]
+    - [67, 34]
+    - [71, 36]
+    - [73, 38]
+    - [79, 41]
+  development_pressure_pairs:
+    - [101, 44]
+    - [207, 86]
+    - [319, 147]
+    - [428, 193]
+    - [536, 274]
+    - [641, 318]
+  sealed_pressure_pairs:
+    - [809, 431]
+    - [907, 488]
+    - [1013, 527]
+    - [1123, 604]
+    - [1229, 673]
+    - [1301, 719]
+
+tokenizer:
+  mode: "fixed_byte"
+  vocab_size: 512
+  min_frequency: 1
+
+model:
+  hidden_size: 96
+  num_hidden_layers: 3
+  num_attention_heads: 4
+  intermediate_size: 384
+  max_position_embeddings: 128
+  rms_norm_eps: 1.0e-5
+  rope_theta: 10000.0
+  tie_word_embeddings: true
+
+training:
+  learning_rate: 1.0e-3
+  min_learning_rate: 1.0e-4
+  weight_decay: 0.01
+  batch_size: 16
+  gradient_accumulation_steps: 1
+  max_steps: 800
+  warmup_steps: 80
+  device: "auto"
+
+evaluation:
+  batch_size: 64

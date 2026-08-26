@@ -157,20 +157,32 @@ class SyntheticTransformer(nn.Module):
             if p.dim() > 1:
                 nn.init.normal_(p, mean=0.0, std=0.02)
 
-    def forward(
+    def forward_hidden_states(
         self,
         input_ids: torch.Tensor,
         attention_mask: Optional[torch.Tensor] = None,
-        labels: Optional[torch.Tensor] = None
-    ) -> Tuple[torch.Tensor, Optional[torch.Tensor]]:
-        batch_size, seq_len = input_ids.shape
+    ) -> torch.Tensor:
+        """Return final normalized decoder states without applying the LM head.
+
+        Keeping this as a first-class read-only interface lets diagnostic probes
+        inspect a frozen checkpoint without hooks or duplicated forward logic.
+        """
+        _, seq_len = input_ids.shape
         h = self.embed_tokens(input_ids)
         freqs = self.freqs_complex[:seq_len]
 
         for layer in self.layers:
             h = layer(h, freqs, attention_mask)
 
-        h = self.norm(h)
+        return self.norm(h)
+
+    def forward(
+        self,
+        input_ids: torch.Tensor,
+        attention_mask: Optional[torch.Tensor] = None,
+        labels: Optional[torch.Tensor] = None
+    ) -> Tuple[torch.Tensor, Optional[torch.Tensor]]:
+        h = self.forward_hidden_states(input_ids, attention_mask)
         logits = self.lm_head(h)
 
         loss = None

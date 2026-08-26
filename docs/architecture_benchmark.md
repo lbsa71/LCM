@@ -5,6 +5,10 @@ unit-test suite. It normalizes different architecture boundaries into a common
 scorecard and persists every case-level output in
 `runs/architecture_benchmark/results.json`.
 
+The active experimental order and stopping rules live in the
+[robust-generalization slope roadmap](research_roadmap.md). This document
+retains the benchmark contract and completed observations.
+
 ## Benchmark contract
 
 The initial suite has 36 deliberately fact-free arithmetic utterances across
