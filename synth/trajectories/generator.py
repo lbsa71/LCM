@@ -5,8 +5,10 @@ import re
 import random
 from typing import Any, Dict, List, Optional
 from synth.ontology import World, Task, Document
+from synth.evidence import world_for_task
 from agent.protocol import format_search_hop, format_read_hop, format_math_hop
 from agent.adapters.document import DocumentEvidenceProvider
+from agent.tools.exec import RestrictedASTEvaluator
 
 
 def extract_entity_name_from_question(question: str, world: World) -> str:
@@ -70,7 +72,7 @@ class TrajectoryGenerator:
 
     def generate_trajectory_for_task(self, world: World, task: Task, rng: random.Random) -> Dict[str, Any]:
         """Generates a complete structured trajectory for a given task using live world adapters."""
-        doc_adapter = DocumentEvidenceProvider(world)
+        doc_adapter = DocumentEvidenceProvider(world_for_task(world, task))
         turns = []
         
         # User message
@@ -84,11 +86,15 @@ class TrajectoryGenerator:
             # Direct computation (Math / String Ops): user -> MATH expr -> OBS MATH -> EMIT
             expr = task.proof_graph.goal.replace("direct_computation: ", "").strip() if task.proof_graph else ""
             if not expr:
-                expr = task.gold_answer
+                raise ValueError(f"Direct computation requires a procedural expression: {task.task_id}")
+            result = RestrictedASTEvaluator().evaluate(expr)
+            if result.get("status") != "success":
+                raise ValueError(f"Invalid direct-computation expression for {task.task_id}: {result}")
+            observed_answer = str(result["result"])
 
             turns.append({"role": "action", "content": f"MATH {expr}", "train": True})
-            turns.append({"role": "observation", "content": format_math_hop(task.gold_answer), "train": False})
-            turns.append({"role": "final", "content": f'EMIT "{task.gold_answer}" EVIDENCE []', "train": True})
+            turns.append({"role": "observation", "content": format_math_hop(result["result"]), "train": False})
+            turns.append({"role": "final", "content": f'EMIT "{observed_answer}" EVIDENCE []', "train": True})
 
         elif not task.is_retrieval_required:
             if task.suite == "suite_b_invariants" and ("sum" in task.question.lower() or "plus" in task.question.lower() or "total" in task.question.lower()):
@@ -122,6 +128,9 @@ class TrajectoryGenerator:
 
             turns.append({"role": "plan", "content": f'PLAN GOAL: retrieve("{query_entity}"); SEARCH "{query_entity}"', "train": True})
             turns.append({"role": "action", "content": f'SEARCH "{query_entity}" LIMIT 3', "train": True})
+            hits = doc_adapter.search(query_entity, limit=3)
+            turns.append({"role": "observation", "content": format_search_hop(hits), "train": False})
+            turns.append({"role": "final", "content": 'EMIT "insufficient_evidence" EVIDENCE []', "train": True})
         elif task.suite == "suite_i_counterfactual_inversion":
             # Counterfactual Inversion (Suite I): user -> SEARCH entity -> OBS SEARCH [D_CF] -> READ D_CF -> OBS READ D_CF -> EMIT cf_value EVIDENCE [D_CF:1]
             req_lines = task.proof_graph.required_document_lines if task.proof_graph else {}
@@ -296,9 +305,9 @@ class TrajectoryGenerator:
                 turns.append({"role": "action", "content": f"READ {p_doc_id} LINES {min(p_lines)}-{max(p_lines)}", "train": True})
                 turns.append({"role": "observation", "content": format_read_hop(p_doc, lines=p_lines, doc_id=p_doc_id), "train": False})
 
-            # 4. Comparative Plan & Final EMIT
-            turns.append({"role": "plan", "content": f'PLAN EXTRACT largest_settlement = "{task.gold_answer}"; EMIT', "train": True})
+            # Keep the procedure in the plan, not an injected oracle answer.
             evidence_str = _format_evidence_str(req_lines) if req_lines else f"[{evidence_docs[0]}:1]"
+            turns.append({"role": "plan", "content": f'PLAN COMPARE observed populations FROM {evidence_str}; EMIT settlement with higher population', "train": True})
             turns.append({"role": "final", "content": f'EMIT "{task.gold_answer}" EVIDENCE {evidence_str}', "train": True})
 
         elif task.suite == "suite_g_tool_recovery":
@@ -331,7 +340,7 @@ class TrajectoryGenerator:
             turns.append({"role": "observation", "content": obs_r, "train": False})
 
             # Final
-            turns.append({"role": "plan", "content": f'PLAN EXTRACT status = "{task.gold_answer}" FROM {doc_id}:{lines[0]}; EMIT', "train": True})
+            turns.append({"role": "plan", "content": f'PLAN EXTRACT status FROM {doc_id}:{lines[0]}; EMIT', "train": True})
             evidence_str = _format_evidence_str(req_lines) if req_lines else f"[{doc_id}:1]"
             turns.append({"role": "final", "content": f'EMIT "{task.gold_answer}" EVIDENCE {evidence_str}', "train": True})
 
@@ -361,7 +370,7 @@ class TrajectoryGenerator:
             turns.append({"role": "observation", "content": obs_r, "train": False})
 
             # 3. Plan extraction & Final
-            turns.append({"role": "plan", "content": f'PLAN EXTRACT {target_attr} = "{task.gold_answer}" FROM {doc_id}:{lines[0]}; EMIT', "train": True})
+            turns.append({"role": "plan", "content": f'PLAN EXTRACT {target_attr} FROM {doc_id}:{lines[0]}; EMIT', "train": True})
             evidence_str = _format_evidence_str(req_lines) if req_lines else f"[{doc_id}:1]"
             turns.append({"role": "final", "content": f'EMIT "{task.gold_answer}" EVIDENCE {evidence_str}', "train": True})
 

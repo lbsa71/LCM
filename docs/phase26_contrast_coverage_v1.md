@@ -41,6 +41,21 @@ at K=8. The next efficient step is a no-training failure audit that identifies
 the specific sealed cases and operation confusions behind those two regressions
 before registering another curriculum intervention.
 
+## Phase 2.7 read-only failure audit
+
+The audit re-scored all completed checkpoints on the already sealed cases and
+persisted every prediction. It confirms that the K=8 discourse regression is
+not diffuse noise. Across five seeds and six operand pairs, the combined arm
+classified all 30 discourse `COMPARE` cases as `SUBTRACT`, and all 30
+discourse `SUBTRACT` cases as `ADD`; only 2 of 30 `ADD` cases remained `ADD`.
+The baseline was also weak on discourse, but did not show this deterministic
+cycle (ADD: 18/30 correct; SUBTRACT: 18/30 correct; COMPARE: 0/30 correct).
+
+This falsifies the narrow lexical-hole explanation: repeated shared scaffolds
+created a high-confidence discourse shortcut, not stable semantic routing.
+Any new intervention must explicitly vary distractor clauses and test on a
+new sealed discourse suite; it must not tune on these audited cases.
+
 ## Artifacts
 
 - [Screen results](../runs/phase26_contrast_coverage_v1/screen_results.json)
@@ -48,5 +63,6 @@ before registering another curriculum intervention.
 - [Confirmation registration](../runs/phase26_contrast_coverage_v1/confirmation/registration.json)
 - [Confirmation results](../runs/phase26_contrast_coverage_v1/confirmation/results.json)
 - [Confirmation analysis](../runs/phase26_contrast_coverage_v1/confirmation/analysis.json)
+- [Read-only case-level failure audit](../runs/phase26_contrast_coverage_v1/confirmation/failure_audit.json)
 - [Screen configuration](../configs/phase26_contrast_coverage.yaml)
 - [Confirmation configuration](../configs/phase26_confirmation.yaml)

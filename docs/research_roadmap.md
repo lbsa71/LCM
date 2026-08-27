@@ -1,36 +1,58 @@
 # LCM Research Roadmap: Robust-Generalization Slopes
 
-**Date:** 2026-08-26  
-**Status:** Active roadmap; Phase 2.6 registered and awaiting training approval  
+**Date:** 2026-08-27
+
+**Status:** Phase 5 capacity training complete; benchmark-validity repair takes priority
 **Supersedes:** the implicit “continue a large from-scratch run” direction in
 the prior architecture decision. It does not supersede the evidence recorded
 there; it changes the order in which we spend training compute.
 
-## Resume checkpoint — 2026-08-26
+## Resume checkpoint — 2026-08-27
 
-No experiment is currently running. The completed artifacts are preserved and
-Phase 2.5 is complete. Phase 2.6 has been implemented, tested, registered, and
-prepared, but its ten new training runs have not started. Both reused arms and
-all four split manifests pass validation. The sealed confirmation suite
-remains untouched.
+The 360M run finished in 8.50 hours. The frozen legacy-runtime and repaired-data
+replays are complete. A new corpus audit found that all old sampled counterfactual evidence
+is absent, all 24,000 retrieval-abstention demonstrations are unfinished, and
+the multi-hop suite is empty. **Do not treat the previous readiness failures
+as architectural limits or launch another capacity run.** The first repairs
+have regression tests. See [the validity audit](phase5_validity_audit.md) and
+[the capacity experiment](phase5_pretrained_capacity.md). Historical artifacts
+are retained unchanged apart from explicitly documented provenance corrections.
+
+The repaired 110-case probe gives 135M 48.18% and 360M 50.00% strict grounded
+success; the +1.82 pp difference has a world-cluster interval spanning zero.
+Both reach 90% on counterfactual evidence when its documents actually exist,
+but both still fail multi-hop and retrieval-abstention. The paired value-swap
+probe passed 8/10 complete pairs for 135M and 9/10 for 360M, supporting real
+evidence dependence on these cases. See the [feasibility checkpoint](phase5_feasibility_verdict.md).
+Latest verification:
+217 unit/integration tests passed. No further training has been launched.
+
+### Earlier completed sequence
+
+Phase 2 is complete through the fixed-template capacity interaction, and that
+curriculum branch is retired. Phase 3 completed the full sequential curve
+through R889. The local K=8 R178-to-R356 macro gain did not persist:
+R356-to-R889 macro and worst-group intervals cross or touch zero at both K=1
+and K=8. Repetition scaling is closed as flat/inconclusive for semantic
+invariance. Phase 4 Stage A is complete. Its multitask arm produced a strong
+worst-group gain but missed the no-regression gate on discourse distractors;
+a read-only failure audit is complete. Stage B will use a fresh development
+suite to test binding-loss weight and scaffold counterbalancing.
 
 | Phase | State | Resume note |
 | --- | --- | --- |
 | 0 — Clean semantic benchmark | Complete | Fixed 126-case pressure suite; all split manifests pass with zero exact overlap. |
 | 1 — Form-diversity curve | Complete | Twenty five-seed runs; familiar forms mastered, worst-group robustness remains near chance. |
 | 2 — Breadth versus reinforcement | Complete | Corrected 60-cell v2 factorial is the scientific result; repetition has no reliable slope. |
-| 2.5 — Representation diagnostic and ablation | **Complete; gate not passed** | Ten frozen probes and 15 new K=4/R89 runs completed. Minimal contrasts improved the mean but its confidence bound touched zero; typed targets regressed distractor tracks. |
-| 2.6 — Targeted contrast coverage | **Registered; not run** | Baseline and minimal arms are validated for reuse. Lexical-only and minimal-plus-lexical require ten new runs after explicit approval. |
-| 3 — Training-token curves | Deferred | Do not start until Phase 2.6 identifies a representation with a credible worst-group signal. |
-| 4 — Taxonomy/representation scaling | Queued | Use the representation selected after the Phase 2.6 decision gate. |
-| 5 — Matched architecture benchmark | Queued | Run only after a non-saturated parser configuration is identified. |
+| 2.5 — Representation diagnostic and ablation | **Complete; rejected** | Minimal contrasts improved the screen mean but not its confidence-bound gate; typed targets regressed distractor tracks. |
+| 2.6–2.10 — Coverage, audit, augmentation, capacity | **Complete; rejected** | Sealed confirmation exposed deterministic cue policies; replacement, augmentation, extra exposure, and modest width did not repair worst-group robustness. |
+| 3 — Training-token curves | **Complete; repetition closed** | K=8 R356→R889 macro -0.25 pp/doubling, CI [-5.04, +4.54]; worst -1.26, CI [-3.79, 0.00]. |
+| 4 — Taxonomy/representation scaling | **Complete; rejected** | Consistency improved agreement but failed sealed correctness and robustness. |
+| 5 — Architecture feasibility | **Validity repair; frozen weights retained** | 360M training finished. Old scores are diagnostic-only: repair absent evidence, incomplete demonstrations, and missing suite coverage before ranking architectures. |
 
-Last verification before this checkpoint: the corrected Phase-2 run completed
-all 60 cells and Phase 2.5 completed ten frozen probes plus 15 new training
-runs. The full unit suite reports 140 passing tests. Phase 2.6 preparation
-validated all ten reused artifacts and all four manifests with zero exact
-overlap; only registration/manifests exist in its output directory. The sealed
-Stage-C suite has not been created or opened. The earlier
+The earlier Phase-3 checkpoint had 166 passing tests; the first Phase-5 validity
+repair pass has 198. The corrected Phase-2 run completed all 60 cells; Phases
+2.5–2.10 and the complete Phase-3 curve through R889 are finished. The earlier
 `runs/breadth_reinforcement_v1` artifact is retained for diagnosis only because
 its fixed 40-step warmup confounds the cells. The working-tree research changes
 have not yet been committed.
@@ -257,13 +279,89 @@ for each worst-track regression, and a per-template/operation decomposition.
 This is analysis-only and must not use the sealed suite to tune a new training
 intervention. Register any follow-up curriculum against a new sealed suite.
 
-### Phase 3 — Training-token curves — Deferred pending a confirmed Phase 2 intervention
+**Complete:** the audit found that the K=8 combined arm systematically maps
+the sealed discourse `COMPARE` cases to `SUBTRACT` (30/30) and `SUBTRACT`
+cases to `ADD` (30/30). This is a shared-scaffold shortcut, not a residual
+lexical gap. The next intervention must vary distractor clauses explicitly,
+with a new sealed suite that is never used for development.
+
+### Phase 2.8 — Counterfactual discourse coverage — Complete; rejected
+
+At K=8/R89, compare fresh five-seed baselines against a fixed-budget curriculum
+that replaces 25% of standard examples per operand/operation cell with
+training-only distractor clauses. Clause polarity and requested operation are
+counterbalanced, so no cue can predict `ADD`, `SUBTRACT`, or `COMPARE` by
+itself. The screen retains the existing development suite; advancement requires
+the existing +10 pp/positive-CI/no-regression gate. A passing screen must be
+confirmed on a newly created sealed discourse suite, never the audited suite.
+
+The screen improved discourse distractors by +20.0 pp (CI [+7.8, +32.2]) but
+regressed held-out templates by 17.2 pp and syntax order by 20.0 pp; worst-group
+accuracy fell 7.2 pp. It failed the gate, so no sealed suite was created. See
+the [Phase 2.8 report](phase28_counterfactual_discourse_v1.md).
+
+### Phase 2.9 — Replacement versus augmentation — Complete; rejected
+
+Reuse Phase 2.8's validated baseline and replacement cells. Add two five-seed
+cells that retain all standard K=8 forms and append the counterbalanced
+discourse examples: one at the original 1,600 updates and one with updates
+scaled by 1.25x to preserve per-example exposure. This distinguishes deletion
+cost, diversity dilution, and additional-compute effects without reopening a
+sealed suite. Advance only if an augmentation arm passes the existing gate.
+
+Neither augmentation arm passed. Fixed-update augmentation changed worst-group
+accuracy by -5.6 pp; matched-exposure augmentation changed it by -17.8 pp.
+The extra 25% updates had a paired -12.2 pp effect (CI [-18.9, -4.5]), showing
+that additional optimization strengthens the specialized shortcut. See the
+[Phase 2.9 report](phase29_discourse_augmentation_v1.md).
+
+### Phase 2.10 — Capacity interaction — Complete; rejected
+
+Reuse Phase 2.9's 96-wide baseline and fixed-update augmentation cells. Train
+fresh paired baseline and augmentation cells at hidden size 144 with all other
+controls fixed. Estimate the width x augmentation interaction for worst-group
+and macro robustness. The wide augmentation cell may advance only relative to
+the paired wide baseline under the existing gate; a passing screen requires a
+new sealed confirmation.
+
+The width x augmentation interaction was -4.5 pp for worst-group accuracy (CI
+[-32.8, +32.2]) and +1.9 pp macro (CI [-7.7, +14.7]). Wide augmentation still
+regressed held-out forms and failed the gate. See the [Phase 2.10
+report](phase210_capacity_interaction_v1.md). This closes the fixed-template
+curriculum branch.
+
+### Phase 3 — Training-token curves — Complete; repetition closed
 
 For low diversity (K=1) and high diversity (K=8), train at 0.1x, 0.3x, 1x,
 3x, and 10x the Phase-1 token budget. Use the same test suite.
 
 **Question:** does diversity improve sample efficiency, the eventual ceiling,
 or both?
+
+Use a sequential extension rather than immediately paying for the full 10x
+tail. Reuse K=1/K=8 R178 results and train R356 at five paired seeds. Continue
+to R889 only if at least one breadth has a macro per-doubling slope whose
+paired-bootstrap lower bound is positive, with no worst-group mean regression
+greater than 5 pp. Otherwise close repetition scaling as flat or harmful.
+
+**Stage A result:** K=8 passed the gate: macro robustness rose +4.00 pp per
+doubling (paired 95% CI [+1.33, +6.89]) and worst-group accuracy rose +0.56 pp.
+K=1 was inconclusive. Run the registered R889 cells for both breadths, then
+compare R356→R889 slopes and the full curve. See the [Stage A report](phase3_scaling_stage_a.md).
+
+**Terminal interpretation registered before R889 completion:** a positive
+macro lower bound with no >5 pp worst-group mean regression establishes only
+average sample-efficiency improvement. Repetition counts as repairing the
+semantic-invariance failure only if the final worst-group slope also has a
+strictly positive lower bound. A confidence interval containing zero is
+flat/inconclusive and a negative upper bound is harmful. R889 closes the
+repetition axis in every case; Phase 4 follows rather than extending the tail.
+
+**Final result:** neither K=1 nor K=8 has a positive terminal macro or
+worst-group lower bound. K=8 macro moved -0.25 pp per doubling (CI [-5.04,
++4.54]) and worst group -1.26 pp (CI [-3.79, 0.00]) from R356 to R889. The
+Stage-A improvement was a local bump rather than a sustained tangent. See the
+[complete Phase 3 report](phase3_scaling_complete.md).
 
 ### Phase 4 — Taxonomy and representation scaling
 
@@ -274,6 +372,96 @@ separately.
 
 **Question:** where does a compact semantic representation stop compressing
 the interpretation space effectively?
+
+#### Stage A — Separate semantic supervision from frame serialization
+
+Before expanding the taxonomy, test whether Phase 2.5's typed-frame failure
+was caused by the representation or by autoregressive serialization. The
+original corpus confounds B-first order with SUBTRACT, so replace forms within
+each operation/operand cell to obtain a fixed-budget 50/50 mention-order
+distribution. At K=8/R178 train a matched generative baseline, an end-to-end
+operation classifier, and an operation classifier with an auxiliary canonical
+A/B mention-order head. This adds 15 runs and keeps the data, updates,
+tokenizer, architecture width, optimizer, pressure suite, and seeds fixed
+across all three arms. The old Phase-2 cell is reference-only.
+
+Advance at most one arm under the existing +10 pp worst-group, positive paired
+CI, and no >5 pp track-regression gate. A passing arm requires a newly frozen
+sealed confirmation before equality, nested frames, or dialogue context are
+added. See the [Phase 4 Stage-A registration](phase4_bottleneck_screen_v1.md).
+
+**Stage-A result:** operation-only gained +12.22 pp worst-group accuracy (CI
+[+2.22, +22.22]) but regressed held-out templates 5.55 pp. Operation plus
+binding gained +25.55 pp (CI [+12.22, +33.33]) and +9.44 pp macro (CI [+5.33,
++16.00]) but regressed discourse 6.67 pp. Neither arm passes; no sealed suite
+was created. The multitask arm is retained as the strongest lead. Before any
+new training, audit case-level discourse operation confusions and the repeated
+minimal-contrast binding collapse. See the [Phase 4 Stage-A report](phase4_bottleneck_screen_v1.md).
+
+#### Stage B — Binding-weight × scaffold-coverage factorial — Complete; no gate pass
+
+The [read-only audit](phase4_failure_audit.md) found that the discourse
+regression is entirely driven by one seed, while all five encoders and a
+refitted frozen probe map every minimal-contrast case to the wrong binding
+class. Register a fixed-budget 2 × 2 at K=8/R178:
+
+| Binding-loss weight | Ordinary balanced corpus | Scaffold-counterbalanced corpus |
+| ---: | --- | --- |
+| 1.0 | Reuse Stage-A multitask checkpoints | Five new runs |
+| 0.25 | Five new runs | Five new runs |
+
+Every corpus must remain 50/50 A-first/B-first within each operation/operand
+cell. Scaffold examples replace, never append. Evaluate the reused and new
+arms on a newly frozen development suite with unseen text and balanced binding
+labels; the Stage-A development suite is audit-only from this point. Compare
+all arms to the matched generative checkpoints on the new suite using the same
++10 pp worst-group, positive paired-CI, and no >5 pp track-regression gate.
+Select at most one arm. Only a passing arm permits creation of a new sealed
+confirmation suite.
+
+All 15 new runs completed. The weight-0.25 scaffold arm gained +12.67 pp macro
+operation accuracy and +55.56 pp on minimal contrasts, but only +1.11 pp
+worst-group accuracy (CI [-16.66, +15.55]) and regressed syntax by 10.00 pp.
+No arm passed, and no sealed suite was created. A read-only frozen-probe audit
+found no latent linear readout solution on lexical or syntax failures. See the
+[Stage-B result](phase4_stageb_factorial.md) and [failure audit](phase4_stageb_failure_audit.md).
+
+#### Stage C — Paired representation consistency — Complete; rejected
+
+Reuse the weight-0.25 scaffold arm as the no-consistency lead and pair each
+A-first training form with one B-first form from the same operation/operand
+frame. Keep 16 sequences per update and 3,200 updates fixed. Train consistency
+weights 0.25 and 1.0 (five paired seeds each), aligning same-intent operation
+logits while leaving the binding head separately supervised. Re-evaluate the
+matched generative baseline, reused lead, and both new arms on a third fresh,
+binding-balanced development suite. Apply the unchanged worst-group gate. This
+is ten new runs and directly tests the representation-invariance hypothesis.
+
+All five consistency-0.25 seeds completed on 2026-08-26. The runner was then
+stopped at the cell boundary; no consistency-1.0 seed completed. Restarting the
+registered Stage-C screen validates and skips the first five runs before
+training the remaining cell.
+
+The remaining cell resumed on 2026-08-27 after all 177 unit tests and the
+registered source, pairing, exposure, and development-suite controls passed.
+
+All ten runs completed. Consistency-0.25 passed against the generative baseline
+with a +26.67 pp worst-group gain (CI [+10.00, +41.11]) and no >5 pp track
+regression. Consistency-1.0 failed on a 6.67 pp syntax regression. The direct
+consistency-0.25 effect versus the no-consistency lead was only +1.11 pp (CI
+[-7.78, +12.22]), so mechanism attribution is explicitly unresolved.
+
+The sealed confirmation uses frozen baseline, lead, and selected checkpoints,
+six new operand pairs, and both mention orders for every operation/frame: 216
+fresh cases total. Apply the unchanged primary gate once; paired-form agreement
+is secondary diagnostic evidence and cannot rescue a gate failure.
+
+**Sealed result:** the candidate changed worst-group accuracy by -2.78 pp (CI
+[-15.00, +10.00]) and regressed held-out templates by 32.78 pp. Paired-form
+agreement improved by 9.56 pp (CI [+3.56, +14.22]), but paired correctness was
+flat (+2.00 pp, CI [-4.44, +7.33]). This closes the compact 96-wide parser
+branch: the intervention made errors more self-consistent without making the
+semantic decisions reliably correct.
 
 ### Phase 5 — Matched architecture benchmark
 
@@ -288,6 +476,24 @@ Use the architecture benchmark’s separate routing, protocol, executable-action
 and grounded-episode tracks. The historic 300M scratch checkpoint remains a
 diagnostic reference only and cannot be used for a scientific head-to-head
 claim.
+
+#### Stage A — Existing-checkpoint learning curves
+
+Before paying for another training run, evaluate the saved SmolLM2-135M ReAct
+checkpoints at SFT steps 1,000 and 2,000 on the same held-out suites already
+used at step 3,000. Preserve suite-level grounded success, failure taxonomy,
+latency, and approximate samples. The legacy scratch-300M curve remains useful
+only to diagnose that run; its contaminated corpus forbids a family-level
+comparison.
+
+For a pragmatic general-purpose readiness signal, require both breadth and a
+non-flat terminal slope: at least 70% overall grounded success, at least 40% on
+each retrieval/computation, missing-evidence, recovery, and counterfactual core
+suite, and at least +5 pp overall from step 2,000 to 3,000. Failure rejects the
+135M checkpoint as usable or fast-converging, not the pretrained architecture
+family. If it fails, the next discriminating run is the matched 360M pretrained
+adapter; only after that capacity test decide whether a clean scratch rerun is
+worth its substantially larger compute budget.
 
 ## Findings retained as priors, not conclusions
 
@@ -311,6 +517,10 @@ claim.
 
 ## Immediate next action
 
-Phase 2.6 is complete and rejected by sealed confirmation. Execute the Phase
-2.7 read-only failure audit next; do not launch Phase 3 or another curriculum
-training run until it has produced a new, independently sealed registration.
+The frozen replays and paired value-swap diagnostic are complete. Prepare and
+register the [small complete-trajectory/control experiment](phase5_next_control.md)
+on the 135M baseline, including live tool-observation replay and tokenized
+terminal-target coverage before training. Do not scale capacity on the invalid
+corpus, reopen Stage-C confirmation, or return to fixed-template parser scaling.
+The three-way architecture ranking, repaired multi-checkpoint learning curve,
+and any general-purpose extrapolation remain unresolved.

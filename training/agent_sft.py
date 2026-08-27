@@ -15,6 +15,33 @@ from training.pretrain import get_lr_scheduler
 from utils.timer import StepTimer
 
 
+def seed_training_randomness(seed: int) -> None:
+    """Seed model initialization and DataLoader shuffling for reproducible SFT."""
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
+
+
+def summarize_sft_exposure(
+    *,
+    microsteps: int,
+    batch_size: int,
+    gradient_accumulation_steps: int,
+    sequence_length: int,
+) -> dict[str, int]:
+    """Report SFT exposure without treating accumulation as extra samples."""
+    if min(microsteps, batch_size, gradient_accumulation_steps, sequence_length) <= 0:
+        raise ValueError("SFT exposure values must be positive")
+    sequences = microsteps * batch_size
+    return {
+        "microsteps": microsteps,
+        "optimizer_updates": microsteps // gradient_accumulation_steps,
+        "sequences_processed": sequences,
+        "tokens_processed": sequences * sequence_length,
+        "effective_batch_size": batch_size * gradient_accumulation_steps,
+    }
+
+
 class TrajectoryDataset(Dataset):
     """Encodes agent trajectories and applies target loss masking."""
 
@@ -35,6 +62,10 @@ class TrajectoryDataset(Dataset):
                     continue
                 item = json.loads(line)
                 turns = item.get("turns", [])
+                if not turns or turns[-1].get("role") != "final" or not turns[-1].get("train", False):
+                    raise ValueError(
+                        f"SFT requires a supervised terminal final response: {item.get('task_id', '<unknown>')}"
+                    )
                 
                 input_ids = [bos_id] if bos_id is not None else []
                 labels = [-100] * len(input_ids)
@@ -86,6 +117,11 @@ class TrajectoryDataset(Dataset):
 def train_agent_sft(config_path: str):
     with open(config_path, "r", encoding="utf-8") as f:
         config = yaml.safe_load(f)
+    if config.get("evaluation_only", False):
+        raise ValueError("Cannot train from an evaluation-only configuration")
+
+    seed = int(config.get("seed", 42))
+    seed_training_randomness(seed)
 
     preset_name = config.get("name", "smoke")
     backend = config.get("backend", "custom")
@@ -204,7 +240,13 @@ def train_agent_sft(config_path: str):
 
     total_time = time.time() - start_time
     seq_len = min(max_seq_len, 1024)
-    total_tokens_processed = step * batch_size * seq_len
+    exposure = summarize_sft_exposure(
+        microsteps=step,
+        batch_size=batch_size,
+        gradient_accumulation_steps=grad_accum,
+        sequence_length=seq_len,
+    )
+    total_tokens_processed = exposure["tokens_processed"]
     tokens_per_sec = total_tokens_processed / max(0.001, total_time)
     ms_per_step = (total_time / max(1, step)) * 1000.0
 
@@ -224,7 +266,9 @@ def train_agent_sft(config_path: str):
         "phase": "agent_sft",
         "preset": preset_name,
         "backend": backend,
+        "seed": seed,
         "total_steps": step,
+        **exposure,
         "total_wall_clock_seconds": round(total_time, 2),
         "ms_per_step": round(ms_per_step, 2),
         "tokens_per_second": round(tokens_per_sec, 2),

@@ -1,7 +1,7 @@
-name: "smollm2_135m_agent"
+name: "smollm2_360m_capacity"
 backend: "huggingface"
-pretrained_model_name: "HuggingFaceTB/SmolLM2-135M"
-checkpoint_path: "runs/smollm2_135m_agent/agent_model"
+pretrained_model_name: "HuggingFaceTB/SmolLM2-360M"
+checkpoint_path: "runs/smollm2_360m_capacity/agent_model"
 seed: 42
 
 corpus:

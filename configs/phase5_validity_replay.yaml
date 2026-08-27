@@ -1,0 +1,10 @@
+# Evaluation-only repair probe. No training configuration or training worlds.
+name: phase5_validity_replay
+seed: 81027
+corpus:
+  train_worlds: 0
+  val_worlds: 0
+  test_worlds: 20
+  docs_per_world: 30
+agent_runtime:
+  include_plan: false

@@ -6,12 +6,14 @@ import os
 import time
 import yaml
 from collections import defaultdict
+from typing import Mapping, Sequence
 import torch
 
 from synth.ontology import World, Task, Document, DocumentLine
 from agent.shell import DeterministicShell
 from eval.metrics import evaluate_episode_outcome, compute_aggregate_metrics
 from training.model_loader import load_model_and_tokenizer
+from training.agent_sft import summarize_sft_exposure
 
 
 def deserialize_world(data: dict) -> World:
@@ -59,6 +61,60 @@ def stratified_sample_tasks(tasks, per_suite=30):
         if suite not in seen_suites:
             sampled.extend(suite_tasks[:per_suite])
     return sampled
+
+
+def analyze_milestone_progress(
+    results: Mapping[str, Mapping[str, object]],
+    *,
+    prior_step: int,
+    target_step: int,
+    core_suites: Sequence[str],
+    minimum_overall: float,
+    minimum_core: float,
+    minimum_terminal_gain: float,
+) -> dict[str, object]:
+    """Apply a preregistered breadth and terminal-slope readiness gate."""
+    indexed = {int(result["step"]): result for result in results.values()}
+    if prior_step not in indexed or target_step not in indexed:
+        raise ValueError("Milestone readiness analysis requires both registered steps")
+    prior = indexed[prior_step]
+    target = indexed[target_step]
+    suite_metrics = target.get("suite_metrics")
+    if not isinstance(suite_metrics, Mapping):
+        raise ValueError("Target milestone is missing suite metrics")
+    core_scores: dict[str, float] = {}
+    for suite in core_suites:
+        suite_result = suite_metrics.get(suite)
+        if not isinstance(suite_result, Mapping) or "grounded_success_rate" not in suite_result:
+            raise ValueError(f"Target milestone is missing core suite {suite}")
+        core_scores[suite] = float(suite_result["grounded_success_rate"])
+    prior_accuracy = float(prior["grounded_accuracy"])
+    target_accuracy = float(target["grounded_accuracy"])
+    terminal_gain = round(target_accuracy - prior_accuracy, 4)
+    failing_core_suites = [
+        suite for suite in core_suites if core_scores[suite] < minimum_core
+    ]
+    overall_passed = target_accuracy >= minimum_overall
+    breadth_passed = not failing_core_suites
+    terminal_slope_passed = terminal_gain >= minimum_terminal_gain
+    return {
+        "prior_step": prior_step,
+        "target_step": target_step,
+        "prior_grounded_accuracy": prior_accuracy,
+        "target_grounded_accuracy": target_accuracy,
+        "terminal_grounded_gain": terminal_gain,
+        "core_suite_grounded_accuracy": core_scores,
+        "thresholds": {
+            "minimum_overall": minimum_overall,
+            "minimum_core": minimum_core,
+            "minimum_terminal_gain": minimum_terminal_gain,
+        },
+        "failing_core_suites": failing_core_suites,
+        "overall_passed": overall_passed,
+        "breadth_passed": breadth_passed,
+        "terminal_slope_passed": terminal_slope_passed,
+        "readiness_passed": overall_passed and breadth_passed and terminal_slope_passed,
+    }
 
 
 def evaluate_checkpoint(model, tokenizer, device, worlds, tasks, checkpoint_name):
@@ -217,7 +273,16 @@ def run_milestone_evaluation(config_path: str, per_suite: int = 20, final_only: 
         error_rate = 1.0 - grounded_acc
         task_success = metrics["overall_task_success_rate"]
         unsupported_rate = metrics["unsupported_claim_rate"]
-        approx_samples = step * config.get("agent_sft", {}).get("batch_size", 4) * config.get("agent_sft", {}).get("gradient_accumulation_steps", 8)
+        sft_config = config.get("agent_sft", {})
+        exposure = summarize_sft_exposure(
+            microsteps=step,
+            batch_size=int(sft_config.get("batch_size", 4)),
+            gradient_accumulation_steps=int(
+                sft_config.get("gradient_accumulation_steps", 8)
+            ),
+            sequence_length=1,
+        )
+        approx_samples = exposure["sequences_processed"]
 
         all_milestone_results[step_key] = {
             "label": label,
@@ -237,6 +302,22 @@ def run_milestone_evaluation(config_path: str, per_suite: int = 20, final_only: 
         with open(summary_path, "w", encoding="utf-8") as f:
             json.dump(all_milestone_results, f, indent=2)
         print(f"[+] Saved checkpoint metrics to {summary_path}")
+
+    feasibility_gate = config.get("feasibility_gate")
+    if isinstance(feasibility_gate, Mapping):
+        analysis = analyze_milestone_progress(
+            all_milestone_results,
+            prior_step=int(feasibility_gate["prior_step"]),
+            target_step=int(feasibility_gate["target_step"]),
+            core_suites=tuple(str(suite) for suite in feasibility_gate["core_suites"]),
+            minimum_overall=float(feasibility_gate["minimum_overall"]),
+            minimum_core=float(feasibility_gate["minimum_core"]),
+            minimum_terminal_gain=float(feasibility_gate["minimum_terminal_gain"]),
+        )
+        analysis_path = os.path.join(eval_dir, "milestone_feasibility_analysis.json")
+        with open(analysis_path, "w", encoding="utf-8") as f:
+            json.dump(analysis, f, indent=2)
+        print(f"[+] Saved feasibility analysis to {analysis_path}")
 
     # Final Summary Table
     print("\n" + "=" * 90)

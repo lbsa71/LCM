@@ -1,0 +1,69 @@
+name: "phase4_stageb_factorial_v1"
+seed: 42
+
+phase4_stageb:
+  output_dir: "runs/phase4_stageb_factorial_v1"
+  stagea_output_dir: "runs/phase4_bottleneck_screen_v1"
+  variants_per_operation: 8
+  exposure: 177.777778
+  scaffold_replacement_fraction: 0.25
+  full_binding_loss_weight: 1.0
+  reduced_binding_loss_weight: 0.25
+  seeds: [17, 29, 41, 53, 67]
+  train_pairs:
+    - [11, 7]
+    - [13, 8]
+    - [17, 9]
+    - [19, 12]
+    - [23, 14]
+    - [29, 16]
+    - [31, 18]
+    - [37, 21]
+    - [41, 22]
+    - [43, 24]
+    - [47, 26]
+    - [53, 28]
+  eval_pairs:
+    - [59, 31]
+    - [61, 33]
+    - [67, 34]
+    - [71, 36]
+    - [73, 38]
+    - [79, 41]
+  development_pairs:
+    - [751, 363]
+    - [863, 421]
+    - [977, 488]
+    - [1091, 537]
+    - [1217, 608]
+    - [1321, 659]
+  gate:
+    minimum_worst_group_gain: 0.10
+    maximum_track_regression: 0.05
+
+tokenizer:
+  mode: "fixed_byte"
+  vocab_size: 512
+
+model:
+  hidden_size: 96
+  num_hidden_layers: 3
+  num_attention_heads: 4
+  intermediate_size: 384
+  max_position_embeddings: 128
+  rms_norm_eps: 1.0e-5
+  rope_theta: 10000.0
+  tie_word_embeddings: true
+
+training:
+  learning_rate: 1.0e-3
+  min_learning_rate: 1.0e-4
+  weight_decay: 0.01
+  batch_size: 16
+  gradient_accumulation_steps: 1
+  max_steps: 3200
+  warmup_steps: 320
+  device: "auto"
+
+evaluation:
+  batch_size: 64

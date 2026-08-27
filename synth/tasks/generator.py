@@ -123,11 +123,20 @@ class TaskGenerator:
     def generate_suite_d_tasks(self, world: World, count: int, rng: random.Random) -> List[Task]:
         """Suite D: Multi-Hop Traversal."""
         tasks = []
+        if count <= 0:
+            return tasks
         regions = [e for e in world.entities.values() if e.entity_type == "region"]
         rng.shuffle(regions)
 
-        for i, region in enumerate(regions[:count]):
-            settlements = [e for e in world.entities.values() if e.entity_type == "settlement" and e.properties.get("region_id") == region.id]
+        for i, region in enumerate(regions):
+            # Containment is a canonical fact, not an entity property. The old
+            # property lookup silently produced an empty suite for every world.
+            inside_facts = {
+                f.subject_id: f for f in world.facts.values()
+                if f.relation == "inside" and f.value == region.id
+            }
+            settlements = [e for e in world.entities.values()
+                           if e.entity_type == "settlement" and e.id in inside_facts]
             if len(settlements) < 2:
                 continue
 
@@ -137,6 +146,8 @@ class TaskGenerator:
 
             if not f1 or not f2:
                 continue
+            if int(f1.value) == int(f2.value):
+                continue  # Neither settlement is strictly higher on a tie.
 
             d1, l1 = self._find_fact_doc_and_line(world, f1.id)
             d2, l2 = self._find_fact_doc_and_line(world, f2.id)
@@ -144,18 +155,23 @@ class TaskGenerator:
             if not d1 or not d2:
                 continue
 
-            # Also need region doc
-            f_reg = next((f for f in world.facts.values() if f.subject_id == s1.id and f.relation == "inside"), None)
-            d_reg, l_reg = (self._find_fact_doc_and_line(world, f_reg.id)) if f_reg else (d1, l1)
+            # Both memberships and both populations form the required proof.
+            memberships = [self._find_fact_doc_and_line(world, inside_facts[s.id].id)
+                           for s in (s1, s2)]
+            if any(doc is None or line is None for doc, line in memberships):
+                continue
 
             gold = s1.name if int(f1.value) > int(f2.value) else s2.name
             q = f"Which settlement in {region.name} has the higher recorded population, {s1.name} or {s2.name}?"
 
             pg = ProofGraph(goal=f"multi_hop_comparison({region.id})")
-            if d_reg:
-                pg.required_document_lines.setdefault(d_reg, []).append(l_reg)
+            for doc, line in memberships:
+                pg.required_document_lines.setdefault(doc, []).append(line)
             pg.required_document_lines.setdefault(d1, []).append(l1)
             pg.required_document_lines.setdefault(d2, []).append(l2)
+            pg.required_document_lines = {
+                doc: sorted(set(lines)) for doc, lines in pg.required_document_lines.items()
+            }
 
             tasks.append(Task(
                 task_id=f"task_d_{world.world_id}_{i+1}",
@@ -168,6 +184,8 @@ class TaskGenerator:
                 is_retrieval_required=True,
                 is_contingent=True
             ))
+            if len(tasks) >= count:
+                break
         return tasks
 
     def generate_suite_e_tasks(self, world: World, count: int, rng: random.Random) -> List[Task]:

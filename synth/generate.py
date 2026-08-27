@@ -172,10 +172,11 @@ def main():
         world_id = f"w_te_{seed}"
         w = world_gen.generate_world(world_id, seed, held_out_lexicon=True)
         eval_doc_gen.generate_documents(w, docs_per_world=corpus_cfg.get("docs_per_world", 10))
-        eval_worlds_dict[world_id] = serialize_world(w)
-
         rng = random.Random(seed)
         tasks = eval_task_gen.generate_all_tasks(w, rng)
+        # Counterfactual tasks add evidence documents. Serialize only after all
+        # task construction, otherwise their reference lines do not exist on disk.
+        eval_worlds_dict[world_id] = serialize_world(w)
         for task in tasks:
             eval_tasks_list.append(serialize_task(task))
 

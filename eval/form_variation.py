@@ -240,6 +240,19 @@ _TRAINING_LEXICAL_TEMPLATES: dict[str, tuple[str, ...]] = {
     ),
 }
 
+_TRAINING_DISCOURSE_CUES = (
+    "Although a comparison might be considered, ",
+    "A total may be useful elsewhere, but here ",
+    "Someone suggested taking one amount away; instead, ",
+    "Ignore the order in which the numbers were mentioned and ",
+)
+
+_TRAINING_DISCOURSE_REQUESTS = {
+    "ADD": "combine {left} with {right} and report the total.",
+    "SUBTRACT": "remove {right} from {left} and report what remains.",
+    "COMPARE": "decide whether {left} is greater than {right}.",
+}
+
 
 def build_contrast_balanced_examples(
     examples: Sequence[FormVariationExample],
@@ -325,6 +338,69 @@ def build_lexical_contrast_examples(
                 right=right,
             )
     return tuple(result)
+
+
+def discourse_cue_id(template_id: int) -> int:
+    """Decode the counterbalanced cue family from a Phase-2.8 template ID."""
+    if not 3_000 <= template_id < 4_000:
+        raise ValueError(f"Not a Phase-2.8 discourse template ID: {template_id}")
+    return (template_id - 3_000) % len(_TRAINING_DISCOURSE_CUES)
+
+
+def build_counterfactual_discourse_examples(
+    examples: Sequence[FormVariationExample],
+    replacement_fraction: float,
+    seed: int,
+) -> tuple[FormVariationExample, ...]:
+    """Replace a matched fraction with cue-balanced distractor utterances.
+
+    Every operand pair receives the same cue IDs for all three operations, so
+    the distractor clause cannot identify the requested operation by itself.
+    """
+    if not examples:
+        raise ValueError("Counterfactual discourse balancing requires examples")
+    if not 0 < replacement_fraction <= 1:
+        raise ValueError("replacement_fraction must be in (0, 1]")
+    grouped: dict[tuple[int, int, str], list[int]] = {}
+    for index, example in enumerate(examples):
+        if example.operation not in OPERATIONS:
+            raise ValueError(f"Unsupported operation: {example.operation}")
+        if example.template_id < 1_000:
+            grouped.setdefault((example.left, example.right, example.operation), []).append(index)
+    pair_rank = {pair: rank for rank, pair in enumerate(sorted({key[:2] for key in grouped}))}
+    result = list(examples)
+    rng = random.Random(seed)
+    for left, right, operation in sorted(grouped):
+        indices = grouped[(left, right, operation)]
+        replacement_count = min(len(indices), max(1, int(round(len(indices) * replacement_fraction))))
+        selected = sorted(rng.sample(indices, replacement_count))
+        for offset, example_index in enumerate(selected):
+            cue = (pair_rank[(left, right)] * replacement_count + offset) % len(_TRAINING_DISCOURSE_CUES)
+            utterance = (_TRAINING_DISCOURSE_CUES[cue] + _TRAINING_DISCOURSE_REQUESTS[operation]).format(
+                left=left, right=right
+            )
+            result[example_index] = FormVariationExample(
+                utterance=utterance,
+                target=f"OP={operation}",
+                operation=operation,
+                template_id=3_000 + cue,
+                left=left,
+                right=right,
+            )
+    return tuple(result)
+
+
+def build_counterfactual_discourse_augmentation(
+    examples: Sequence[FormVariationExample],
+    augmentation_fraction: float,
+    seed: int,
+) -> tuple[FormVariationExample, ...]:
+    """Append the counterbalanced discourse forms without deleting standards."""
+    replaced = build_counterfactual_discourse_examples(
+        examples, replacement_fraction=augmentation_fraction, seed=seed
+    )
+    additions = tuple(example for example in replaced if 3_000 <= example.template_id < 4_000)
+    return tuple(examples) + additions
 
 
 _PRESSURE_TRACKS = (
@@ -493,6 +569,73 @@ def build_phase26_confirmation_arms(
             "requires_training": True,
         }
         for arm_name in ("baseline", "minimal_lexical_contrast")
+    }
+
+
+def build_phase28_discourse_arms(
+    splits: ConditionSplits,
+    *,
+    replacement_fraction: float,
+    discourse_seed: int,
+) -> dict[str, dict[str, object]]:
+    """Build fresh baseline and counterfactual-discourse screen arms."""
+    discourse_splits = ConditionSplits(
+        train=build_counterfactual_discourse_examples(
+            splits.train, replacement_fraction=replacement_fraction, seed=discourse_seed
+        ),
+        seen_form=splits.seen_form,
+        same_meaning_unseen_form=splits.same_meaning_unseen_form,
+        unseen_operands_seen_form=splits.unseen_operands_seen_form,
+        minimal_contrasts=splits.minimal_contrasts,
+    )
+    return {
+        "baseline": {"splits": splits, "target_mode": "operation", "requires_training": True},
+        "counterfactual_discourse": {
+            "splits": discourse_splits,
+            "target_mode": "operation",
+            "requires_training": True,
+        },
+    }
+
+
+def build_phase29_augmentation_arms(
+    splits: ConditionSplits,
+    *,
+    augmentation_fraction: float,
+    discourse_seed: int,
+) -> dict[str, dict[str, object]]:
+    """Build Phase 2.9's reused and newly trained augmentation cells."""
+    replacement = build_phase28_discourse_arms(
+        splits, replacement_fraction=augmentation_fraction, discourse_seed=discourse_seed
+    )["counterfactual_discourse"]["splits"]
+    if not isinstance(replacement, ConditionSplits):
+        raise ValueError("Invalid Phase-2.9 replacement splits")
+    augmented = ConditionSplits(
+        train=build_counterfactual_discourse_augmentation(
+            splits.train, augmentation_fraction=augmentation_fraction, seed=discourse_seed
+        ),
+        seen_form=splits.seen_form,
+        same_meaning_unseen_form=splits.same_meaning_unseen_form,
+        unseen_operands_seen_form=splits.unseen_operands_seen_form,
+        minimal_contrasts=splits.minimal_contrasts,
+    )
+    return {
+        "baseline": {"splits": splits, "target_mode": "operation", "requires_training": False},
+        "counterfactual_replacement": {
+            "splits": replacement,
+            "target_mode": "operation",
+            "requires_training": False,
+        },
+        "augmentation_fixed_updates": {
+            "splits": augmented,
+            "target_mode": "operation",
+            "requires_training": True,
+        },
+        "augmentation_matched_exposure": {
+            "splits": augmented,
+            "target_mode": "operation",
+            "requires_training": True,
+        },
     }
 
 
@@ -2037,6 +2180,136 @@ def analyze_phase26_confirmation(report: Mapping[str, object]) -> dict[str, obje
     }
 
 
+def analyze_phase28_screen(report: Mapping[str, object]) -> dict[str, object]:
+    """Apply the existing paired continuation gate to the Phase-2.8 screen."""
+    analysis = analyze_phase25_screen(report)
+    arm = analysis.get("arms", {}).get("counterfactual_discourse")
+    analysis["selected_arm"] = (
+        "counterfactual_discourse"
+        if isinstance(arm, Mapping) and bool(arm.get("passes_continuation_gate"))
+        else None
+    )
+    return analysis
+
+
+def analyze_phase29_screen(report: Mapping[str, object]) -> dict[str, object]:
+    """Gate augmentation arms and estimate the paired 25%-compute effect."""
+    analysis = analyze_phase25_screen(report)
+    raw_arms = report.get("arms")
+    if not isinstance(raw_arms, Mapping):
+        raise ValueError("Phase-2.9 report is missing arms")
+
+    def by_seed(name: str) -> dict[int, Mapping[str, object]]:
+        runs = raw_arms.get(name)
+        if not isinstance(runs, Sequence):
+            raise ValueError(f"Phase-2.9 report is missing {name}")
+        return {int(run["seed"]): run for run in runs if isinstance(run, Mapping)}
+
+    fixed = by_seed("augmentation_fixed_updates")
+    matched = by_seed("augmentation_matched_exposure")
+    seeds = sorted(set(fixed).intersection(matched))
+    if not seeds:
+        raise ValueError("Phase-2.9 augmentation cells have no paired seeds")
+
+    def metric(run: Mapping[str, object], name: str) -> float:
+        if name == "worst_robust_accuracy":
+            return float(run[name])
+        groups = run["pressure_groups"]
+        return sum(float(groups[track]) for track in _ROBUST_PRESSURE_TRACKS) / len(_ROBUST_PRESSURE_TRACKS)
+
+    analysis["compute_effect"] = {
+        name: {
+            **_distribution_summary([metric(matched[seed], name) - metric(fixed[seed], name) for seed in seeds]),
+            "paired_seeds": seeds,
+        }
+        for name in ("worst_robust_accuracy", "macro_robust_accuracy")
+    }
+    passing = []
+    for arm_name in ("augmentation_fixed_updates", "augmentation_matched_exposure"):
+        arm = analysis["arms"][arm_name]
+        if arm["passes_continuation_gate"]:
+            passing.append((float(arm["worst_group_delta"]["mean"]), arm_name))
+    analysis["selected_arm"] = max(passing)[1] if passing else None
+    return analysis
+
+
+def phase210_wide_model_config(
+    model: Mapping[str, object], *, hidden_size: int, intermediate_size: int
+) -> dict[str, object]:
+    """Copy a model configuration with only the registered capacity fields changed."""
+    if hidden_size <= 0 or intermediate_size <= 0:
+        raise ValueError("Phase-2.10 capacity fields must be positive")
+    result = dict(model)
+    result["hidden_size"] = hidden_size
+    result["intermediate_size"] = intermediate_size
+    return result
+
+
+def analyze_phase210_screen(report: Mapping[str, object]) -> dict[str, object]:
+    """Estimate width effects and gate wide augmentation against its wide baseline."""
+    raw_arms = report.get("arms")
+    if not isinstance(raw_arms, Mapping):
+        raise ValueError("Phase-2.10 report is missing arms")
+    required = ("narrow_baseline", "narrow_augmentation", "wide_baseline", "wide_augmentation")
+
+    def by_seed(name: str) -> dict[int, Mapping[str, object]]:
+        runs = raw_arms.get(name)
+        if not isinstance(runs, Sequence):
+            raise ValueError(f"Phase-2.10 report is missing {name}")
+        return {int(run["seed"]): run for run in runs if isinstance(run, Mapping)}
+
+    cells = {name: by_seed(name) for name in required}
+    seeds = sorted(set.intersection(*(set(cell) for cell in cells.values())))
+    if not seeds:
+        raise ValueError("Phase-2.10 has no fully paired seeds")
+
+    def metric(run: Mapping[str, object], name: str) -> float:
+        if name == "worst_robust_accuracy":
+            return float(run[name])
+        groups = run["pressure_groups"]
+        return sum(float(groups[track]) for track in _ROBUST_PRESSURE_TRACKS) / len(_ROBUST_PRESSURE_TRACKS)
+
+    effects: dict[str, object] = {}
+    for metric_name in ("worst_robust_accuracy", "macro_robust_accuracy"):
+        values = {
+            name: {seed: metric(cells[name][seed], metric_name) for seed in seeds} for name in required
+        }
+        deltas = {
+            "capacity_without_augmentation": [
+                values["wide_baseline"][seed] - values["narrow_baseline"][seed] for seed in seeds
+            ],
+            "capacity_with_augmentation": [
+                values["wide_augmentation"][seed] - values["narrow_augmentation"][seed] for seed in seeds
+            ],
+            "interaction": [
+                values["wide_augmentation"][seed]
+                - values["wide_baseline"][seed]
+                - values["narrow_augmentation"][seed]
+                + values["narrow_baseline"][seed]
+                for seed in seeds
+            ],
+        }
+        effects[metric_name] = {
+            name: {**_distribution_summary(delta), "paired_seeds": seeds} for name, delta in deltas.items()
+        }
+    wide_gate = analyze_phase25_screen({
+        "arms": {
+            "baseline": list(raw_arms["wide_baseline"]),
+            "wide_augmentation": list(raw_arms["wide_augmentation"]),
+        }
+    })
+    selected = (
+        "wide_augmentation"
+        if wide_gate["arms"]["wide_augmentation"]["passes_continuation_gate"]
+        else None
+    )
+    return {
+        "capacity_effects": effects,
+        "wide_gate": wide_gate,
+        "selected_arm": selected,
+    }
+
+
 def _phase26_confirmation_schedule(
     *, dataset_size: int,
     batch_size: int,
@@ -2428,6 +2701,582 @@ def run_phase26_confirmation(config_path: str) -> dict[str, object]:
     return {"report": report, "analysis": analysis, "registration": preparation["registration"]}
 
 
+def _load_phase28_config(config_path: str) -> tuple[dict[str, object], dict[str, object]]:
+    with open(config_path, "r", encoding="utf-8") as handle:
+        config = yaml.safe_load(handle)
+    if not isinstance(config, dict) or "phase28_discourse_coverage" not in config:
+        raise ValueError("Configuration is missing phase28_discourse_coverage")
+    experiment = config["phase28_discourse_coverage"]
+    if not isinstance(experiment, dict):
+        raise ValueError("phase28_discourse_coverage must be a mapping")
+    return config, experiment
+
+
+def _phase28_condition(
+    config: Mapping[str, object], experiment: Mapping[str, object]
+) -> tuple[ConditionSplits, dict[str, dict[str, object]], dict[str, int]]:
+    splits = build_condition_splits(
+        int(experiment["variants_per_operation"]),
+        tuple(tuple(pair) for pair in experiment["train_pairs"]),
+        tuple(tuple(pair) for pair in experiment["eval_pairs"]),
+        seed=int(config["seed"]),
+    )
+    arms = build_phase28_discourse_arms(
+        splits,
+        replacement_fraction=float(experiment["replacement_fraction"]),
+        discourse_seed=int(experiment["discourse_seed"]),
+    )
+    schedule = _phase26_confirmation_schedule(
+        dataset_size=len(splits.train),
+        batch_size=int(config["training"]["batch_size"]),
+        exposure=float(experiment["exposure"]),
+    )
+    return splits, arms, schedule
+
+
+def prepare_phase28(config_path: str) -> dict[str, object]:
+    """Register Phase 2.8 and validate its development isolation without training."""
+    config, experiment = _load_phase28_config(config_path)
+    _, arms, schedule = _phase28_condition(config, experiment)
+    development = build_fixed_pressure_test(
+        tuple(tuple(pair) for pair in experiment["development_pressure_pairs"])
+    )
+    manifests: dict[str, object] = {}
+    fingerprints: dict[str, str] = {}
+    for arm_name, arm in arms.items():
+        splits = arm["splits"]
+        if not isinstance(splits, ConditionSplits):
+            raise ValueError(f"Invalid Phase-2.8 {arm_name} splits")
+        manifests[arm_name] = build_phase25_split_manifest(splits.train, development)
+        fingerprints[arm_name] = compute_phase25_training_fingerprint(
+            splits.train,
+            {"training": schedule, "model": config["model"], "tokenizer": config["tokenizer"]},
+            target_mode="operation",
+        )
+    if any(manifest["validation"] != "PASS" for manifest in manifests.values()):
+        raise ValueError("A Phase-2.8 train/development split manifest failed")
+    seeds = [int(seed) for seed in experiment["seeds"]]
+    registration = {
+        "experiment": str(config.get("name", "phase28_counterfactual_discourse")),
+        "config": config_path,
+        "status": "registered_not_run",
+        "variants_per_operation": int(experiment["variants_per_operation"]),
+        "exposure": float(experiment["exposure"]),
+        "seeds": seeds,
+        "schedule": schedule,
+        "new_training_runs": len(arms) * len(seeds),
+        "sealed_suite_status": "not_created_not_opened",
+        "training_fingerprints": fingerprints,
+    }
+    output_dir = Path(str(experiment["output_dir"]))
+    output_dir.mkdir(parents=True, exist_ok=True)
+    with (output_dir / "registration.json").open("w", encoding="utf-8") as handle:
+        json.dump(registration, handle, indent=2)
+    with (output_dir / "split_manifests.json").open("w", encoding="utf-8") as handle:
+        json.dump({"experiment": registration["experiment"], "manifests": manifests}, handle, indent=2)
+    return {"registration": registration, "arms": arms, "development": development}
+
+
+def run_phase28_screen(config_path: str) -> dict[str, object]:
+    """Run the registered fresh-baseline counterfactual-discourse screen."""
+    preparation = prepare_phase28(config_path)
+    config, experiment = _load_phase28_config(config_path)
+    _, arms, schedule = _phase28_condition(config, experiment)
+    development = preparation["development"]
+    if not isinstance(development, Mapping):
+        raise ValueError("Invalid Phase-2.8 development suite")
+    run_config = copy.deepcopy(config)
+    run_config["training"]["max_steps"] = schedule["max_steps"]
+    run_config["training"]["warmup_steps"] = schedule["warmup_steps"]
+    output_dir = Path(str(experiment["output_dir"]))
+    seeds = tuple(int(seed) for seed in experiment["seeds"])
+    results: dict[str, list[dict[str, object]]] = {}
+    for arm_name, arm in arms.items():
+        splits = arm["splits"]
+        if not isinstance(splits, ConditionSplits):
+            raise ValueError(f"Invalid Phase-2.8 {arm_name} splits")
+        fingerprint = preparation["registration"]["training_fingerprints"][arm_name]
+        results[arm_name] = []
+        for seed in seeds:
+            run_dir = output_dir / "screen" / arm_name / f"seed_{seed}"
+            metrics_path = run_dir / "metrics.json"
+            checkpoint_path = run_dir / "parser_final.pt"
+            if metrics_path.exists() or checkpoint_path.exists():
+                if not metrics_path.exists() or not checkpoint_path.exists():
+                    raise RuntimeError(f"Partial Phase-2.8 run requires manual inspection: {run_dir}")
+                with metrics_path.open("r", encoding="utf-8") as handle:
+                    existing = json.load(handle)
+                if existing.get("phase28_training_fingerprint") != fingerprint:
+                    raise RuntimeError(f"Refusing mismatched Phase-2.8 reuse: {run_dir}")
+                results[arm_name].append(existing)
+                continue
+            results[arm_name].append(run_condition(
+                splits,
+                run_dir,
+                run_config,
+                seed,
+                pressure_groups=development,
+                run_metadata={
+                    "phase28_arm": arm_name,
+                    "phase28_training_fingerprint": fingerprint,
+                    "variants_per_operation": int(experiment["variants_per_operation"]),
+                    "exposure_target": float(experiment["exposure"]),
+                },
+                target_mode="operation",
+            ))
+    report = {
+        "experiment": str(config.get("name", "phase28_counterfactual_discourse")),
+        "stage": "phase28_counterfactual_discourse_screen",
+        "config": config_path,
+        "seeds": list(seeds),
+        "schedule": schedule,
+        "sealed_suite_status": "not_created_not_opened",
+        "arms": results,
+    }
+    analysis = analyze_phase28_screen(report)
+    with (output_dir / "screen_results.json").open("w", encoding="utf-8") as handle:
+        json.dump(report, handle, indent=2)
+    with (output_dir / "screen_analysis.json").open("w", encoding="utf-8") as handle:
+        json.dump(analysis, handle, indent=2)
+    return {"report": report, "analysis": analysis, "registration": preparation["registration"]}
+
+
+def _load_phase29_config(config_path: str) -> tuple[dict[str, object], dict[str, object]]:
+    with open(config_path, "r", encoding="utf-8") as handle:
+        config = yaml.safe_load(handle)
+    if not isinstance(config, dict) or "phase29_discourse_augmentation" not in config:
+        raise ValueError("Configuration is missing phase29_discourse_augmentation")
+    experiment = config["phase29_discourse_augmentation"]
+    if not isinstance(experiment, dict):
+        raise ValueError("phase29_discourse_augmentation must be a mapping")
+    return config, experiment
+
+
+def _phase29_condition(
+    config: Mapping[str, object], experiment: Mapping[str, object]
+) -> tuple[dict[str, dict[str, object]], dict[str, dict[str, int]]]:
+    splits = build_condition_splits(
+        int(experiment["variants_per_operation"]),
+        tuple(tuple(pair) for pair in experiment["train_pairs"]),
+        tuple(tuple(pair) for pair in experiment["eval_pairs"]),
+        seed=int(config["seed"]),
+    )
+    arms = build_phase29_augmentation_arms(
+        splits,
+        augmentation_fraction=float(experiment["augmentation_fraction"]),
+        discourse_seed=int(experiment["discourse_seed"]),
+    )
+    batch_size = int(config["training"]["batch_size"])
+    exposure = float(experiment["exposure"])
+    base_schedule = _phase26_confirmation_schedule(
+        dataset_size=len(splits.train), batch_size=batch_size, exposure=exposure
+    )
+    augmented_splits = arms["augmentation_fixed_updates"]["splits"]
+    if not isinstance(augmented_splits, ConditionSplits):
+        raise ValueError("Invalid Phase-2.9 augmented splits")
+    matched_schedule = _phase26_confirmation_schedule(
+        dataset_size=len(augmented_splits.train), batch_size=batch_size, exposure=exposure
+    )
+    schedules = {
+        "baseline": base_schedule,
+        "counterfactual_replacement": base_schedule,
+        "augmentation_fixed_updates": base_schedule,
+        "augmentation_matched_exposure": matched_schedule,
+    }
+    return arms, schedules
+
+
+def _phase29_fingerprints(
+    config: Mapping[str, object],
+    arms: Mapping[str, Mapping[str, object]],
+    schedules: Mapping[str, Mapping[str, object]],
+) -> dict[str, str]:
+    fingerprints: dict[str, str] = {}
+    for arm_name, arm in arms.items():
+        splits = arm["splits"]
+        if not isinstance(splits, ConditionSplits):
+            raise ValueError(f"Invalid Phase-2.9 {arm_name} splits")
+        fingerprints[arm_name] = compute_phase25_training_fingerprint(
+            splits.train,
+            {"training": dict(schedules[arm_name]), "model": config["model"], "tokenizer": config["tokenizer"]},
+            target_mode="operation",
+        )
+    return fingerprints
+
+
+def _validate_phase29_source(
+    source: Mapping[str, object],
+    fingerprints: Mapping[str, str],
+    seeds: Sequence[int],
+    max_steps: int,
+) -> dict[str, list[dict[str, object]]]:
+    raw_arms = source.get("arms")
+    if not isinstance(raw_arms, Mapping):
+        raise ValueError("Phase-2.9 source report is missing arms")
+    source_names = {"baseline": "baseline", "counterfactual_replacement": "counterfactual_discourse"}
+    reused: dict[str, list[dict[str, object]]] = {}
+    for target_name, source_name in source_names.items():
+        runs = raw_arms.get(source_name)
+        if not isinstance(runs, Sequence):
+            raise ValueError(f"Phase-2.9 source report is missing {source_name}")
+        by_seed = {int(run["seed"]): dict(run) for run in runs if isinstance(run, Mapping)}
+        reused[target_name] = []
+        for seed_value in seeds:
+            seed = int(seed_value)
+            run = by_seed.get(seed)
+            if run is None:
+                raise ValueError(f"Missing Phase-2.9 source seed {seed}")
+            if int(run["steps"]) != max_steps:
+                raise ValueError(f"Phase-2.9 source schedule mismatch for {source_name} seed {seed}")
+            if run.get("phase28_training_fingerprint") != fingerprints[target_name]:
+                raise ValueError(f"Phase-2.9 source fingerprint mismatch for {source_name} seed {seed}")
+            reused[target_name].append(run)
+    return reused
+
+
+def prepare_phase29(config_path: str) -> dict[str, object]:
+    """Register Phase 2.9 and validate both Phase-2.8 source cells."""
+    config, experiment = _load_phase29_config(config_path)
+    arms, schedules = _phase29_condition(config, experiment)
+    fingerprints = _phase29_fingerprints(config, arms, schedules)
+    development = build_fixed_pressure_test(
+        tuple(tuple(pair) for pair in experiment["development_pressure_pairs"])
+    )
+    manifests: dict[str, object] = {}
+    for arm_name, arm in arms.items():
+        splits = arm["splits"]
+        if not isinstance(splits, ConditionSplits):
+            raise ValueError(f"Invalid Phase-2.9 {arm_name} splits")
+        manifests[arm_name] = build_phase25_split_manifest(splits.train, development)
+    if any(manifest["validation"] != "PASS" for manifest in manifests.values()):
+        raise ValueError("A Phase-2.9 train/development split manifest failed")
+    with Path(str(experiment["source_results"])).open("r", encoding="utf-8") as handle:
+        source = json.load(handle)
+    seeds = tuple(int(seed) for seed in experiment["seeds"])
+    reused = _validate_phase29_source(
+        source, fingerprints, seeds, int(schedules["baseline"]["max_steps"])
+    )
+    source_names = {"baseline": "baseline", "counterfactual_replacement": "counterfactual_discourse"}
+    source_root = Path(str(experiment["source_run_dir"]))
+    for arm_name, runs in reused.items():
+        splits = arms[arm_name]["splits"]
+        if not isinstance(splits, ConditionSplits):
+            raise ValueError(f"Invalid Phase-2.9 reused {arm_name} splits")
+        expected = "".join(f"{example.utterance}\n{example.target}\n" for example in splits.train)
+        expected_hash = hashlib.sha256(expected.encode("utf-8")).hexdigest()
+        for run in runs:
+            run_dir = source_root / source_names[arm_name] / f"seed_{int(run['seed'])}"
+            if not (run_dir / "parser_final.pt").exists() or not (run_dir / "tokenizer_corpus.txt").exists():
+                raise FileNotFoundError(f"Incomplete Phase-2.9 source run: {run_dir}")
+            normalized_corpus = (run_dir / "tokenizer_corpus.txt").read_text(encoding="utf-8")
+            actual_hash = hashlib.sha256(normalized_corpus.encode("utf-8")).hexdigest()
+            if actual_hash != expected_hash:
+                raise ValueError(f"Phase-2.9 source corpus mismatch: {run_dir}")
+    registration = {
+        "experiment": str(config.get("name", "phase29_discourse_augmentation")),
+        "config": config_path,
+        "status": "registered_not_run",
+        "seeds": list(seeds),
+        "schedules": schedules,
+        "new_training_runs": 2 * len(seeds),
+        "sealed_suite_status": "not_created_not_opened",
+        "training_fingerprints": fingerprints,
+        "source_reuse_validation": {"validation": "PASS", "arms": list(reused), "seeds": list(seeds)},
+    }
+    output_dir = Path(str(experiment["output_dir"]))
+    output_dir.mkdir(parents=True, exist_ok=True)
+    with (output_dir / "registration.json").open("w", encoding="utf-8") as handle:
+        json.dump(registration, handle, indent=2)
+    with (output_dir / "split_manifests.json").open("w", encoding="utf-8") as handle:
+        json.dump({"experiment": registration["experiment"], "manifests": manifests}, handle, indent=2)
+    return {"registration": registration, "arms": arms, "development": development, "reused": reused}
+
+
+def run_phase29_screen(config_path: str) -> dict[str, object]:
+    """Train only Phase 2.9's two augmentation cells and apply its gate."""
+    preparation = prepare_phase29(config_path)
+    config, experiment = _load_phase29_config(config_path)
+    arms, schedules = _phase29_condition(config, experiment)
+    fingerprints = preparation["registration"]["training_fingerprints"]
+    development = preparation["development"]
+    results = copy.deepcopy(preparation["reused"])
+    output_dir = Path(str(experiment["output_dir"]))
+    seeds = tuple(int(seed) for seed in experiment["seeds"])
+    for arm_name in ("augmentation_fixed_updates", "augmentation_matched_exposure"):
+        splits = arms[arm_name]["splits"]
+        if not isinstance(splits, ConditionSplits):
+            raise ValueError(f"Invalid Phase-2.9 {arm_name} splits")
+        run_config = copy.deepcopy(config)
+        run_config["training"]["max_steps"] = schedules[arm_name]["max_steps"]
+        run_config["training"]["warmup_steps"] = schedules[arm_name]["warmup_steps"]
+        fingerprint = fingerprints[arm_name]
+        results[arm_name] = []
+        for seed in seeds:
+            run_dir = output_dir / "screen" / arm_name / f"seed_{seed}"
+            metrics_path = run_dir / "metrics.json"
+            checkpoint_path = run_dir / "parser_final.pt"
+            if metrics_path.exists() or checkpoint_path.exists():
+                if not metrics_path.exists() or not checkpoint_path.exists():
+                    raise RuntimeError(f"Partial Phase-2.9 run requires manual inspection: {run_dir}")
+                with metrics_path.open("r", encoding="utf-8") as handle:
+                    existing = json.load(handle)
+                if existing.get("phase29_training_fingerprint") != fingerprint:
+                    raise RuntimeError(f"Refusing mismatched Phase-2.9 reuse: {run_dir}")
+                results[arm_name].append(existing)
+                continue
+            results[arm_name].append(run_condition(
+                splits, run_dir, run_config, seed, pressure_groups=development,
+                run_metadata={
+                    "phase29_arm": arm_name,
+                    "phase29_training_fingerprint": fingerprint,
+                    "variants_per_operation": int(experiment["variants_per_operation"]),
+                    "exposure_target": (
+                        float(experiment["exposure"])
+                        if arm_name == "augmentation_matched_exposure"
+                        else round(schedules[arm_name]["max_steps"] * int(config["training"]["batch_size"]) / len(splits.train), 6)
+                    ),
+                }, target_mode="operation",
+            ))
+    report = {
+        "experiment": str(config.get("name", "phase29_discourse_augmentation")),
+        "stage": "phase29_replacement_vs_augmentation_screen",
+        "config": config_path,
+        "seeds": list(seeds),
+        "schedules": schedules,
+        "sealed_suite_status": "not_created_not_opened",
+        "arms": results,
+    }
+    analysis = analyze_phase29_screen(report)
+    with (output_dir / "screen_results.json").open("w", encoding="utf-8") as handle:
+        json.dump(report, handle, indent=2)
+    with (output_dir / "screen_analysis.json").open("w", encoding="utf-8") as handle:
+        json.dump(analysis, handle, indent=2)
+    return {"report": report, "analysis": analysis, "registration": preparation["registration"]}
+
+
+def _load_phase210_config(config_path: str) -> tuple[dict[str, object], dict[str, object]]:
+    with open(config_path, "r", encoding="utf-8") as handle:
+        config = yaml.safe_load(handle)
+    if not isinstance(config, dict) or "phase210_capacity_interaction" not in config:
+        raise ValueError("Configuration is missing phase210_capacity_interaction")
+    experiment = config["phase210_capacity_interaction"]
+    if not isinstance(experiment, dict):
+        raise ValueError("phase210_capacity_interaction must be a mapping")
+    return config, experiment
+
+
+def _phase210_design(
+    config: Mapping[str, object], experiment: Mapping[str, object]
+) -> tuple[dict[str, ConditionSplits], dict[str, dict[str, object]], dict[str, int]]:
+    base = build_condition_splits(
+        int(experiment["variants_per_operation"]),
+        tuple(tuple(pair) for pair in experiment["train_pairs"]),
+        tuple(tuple(pair) for pair in experiment["eval_pairs"]),
+        seed=int(config["seed"]),
+    )
+    augmented_train = build_counterfactual_discourse_augmentation(
+        base.train,
+        augmentation_fraction=float(experiment["augmentation_fraction"]),
+        seed=int(experiment["discourse_seed"]),
+    )
+    augmented = ConditionSplits(
+        train=augmented_train,
+        seen_form=base.seen_form,
+        same_meaning_unseen_form=base.same_meaning_unseen_form,
+        unseen_operands_seen_form=base.unseen_operands_seen_form,
+        minimal_contrasts=base.minimal_contrasts,
+    )
+    splits = {
+        "narrow_baseline": base,
+        "narrow_augmentation": augmented,
+        "wide_baseline": base,
+        "wide_augmentation": augmented,
+    }
+    narrow_model = dict(config["model"])
+    wide_model = phase210_wide_model_config(
+        narrow_model,
+        hidden_size=int(experiment["wide_hidden_size"]),
+        intermediate_size=int(experiment["wide_intermediate_size"]),
+    )
+    models_by_arm = {
+        "narrow_baseline": narrow_model,
+        "narrow_augmentation": narrow_model,
+        "wide_baseline": wide_model,
+        "wide_augmentation": wide_model,
+    }
+    schedule = _phase26_confirmation_schedule(
+        dataset_size=len(base.train),
+        batch_size=int(config["training"]["batch_size"]),
+        exposure=float(experiment["exposure"]),
+    )
+    return splits, models_by_arm, schedule
+
+
+def _phase210_fingerprints(
+    config: Mapping[str, object],
+    splits: Mapping[str, ConditionSplits],
+    models_by_arm: Mapping[str, Mapping[str, object]],
+    schedule: Mapping[str, object],
+) -> dict[str, str]:
+    return {
+        arm_name: compute_phase25_training_fingerprint(
+            arm_splits.train,
+            {"training": dict(schedule), "model": models_by_arm[arm_name], "tokenizer": config["tokenizer"]},
+            target_mode="operation",
+        )
+        for arm_name, arm_splits in splits.items()
+    }
+
+
+def prepare_phase210(config_path: str) -> dict[str, object]:
+    """Register the capacity interaction and validate narrow source cells."""
+    config, experiment = _load_phase210_config(config_path)
+    splits, models_by_arm, schedule = _phase210_design(config, experiment)
+    fingerprints = _phase210_fingerprints(config, splits, models_by_arm, schedule)
+    development = build_fixed_pressure_test(
+        tuple(tuple(pair) for pair in experiment["development_pressure_pairs"])
+    )
+    manifests = {
+        arm_name: build_phase25_split_manifest(arm_splits.train, development)
+        for arm_name, arm_splits in splits.items()
+    }
+    if any(manifest["validation"] != "PASS" for manifest in manifests.values()):
+        raise ValueError("A Phase-2.10 train/development manifest failed")
+    with Path(str(experiment["source_results"])).open("r", encoding="utf-8") as handle:
+        source = json.load(handle)
+    raw_arms = source.get("arms")
+    if not isinstance(raw_arms, Mapping):
+        raise ValueError("Phase-2.10 source report is missing arms")
+    source_specs = {
+        "narrow_baseline": ("baseline", "phase28_training_fingerprint", Path(str(experiment["narrow_baseline_run_dir"]))),
+        "narrow_augmentation": (
+            "augmentation_fixed_updates",
+            "phase29_training_fingerprint",
+            Path(str(experiment["narrow_augmentation_run_dir"])),
+        ),
+    }
+    seeds = tuple(int(seed) for seed in experiment["seeds"])
+    reused: dict[str, list[dict[str, object]]] = {}
+    for target_name, (source_name, fingerprint_field, run_root) in source_specs.items():
+        raw_runs = raw_arms.get(source_name)
+        if not isinstance(raw_runs, Sequence):
+            raise ValueError(f"Phase-2.10 source report is missing {source_name}")
+        by_seed = {int(run["seed"]): dict(run) for run in raw_runs if isinstance(run, Mapping)}
+        reused[target_name] = []
+        expected_corpus = "".join(
+            f"{example.utterance}\n{example.target}\n" for example in splits[target_name].train
+        )
+        expected_hash = hashlib.sha256(expected_corpus.encode("utf-8")).hexdigest()
+        for seed in seeds:
+            run = by_seed.get(seed)
+            if run is None:
+                raise ValueError(f"Missing Phase-2.10 source {source_name} seed {seed}")
+            if int(run["steps"]) != int(schedule["max_steps"]):
+                raise ValueError(f"Phase-2.10 source schedule mismatch for {source_name} seed {seed}")
+            if run.get(fingerprint_field) != fingerprints[target_name]:
+                raise ValueError(f"Phase-2.10 source fingerprint mismatch for {source_name} seed {seed}")
+            run_dir = run_root / f"seed_{seed}"
+            corpus_path = run_dir / "tokenizer_corpus.txt"
+            if not (run_dir / "parser_final.pt").exists() or not corpus_path.exists():
+                raise FileNotFoundError(f"Incomplete Phase-2.10 source run: {run_dir}")
+            actual_hash = hashlib.sha256(corpus_path.read_text(encoding="utf-8").encode("utf-8")).hexdigest()
+            if actual_hash != expected_hash:
+                raise ValueError(f"Phase-2.10 source corpus mismatch: {run_dir}")
+            reused[target_name].append(run)
+    registration = {
+        "experiment": str(config.get("name", "phase210_capacity_interaction")),
+        "config": config_path,
+        "status": "registered_not_run",
+        "seeds": list(seeds),
+        "schedule": schedule,
+        "narrow_hidden_size": int(config["model"]["hidden_size"]),
+        "wide_hidden_size": int(experiment["wide_hidden_size"]),
+        "new_training_runs": 2 * len(seeds),
+        "sealed_suite_status": "not_created_not_opened",
+        "training_fingerprints": fingerprints,
+        "source_reuse_validation": {"validation": "PASS", "arms": list(reused), "seeds": list(seeds)},
+    }
+    output_dir = Path(str(experiment["output_dir"]))
+    output_dir.mkdir(parents=True, exist_ok=True)
+    with (output_dir / "registration.json").open("w", encoding="utf-8") as handle:
+        json.dump(registration, handle, indent=2)
+    with (output_dir / "split_manifests.json").open("w", encoding="utf-8") as handle:
+        json.dump({"experiment": registration["experiment"], "manifests": manifests}, handle, indent=2)
+    return {
+        "registration": registration,
+        "splits": splits,
+        "models_by_arm": models_by_arm,
+        "development": development,
+        "reused": reused,
+    }
+
+
+def run_phase210_screen(config_path: str) -> dict[str, object]:
+    """Train only the two wide Phase-2.10 cells and estimate the interaction."""
+    preparation = prepare_phase210(config_path)
+    config, experiment = _load_phase210_config(config_path)
+    _, _, schedule = _phase210_design(config, experiment)
+    results = copy.deepcopy(preparation["reused"])
+    seeds = tuple(int(seed) for seed in experiment["seeds"])
+    output_dir = Path(str(experiment["output_dir"]))
+    for arm_name in ("wide_baseline", "wide_augmentation"):
+        arm_splits = preparation["splits"][arm_name]
+        run_config = copy.deepcopy(config)
+        run_config["model"] = copy.deepcopy(preparation["models_by_arm"][arm_name])
+        run_config["training"]["max_steps"] = int(schedule["max_steps"])
+        run_config["training"]["warmup_steps"] = int(schedule["warmup_steps"])
+        fingerprint = preparation["registration"]["training_fingerprints"][arm_name]
+        results[arm_name] = []
+        for seed in seeds:
+            run_dir = output_dir / "screen" / arm_name / f"seed_{seed}"
+            metrics_path = run_dir / "metrics.json"
+            checkpoint_path = run_dir / "parser_final.pt"
+            if metrics_path.exists() or checkpoint_path.exists():
+                if not metrics_path.exists() or not checkpoint_path.exists():
+                    raise RuntimeError(f"Partial Phase-2.10 run requires manual inspection: {run_dir}")
+                with metrics_path.open("r", encoding="utf-8") as handle:
+                    existing = json.load(handle)
+                if existing.get("phase210_training_fingerprint") != fingerprint:
+                    raise RuntimeError(f"Refusing mismatched Phase-2.10 reuse: {run_dir}")
+                results[arm_name].append(existing)
+                continue
+            results[arm_name].append(run_condition(
+                arm_splits,
+                run_dir,
+                run_config,
+                seed,
+                pressure_groups=preparation["development"],
+                run_metadata={
+                    "phase210_arm": arm_name,
+                    "phase210_training_fingerprint": fingerprint,
+                    "variants_per_operation": int(experiment["variants_per_operation"]),
+                    "exposure_target": round(
+                        int(schedule["max_steps"])
+                        * int(config["training"]["batch_size"])
+                        / len(arm_splits.train),
+                        6,
+                    ),
+                    "hidden_size": int(experiment["wide_hidden_size"]),
+                },
+                target_mode="operation",
+            ))
+    report = {
+        "experiment": str(config.get("name", "phase210_capacity_interaction")),
+        "stage": "phase210_width_by_augmentation_screen",
+        "config": config_path,
+        "seeds": list(seeds),
+        "schedule": schedule,
+        "sealed_suite_status": "not_created_not_opened",
+        "arms": results,
+    }
+    analysis = analyze_phase210_screen(report)
+    with (output_dir / "screen_results.json").open("w", encoding="utf-8") as handle:
+        json.dump(report, handle, indent=2)
+    with (output_dir / "screen_analysis.json").open("w", encoding="utf-8") as handle:
+        json.dump(analysis, handle, indent=2)
+    return {"report": report, "analysis": analysis, "registration": preparation["registration"]}
+
+
 def analyze_clean_report(report: Mapping[str, object]) -> dict[str, object]:
     """Compute paired per-doubling slopes from a completed clean-ablation report."""
     raw_runs = report["runs"]
@@ -2550,6 +3399,80 @@ def analyze_breadth_report(report: Mapping[str, object]) -> dict[str, object]:
     return analysis
 
 
+def analyze_scaling_reports(reports: Sequence[Mapping[str, object]]) -> dict[str, object]:
+    """Merge compatible sequential scaling reports and analyze their full curve.
+
+    Sequential stages intentionally live in separate output directories. This
+    validator prevents a curve from silently combining different seeds,
+    tokenizers, pressure tracks, or training splits before delegating the
+    slope calculation to :func:`analyze_breadth_report`.
+    """
+    if not reports:
+        raise ValueError("At least one scaling report is required")
+
+    first = reports[0]
+    expected_seeds = tuple(int(seed) for seed in first["seeds"])
+    expected_tokenizer = first.get("tokenizer_policy")
+    expected_tracks = tuple(str(track) for track in first["robust_pressure_tracks"])
+    run_mappings: list[Mapping[str, object]] = []
+    common_variants: set[str] | None = None
+    for report in reports:
+        if tuple(int(seed) for seed in report["seeds"]) != expected_seeds:
+            raise ValueError("Scaling reports use different seeds")
+        if report.get("tokenizer_policy") != expected_tokenizer:
+            raise ValueError("Scaling reports use different tokenizer policies")
+        if tuple(str(track) for track in report["robust_pressure_tracks"]) != expected_tracks:
+            raise ValueError("Scaling reports use different robust pressure tracks")
+        raw_runs = report["runs"]
+        if not isinstance(raw_runs, Mapping):
+            raise ValueError("Scaling report runs must be a mapping")
+        run_mappings.append(raw_runs)
+        variants = {str(variant) for variant in raw_runs}
+        common_variants = variants if common_variants is None else common_variants.intersection(variants)
+
+    if not common_variants:
+        raise ValueError("Scaling reports have no common breadth variants")
+    variants = sorted(common_variants, key=int)
+
+    expected_manifests = first["split_manifests"]
+    if not isinstance(expected_manifests, Mapping):
+        raise ValueError("Scaling report split manifests must be a mapping")
+    for report in reports[1:]:
+        manifests = report["split_manifests"]
+        if not isinstance(manifests, Mapping):
+            raise ValueError("Scaling report split manifests must be a mapping")
+        for variant in variants:
+            if manifests.get(variant) != expected_manifests.get(variant):
+                raise ValueError(f"Scaling split manifest drift for breadth {variant}")
+
+    merged_runs: dict[str, dict[str, object]] = {variant: {} for variant in variants}
+    merged_exposures: dict[str, float] = {}
+    for report, raw_runs in zip(reports, run_mappings):
+        exposures = report["exposures"]
+        if not isinstance(exposures, Mapping):
+            raise ValueError("Scaling report exposures must be a mapping")
+        for exposure_key, exposure_value in exposures.items():
+            key = str(exposure_key)
+            if key in merged_exposures:
+                raise ValueError(f"Duplicate exposure {key} across scaling reports")
+            merged_exposures[key] = float(exposure_value)
+            for variant in variants:
+                by_exposure = raw_runs[variant]
+                if not isinstance(by_exposure, Mapping) or key not in by_exposure:
+                    raise ValueError(f"Scaling report is missing {variant}/{key}")
+                merged_runs[variant][key] = by_exposure[key]
+
+    merged_report = {"runs": merged_runs, "exposures": merged_exposures}
+    analysis = analyze_breadth_report(merged_report)
+    exposure_keys = sorted(merged_exposures, key=lambda key: merged_exposures[key])
+    return {
+        "sources": [str(report.get("experiment", "unnamed")) for report in reports],
+        "variants": variants,
+        "exposures": exposure_keys,
+        **analysis,
+    }
+
+
 def _write_breadth_analysis(report: Mapping[str, object], output_path: Path) -> dict[str, object]:
     analysis = analyze_breadth_report(report)
     with output_path.open("w", encoding="utf-8") as handle:
@@ -2628,6 +3551,24 @@ def main() -> None:
         default=None,
         help="Explicitly select Phase 2.6 sealed-confirmation preparation or training",
     )
+    parser.add_argument(
+        "--phase28-stage",
+        choices=("prepare", "screen"),
+        default=None,
+        help="Explicitly select Phase 2.8 preparation or its ten-run training screen",
+    )
+    parser.add_argument(
+        "--phase29-stage",
+        choices=("prepare", "screen"),
+        default=None,
+        help="Explicitly select Phase 2.9 preparation or its ten-run augmentation screen",
+    )
+    parser.add_argument(
+        "--phase210-stage",
+        choices=("prepare", "screen"),
+        default=None,
+        help="Explicitly select Phase 2.10 preparation or its ten-run capacity screen",
+    )
     args = parser.parse_args()
     if args.analyze_existing:
         print(json.dumps(write_clean_analysis(args.analyze_existing), indent=2))
@@ -2637,7 +3578,34 @@ def main() -> None:
         return
     with open(args.config, "r", encoding="utf-8") as handle:
         config = yaml.safe_load(handle)
-    if "phase26_confirmation" in config:
+    if "phase210_capacity_interaction" in config:
+        if args.phase210_stage is None:
+            parser.error("Phase 2.10 configs require --phase210-stage; no experiment is started implicitly")
+        if args.phase210_stage == "prepare":
+            result = prepare_phase210(args.config)
+            print(json.dumps(result["registration"], indent=2))
+        else:
+            result = run_phase210_screen(args.config)
+            print(json.dumps(result["analysis"], indent=2))
+    elif "phase29_discourse_augmentation" in config:
+        if args.phase29_stage is None:
+            parser.error("Phase 2.9 configs require --phase29-stage; no experiment is started implicitly")
+        if args.phase29_stage == "prepare":
+            result = prepare_phase29(args.config)
+            print(json.dumps(result["registration"], indent=2))
+        else:
+            result = run_phase29_screen(args.config)
+            print(json.dumps(result["analysis"], indent=2))
+    elif "phase28_discourse_coverage" in config:
+        if args.phase28_stage is None:
+            parser.error("Phase 2.8 configs require --phase28-stage; no experiment is started implicitly")
+        if args.phase28_stage == "prepare":
+            result = prepare_phase28(args.config)
+            print(json.dumps(result["registration"], indent=2))
+        else:
+            result = run_phase28_screen(args.config)
+            print(json.dumps(result["analysis"], indent=2))
+    elif "phase26_confirmation" in config:
         if args.phase26_confirmation_stage is None:
             parser.error("Phase 2.6 confirmation requires --phase26-confirmation-stage; no experiment is started implicitly")
         if args.phase26_confirmation_stage == "prepare":

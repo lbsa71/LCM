@@ -139,7 +139,7 @@ def test_dynamic_single_hop_trajectory_with_plan():
     assert "850" in turns[6]["content"]
 
     assert turns[7]["role"] == "plan"
-    assert "850" in turns[7]["content"]
+    assert turns[7]["content"] == "PLAN EXTRACT population FROM D01:2; EMIT"
 
     final_turn = turns[8]
     assert final_turn["role"] == "final"
