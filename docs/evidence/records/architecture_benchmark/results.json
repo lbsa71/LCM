@@ -1,0 +1,3025 @@
+{
+  "benchmark": "architecture_pressure_test_v1",
+  "scope": {
+    "shared_track": "ADD/SUBTRACT semantic routing and execution-ready first action",
+    "extension_track": "COMPARE; reported separately because only the parser was trained for it",
+    "legacy_scratch_status": "diagnostic_only: its historical training corpus failed current contamination validation"
+  },
+  "case_count": 36,
+  "cases": [
+    {
+      "case_id": "seen_style_add_1",
+      "track": "seen_style",
+      "utterance": "Calculate 345 plus 456.",
+      "operation": "ADD",
+      "left": 345,
+      "right": 456,
+      "shared": true
+    },
+    {
+      "case_id": "seen_style_add_2",
+      "track": "seen_style",
+      "utterance": "Calculate 901 plus 278.",
+      "operation": "ADD",
+      "left": 901,
+      "right": 278,
+      "shared": true
+    },
+    {
+      "case_id": "seen_style_add_3",
+      "track": "seen_style",
+      "utterance": "Calculate 613 plus 149.",
+      "operation": "ADD",
+      "left": 613,
+      "right": 149,
+      "shared": true
+    },
+    {
+      "case_id": "seen_style_subtract_1",
+      "track": "seen_style",
+      "utterance": "Subtract 456 from 345.",
+      "operation": "SUBTRACT",
+      "left": 345,
+      "right": 456,
+      "shared": true
+    },
+    {
+      "case_id": "seen_style_subtract_2",
+      "track": "seen_style",
+      "utterance": "Subtract 278 from 901.",
+      "operation": "SUBTRACT",
+      "left": 901,
+      "right": 278,
+      "shared": true
+    },
+    {
+      "case_id": "seen_style_subtract_3",
+      "track": "seen_style",
+      "utterance": "Subtract 149 from 613.",
+      "operation": "SUBTRACT",
+      "left": 613,
+      "right": 149,
+      "shared": true
+    },
+    {
+      "case_id": "seen_style_compare_1",
+      "track": "seen_style",
+      "utterance": "Are 345 greater than 456?",
+      "operation": "COMPARE",
+      "left": 345,
+      "right": 456,
+      "shared": false
+    },
+    {
+      "case_id": "seen_style_compare_2",
+      "track": "seen_style",
+      "utterance": "Are 901 greater than 278?",
+      "operation": "COMPARE",
+      "left": 901,
+      "right": 278,
+      "shared": false
+    },
+    {
+      "case_id": "seen_style_compare_3",
+      "track": "seen_style",
+      "utterance": "Are 613 greater than 149?",
+      "operation": "COMPARE",
+      "left": 613,
+      "right": 149,
+      "shared": false
+    },
+    {
+      "case_id": "held_out_style_add_1",
+      "track": "held_out_style",
+      "utterance": "Find the total when 345 is joined with 456.",
+      "operation": "ADD",
+      "left": 345,
+      "right": 456,
+      "shared": true
+    },
+    {
+      "case_id": "held_out_style_add_2",
+      "track": "held_out_style",
+      "utterance": "Find the total when 901 is joined with 278.",
+      "operation": "ADD",
+      "left": 901,
+      "right": 278,
+      "shared": true
+    },
+    {
+      "case_id": "held_out_style_add_3",
+      "track": "held_out_style",
+      "utterance": "Find the total when 613 is joined with 149.",
+      "operation": "ADD",
+      "left": 613,
+      "right": 149,
+      "shared": true
+    },
+    {
+      "case_id": "held_out_style_subtract_1",
+      "track": "held_out_style",
+      "utterance": "Reduce 345 by 456.",
+      "operation": "SUBTRACT",
+      "left": 345,
+      "right": 456,
+      "shared": true
+    },
+    {
+      "case_id": "held_out_style_subtract_2",
+      "track": "held_out_style",
+      "utterance": "Reduce 901 by 278.",
+      "operation": "SUBTRACT",
+      "left": 901,
+      "right": 278,
+      "shared": true
+    },
+    {
+      "case_id": "held_out_style_subtract_3",
+      "track": "held_out_style",
+      "utterance": "Reduce 613 by 149.",
+      "operation": "SUBTRACT",
+      "left": 613,
+      "right": 149,
+      "shared": true
+    },
+    {
+      "case_id": "held_out_style_compare_1",
+      "track": "held_out_style",
+      "utterance": "Check whether the count of 345 outranks 456.",
+      "operation": "COMPARE",
+      "left": 345,
+      "right": 456,
+      "shared": false
+    },
+    {
+      "case_id": "held_out_style_compare_2",
+      "track": "held_out_style",
+      "utterance": "Check whether the count of 901 outranks 278.",
+      "operation": "COMPARE",
+      "left": 901,
+      "right": 278,
+      "shared": false
+    },
+    {
+      "case_id": "held_out_style_compare_3",
+      "track": "held_out_style",
+      "utterance": "Check whether the count of 613 outranks 149.",
+      "operation": "COMPARE",
+      "left": 613,
+      "right": 149,
+      "shared": false
+    },
+    {
+      "case_id": "lexical_shift_add_1",
+      "track": "lexical_shift",
+      "utterance": "How much do 345 and 456 make in all?",
+      "operation": "ADD",
+      "left": 345,
+      "right": 456,
+      "shared": true
+    },
+    {
+      "case_id": "lexical_shift_add_2",
+      "track": "lexical_shift",
+      "utterance": "How much do 901 and 278 make in all?",
+      "operation": "ADD",
+      "left": 901,
+      "right": 278,
+      "shared": true
+    },
+    {
+      "case_id": "lexical_shift_add_3",
+      "track": "lexical_shift",
+      "utterance": "How much do 613 and 149 make in all?",
+      "operation": "ADD",
+      "left": 613,
+      "right": 149,
+      "shared": true
+    },
+    {
+      "case_id": "lexical_shift_subtract_1",
+      "track": "lexical_shift",
+      "utterance": "By what amount does 345 outrun 456?",
+      "operation": "SUBTRACT",
+      "left": 345,
+      "right": 456,
+      "shared": true
+    },
+    {
+      "case_id": "lexical_shift_subtract_2",
+      "track": "lexical_shift",
+      "utterance": "By what amount does 901 outrun 278?",
+      "operation": "SUBTRACT",
+      "left": 901,
+      "right": 278,
+      "shared": true
+    },
+    {
+      "case_id": "lexical_shift_subtract_3",
+      "track": "lexical_shift",
+      "utterance": "By what amount does 613 outrun 149?",
+      "operation": "SUBTRACT",
+      "left": 613,
+      "right": 149,
+      "shared": true
+    },
+    {
+      "case_id": "lexical_shift_compare_1",
+      "track": "lexical_shift",
+      "utterance": "Is 345 above 456?",
+      "operation": "COMPARE",
+      "left": 345,
+      "right": 456,
+      "shared": false
+    },
+    {
+      "case_id": "lexical_shift_compare_2",
+      "track": "lexical_shift",
+      "utterance": "Is 901 above 278?",
+      "operation": "COMPARE",
+      "left": 901,
+      "right": 278,
+      "shared": false
+    },
+    {
+      "case_id": "lexical_shift_compare_3",
+      "track": "lexical_shift",
+      "utterance": "Is 613 above 149?",
+      "operation": "COMPARE",
+      "left": 613,
+      "right": 149,
+      "shared": false
+    },
+    {
+      "case_id": "discourse_distractor_add_1",
+      "track": "discourse_distractor",
+      "utterance": "Although 345 exceeds 456, what is the combined count of 345 zols and 456 binks?",
+      "operation": "ADD",
+      "left": 345,
+      "right": 456,
+      "shared": true
+    },
+    {
+      "case_id": "discourse_distractor_add_2",
+      "track": "discourse_distractor",
+      "utterance": "Although 901 exceeds 278, what is the combined count of 901 zols and 278 binks?",
+      "operation": "ADD",
+      "left": 901,
+      "right": 278,
+      "shared": true
+    },
+    {
+      "case_id": "discourse_distractor_add_3",
+      "track": "discourse_distractor",
+      "utterance": "Although 613 exceeds 149, what is the combined count of 613 zols and 149 binks?",
+      "operation": "ADD",
+      "left": 613,
+      "right": 149,
+      "shared": true
+    },
+    {
+      "case_id": "discourse_distractor_subtract_1",
+      "track": "discourse_distractor",
+      "utterance": "The quantities belong together, but remove 456 binks from 345 zols. How many remain?",
+      "operation": "SUBTRACT",
+      "left": 345,
+      "right": 456,
+      "shared": true
+    },
+    {
+      "case_id": "discourse_distractor_subtract_2",
+      "track": "discourse_distractor",
+      "utterance": "The quantities belong together, but remove 278 binks from 901 zols. How many remain?",
+      "operation": "SUBTRACT",
+      "left": 901,
+      "right": 278,
+      "shared": true
+    },
+    {
+      "case_id": "discourse_distractor_subtract_3",
+      "track": "discourse_distractor",
+      "utterance": "The quantities belong together, but remove 149 binks from 613 zols. How many remain?",
+      "operation": "SUBTRACT",
+      "left": 613,
+      "right": 149,
+      "shared": true
+    },
+    {
+      "case_id": "discourse_distractor_compare_1",
+      "track": "discourse_distractor",
+      "utterance": "A total may be useful later. First decide whether 345 zols outnumber 456 binks.",
+      "operation": "COMPARE",
+      "left": 345,
+      "right": 456,
+      "shared": false
+    },
+    {
+      "case_id": "discourse_distractor_compare_2",
+      "track": "discourse_distractor",
+      "utterance": "A total may be useful later. First decide whether 901 zols outnumber 278 binks.",
+      "operation": "COMPARE",
+      "left": 901,
+      "right": 278,
+      "shared": false
+    },
+    {
+      "case_id": "discourse_distractor_compare_3",
+      "track": "discourse_distractor",
+      "utterance": "A total may be useful later. First decide whether 613 zols outnumber 149 binks.",
+      "operation": "COMPARE",
+      "left": 613,
+      "right": 149,
+      "shared": false
+    }
+  ],
+  "results": [
+    {
+      "id": "semantic_parser_k8_seed17",
+      "family": "semantic_parser",
+      "capability": "canonical_operation",
+      "summary": {
+        "overall": {
+          "count": 36,
+          "operation_accuracy": 0.5833,
+          "protocol_valid_rate": null,
+          "execution_ready_accuracy": null,
+          "mean_latency_ms": 31.2043
+        },
+        "shared": {
+          "count": 24,
+          "operation_accuracy": 0.625,
+          "protocol_valid_rate": null,
+          "execution_ready_accuracy": null,
+          "mean_latency_ms": 36.3358
+        },
+        "extension": {
+          "count": 12,
+          "operation_accuracy": 0.5,
+          "protocol_valid_rate": null,
+          "execution_ready_accuracy": null,
+          "mean_latency_ms": 20.9413
+        },
+        "by_track": {
+          "discourse_distractor": {
+            "count": 9,
+            "operation_accuracy": 0.3333,
+            "protocol_valid_rate": null,
+            "execution_ready_accuracy": null,
+            "mean_latency_ms": 20.8886
+          },
+          "held_out_style": {
+            "count": 9,
+            "operation_accuracy": 0.3333,
+            "protocol_valid_rate": null,
+            "execution_ready_accuracy": null,
+            "mean_latency_ms": 22.5949
+          },
+          "lexical_shift": {
+            "count": 9,
+            "operation_accuracy": 0.6667,
+            "protocol_valid_rate": null,
+            "execution_ready_accuracy": null,
+            "mean_latency_ms": 19.8466
+          },
+          "seen_style": {
+            "count": 9,
+            "operation_accuracy": 1.0,
+            "protocol_valid_rate": null,
+            "execution_ready_accuracy": null,
+            "mean_latency_ms": 61.4872
+          }
+        }
+      },
+      "predictions": [
+        {
+          "case": {
+            "case_id": "seen_style_add_1",
+            "track": "seen_style",
+            "utterance": "Calculate 345 plus 456.",
+            "operation": "ADD",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "OP=ADD",
+          "predicted_operation": "ADD",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 379.381
+        },
+        {
+          "case": {
+            "case_id": "seen_style_add_2",
+            "track": "seen_style",
+            "utterance": "Calculate 901 plus 278.",
+            "operation": "ADD",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "OP=ADD",
+          "predicted_operation": "ADD",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 18.086
+        },
+        {
+          "case": {
+            "case_id": "seen_style_add_3",
+            "track": "seen_style",
+            "utterance": "Calculate 613 plus 149.",
+            "operation": "ADD",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "OP=ADD",
+          "predicted_operation": "ADD",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 23.607
+        },
+        {
+          "case": {
+            "case_id": "seen_style_subtract_1",
+            "track": "seen_style",
+            "utterance": "Subtract 456 from 345.",
+            "operation": "SUBTRACT",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 24.173
+        },
+        {
+          "case": {
+            "case_id": "seen_style_subtract_2",
+            "track": "seen_style",
+            "utterance": "Subtract 278 from 901.",
+            "operation": "SUBTRACT",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 24.31
+        },
+        {
+          "case": {
+            "case_id": "seen_style_subtract_3",
+            "track": "seen_style",
+            "utterance": "Subtract 149 from 613.",
+            "operation": "SUBTRACT",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 19.056
+        },
+        {
+          "case": {
+            "case_id": "seen_style_compare_1",
+            "track": "seen_style",
+            "utterance": "Are 345 greater than 456?",
+            "operation": "COMPARE",
+            "left": 345,
+            "right": 456,
+            "shared": false
+          },
+          "raw_output": "OP=COMPARE",
+          "predicted_operation": "COMPARE",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 21.885
+        },
+        {
+          "case": {
+            "case_id": "seen_style_compare_2",
+            "track": "seen_style",
+            "utterance": "Are 901 greater than 278?",
+            "operation": "COMPARE",
+            "left": 901,
+            "right": 278,
+            "shared": false
+          },
+          "raw_output": "OP=COMPARE",
+          "predicted_operation": "COMPARE",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 21.349
+        },
+        {
+          "case": {
+            "case_id": "seen_style_compare_3",
+            "track": "seen_style",
+            "utterance": "Are 613 greater than 149?",
+            "operation": "COMPARE",
+            "left": 613,
+            "right": 149,
+            "shared": false
+          },
+          "raw_output": "OP=COMPARE",
+          "predicted_operation": "COMPARE",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 21.538
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_add_1",
+            "track": "held_out_style",
+            "utterance": "Find the total when 345 is joined with 456.",
+            "operation": "ADD",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 21.719
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_add_2",
+            "track": "held_out_style",
+            "utterance": "Find the total when 901 is joined with 278.",
+            "operation": "ADD",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 24.132
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_add_3",
+            "track": "held_out_style",
+            "utterance": "Find the total when 613 is joined with 149.",
+            "operation": "ADD",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 23.182
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_subtract_1",
+            "track": "held_out_style",
+            "utterance": "Reduce 345 by 456.",
+            "operation": "SUBTRACT",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 26.091
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_subtract_2",
+            "track": "held_out_style",
+            "utterance": "Reduce 901 by 278.",
+            "operation": "SUBTRACT",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 21.562
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_subtract_3",
+            "track": "held_out_style",
+            "utterance": "Reduce 613 by 149.",
+            "operation": "SUBTRACT",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 20.483
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_compare_1",
+            "track": "held_out_style",
+            "utterance": "Check whether the count of 345 outranks 456.",
+            "operation": "COMPARE",
+            "left": 345,
+            "right": 456,
+            "shared": false
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 24.534
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_compare_2",
+            "track": "held_out_style",
+            "utterance": "Check whether the count of 901 outranks 278.",
+            "operation": "COMPARE",
+            "left": 901,
+            "right": 278,
+            "shared": false
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 20.745
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_compare_3",
+            "track": "held_out_style",
+            "utterance": "Check whether the count of 613 outranks 149.",
+            "operation": "COMPARE",
+            "left": 613,
+            "right": 149,
+            "shared": false
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 20.906
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_add_1",
+            "track": "lexical_shift",
+            "utterance": "How much do 345 and 456 make in all?",
+            "operation": "ADD",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 20.353
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_add_2",
+            "track": "lexical_shift",
+            "utterance": "How much do 901 and 278 make in all?",
+            "operation": "ADD",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 17.842
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_add_3",
+            "track": "lexical_shift",
+            "utterance": "How much do 613 and 149 make in all?",
+            "operation": "ADD",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 20.47
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_subtract_1",
+            "track": "lexical_shift",
+            "utterance": "By what amount does 345 outrun 456?",
+            "operation": "SUBTRACT",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 20.736
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_subtract_2",
+            "track": "lexical_shift",
+            "utterance": "By what amount does 901 outrun 278?",
+            "operation": "SUBTRACT",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 19.747
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_subtract_3",
+            "track": "lexical_shift",
+            "utterance": "By what amount does 613 outrun 149?",
+            "operation": "SUBTRACT",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 21.729
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_compare_1",
+            "track": "lexical_shift",
+            "utterance": "Is 345 above 456?",
+            "operation": "COMPARE",
+            "left": 345,
+            "right": 456,
+            "shared": false
+          },
+          "raw_output": "OP=COMPARE",
+          "predicted_operation": "COMPARE",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 21.663
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_compare_2",
+            "track": "lexical_shift",
+            "utterance": "Is 901 above 278?",
+            "operation": "COMPARE",
+            "left": 901,
+            "right": 278,
+            "shared": false
+          },
+          "raw_output": "OP=COMPARE",
+          "predicted_operation": "COMPARE",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 18.666
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_compare_3",
+            "track": "lexical_shift",
+            "utterance": "Is 613 above 149?",
+            "operation": "COMPARE",
+            "left": 613,
+            "right": 149,
+            "shared": false
+          },
+          "raw_output": "OP=COMPARE",
+          "predicted_operation": "COMPARE",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 17.413
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_add_1",
+            "track": "discourse_distractor",
+            "utterance": "Although 345 exceeds 456, what is the combined count of 345 zols and 456 binks?",
+            "operation": "ADD",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 25.27
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_add_2",
+            "track": "discourse_distractor",
+            "utterance": "Although 901 exceeds 278, what is the combined count of 901 zols and 278 binks?",
+            "operation": "ADD",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 21.735
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_add_3",
+            "track": "discourse_distractor",
+            "utterance": "Although 613 exceeds 149, what is the combined count of 613 zols and 149 binks?",
+            "operation": "ADD",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 18.124
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_subtract_1",
+            "track": "discourse_distractor",
+            "utterance": "The quantities belong together, but remove 456 binks from 345 zols. How many remain?",
+            "operation": "SUBTRACT",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 21.771
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_subtract_2",
+            "track": "discourse_distractor",
+            "utterance": "The quantities belong together, but remove 278 binks from 901 zols. How many remain?",
+            "operation": "SUBTRACT",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 20.755
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_subtract_3",
+            "track": "discourse_distractor",
+            "utterance": "The quantities belong together, but remove 149 binks from 613 zols. How many remain?",
+            "operation": "SUBTRACT",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 17.746
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_compare_1",
+            "track": "discourse_distractor",
+            "utterance": "A total may be useful later. First decide whether 345 zols outnumber 456 binks.",
+            "operation": "COMPARE",
+            "left": 345,
+            "right": 456,
+            "shared": false
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 20.682
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_compare_2",
+            "track": "discourse_distractor",
+            "utterance": "A total may be useful later. First decide whether 901 zols outnumber 278 binks.",
+            "operation": "COMPARE",
+            "left": 901,
+            "right": 278,
+            "shared": false
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 18.203
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_compare_3",
+            "track": "discourse_distractor",
+            "utterance": "A total may be useful later. First decide whether 613 zols outnumber 149 binks.",
+            "operation": "COMPARE",
+            "left": 613,
+            "right": 149,
+            "shared": false
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 23.711
+        }
+      ]
+    },
+    {
+      "id": "semantic_parser_k8_seed29",
+      "family": "semantic_parser",
+      "capability": "canonical_operation",
+      "summary": {
+        "overall": {
+          "count": 36,
+          "operation_accuracy": 0.5556,
+          "protocol_valid_rate": null,
+          "execution_ready_accuracy": null,
+          "mean_latency_ms": 25.2882
+        },
+        "shared": {
+          "count": 24,
+          "operation_accuracy": 0.5833,
+          "protocol_valid_rate": null,
+          "execution_ready_accuracy": null,
+          "mean_latency_ms": 24.8704
+        },
+        "extension": {
+          "count": 12,
+          "operation_accuracy": 0.5,
+          "protocol_valid_rate": null,
+          "execution_ready_accuracy": null,
+          "mean_latency_ms": 26.124
+        },
+        "by_track": {
+          "discourse_distractor": {
+            "count": 9,
+            "operation_accuracy": 0.3333,
+            "protocol_valid_rate": null,
+            "execution_ready_accuracy": null,
+            "mean_latency_ms": 29.2437
+          },
+          "held_out_style": {
+            "count": 9,
+            "operation_accuracy": 0.3333,
+            "protocol_valid_rate": null,
+            "execution_ready_accuracy": null,
+            "mean_latency_ms": 22.746
+          },
+          "lexical_shift": {
+            "count": 9,
+            "operation_accuracy": 0.5556,
+            "protocol_valid_rate": null,
+            "execution_ready_accuracy": null,
+            "mean_latency_ms": 26.5279
+          },
+          "seen_style": {
+            "count": 9,
+            "operation_accuracy": 1.0,
+            "protocol_valid_rate": null,
+            "execution_ready_accuracy": null,
+            "mean_latency_ms": 22.6354
+          }
+        }
+      },
+      "predictions": [
+        {
+          "case": {
+            "case_id": "seen_style_add_1",
+            "track": "seen_style",
+            "utterance": "Calculate 345 plus 456.",
+            "operation": "ADD",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "OP=ADD",
+          "predicted_operation": "ADD",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 23.143
+        },
+        {
+          "case": {
+            "case_id": "seen_style_add_2",
+            "track": "seen_style",
+            "utterance": "Calculate 901 plus 278.",
+            "operation": "ADD",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "OP=ADD",
+          "predicted_operation": "ADD",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 17.889
+        },
+        {
+          "case": {
+            "case_id": "seen_style_add_3",
+            "track": "seen_style",
+            "utterance": "Calculate 613 plus 149.",
+            "operation": "ADD",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "OP=ADD",
+          "predicted_operation": "ADD",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 16.518
+        },
+        {
+          "case": {
+            "case_id": "seen_style_subtract_1",
+            "track": "seen_style",
+            "utterance": "Subtract 456 from 345.",
+            "operation": "SUBTRACT",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 16.868
+        },
+        {
+          "case": {
+            "case_id": "seen_style_subtract_2",
+            "track": "seen_style",
+            "utterance": "Subtract 278 from 901.",
+            "operation": "SUBTRACT",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 27.085
+        },
+        {
+          "case": {
+            "case_id": "seen_style_subtract_3",
+            "track": "seen_style",
+            "utterance": "Subtract 149 from 613.",
+            "operation": "SUBTRACT",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 22.958
+        },
+        {
+          "case": {
+            "case_id": "seen_style_compare_1",
+            "track": "seen_style",
+            "utterance": "Are 345 greater than 456?",
+            "operation": "COMPARE",
+            "left": 345,
+            "right": 456,
+            "shared": false
+          },
+          "raw_output": "OP=COMPARE",
+          "predicted_operation": "COMPARE",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 30.454
+        },
+        {
+          "case": {
+            "case_id": "seen_style_compare_2",
+            "track": "seen_style",
+            "utterance": "Are 901 greater than 278?",
+            "operation": "COMPARE",
+            "left": 901,
+            "right": 278,
+            "shared": false
+          },
+          "raw_output": "OP=COMPARE",
+          "predicted_operation": "COMPARE",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 24.865
+        },
+        {
+          "case": {
+            "case_id": "seen_style_compare_3",
+            "track": "seen_style",
+            "utterance": "Are 613 greater than 149?",
+            "operation": "COMPARE",
+            "left": 613,
+            "right": 149,
+            "shared": false
+          },
+          "raw_output": "OP=COMPARE",
+          "predicted_operation": "COMPARE",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 23.939
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_add_1",
+            "track": "held_out_style",
+            "utterance": "Find the total when 345 is joined with 456.",
+            "operation": "ADD",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 30.396
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_add_2",
+            "track": "held_out_style",
+            "utterance": "Find the total when 901 is joined with 278.",
+            "operation": "ADD",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 26.073
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_add_3",
+            "track": "held_out_style",
+            "utterance": "Find the total when 613 is joined with 149.",
+            "operation": "ADD",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 22.64
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_subtract_1",
+            "track": "held_out_style",
+            "utterance": "Reduce 345 by 456.",
+            "operation": "SUBTRACT",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 20.459
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_subtract_2",
+            "track": "held_out_style",
+            "utterance": "Reduce 901 by 278.",
+            "operation": "SUBTRACT",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 17.585
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_subtract_3",
+            "track": "held_out_style",
+            "utterance": "Reduce 613 by 149.",
+            "operation": "SUBTRACT",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 17.778
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_compare_1",
+            "track": "held_out_style",
+            "utterance": "Check whether the count of 345 outranks 456.",
+            "operation": "COMPARE",
+            "left": 345,
+            "right": 456,
+            "shared": false
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 24.487
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_compare_2",
+            "track": "held_out_style",
+            "utterance": "Check whether the count of 901 outranks 278.",
+            "operation": "COMPARE",
+            "left": 901,
+            "right": 278,
+            "shared": false
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 24.136
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_compare_3",
+            "track": "held_out_style",
+            "utterance": "Check whether the count of 613 outranks 149.",
+            "operation": "COMPARE",
+            "left": 613,
+            "right": 149,
+            "shared": false
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 21.16
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_add_1",
+            "track": "lexical_shift",
+            "utterance": "How much do 345 and 456 make in all?",
+            "operation": "ADD",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 24.906
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_add_2",
+            "track": "lexical_shift",
+            "utterance": "How much do 901 and 278 make in all?",
+            "operation": "ADD",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 18.727
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_add_3",
+            "track": "lexical_shift",
+            "utterance": "How much do 613 and 149 make in all?",
+            "operation": "ADD",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 24.496
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_subtract_1",
+            "track": "lexical_shift",
+            "utterance": "By what amount does 345 outrun 456?",
+            "operation": "SUBTRACT",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 21.844
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_subtract_2",
+            "track": "lexical_shift",
+            "utterance": "By what amount does 901 outrun 278?",
+            "operation": "SUBTRACT",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "OP=COMPARE",
+          "predicted_operation": "COMPARE",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 32.965
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_subtract_3",
+            "track": "lexical_shift",
+            "utterance": "By what amount does 613 outrun 149?",
+            "operation": "SUBTRACT",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 29.603
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_compare_1",
+            "track": "lexical_shift",
+            "utterance": "Is 345 above 456?",
+            "operation": "COMPARE",
+            "left": 345,
+            "right": 456,
+            "shared": false
+          },
+          "raw_output": "OP=COMPARE",
+          "predicted_operation": "COMPARE",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 27.003
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_compare_2",
+            "track": "lexical_shift",
+            "utterance": "Is 901 above 278?",
+            "operation": "COMPARE",
+            "left": 901,
+            "right": 278,
+            "shared": false
+          },
+          "raw_output": "OP=COMPARE",
+          "predicted_operation": "COMPARE",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 36.253
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_compare_3",
+            "track": "lexical_shift",
+            "utterance": "Is 613 above 149?",
+            "operation": "COMPARE",
+            "left": 613,
+            "right": 149,
+            "shared": false
+          },
+          "raw_output": "OP=COMPARE",
+          "predicted_operation": "COMPARE",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 22.954
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_add_1",
+            "track": "discourse_distractor",
+            "utterance": "Although 345 exceeds 456, what is the combined count of 345 zols and 456 binks?",
+            "operation": "ADD",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 36.714
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_add_2",
+            "track": "discourse_distractor",
+            "utterance": "Although 901 exceeds 278, what is the combined count of 901 zols and 278 binks?",
+            "operation": "ADD",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "OP=COMPARE",
+          "predicted_operation": "COMPARE",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 32.258
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_add_3",
+            "track": "discourse_distractor",
+            "utterance": "Although 613 exceeds 149, what is the combined count of 613 zols and 149 binks?",
+            "operation": "ADD",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "OP=COMPARE",
+          "predicted_operation": "COMPARE",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 27.3
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_subtract_1",
+            "track": "discourse_distractor",
+            "utterance": "The quantities belong together, but remove 456 binks from 345 zols. How many remain?",
+            "operation": "SUBTRACT",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 31.215
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_subtract_2",
+            "track": "discourse_distractor",
+            "utterance": "The quantities belong together, but remove 278 binks from 901 zols. How many remain?",
+            "operation": "SUBTRACT",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 33.883
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_subtract_3",
+            "track": "discourse_distractor",
+            "utterance": "The quantities belong together, but remove 149 binks from 613 zols. How many remain?",
+            "operation": "SUBTRACT",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": true,
+          "execution_correct": null,
+          "latency_ms": 23.586
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_compare_1",
+            "track": "discourse_distractor",
+            "utterance": "A total may be useful later. First decide whether 345 zols outnumber 456 binks.",
+            "operation": "COMPARE",
+            "left": 345,
+            "right": 456,
+            "shared": false
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 32.883
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_compare_2",
+            "track": "discourse_distractor",
+            "utterance": "A total may be useful later. First decide whether 901 zols outnumber 278 binks.",
+            "operation": "COMPARE",
+            "left": 901,
+            "right": 278,
+            "shared": false
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 23.417
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_compare_3",
+            "track": "discourse_distractor",
+            "utterance": "A total may be useful later. First decide whether 613 zols outnumber 149 binks.",
+            "operation": "COMPARE",
+            "left": 613,
+            "right": 149,
+            "shared": false
+          },
+          "raw_output": "OP=SUBTRACT",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": null,
+          "operation_correct": false,
+          "execution_correct": null,
+          "latency_ms": 21.937
+        }
+      ]
+    },
+    {
+      "id": "smollm2_135m_react",
+      "family": "react_agent",
+      "capability": "first_math_action",
+      "summary": {
+        "overall": {
+          "count": 36,
+          "operation_accuracy": 0.4444,
+          "protocol_valid_rate": 0.8611,
+          "execution_ready_accuracy": 0.3889,
+          "mean_latency_ms": 2143.3444
+        },
+        "shared": {
+          "count": 24,
+          "operation_accuracy": 0.6667,
+          "protocol_valid_rate": 0.9167,
+          "execution_ready_accuracy": 0.5417,
+          "mean_latency_ms": 2043.4543
+        },
+        "extension": {
+          "count": 12,
+          "operation_accuracy": 0.0,
+          "protocol_valid_rate": 0.75,
+          "execution_ready_accuracy": 0.0833,
+          "mean_latency_ms": 2343.1247
+        },
+        "by_track": {
+          "discourse_distractor": {
+            "count": 9,
+            "operation_accuracy": 0.0,
+            "protocol_valid_rate": 0.4444,
+            "execution_ready_accuracy": 0.0,
+            "mean_latency_ms": 2324.529
+          },
+          "held_out_style": {
+            "count": 9,
+            "operation_accuracy": 0.4444,
+            "protocol_valid_rate": 1.0,
+            "execution_ready_accuracy": 0.4444,
+            "mean_latency_ms": 2204.7393
+          },
+          "lexical_shift": {
+            "count": 9,
+            "operation_accuracy": 0.6667,
+            "protocol_valid_rate": 1.0,
+            "execution_ready_accuracy": 0.6667,
+            "mean_latency_ms": 1058.5592
+          },
+          "seen_style": {
+            "count": 9,
+            "operation_accuracy": 0.6667,
+            "protocol_valid_rate": 1.0,
+            "execution_ready_accuracy": 0.4444,
+            "mean_latency_ms": 2985.5501
+          }
+        }
+      },
+      "predictions": [
+        {
+          "case": {
+            "case_id": "seen_style_add_1",
+            "track": "seen_style",
+            "utterance": "Calculate 345 plus 456.",
+            "operation": "ADD",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "<ACTION>MATH 345 + 456",
+          "predicted_operation": "ADD",
+          "protocol_valid": true,
+          "operation_correct": true,
+          "execution_correct": true,
+          "latency_ms": 3575.765
+        },
+        {
+          "case": {
+            "case_id": "seen_style_add_2",
+            "track": "seen_style",
+            "utterance": "Calculate 901 plus 278.",
+            "operation": "ADD",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "<ACTION>MATH 901 + 278",
+          "predicted_operation": "ADD",
+          "protocol_valid": true,
+          "operation_correct": true,
+          "execution_correct": true,
+          "latency_ms": 2211.328
+        },
+        {
+          "case": {
+            "case_id": "seen_style_add_3",
+            "track": "seen_style",
+            "utterance": "Calculate 613 plus 149.",
+            "operation": "ADD",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "<ACTION>MATH 613 + 149",
+          "predicted_operation": "ADD",
+          "protocol_valid": true,
+          "operation_correct": true,
+          "execution_correct": true,
+          "latency_ms": 1917.143
+        },
+        {
+          "case": {
+            "case_id": "seen_style_subtract_1",
+            "track": "seen_style",
+            "utterance": "Subtract 456 from 345.",
+            "operation": "SUBTRACT",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "<ACTION>MATH 345 - 345",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": true,
+          "operation_correct": true,
+          "execution_correct": false,
+          "latency_ms": 1818.976
+        },
+        {
+          "case": {
+            "case_id": "seen_style_subtract_2",
+            "track": "seen_style",
+            "utterance": "Subtract 278 from 901.",
+            "operation": "SUBTRACT",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "<ACTION>MATH 901 - 1001",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": true,
+          "operation_correct": true,
+          "execution_correct": false,
+          "latency_ms": 1887.542
+        },
+        {
+          "case": {
+            "case_id": "seen_style_subtract_3",
+            "track": "seen_style",
+            "utterance": "Subtract 149 from 613.",
+            "operation": "SUBTRACT",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "<ACTION>MATH 613 - 614",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": true,
+          "operation_correct": true,
+          "execution_correct": false,
+          "latency_ms": 1787.263
+        },
+        {
+          "case": {
+            "case_id": "seen_style_compare_1",
+            "track": "seen_style",
+            "utterance": "Are 345 greater than 456?",
+            "operation": "COMPARE",
+            "left": 345,
+            "right": 456,
+            "shared": false
+          },
+          "raw_output": "<ACTION>MATH 456 - 456",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": true,
+          "operation_correct": false,
+          "execution_correct": true,
+          "latency_ms": 1662.222
+        },
+        {
+          "case": {
+            "case_id": "seen_style_compare_2",
+            "track": "seen_style",
+            "utterance": "Are 901 greater than 278?",
+            "operation": "COMPARE",
+            "left": 901,
+            "right": 278,
+            "shared": false
+          },
+          "raw_output": "<ACTION>MATH 278.000000.000000 (901 + 278) / 901\n\n## What is 901 greater than 278?\n\nHigher Than: 278 is Higher Than",
+          "predicted_operation": null,
+          "protocol_valid": true,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 9034.172
+        },
+        {
+          "case": {
+            "case_id": "seen_style_compare_3",
+            "track": "seen_style",
+            "utterance": "Are 613 greater than 149?",
+            "operation": "COMPARE",
+            "left": 613,
+            "right": 149,
+            "shared": false
+          },
+          "raw_output": "<ACTION>MATH 149.613.",
+          "predicted_operation": null,
+          "protocol_valid": true,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 2975.54
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_add_1",
+            "track": "held_out_style",
+            "utterance": "Find the total when 345 is joined with 456.",
+            "operation": "ADD",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "<ACTION>MATH 345 + 456",
+          "predicted_operation": "ADD",
+          "protocol_valid": true,
+          "operation_correct": true,
+          "execution_correct": true,
+          "latency_ms": 2869.778
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_add_2",
+            "track": "held_out_style",
+            "utterance": "Find the total when 901 is joined with 278.",
+            "operation": "ADD",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "<ACTION>MATH 901 + 278",
+          "predicted_operation": "ADD",
+          "protocol_valid": true,
+          "operation_correct": true,
+          "execution_correct": true,
+          "latency_ms": 2901.684
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_add_3",
+            "track": "held_out_style",
+            "utterance": "Find the total when 613 is joined with 149.",
+            "operation": "ADD",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "<ACTION>MATH 613 + 149",
+          "predicted_operation": "ADD",
+          "protocol_valid": true,
+          "operation_correct": true,
+          "execution_correct": true,
+          "latency_ms": 2867.044
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_subtract_1",
+            "track": "held_out_style",
+            "utterance": "Reduce 345 by 456.",
+            "operation": "SUBTRACT",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "<ACTION>MATH 345 - 456",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": true,
+          "operation_correct": true,
+          "execution_correct": true,
+          "latency_ms": 2588.167
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_subtract_2",
+            "track": "held_out_style",
+            "utterance": "Reduce 901 by 278.",
+            "operation": "SUBTRACT",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "<ACTION>MATH 901.",
+          "predicted_operation": null,
+          "protocol_valid": true,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 1869.075
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_subtract_3",
+            "track": "held_out_style",
+            "utterance": "Reduce 613 by 149.",
+            "operation": "SUBTRACT",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "<ACTION>MATH 613.",
+          "predicted_operation": null,
+          "protocol_valid": true,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 1436.55
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_compare_1",
+            "track": "held_out_style",
+            "utterance": "Check whether the count of 345 outranks 456.",
+            "operation": "COMPARE",
+            "left": 345,
+            "right": 456,
+            "shared": false
+          },
+          "raw_output": "<ACTION>MATH 345 - 456",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": true,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 1832.026
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_compare_2",
+            "track": "held_out_style",
+            "utterance": "Check whether the count of 901 outranks 278.",
+            "operation": "COMPARE",
+            "left": 901,
+            "right": 278,
+            "shared": false
+          },
+          "raw_output": "<ACTION>MATH 901 - 278",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": true,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 1709.874
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_compare_3",
+            "track": "held_out_style",
+            "utterance": "Check whether the count of 613 outranks 149.",
+            "operation": "COMPARE",
+            "left": 613,
+            "right": 149,
+            "shared": false
+          },
+          "raw_output": "<ACTION>MATH 613 - 149",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": true,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 1768.456
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_add_1",
+            "track": "lexical_shift",
+            "utterance": "How much do 345 and 456 make in all?",
+            "operation": "ADD",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "<ACTION>MATH 345 + 456",
+          "predicted_operation": "ADD",
+          "protocol_valid": true,
+          "operation_correct": true,
+          "execution_correct": true,
+          "latency_ms": 1303.542
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_add_2",
+            "track": "lexical_shift",
+            "utterance": "How much do 901 and 278 make in all?",
+            "operation": "ADD",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "<ACTION>MATH 901 + 278",
+          "predicted_operation": "ADD",
+          "protocol_valid": true,
+          "operation_correct": true,
+          "execution_correct": true,
+          "latency_ms": 1222.378
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_add_3",
+            "track": "lexical_shift",
+            "utterance": "How much do 613 and 149 make in all?",
+            "operation": "ADD",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "<ACTION>MATH 613 + 149",
+          "predicted_operation": "ADD",
+          "protocol_valid": true,
+          "operation_correct": true,
+          "execution_correct": true,
+          "latency_ms": 1106.745
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_subtract_1",
+            "track": "lexical_shift",
+            "utterance": "By what amount does 345 outrun 456?",
+            "operation": "SUBTRACT",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "<ACTION>MATH 345 - 456",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": true,
+          "operation_correct": true,
+          "execution_correct": true,
+          "latency_ms": 1121.179
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_subtract_2",
+            "track": "lexical_shift",
+            "utterance": "By what amount does 901 outrun 278?",
+            "operation": "SUBTRACT",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "<ACTION>MATH 901 - 278",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": true,
+          "operation_correct": true,
+          "execution_correct": true,
+          "latency_ms": 1154.087
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_subtract_3",
+            "track": "lexical_shift",
+            "utterance": "By what amount does 613 outrun 149?",
+            "operation": "SUBTRACT",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "<ACTION>MATH 613 - 149",
+          "predicted_operation": "SUBTRACT",
+          "protocol_valid": true,
+          "operation_correct": true,
+          "execution_correct": true,
+          "latency_ms": 1091.85
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_compare_1",
+            "track": "lexical_shift",
+            "utterance": "Is 345 above 456?",
+            "operation": "COMPARE",
+            "left": 345,
+            "right": 456,
+            "shared": false
+          },
+          "raw_output": "<ACTION>MATH 456.",
+          "predicted_operation": null,
+          "protocol_valid": true,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 793.047
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_compare_2",
+            "track": "lexical_shift",
+            "utterance": "Is 901 above 278?",
+            "operation": "COMPARE",
+            "left": 901,
+            "right": 278,
+            "shared": false
+          },
+          "raw_output": "<ACTION>MATH 278.",
+          "predicted_operation": null,
+          "protocol_valid": true,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 939.29
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_compare_3",
+            "track": "lexical_shift",
+            "utterance": "Is 613 above 149?",
+            "operation": "COMPARE",
+            "left": 613,
+            "right": 149,
+            "shared": false
+          },
+          "raw_output": "<ACTION>MATH 149.",
+          "predicted_operation": null,
+          "protocol_valid": true,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 794.915
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_add_1",
+            "track": "discourse_distractor",
+            "utterance": "Although 345 exceeds 456, what is the combined count of 345 zols and 456 binks?",
+            "operation": "ADD",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "<PLAN>PLAN GOAL: find_value(\"345\"); SEARCH \"345\"",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 2080.736
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_add_2",
+            "track": "discourse_distractor",
+            "utterance": "Although 901 exceeds 278, what is the combined count of 901 zols and 278 binks?",
+            "operation": "ADD",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "<ACTION>MATH 901 + 278 binks",
+          "predicted_operation": null,
+          "protocol_valid": true,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 1664.258
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_add_3",
+            "track": "discourse_distractor",
+            "utterance": "Although 613 exceeds 149, what is the combined count of 613 zols and 149 binks?",
+            "operation": "ADD",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "<PLAN>PLAN GOAL: find_value(\"149\"); SEARCH \"149\"",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 2991.463
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_subtract_1",
+            "track": "discourse_distractor",
+            "utterance": "The quantities belong together, but remove 456 binks from 345 zols. How many remain?",
+            "operation": "SUBTRACT",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "<ACTION>MATH 345 - 345 = 273",
+          "predicted_operation": null,
+          "protocol_valid": true,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 2078.943
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_subtract_2",
+            "track": "discourse_distractor",
+            "utterance": "The quantities belong together, but remove 278 binks from 901 zols. How many remain?",
+            "operation": "SUBTRACT",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "<ACTION>MATH 901 - 901 = 901 + 901",
+          "predicted_operation": null,
+          "protocol_valid": true,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 2843.141
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_subtract_3",
+            "track": "discourse_distractor",
+            "utterance": "The quantities belong together, but remove 149 binks from 613 zols. How many remain?",
+            "operation": "SUBTRACT",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "<ACTION>MATH 613 - 613 = 613 + 613",
+          "predicted_operation": null,
+          "protocol_valid": true,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 2654.265
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_compare_1",
+            "track": "discourse_distractor",
+            "utterance": "A total may be useful later. First decide whether 345 zols outnumber 456 binks.",
+            "operation": "COMPARE",
+            "left": 345,
+            "right": 456,
+            "shared": false
+          },
+          "raw_output": "<PLAN>PLAN GOAL: find_value(\"345\"); SEARCH \"345\"",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 2265.904
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_compare_2",
+            "track": "discourse_distractor",
+            "utterance": "A total may be useful later. First decide whether 901 zols outnumber 278 binks.",
+            "operation": "COMPARE",
+            "left": 901,
+            "right": 278,
+            "shared": false
+          },
+          "raw_output": "<PLAN>PLAN GOAL: find_value(\"278\"); SEARCH \"278\"",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 2180.253
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_compare_3",
+            "track": "discourse_distractor",
+            "utterance": "A total may be useful later. First decide whether 613 zols outnumber 149 binks.",
+            "operation": "COMPARE",
+            "left": 613,
+            "right": 149,
+            "shared": false
+          },
+          "raw_output": "<PLAN>PLAN GOAL: find_value(\"149\"); SEARCH \"149\"",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 2161.798
+        }
+      ]
+    },
+    {
+      "id": "scratch_300m_react_legacy",
+      "family": "react_agent",
+      "capability": "first_math_action",
+      "summary": {
+        "overall": {
+          "count": 36,
+          "operation_accuracy": 0.0,
+          "protocol_valid_rate": 0.0278,
+          "execution_ready_accuracy": 0.0,
+          "mean_latency_ms": 1165.1854
+        },
+        "shared": {
+          "count": 24,
+          "operation_accuracy": 0.0,
+          "protocol_valid_rate": 0.0,
+          "execution_ready_accuracy": 0.0,
+          "mean_latency_ms": 1233.4563
+        },
+        "extension": {
+          "count": 12,
+          "operation_accuracy": 0.0,
+          "protocol_valid_rate": 0.0833,
+          "execution_ready_accuracy": 0.0,
+          "mean_latency_ms": 1028.6437
+        },
+        "by_track": {
+          "discourse_distractor": {
+            "count": 9,
+            "operation_accuracy": 0.0,
+            "protocol_valid_rate": 0.1111,
+            "execution_ready_accuracy": 0.0,
+            "mean_latency_ms": 670.5748
+          },
+          "held_out_style": {
+            "count": 9,
+            "operation_accuracy": 0.0,
+            "protocol_valid_rate": 0.0,
+            "execution_ready_accuracy": 0.0,
+            "mean_latency_ms": 1027.1133
+          },
+          "lexical_shift": {
+            "count": 9,
+            "operation_accuracy": 0.0,
+            "protocol_valid_rate": 0.0,
+            "execution_ready_accuracy": 0.0,
+            "mean_latency_ms": 1801.5152
+          },
+          "seen_style": {
+            "count": 9,
+            "operation_accuracy": 0.0,
+            "protocol_valid_rate": 0.0,
+            "execution_ready_accuracy": 0.0,
+            "mean_latency_ms": 1161.5384
+          }
+        }
+      },
+      "predictions": [
+        {
+          "case": {
+            "case_id": "seen_style_add_1",
+            "track": "seen_style",
+            "utterance": "Calculate 345 plus 456.",
+            "operation": "ADD",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "EMIT \"446\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 1244.865
+        },
+        {
+          "case": {
+            "case_id": "seen_style_add_2",
+            "track": "seen_style",
+            "utterance": "Calculate 901 plus 278.",
+            "operation": "ADD",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "EMIT \"918\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 1379.01
+        },
+        {
+          "case": {
+            "case_id": "seen_style_add_3",
+            "track": "seen_style",
+            "utterance": "Calculate 613 plus 149.",
+            "operation": "ADD",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "EMIT \"649\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 1269.624
+        },
+        {
+          "case": {
+            "case_id": "seen_style_subtract_1",
+            "track": "seen_style",
+            "utterance": "Subtract 456 from 345.",
+            "operation": "SUBTRACT",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "EMIT \"446\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 1125.694
+        },
+        {
+          "case": {
+            "case_id": "seen_style_subtract_2",
+            "track": "seen_style",
+            "utterance": "Subtract 278 from 901.",
+            "operation": "SUBTRACT",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "EMIT \"271\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 1147.848
+        },
+        {
+          "case": {
+            "case_id": "seen_style_subtract_3",
+            "track": "seen_style",
+            "utterance": "Subtract 149 from 613.",
+            "operation": "SUBTRACT",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "EMIT \"419\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 1240.754
+        },
+        {
+          "case": {
+            "case_id": "seen_style_compare_1",
+            "track": "seen_style",
+            "utterance": "Are 345 greater than 456?",
+            "operation": "COMPARE",
+            "left": 345,
+            "right": 456,
+            "shared": false
+          },
+          "raw_output": "EMIT \"426\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 1122.45
+        },
+        {
+          "case": {
+            "case_id": "seen_style_compare_2",
+            "track": "seen_style",
+            "utterance": "Are 901 greater than 278?",
+            "operation": "COMPARE",
+            "left": 901,
+            "right": 278,
+            "shared": false
+          },
+          "raw_output": "EMIT \"278\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 973.842
+        },
+        {
+          "case": {
+            "case_id": "seen_style_compare_3",
+            "track": "seen_style",
+            "utterance": "Are 613 greater than 149?",
+            "operation": "COMPARE",
+            "left": 613,
+            "right": 149,
+            "shared": false
+          },
+          "raw_output": "EMIT \"149\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 949.759
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_add_1",
+            "track": "held_out_style",
+            "utterance": "Find the total when 345 is joined with 456.",
+            "operation": "ADD",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "EMIT \"446\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 975.904
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_add_2",
+            "track": "held_out_style",
+            "utterance": "Find the total when 901 is joined with 278.",
+            "operation": "ADD",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "EMIT \"178\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 951.124
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_add_3",
+            "track": "held_out_style",
+            "utterance": "Find the total when 613 is joined with 149.",
+            "operation": "ADD",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "EMIT \"149\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 926.748
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_subtract_1",
+            "track": "held_out_style",
+            "utterance": "Reduce 345 by 456.",
+            "operation": "SUBTRACT",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "EMIT \"448\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 750.247
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_subtract_2",
+            "track": "held_out_style",
+            "utterance": "Reduce 901 by 278.",
+            "operation": "SUBTRACT",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "EMIT \"918\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 796.716
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_subtract_3",
+            "track": "held_out_style",
+            "utterance": "Reduce 613 by 149.",
+            "operation": "SUBTRACT",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "EMIT \"149\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 735.49
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_compare_1",
+            "track": "held_out_style",
+            "utterance": "Check whether the count of 345 outranks 456.",
+            "operation": "COMPARE",
+            "left": 345,
+            "right": 456,
+            "shared": false
+          },
+          "raw_output": "EMIT \"446\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 732.247
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_compare_2",
+            "track": "held_out_style",
+            "utterance": "Check whether the count of 901 outranks 278.",
+            "operation": "COMPARE",
+            "left": 901,
+            "right": 278,
+            "shared": false
+          },
+          "raw_output": "EMIT \"128\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 701.021
+        },
+        {
+          "case": {
+            "case_id": "held_out_style_compare_3",
+            "track": "held_out_style",
+            "utterance": "Check whether the count of 613 outranks 149.",
+            "operation": "COMPARE",
+            "left": 613,
+            "right": 149,
+            "shared": false
+          },
+          "raw_output": "EMIT \"149\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 2674.523
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_add_1",
+            "track": "lexical_shift",
+            "utterance": "How much do 345 and 456 make in all?",
+            "operation": "ADD",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "SEMIT \"46\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 3232.549
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_add_2",
+            "track": "lexical_shift",
+            "utterance": "How much do 901 and 278 make in all?",
+            "operation": "ADD",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "EMIT \"121\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 3332.707
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_add_3",
+            "track": "lexical_shift",
+            "utterance": "How much do 613 and 149 make in all?",
+            "operation": "ADD",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "EMIT \"491\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 2191.647
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_subtract_1",
+            "track": "lexical_shift",
+            "utterance": "By what amount does 345 outrun 456?",
+            "operation": "SUBTRACT",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "SEARCH \"45\" LIMIT 3",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 1290.193
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_subtract_2",
+            "track": "lexical_shift",
+            "utterance": "By what amount does 901 outrun 278?",
+            "operation": "SUBTRACT",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "EMIT \"278\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 1690.089
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_subtract_3",
+            "track": "lexical_shift",
+            "utterance": "By what amount does 613 outrun 149?",
+            "operation": "SUBTRACT",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "EMIT \"149\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 1162.864
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_compare_1",
+            "track": "lexical_shift",
+            "utterance": "Is 345 above 456?",
+            "operation": "COMPARE",
+            "left": 345,
+            "right": 456,
+            "shared": false
+          },
+          "raw_output": "EMIT \"426\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 1070.776
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_compare_2",
+            "track": "lexical_shift",
+            "utterance": "Is 901 above 278?",
+            "operation": "COMPARE",
+            "left": 901,
+            "right": 278,
+            "shared": false
+          },
+          "raw_output": "EMIT \"278\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 1359.9
+        },
+        {
+          "case": {
+            "case_id": "lexical_shift_compare_3",
+            "track": "lexical_shift",
+            "utterance": "Is 613 above 149?",
+            "operation": "COMPARE",
+            "left": 613,
+            "right": 149,
+            "shared": false
+          },
+          "raw_output": "EMIT \"149\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 882.912
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_add_1",
+            "track": "discourse_distractor",
+            "utterance": "Although 345 exceeds 456, what is the combined count of 345 zols and 456 binks?",
+            "operation": "ADD",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "EMIT \"146\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 749.644
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_add_2",
+            "track": "discourse_distractor",
+            "utterance": "Although 901 exceeds 278, what is the combined count of 901 zols and 278 binks?",
+            "operation": "ADD",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "EMIT \"171\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 700.649
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_add_3",
+            "track": "discourse_distractor",
+            "utterance": "Although 613 exceeds 149, what is the combined count of 613 zols and 149 binks?",
+            "operation": "ADD",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "EMIT \"149\" EVIDENCE [D04:2]",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 916.201
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_subtract_1",
+            "track": "discourse_distractor",
+            "utterance": "The quantities belong together, but remove 456 binks from 345 zols. How many remain?",
+            "operation": "SUBTRACT",
+            "left": 345,
+            "right": 456,
+            "shared": true
+          },
+          "raw_output": "READ D02 LINES 1-2",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 741.546
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_subtract_2",
+            "track": "discourse_distractor",
+            "utterance": "The quantities belong together, but remove 278 binks from 901 zols. How many remain?",
+            "operation": "SUBTRACT",
+            "left": 901,
+            "right": 278,
+            "shared": true
+          },
+          "raw_output": "READ D02 LINES 1-2",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 541.205
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_subtract_3",
+            "track": "discourse_distractor",
+            "utterance": "The quantities belong together, but remove 149 binks from 613 zols. How many remain?",
+            "operation": "SUBTRACT",
+            "left": 613,
+            "right": 149,
+            "shared": true
+          },
+          "raw_output": "READ D02 LINES 1-2",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 509.633
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_compare_1",
+            "track": "discourse_distractor",
+            "utterance": "A total may be useful later. First decide whether 345 zols outnumber 456 binks.",
+            "operation": "COMPARE",
+            "left": 345,
+            "right": 456,
+            "shared": false
+          },
+          "raw_output": "MATH \"45:\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": true,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 608.754
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_compare_2",
+            "track": "discourse_distractor",
+            "utterance": "A total may be useful later. First decide whether 901 zols outnumber 278 binks.",
+            "operation": "COMPARE",
+            "left": 901,
+            "right": 278,
+            "shared": false
+          },
+          "raw_output": "EMIT \"271\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 633.451
+        },
+        {
+          "case": {
+            "case_id": "discourse_distractor_compare_3",
+            "track": "discourse_distractor",
+            "utterance": "A total may be useful later. First decide whether 613 zols outnumber 149 binks.",
+            "operation": "COMPARE",
+            "left": 613,
+            "right": 149,
+            "shared": false
+          },
+          "raw_output": "EMIT \"449\" EVIDENCE []",
+          "predicted_operation": null,
+          "protocol_valid": false,
+          "operation_correct": false,
+          "execution_correct": false,
+          "latency_ms": 634.09
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,188 @@
+{
+  "worst_robust_accuracy": {
+    "by_variants": {
+      "1": {
+        "n": 5,
+        "mean": 0.3333,
+        "sample_std": 0.0,
+        "bootstrap_95_ci": [
+          0.3333,
+          0.3333
+        ]
+      },
+      "2": {
+        "n": 5,
+        "mean": 0.2722,
+        "sample_std": 0.097,
+        "bootstrap_95_ci": [
+          0.1833,
+          0.3333
+        ]
+      },
+      "4": {
+        "n": 5,
+        "mean": 0.2333,
+        "sample_std": 0.1491,
+        "bootstrap_95_ci": [
+          0.1,
+          0.3333
+        ]
+      },
+      "8": {
+        "n": 5,
+        "mean": 0.25,
+        "sample_std": 0.0878,
+        "bootstrap_95_ci": [
+          0.1778,
+          0.3111
+        ]
+      }
+    },
+    "adjacent_doubling_slopes": {
+      "1_to_2": {
+        "n": 5,
+        "mean": -0.0611,
+        "sample_std": 0.097,
+        "bootstrap_95_ci": [
+          -0.15,
+          0.0
+        ],
+        "paired_seeds": [
+          17,
+          29,
+          41,
+          53,
+          67
+        ],
+        "unit": "accuracy_points_per_doubling"
+      },
+      "2_to_4": {
+        "n": 5,
+        "mean": -0.0389,
+        "sample_std": 0.0541,
+        "bootstrap_95_ci": [
+          -0.0833,
+          0.0
+        ],
+        "paired_seeds": [
+          17,
+          29,
+          41,
+          53,
+          67
+        ],
+        "unit": "accuracy_points_per_doubling"
+      },
+      "4_to_8": {
+        "n": 5,
+        "mean": 0.0167,
+        "sample_std": 0.1516,
+        "bootstrap_95_ci": [
+          -0.0777,
+          0.1556
+        ],
+        "paired_seeds": [
+          17,
+          29,
+          41,
+          53,
+          67
+        ],
+        "unit": "accuracy_points_per_doubling"
+      }
+    }
+  },
+  "macro_robust_accuracy": {
+    "by_variants": {
+      "1": {
+        "n": 5,
+        "mean": 0.3377,
+        "sample_std": 0.0099,
+        "bootstrap_95_ci": [
+          0.3333,
+          0.3466
+        ]
+      },
+      "2": {
+        "n": 5,
+        "mean": 0.3611,
+        "sample_std": 0.0718,
+        "bootstrap_95_ci": [
+          0.3233,
+          0.4267
+        ]
+      },
+      "4": {
+        "n": 5,
+        "mean": 0.4633,
+        "sample_std": 0.1189,
+        "bootstrap_95_ci": [
+          0.3755,
+          0.5511
+        ]
+      },
+      "8": {
+        "n": 5,
+        "mean": 0.4189,
+        "sample_std": 0.0579,
+        "bootstrap_95_ci": [
+          0.39,
+          0.4711
+        ]
+      }
+    },
+    "adjacent_doubling_slopes": {
+      "1_to_2": {
+        "n": 5,
+        "mean": 0.0233,
+        "sample_std": 0.0746,
+        "bootstrap_95_ci": [
+          -0.0167,
+          0.09
+        ],
+        "paired_seeds": [
+          17,
+          29,
+          41,
+          53,
+          67
+        ],
+        "unit": "accuracy_points_per_doubling"
+      },
+      "2_to_4": {
+        "n": 5,
+        "mean": 0.1022,
+        "sample_std": 0.1029,
+        "bootstrap_95_ci": [
+          0.0211,
+          0.1834
+        ],
+        "paired_seeds": [
+          17,
+          29,
+          41,
+          53,
+          67
+        ],
+        "unit": "accuracy_points_per_doubling"
+      },
+      "4_to_8": {
+        "n": 5,
+        "mean": -0.0444,
+        "sample_std": 0.1095,
+        "bootstrap_95_ci": [
+          -0.1267,
+          0.0422
+        ],
+        "paired_seeds": [
+          17,
+          29,
+          41,
+          53,
+          67
+        ],
+        "unit": "accuracy_points_per_doubling"
+      }
+    }
+  }
+}

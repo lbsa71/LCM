@@ -1,0 +1,151 @@
+{
+  "cases": 20,
+  "pairs": 10,
+  "strict_case_success_rate": 0.9,
+  "both_variants_strictly_correct": 9,
+  "both_variants_strictly_correct_rate": 0.9,
+  "training_counterfact_reuse_rate": 0.0,
+  "real_world_prior_reuse_rate": 0.0,
+  "pair_outcomes": {
+    "task_i_cf_w_te_281027_1": {
+      "0": {
+        "strict_success": false,
+        "model_answer": "insufficient_evidence",
+        "gold_answer": "Velora",
+        "task_id": "task_i_cf_w_te_281027_1_swap_0"
+      },
+      "1": {
+        "strict_success": false,
+        "model_answer": "insufficient_evidence",
+        "gold_answer": "Veleth",
+        "task_id": "task_i_cf_w_te_281027_1_swap_1"
+      }
+    },
+    "task_i_cf_w_te_281027_2": {
+      "0": {
+        "strict_success": true,
+        "model_answer": "1237",
+        "gold_answer": "1237",
+        "task_id": "task_i_cf_w_te_281027_2_swap_0"
+      },
+      "1": {
+        "strict_success": true,
+        "model_answer": "1448",
+        "gold_answer": "1448",
+        "task_id": "task_i_cf_w_te_281027_2_swap_1"
+      }
+    },
+    "task_i_cf_w_te_281028_1": {
+      "0": {
+        "strict_success": true,
+        "model_answer": "1274",
+        "gold_answer": "1274",
+        "task_id": "task_i_cf_w_te_281028_1_swap_0"
+      },
+      "1": {
+        "strict_success": true,
+        "model_answer": "1485",
+        "gold_answer": "1485",
+        "task_id": "task_i_cf_w_te_281028_1_swap_1"
+      }
+    },
+    "task_i_cf_w_te_281028_2": {
+      "0": {
+        "strict_success": true,
+        "model_answer": "kasora",
+        "gold_answer": "Kasora",
+        "task_id": "task_i_cf_w_te_281028_2_swap_0"
+      },
+      "1": {
+        "strict_success": true,
+        "model_answer": "kaseth",
+        "gold_answer": "Kaseth",
+        "task_id": "task_i_cf_w_te_281028_2_swap_1"
+      }
+    },
+    "task_i_cf_w_te_281029_1": {
+      "0": {
+        "strict_success": true,
+        "model_answer": "mirora",
+        "gold_answer": "Mirora",
+        "task_id": "task_i_cf_w_te_281029_1_swap_0"
+      },
+      "1": {
+        "strict_success": true,
+        "model_answer": "mireth",
+        "gold_answer": "Mireth",
+        "task_id": "task_i_cf_w_te_281029_1_swap_1"
+      }
+    },
+    "task_i_cf_w_te_281029_2": {
+      "0": {
+        "strict_success": true,
+        "model_answer": "pelora",
+        "gold_answer": "Pelora",
+        "task_id": "task_i_cf_w_te_281029_2_swap_0"
+      },
+      "1": {
+        "strict_success": true,
+        "model_answer": "peleth",
+        "gold_answer": "Peleth",
+        "task_id": "task_i_cf_w_te_281029_2_swap_1"
+      }
+    },
+    "task_i_cf_w_te_281030_1": {
+      "0": {
+        "strict_success": true,
+        "model_answer": "zorora",
+        "gold_answer": "Zorora",
+        "task_id": "task_i_cf_w_te_281030_1_swap_0"
+      },
+      "1": {
+        "strict_success": true,
+        "model_answer": "zoreth",
+        "gold_answer": "Zoreth",
+        "task_id": "task_i_cf_w_te_281030_1_swap_1"
+      }
+    },
+    "task_i_cf_w_te_281030_2": {
+      "0": {
+        "strict_success": true,
+        "model_answer": "1459",
+        "gold_answer": "1459",
+        "task_id": "task_i_cf_w_te_281030_2_swap_0"
+      },
+      "1": {
+        "strict_success": true,
+        "model_answer": "1670",
+        "gold_answer": "1670",
+        "task_id": "task_i_cf_w_te_281030_2_swap_1"
+      }
+    },
+    "task_i_cf_w_te_281031_1": {
+      "0": {
+        "strict_success": true,
+        "model_answer": "lorora",
+        "gold_answer": "Lorora",
+        "task_id": "task_i_cf_w_te_281031_1_swap_0"
+      },
+      "1": {
+        "strict_success": true,
+        "model_answer": "loreth",
+        "gold_answer": "Loreth",
+        "task_id": "task_i_cf_w_te_281031_1_swap_1"
+      }
+    },
+    "task_i_cf_w_te_281031_2": {
+      "0": {
+        "strict_success": true,
+        "model_answer": "finora",
+        "gold_answer": "Finora",
+        "task_id": "task_i_cf_w_te_281031_2_swap_0"
+      },
+      "1": {
+        "strict_success": true,
+        "model_answer": "fineth",
+        "gold_answer": "Fineth",
+        "task_id": "task_i_cf_w_te_281031_2_swap_1"
+      }
+    }
+  }
+}

@@ -1,0 +1,482 @@
+[
+  {
+    "task_id": "task_i_cf_w_te_281027_1_swap_0",
+    "task_type": "counterfactual_inversion",
+    "suite": "grounding_value_swap",
+    "question": "What is the capital of France?",
+    "gold_answer": "Velora",
+    "world_id": "task_i_cf_w_te_281027_1_world_swap_0",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281027_1": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "Paris",
+      "target_entity": "France",
+      "source_task_id": "task_i_cf_w_te_281027_1",
+      "variant": 0,
+      "training_counterfactual_answer": "Lyon"
+    }
+  },
+  {
+    "task_id": "task_i_cf_w_te_281027_1_swap_1",
+    "task_type": "counterfactual_inversion",
+    "suite": "grounding_value_swap",
+    "question": "What is the capital of France?",
+    "gold_answer": "Veleth",
+    "world_id": "task_i_cf_w_te_281027_1_world_swap_1",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281027_1": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "Paris",
+      "target_entity": "France",
+      "source_task_id": "task_i_cf_w_te_281027_1",
+      "variant": 1,
+      "training_counterfactual_answer": "Lyon"
+    }
+  },
+  {
+    "task_id": "task_i_cf_w_te_281027_2_swap_0",
+    "task_type": "counterfactual_inversion",
+    "suite": "grounding_value_swap",
+    "question": "How many planets are in the solar system?",
+    "gold_answer": "1237",
+    "world_id": "task_i_cf_w_te_281027_2_world_swap_0",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281027_2": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "8",
+      "target_entity": "solar system",
+      "source_task_id": "task_i_cf_w_te_281027_2",
+      "variant": 0,
+      "training_counterfactual_answer": "14"
+    }
+  },
+  {
+    "task_id": "task_i_cf_w_te_281027_2_swap_1",
+    "task_type": "counterfactual_inversion",
+    "suite": "grounding_value_swap",
+    "question": "How many planets are in the solar system?",
+    "gold_answer": "1448",
+    "world_id": "task_i_cf_w_te_281027_2_world_swap_1",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281027_2": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "8",
+      "target_entity": "solar system",
+      "source_task_id": "task_i_cf_w_te_281027_2",
+      "variant": 1,
+      "training_counterfactual_answer": "14"
+    }
+  },
+  {
+    "task_id": "task_i_cf_w_te_281028_1_swap_0",
+    "task_type": "counterfactual_inversion",
+    "suite": "grounding_value_swap",
+    "question": "What is the boiling point of water?",
+    "gold_answer": "1274",
+    "world_id": "task_i_cf_w_te_281028_1_world_swap_0",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281028_1": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "100",
+      "target_entity": "water",
+      "source_task_id": "task_i_cf_w_te_281028_1",
+      "variant": 0,
+      "training_counterfactual_answer": "42"
+    }
+  },
+  {
+    "task_id": "task_i_cf_w_te_281028_1_swap_1",
+    "task_type": "counterfactual_inversion",
+    "suite": "grounding_value_swap",
+    "question": "What is the boiling point of water?",
+    "gold_answer": "1485",
+    "world_id": "task_i_cf_w_te_281028_1_world_swap_1",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281028_1": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "100",
+      "target_entity": "water",
+      "source_task_id": "task_i_cf_w_te_281028_1",
+      "variant": 1,
+      "training_counterfactual_answer": "42"
+    }
+  },
+  {
+    "task_id": "task_i_cf_w_te_281028_2_swap_0",
+    "task_type": "counterfactual_inversion",
+    "suite": "grounding_value_swap",
+    "question": "What is the capital of Australia?",
+    "gold_answer": "Kasora",
+    "world_id": "task_i_cf_w_te_281028_2_world_swap_0",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281028_2": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "Canberra",
+      "target_entity": "Australia",
+      "source_task_id": "task_i_cf_w_te_281028_2",
+      "variant": 0,
+      "training_counterfactual_answer": "Sydney"
+    }
+  },
+  {
+    "task_id": "task_i_cf_w_te_281028_2_swap_1",
+    "task_type": "counterfactual_inversion",
+    "suite": "grounding_value_swap",
+    "question": "What is the capital of Australia?",
+    "gold_answer": "Kaseth",
+    "world_id": "task_i_cf_w_te_281028_2_world_swap_1",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281028_2": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "Canberra",
+      "target_entity": "Australia",
+      "source_task_id": "task_i_cf_w_te_281028_2",
+      "variant": 1,
+      "training_counterfactual_answer": "Sydney"
+    }
+  },
+  {
+    "task_id": "task_i_cf_w_te_281029_1_swap_0",
+    "task_type": "counterfactual_inversion",
+    "suite": "grounding_value_swap",
+    "question": "What is the capital of Canada?",
+    "gold_answer": "Mirora",
+    "world_id": "task_i_cf_w_te_281029_1_world_swap_0",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281029_1": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "Ottawa",
+      "target_entity": "Canada",
+      "source_task_id": "task_i_cf_w_te_281029_1",
+      "variant": 0,
+      "training_counterfactual_answer": "Toronto"
+    }
+  },
+  {
+    "task_id": "task_i_cf_w_te_281029_1_swap_1",
+    "task_type": "counterfactual_inversion",
+    "suite": "grounding_value_swap",
+    "question": "What is the capital of Canada?",
+    "gold_answer": "Mireth",
+    "world_id": "task_i_cf_w_te_281029_1_world_swap_1",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281029_1": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "Ottawa",
+      "target_entity": "Canada",
+      "source_task_id": "task_i_cf_w_te_281029_1",
+      "variant": 1,
+      "training_counterfactual_answer": "Toronto"
+    }
+  },
+  {
+    "task_id": "task_i_cf_w_te_281029_2_swap_0",
+    "task_type": "counterfactual_inversion",
+    "suite": "grounding_value_swap",
+    "question": "What is the capital of Australia?",
+    "gold_answer": "Pelora",
+    "world_id": "task_i_cf_w_te_281029_2_world_swap_0",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281029_2": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "Canberra",
+      "target_entity": "Australia",
+      "source_task_id": "task_i_cf_w_te_281029_2",
+      "variant": 0,
+      "training_counterfactual_answer": "Sydney"
+    }
+  },
+  {
+    "task_id": "task_i_cf_w_te_281029_2_swap_1",
+    "task_type": "counterfactual_inversion",
+    "suite": "grounding_value_swap",
+    "question": "What is the capital of Australia?",
+    "gold_answer": "Peleth",
+    "world_id": "task_i_cf_w_te_281029_2_world_swap_1",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281029_2": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "Canberra",
+      "target_entity": "Australia",
+      "source_task_id": "task_i_cf_w_te_281029_2",
+      "variant": 1,
+      "training_counterfactual_answer": "Sydney"
+    }
+  },
+  {
+    "task_id": "task_i_cf_w_te_281030_1_swap_0",
+    "task_type": "counterfactual_inversion",
+    "suite": "grounding_value_swap",
+    "question": "What is the capital of Japan?",
+    "gold_answer": "Zorora",
+    "world_id": "task_i_cf_w_te_281030_1_world_swap_0",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281030_1": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "Tokyo",
+      "target_entity": "Japan",
+      "source_task_id": "task_i_cf_w_te_281030_1",
+      "variant": 0,
+      "training_counterfactual_answer": "Kyoto"
+    }
+  },
+  {
+    "task_id": "task_i_cf_w_te_281030_1_swap_1",
+    "task_type": "counterfactual_inversion",
+    "suite": "grounding_value_swap",
+    "question": "What is the capital of Japan?",
+    "gold_answer": "Zoreth",
+    "world_id": "task_i_cf_w_te_281030_1_world_swap_1",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281030_1": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "Tokyo",
+      "target_entity": "Japan",
+      "source_task_id": "task_i_cf_w_te_281030_1",
+      "variant": 1,
+      "training_counterfactual_answer": "Kyoto"
+    }
+  },
+  {
+    "task_id": "task_i_cf_w_te_281030_2_swap_0",
+    "task_type": "counterfactual_inversion",
+    "suite": "grounding_value_swap",
+    "question": "What is the surface gravity of Earth?",
+    "gold_answer": "1459",
+    "world_id": "task_i_cf_w_te_281030_2_world_swap_0",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281030_2": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "9.8",
+      "target_entity": "Earth",
+      "source_task_id": "task_i_cf_w_te_281030_2",
+      "variant": 0,
+      "training_counterfactual_answer": "2.4"
+    }
+  },
+  {
+    "task_id": "task_i_cf_w_te_281030_2_swap_1",
+    "task_type": "counterfactual_inversion",
+    "suite": "grounding_value_swap",
+    "question": "What is the surface gravity of Earth?",
+    "gold_answer": "1670",
+    "world_id": "task_i_cf_w_te_281030_2_world_swap_1",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281030_2": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "9.8",
+      "target_entity": "Earth",
+      "source_task_id": "task_i_cf_w_te_281030_2",
+      "variant": 1,
+      "training_counterfactual_answer": "2.4"
+    }
+  },
+  {
+    "task_id": "task_i_cf_w_te_281031_1_swap_0",
+    "task_type": "counterfactual_inversion",
+    "suite": "grounding_value_swap",
+    "question": "What is the capital of Australia?",
+    "gold_answer": "Lorora",
+    "world_id": "task_i_cf_w_te_281031_1_world_swap_0",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281031_1": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "Canberra",
+      "target_entity": "Australia",
+      "source_task_id": "task_i_cf_w_te_281031_1",
+      "variant": 0,
+      "training_counterfactual_answer": "Sydney"
+    }
+  },
+  {
+    "task_id": "task_i_cf_w_te_281031_1_swap_1",
+    "task_type": "counterfactual_inversion",
+    "suite": "grounding_value_swap",
+    "question": "What is the capital of Australia?",
+    "gold_answer": "Loreth",
+    "world_id": "task_i_cf_w_te_281031_1_world_swap_1",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281031_1": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "Canberra",
+      "target_entity": "Australia",
+      "source_task_id": "task_i_cf_w_te_281031_1",
+      "variant": 1,
+      "training_counterfactual_answer": "Sydney"
+    }
+  },
+  {
+    "task_id": "task_i_cf_w_te_281031_2_swap_0",
+    "task_type": "counterfactual_inversion",
+    "suite": "grounding_value_swap",
+    "question": "What is the capital of Canada?",
+    "gold_answer": "Finora",
+    "world_id": "task_i_cf_w_te_281031_2_world_swap_0",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281031_2": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "Ottawa",
+      "target_entity": "Canada",
+      "source_task_id": "task_i_cf_w_te_281031_2",
+      "variant": 0,
+      "training_counterfactual_answer": "Toronto"
+    }
+  },
+  {
+    "task_id": "task_i_cf_w_te_281031_2_swap_1",
+    "task_type": "counterfactual_inversion",
+    "suite": "grounding_value_swap",
+    "question": "What is the capital of Canada?",
+    "gold_answer": "Fineth",
+    "world_id": "task_i_cf_w_te_281031_2_world_swap_1",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281031_2": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "Ottawa",
+      "target_entity": "Canada",
+      "source_task_id": "task_i_cf_w_te_281031_2",
+      "variant": 1,
+      "training_counterfactual_answer": "Toronto"
+    }
+  }
+]

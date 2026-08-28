@@ -1,0 +1,58 @@
+{
+  "experiment": "phase25_representation_ablation_v1",
+  "config": "configs/phase25_representation.yaml",
+  "status": "registered_not_run",
+  "screen_variants": 4,
+  "screen_exposure": 88.888889,
+  "seeds": [
+    17,
+    29,
+    41,
+    53,
+    67
+  ],
+  "schedule": {
+    "batch_size": 16,
+    "max_steps": 800,
+    "warmup_steps": 80
+  },
+  "sealed_suite_status": "not_created_not_opened",
+  "arms": {
+    "baseline": {
+      "requires_training": false,
+      "target_mode": "operation",
+      "training_examples": 144,
+      "training_fingerprint": "3562d3949534a32f51225827a45087d2e40a575f67af2edc3753fae349e0dfa7"
+    },
+    "minimal_contrast": {
+      "requires_training": true,
+      "target_mode": "operation",
+      "training_examples": 144,
+      "training_fingerprint": "10ef40aaf9ecf736e0fb3c7b9186fbed06ca3590b73684c337a4bfc8067975f8"
+    },
+    "typed_frame": {
+      "requires_training": true,
+      "target_mode": "typed_frame",
+      "training_examples": 144,
+      "training_fingerprint": "d53bbfb5094039fc6a583d5d46f1de65cca77b29241a38a030e41c7813cf54a3"
+    },
+    "typed_frame_contrast": {
+      "requires_training": true,
+      "target_mode": "typed_frame",
+      "training_examples": 144,
+      "training_fingerprint": "4ce4e7bce20fcf60049a983ecb91957a2316df201e55d4e1505e8dfe04a2afca"
+    }
+  },
+  "baseline_reuse_validation": {
+    "validation": "PASS",
+    "validated_seeds": [
+      17,
+      29,
+      41,
+      53,
+      67
+    ],
+    "source_results": "runs/breadth_reinforcement_v2/results.json",
+    "source_run_dir": "runs/breadth_reinforcement_v2"
+  }
+}

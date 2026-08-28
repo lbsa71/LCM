@@ -1,0 +1,114 @@
+{
+  "phase": "phase4_stagec_sealed_confirmation",
+  "device": "cuda",
+  "cases_per_evaluation": 216,
+  "evaluation_count": 15,
+  "total_wall_clock_seconds": 1.266735,
+  "evaluations": [
+    {
+      "seed": 17,
+      "arm": "matched_generative_baseline",
+      "cases": 216,
+      "wall_clock_seconds": 0.30621,
+      "milliseconds_per_case": 1.41764
+    },
+    {
+      "seed": 17,
+      "arm": "lead_no_consistency",
+      "cases": 216,
+      "wall_clock_seconds": 0.051788,
+      "milliseconds_per_case": 0.239757
+    },
+    {
+      "seed": 17,
+      "arm": "consistency_025",
+      "cases": 216,
+      "wall_clock_seconds": 0.033153,
+      "milliseconds_per_case": 0.153486
+    },
+    {
+      "seed": 29,
+      "arm": "matched_generative_baseline",
+      "cases": 216,
+      "wall_clock_seconds": 0.086538,
+      "milliseconds_per_case": 0.40064
+    },
+    {
+      "seed": 29,
+      "arm": "lead_no_consistency",
+      "cases": 216,
+      "wall_clock_seconds": 0.041577,
+      "milliseconds_per_case": 0.192487
+    },
+    {
+      "seed": 29,
+      "arm": "consistency_025",
+      "cases": 216,
+      "wall_clock_seconds": 0.033392,
+      "milliseconds_per_case": 0.154594
+    },
+    {
+      "seed": 41,
+      "arm": "matched_generative_baseline",
+      "cases": 216,
+      "wall_clock_seconds": 0.08693,
+      "milliseconds_per_case": 0.402455
+    },
+    {
+      "seed": 41,
+      "arm": "lead_no_consistency",
+      "cases": 216,
+      "wall_clock_seconds": 0.035737,
+      "milliseconds_per_case": 0.165448
+    },
+    {
+      "seed": 41,
+      "arm": "consistency_025",
+      "cases": 216,
+      "wall_clock_seconds": 0.035187,
+      "milliseconds_per_case": 0.1629
+    },
+    {
+      "seed": 53,
+      "arm": "matched_generative_baseline",
+      "cases": 216,
+      "wall_clock_seconds": 0.085813,
+      "milliseconds_per_case": 0.397285
+    },
+    {
+      "seed": 53,
+      "arm": "lead_no_consistency",
+      "cases": 216,
+      "wall_clock_seconds": 0.033865,
+      "milliseconds_per_case": 0.156783
+    },
+    {
+      "seed": 53,
+      "arm": "consistency_025",
+      "cases": 216,
+      "wall_clock_seconds": 0.037008,
+      "milliseconds_per_case": 0.171331
+    },
+    {
+      "seed": 67,
+      "arm": "matched_generative_baseline",
+      "cases": 216,
+      "wall_clock_seconds": 0.088353,
+      "milliseconds_per_case": 0.409041
+    },
+    {
+      "seed": 67,
+      "arm": "lead_no_consistency",
+      "cases": 216,
+      "wall_clock_seconds": 0.034685,
+      "milliseconds_per_case": 0.160577
+    },
+    {
+      "seed": 67,
+      "arm": "consistency_025",
+      "cases": 216,
+      "wall_clock_seconds": 0.033356,
+      "milliseconds_per_case": 0.154425
+    }
+  ]
+}

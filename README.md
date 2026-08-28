@@ -1,265 +1,208 @@
-# Large Code Model (LCM) — Synthetic-Only Agentic Language Model POC
+# LCM: Fact-Externalized Language Agents
 
-An end-to-end proof-of-concept for an alternative language-model architecture: a small neural model trained exclusively from random weights on deliberately constructed synthetic language that learns linguistic, semantic, planning, tool-use, and code-synthesis capabilities to solve novel factual tasks inside a deterministic agentic runtime rather than relying on parametric factual memorization.
+> **Research status: paused after feasibility study — 2026-08-28.**
+>
+> This repository is preserved as a research record and stepping stone. It is
+> not a production model, a validated general-purpose agent, or evidence that a
+> fact-free foundation model is feasible. No training is currently authorized.
+> Resumption requires the externally anchored kill test summarized below.
 
----
+## Abstract
 
-## 1. Core Thesis
+LCM investigated whether contingent world knowledge could remain outside model
+weights while a small neural policy learned language interpretation,
+procedural reasoning, planning, and tool use. The prototype combines synthetic
+counterfactual worlds, deterministic `SEARCH` and `READ` tools, constrained
+`MATH` and `FILTER` operations, structured agent messages, proof-addressed
+evaluation, and two model
+families: a compact semantic parser and a direct ReAct-style policy.
 
-Conventional language models simultaneously encode language reasoning patterns and enormous amounts of contingent factual knowledge. This makes reasoning and memorization difficult to separate, leading to stale data, hallucinations, ungrounded answers, and bloated parameter sizes.
+The study found one narrow positive result. Already-pretrained SmolLM2-135M and
+SmolLM2-360M models followed changed document values on 8/10 and 9/10 paired
+counterfactual probes, respectively, without reusing the previous answers.
+The broader results were negative or inconclusive. A scratch-trained compact
+parser mastered familiar forms but remained near chance on its weakest held-out
+language groups; additional form breadth, repetition, counterbalancing,
+consistency supervision, and modest width did not produce sealed semantic
+invariance. Increasing the pretrained policy from 135M to 360M parameters
+improved a repaired development probe by only 1.82 percentage points, with an
+interval spanning zero, at 19.39 times the reported training-loop time. Both
+models scored zero on the repaired multi-hop and retrieval-abstention tracks.
 
-**LCM investigates a different decomposition:**
-- **Neural Model**: Responsible for intent interpretation, planning, tool selection, query generation, program synthesis, observation interpretation, and final answer composition.
-- **Deterministic Shell**: Responsible for execution state, tool invocations, permissions, sandboxing, iteration limits, evidence tracking, and protocol validation.
-- **External Environment**: Responsible for contingent facts, documents, and world state.
+A later validity audit found incomplete demonstrations, missing evidence,
+absent suite coverage, an unenforced seed, and permissive grounding paths in
+the historical pretrained-agent pipeline. Repaired frozen-model probes improve
+the measurement but cannot retroactively validate the training corpus. The
+central claim—a broadly capable model trained from random weights on synthetic,
+fact-externalized language—therefore remains untested. The present evidence
+supports further study of evidence-auditable runtimes, not continued scaling of
+this model family.
 
-The fundamental hypothesis is: **capacity devoted to memorizing contingent world facts can instead be devoted to learning *how to find out*.**
+## Research questions
 
----
+The project combined three hypotheses whose evidence must remain separate.
 
-## 2. Knowledge Boundary
+| Hypothesis | Current conclusion |
+| --- | --- |
+| A neural policy can use external evidence inside a deterministic runtime. | Supported only on a small value-swap diagnostic using already-pretrained models. |
+| A compact semantic bottleneck can map varied language to typed executable actions. | The tested 96-wide scratch parser is rejected as a robust general parser. Larger or pretrained task-specific parsers remain open. |
+| Synthetic, fact-externalized training from random weights can yield a broadly capable small agent. | Not tested at a defensible data scale or with a clean shared comparator. |
 
-| Tier | Category | Status | Examples |
-|---|---|---|---|
-| **Tier A** | Linguistic & Semantic Primitives | Allowed in weights | Syntax, negation, conjunction, relative clauses, pronouns, spatial relations (*above/below, north/south*), quantitative terms (*more/fewer, larger/smaller*). |
-| **Tier B** | Formal Invariants | Allowed in weights | Equality, transitivity, ordering, arithmetic (*add/sub/mul/div*), Boolean logic (*AND/OR/NOT*), set operations. |
-| **Tier C** | Stable Physical Priors | Configurable in weights | Object permanence, non-co-location, containment hierarchies, event sequence. |
-| **Tier D** | Contingent World Knowledge | **Strictly Externalized** | Historical dates, populations, geographic coordinates, prices, names of real people/companies, API endpoints. |
+The pretrained experiments test evidence-conditioned behavior, not fact-free
+learning: SmolLM2 already contains broad linguistic and factual pretraining.
 
----
+## System and method
 
-## 3. System Architecture
+LCM separates four responsibilities:
 
-```
-                    ┌────────────────────────┐
-                    │  Synthetic World Spec  │
-                    └───────────┬────────────┘
-                                │
-                                ▼
-                    ┌────────────────────────┐
-                    │     World / Corpus     │
-                    │       Generator        │
-                    └───────────┬────────────┘
-                                │
-                ┌───────────────┴────────────────┐
-                ▼                                ▼
-      ┌──────────────────┐             ┌─────────────────┐
-      │ Language Corpus  │             │ Agent Episodes  │
-      └─────────┬────────┘             └────────┬────────┘
-                │                               │
-                ▼                               │
-      ┌──────────────────┐                      │
-      │ Base Pretraining │                      │
-      └─────────┬────────┘                      │
-                │                               │
-                └──────────────┬────────────────┘
-                               ▼
-                    ┌──────────────────────┐
-                    │ Agent Trajectory SFT │
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    ┌──────────────────────┐
- Human request ────►│ Deterministic Shell  │
-                    │ + trained model      │
-                    └──────────┬───────────┘
-                               │
-                    Search / Read / Exec
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │ Synthetic World Env  │
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │  Deterministic Eval  │
-                    │ + Proof-Graph Checks │
-                    └──────────────────────┘
-```
+1. a neural policy interprets language and proposes plans or actions;
+2. a deterministic shell manages protocol state, tools, permissions, and
+   budgets;
+3. an external environment holds documents and contingent world state; and
+4. an evaluator checks evidence against hidden proof graphs and expected final
+   state.
 
----
+The main experimental branches were:
 
-## 4. Deterministic Tool Set
+- scratch semantic parsing of `ADD`, `SUBTRACT`, and `COMPARE` under controlled
+  language-form variation;
+- direct pretrained ReAct policies based on SmolLM2-135M and SmolLM2-360M;
+- a historical synthetic-only scratch ReAct model, retained as diagnostic
+  evidence only; and
+- paired counterfactual value swaps intended to distinguish evidence use from
+  fixed-answer reproduction.
 
-1. **`SEARCH(query, limit)`**: Deterministic BM25 / lexical search over synthetic documents with stable tie-breaking.
-2. **`READ(document_id)`**: Line-addressed document reader returning explicit `D{id}:L{line}` identifiers.
-3. **`EXEC(code, inputs)`**: AST-restricted Python evaluator supporting safe arithmetic, comparisons, lists, dicts, `min`, `max`, `sum`, `len`, `sorted`, and list comprehensions (strictly zero filesystem, networking, imports, or dynamic reflection).
+Most parser studies used five paired seeds, matched update budgets, held-out
+pressure groups, paired bootstrap intervals, continuation gates, and a one-time
+sealed confirmation. Software tests enforce implementation invariants; passing
+them does not by itself establish corpus or experimental validity.
 
----
+## Positioning
 
-## 5. Epistemic Scoring Enforcement
+The project extends the controlled-skill tradition represented by
+[bAbI](https://arxiv.org/abs/1502.05698), but treats such tasks as diagnostics,
+not substitutes for broad language. Its typed-representation branch is closer
+to executable [dialogue dataflow](https://www.microsoft.com/en-us/research/blog/dialogue-as-dataflow-a-new-approach-to-conversational-ai/)
+than to a closed universal intent taxonomy. Contemporary pretrained specialists
+such as [FunctionGemma-270M](https://deepmind.google/models/gemma/functiongemma/)
+make an external small-model baseline mandatory. Recent synthetic-environment
+work likewise emphasizes deep, stateful, verifier-backed worlds rather than
+surface-form volume. LCM here is unrelated to Meta's separate
+[Large Concept Model](https://ai.meta.com/research/publications/large-concept-models-language-modeling-in-a-sentence-representation-space/)
+project.
 
-For tasks labeled `REQUIRES_RETRIEVAL`:
-- Producing the correct answer string **without** citing valid document line evidence from the hidden ground-truth `ProofGraph` is scored as an **`UNSUPPORTED_CLAIM` failure**.
-- This prevents parametric lucky guesses from inflating evaluation scores.
+## Results
 
----
+| Experiment | Result | Interpretation |
+| --- | --- | --- |
+| Form breadth, K=1–8 | Familiar form/new operands: 100%. Worst robust group: 23.3–33.3%. Macro peak: 46.3% at K=4. | The parser learned familiar surface families, not a stable operation-invariant boundary. |
+| Repetition tail | At K=8, macro slope −0.25 pp/doubling, 95% CI [−5.04, +4.54]; worst-group slope −1.26, CI [−3.79, 0.00]. | No sustained positive marginal gain; the repetition axis was closed. |
+| Parser sealed confirmation | Worst-group change −2.78 pp, CI [−15.00, +10.00]; held-out templates −32.78 pp. | Consistency increased agreement but not correctness: more consistent errors. |
+| Shared architecture probe | Parser average routing 60.4%; SmolLM2-135M routing 66.7%, execution-ready 54.2%. | Both remained brittle under discourse variation; routing overstated usable action accuracy. |
+| Repaired pretrained probe | 135M: 48.18%; 360M: 50.00%; delta +1.82 pp, world-cluster interval [−2.20, +5.00]. | No reliable capacity gain. |
+| Training-loop cost | 26.3 minutes versus 8.5 hours. | The 360M run cost 19.39× more reported time without a reliable overall benefit. |
+| Paired value swaps | 135M: 17/20 and 8/10 complete pairs; 360M: 18/20 and 9/10 pairs; zero old-answer reuse. | Credible but narrow evidence-conditioned behavior in pretrained models. |
+| Repaired core tracks | Both models: 0% multi-hop and 0% retrieval-abstention. | General-purpose readiness was not demonstrated. |
 
-## 6. Installation & GPU Setup (NVIDIA RTX 4090 / CUDA)
+The historical 300M scratch checkpoint reached 47.8% on an obsolete aggregate
+evaluation, but its corpus failed later validity controls and its interface is
+not comparable with the current benchmark. It cannot support a
+scratch-versus-pretrained ranking.
 
-### Step 1: Clone Repository
-```bash
-git clone https://github.com/lbsa71/LCM.git
-cd LCM
-```
+## Validity limits
 
-### Step 2: Set Up Virtual Environment & Dependencies
-```bash
-# Create Python virtual environment
-python3 -m venv .venv
-source .venv/bin/activate
+The Phase 5 audit found that the historical 184,000-trajectory pretrained
+corpus contained:
 
-# Upgrade pip
-pip install --upgrade pip setuptools wheel
+- 16,000 missing-evidence and 8,000 evidence-disabled demonstrations ending at
+  `SEARCH`, without an observation or terminal answer;
+- sampled counterfactual tasks whose required documents were absent;
+- no multi-hop training or evaluation cases;
+- evidence-disabled evaluations that still retained documents;
+- substantial familiar-question reuse; and
+- a configured 135M seed that was not enforced.
 
-# For GPU machines (CUDA 12.1+ / RTX 4090):
-pip install torch --index-url https://download.pytorch.org/whl/cu121
+The audit repaired several evaluation and corpus-validation paths. Before any
+new training, known blockers still include teacher-side search-hit injection,
+fabricated recovery observations, fallback operands or answers, possible loss
+of terminal targets through truncation, and runtime enforcement that cited
+evidence was actually observed and satisfies the proof graph.
 
-# For CPU-only machines:
-# pip install torch --index-url https://download.pytorch.org/whl/cpu
+Consequently:
 
-# Install core dependencies
-pip install tokenizers pydantic pyyaml pytest
-```
+- historical failures do not establish a universal architectural limit;
+- repaired development probes are not sealed confirmations;
+- cases sampled from a few synthetic worlds are not independent evidence;
+- protocol-valid output is not equivalent to a true or supported answer; and
+- the results provide no defensible timeline to a general-purpose agent.
 
-### Step 3: Verify GPU Detection
-```bash
-python3 -c "import torch; print('CUDA Available:', torch.cuda.is_available(), '| Device:', torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CPU')"
-```
+## Conclusion
 
----
+The broad LCM thesis is neither confirmed nor cleanly falsified. It has not
+received the language diversity, token scale, valid supervision, or external
+baselines required for a fair test. Continuing unchanged would require
+substantially more data engineering and compute while competing with strong
+pretrained small models.
 
-## 7. Running Experiments
+Two narrower conclusions are justified:
 
-### Experiment Presets
+1. the tested compact scratch parser did not acquire robust semantic invariance
+   through additional templates, repetition, modest width, or the tested
+   consistency objectives; and
+2. small pretrained models can follow changed external evidence in a narrow
+   controlled setting, but this did not yield reliable abstention, multi-hop
+   reasoning, or general language robustness.
 
-| Preset | Model Size | Tokens | Purpose | Command |
-|---|---|---|---|---|
-| **`smoke`** | ~1M params | ~5M tokens | Fast pipeline debugging & testing | `make poc` or `--config configs/smoke.yaml` |
-| **`small`** | ~30M params | ~50M tokens | Early learning curve | `--config configs/small.yaml` |
-| **`primary`** | ~80M params | ~100–200M tokens | Main research POC benchmark | `--config configs/primary.yaml` |
-| **`stretch`** | ~200M params | ~300M–1B tokens | Scaling experiment | `--config configs/stretch.yaml` |
+The project is therefore paused. Its continuing value is as a reproducible
+record of negative results, synthetic-data validity failures, evidence-aware
+evaluation machinery, and a possible foundation for a model-independent
+verified-agent benchmark.
 
-### Step-by-Step CLI Execution
+## Conditions for resumption
 
-```bash
-# 1. Generate synthetic world, documents, tasks, and trajectories
-python3 -m synth.generate --config configs/primary.yaml
+The proposed next step is a capped, externally anchored kill test—not another
+open-ended scaling run. It first repairs every oracle, fabricated-observation,
+fallback-answer, silent-truncation, and runtime-proof path. It then compares a
+contemporary small function-calling model, SmolLM2-135M direct ReAct, the same
+backbone with typed executable dataflow, and deterministic/strong-model
+ceilings on identical sealed tasks. A scratch arm is earned only if the
+system-level comparison first shows a clear advantage.
 
-# 2. Train BPE tokenizer from scratch on synthetic corpus
-python3 -m training.tokenizer --config configs/primary.yaml
+The decision-grade test is capped at 14 working days, 120 engineering hours,
+and approximately 50 local GPU-hours before the separately approved scratch
+extension. Candidate continuation gates include a +10 point worst-group gain
+or a 3× efficiency advantage at matched reliability, no core-group regression
+above five points, at least 90% correct absent/withheld-evidence behavior, and
+at least 70% multi-hop final-state success.
 
-# 3. Pretrain base transformer from random weights
-python3 -m training.pretrain --config configs/primary.yaml
+The complete protocol and stopping rules are in
+[docs/kill_test.md](docs/kill_test.md). No part of that experiment has been
+registered or launched.
 
-# 4. Supervised fine-tuning on structured agent trajectories
-python3 -m training.agent_sft --config configs/primary.yaml
+## Research record and reproduction
 
-# 5. Run deterministic evaluation harness & comparative baselines
-python3 -m eval.runner --config configs/primary.yaml
-```
+The curated documentation index is [docs/README.md](docs/README.md). Principal
+evidence includes:
 
-### Quick Execution via Makefile
-```bash
-# Full end-to-end smoke pipeline:
-make poc
+- [clean form-variation curve](docs/history/form_variation_clean_v2.md);
+- [breadth and reinforcement study](docs/history/breadth_reinforcement_v2.md);
+- [completed training-token curve](docs/history/phase3_scaling_complete.md);
+- [parser sealed confirmation](docs/history/phase4_stagec_invariance.md);
+- [shared architecture benchmark](docs/history/architecture_benchmark.md);
+- [Phase 5 validity audit](docs/history/phase5_validity_audit.md); and
+- [feasibility verdict](docs/history/phase5_feasibility_verdict.md).
 
-# Run automated test suite:
-make test
+Create a local environment and run the software verification suite:
 
-# Launch OpenAI-compatible API server:
-make server
-```
-
-### OpenAI-Compatible HTTP API & Frontends
-
-LCM includes a built-in FastAPI server exposing `/v1/models` and `/v1/chat/completions` (with synchronous JSON and SSE streaming):
-
-```bash
-# Launch server
-python3 -m agent.server --config configs/smoke.yaml --port 8000
-```
-
-- **Open WebUI**: `docker run -d -p 3000:8080 -e OPENAI_API_BASE_URL=http://host.docker.internal:8000/v1 ghcr.io/open-webui/open-webui:main`
-- **Evaluation / Proxy Tools**: Works out of the box with **Promptfoo**, **DeepEval**, **Inspect AI**, and **LiteLLM**.
-
----
-
-## 8. Benchmark Evaluation Suites
-
-1. **Suite A — Language Understanding**: Syntax, negation, relative clauses, reference resolution.
-2. **Suite B — Invariant Reasoning**: Spatial ordering, temporal sequences, formal arithmetic invariants.
-3. **Suite C — Single-Hop Retrieval**: Fact acquisition via `SEARCH` → `READ` → `FINAL`.
-4. **Suite D — Multi-Hop Retrieval**: Composed relations (e.g. identify all members in region → retrieve populations → compare).
-5. **Suite E — Retrieval + Computation**: Retrieval composed with `EXEC` code evaluation.
-6. **Suite F — Missing Evidence**: Epistemic abstention (`insufficient_evidence`) when information is withheld.
-7. **Suite G — Tool Recovery**: Recovery from injected tool errors and missed search queries.
-8. **Anti-Memorization Suite**:
-   - **World Permutation Test**: Evaluates identical query semantics across randomized worlds.
-   - **Prior Reversal Test**: Reverses frequently seen correlations to measure evidence obedience.
-   - **Evidence-Disabled Test**: Withholds critical documents to verify the agent abstains instead of guessing.
-   - **Closed-Book Leakage Probe**: Queries real-world historical/geographic facts; correctly scores ungrounded answers as leakage.
-
----
-
-## 9. Automated Test Suite
-
-```bash
-pytest tests/ -v
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -e ".[dev]"
+.\.venv\Scripts\python.exe -m pytest tests/unit/
 ```
 
-Unit and integration tests cover:
-- World generator seed determinism & fact permutation
-- Corpus linter forbidden entity detection
-- Deterministic BM25 search scoring and tie-breaking
-- Line-addressed document reader
-- Restricted AST execution sandbox safety
-- Protocol message validation and turn budgets
-- Oracle 100% ground-truth baseline
-- Epistemic ungrounded guess rejection
-
----
-
-## 10. Repository Structure
-
-```
-.
-├── configs/                  # Experiment presets (smoke, small, primary, stretch)
-│   ├── smoke.yaml
-│   ├── small.yaml
-│   ├── primary.yaml
-│   └── stretch.yaml
-├── specs/                    # Formal boundaries, lexicons, and denylists
-│   ├── knowledge_boundary.yaml
-│   ├── lexicon.yaml
-│   └── forbidden_entities.txt
-├── synth/                    # Synthetic generation engine
-│   ├── ontology.py           # Dataclasses (World, Entity, Fact, Document, ProofGraph)
-│   ├── world.py              # Procedural world generator
-│   ├── language/             # Grammar, lexicons, counterfactual pairs
-│   ├── documents/            # Line-addressed document generator (D_id:L_line)
-│   ├── tasks/                # Benchmark suites (A-G, anti-memorization)
-│   ├── trajectories/         # Agent trajectory generator with loss masking
-│   ├── lint.py               # Contamination and balance linter
-│   ├── manifest.py           # Cryptographic SHA-256 manifest
-│   └── generate.py           # Top-level synthetic CLI
-├── training/                 # Model architecture & training pipelines
-│   ├── model.py              # Pure PyTorch Decoder Transformer (RoPE, SwiGLU, RMSNorm)
-│   ├── tokenizer.py          # Fast BPE tokenizer trainer from scratch
-│   ├── pretrain.py           # Causal next-token pretraining
-│   └── agent_sft.py          # Masked trajectory SFT trainer
-├── agent/                    # Runtime deterministic shell & sandboxed tools
-│   ├── protocol.py           # JSON schema models (PLAN, TOOL_CALL, FINAL)
-│   ├── state.py              # Agent turn and resource tracking
-│   ├── shell.py              # Deterministic ReAct loop
-│   └── tools/                # Deterministic tools (search, read, exec)
-├── eval/                     # Evaluation harness & comparative baselines
-│   ├── oracle.py             # Ground-truth oracle solver (100% target)
-│   ├── baselines/            # Majority, BoW, No-Tool, Rule-based
-│   ├── metrics.py            # Epistemic metrics & failure taxonomy
-│   └── runner.py             # Evaluation runner & HTML report generator
-├── tests/                    # Unit and integration pytest suite
-├── Makefile                  # Developer CLI targets
-└── pyproject.toml            # Project packaging specification
-```
+Historical configurations remain under `configs/` for reproducibility. Large
+checkpoints, ledgers, and generated corpora remain local under ignored `runs/`
+directories; they are evidence for the documented experiments, not endorsed
+production models or authorized future runs. See
+[docs/artifacts.md](docs/artifacts.md) for the retention policy and provenance
+map.

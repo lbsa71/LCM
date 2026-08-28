@@ -1,0 +1,295 @@
+{
+  "baseline": "runs\\smollm2_135m_agent\\frozen_audit_legacy_v1",
+  "candidate": "runs\\smollm2_360m_capacity\\frozen_audit_legacy_v1",
+  "step": 3000,
+  "legacy_grounding": {
+    "tasks": 100,
+    "world_clusters": 10,
+    "before_success_rate": 0.45,
+    "after_success_rate": 0.41,
+    "gain_pp": -4.0,
+    "world_cluster_ci95_pp": [
+      -5.2632,
+      -1.9231
+    ],
+    "independent_training_replicates": 1,
+    "uncertainty_scope": "Conditional on these frozen runs and sampled worlds; not seed uncertainty or a population guarantee."
+  },
+  "legacy_suites": {
+    "anti_memorization_closed_book": {
+      "tasks": 10,
+      "world_clusters": 2,
+      "before_success_rate": 1.0,
+      "after_success_rate": 1.0,
+      "gain_pp": 0.0,
+      "world_cluster_ci95_pp": [
+        0.0,
+        0.0
+      ],
+      "independent_training_replicates": 1,
+      "uncertainty_scope": "Conditional on these frozen runs and sampled worlds; not seed uncertainty or a population guarantee."
+    },
+    "anti_memorization_evidence_disabled": {
+      "tasks": 10,
+      "world_clusters": 10,
+      "before_success_rate": 0.0,
+      "after_success_rate": 0.0,
+      "gain_pp": 0.0,
+      "world_cluster_ci95_pp": [
+        0.0,
+        0.0
+      ],
+      "independent_training_replicates": 1,
+      "uncertainty_scope": "Conditional on these frozen runs and sampled worlds; not seed uncertainty or a population guarantee."
+    },
+    "suite_a_language": {
+      "tasks": 10,
+      "world_clusters": 5,
+      "before_success_rate": 1.0,
+      "after_success_rate": 1.0,
+      "gain_pp": 0.0,
+      "world_cluster_ci95_pp": [
+        0.0,
+        0.0
+      ],
+      "independent_training_replicates": 1,
+      "uncertainty_scope": "Conditional on these frozen runs and sampled worlds; not seed uncertainty or a population guarantee."
+    },
+    "suite_b_invariants": {
+      "tasks": 10,
+      "world_clusters": 5,
+      "before_success_rate": 1.0,
+      "after_success_rate": 1.0,
+      "gain_pp": 0.0,
+      "world_cluster_ci95_pp": [
+        0.0,
+        0.0
+      ],
+      "independent_training_replicates": 1,
+      "uncertainty_scope": "Conditional on these frozen runs and sampled worlds; not seed uncertainty or a population guarantee."
+    },
+    "suite_c_single_hop": {
+      "tasks": 10,
+      "world_clusters": 4,
+      "before_success_rate": 0.4,
+      "after_success_rate": 0.1,
+      "gain_pp": -30.0,
+      "world_cluster_ci95_pp": [
+        -33.3333,
+        -16.6667
+      ],
+      "independent_training_replicates": 1,
+      "uncertainty_scope": "Conditional on these frozen runs and sampled worlds; not seed uncertainty or a population guarantee."
+    },
+    "suite_e_retrieval_computation": {
+      "tasks": 10,
+      "world_clusters": 5,
+      "before_success_rate": 0.0,
+      "after_success_rate": 0.0,
+      "gain_pp": 0.0,
+      "world_cluster_ci95_pp": [
+        0.0,
+        0.0
+      ],
+      "independent_training_replicates": 1,
+      "uncertainty_scope": "Conditional on these frozen runs and sampled worlds; not seed uncertainty or a population guarantee."
+    },
+    "suite_f_missing_evidence": {
+      "tasks": 10,
+      "world_clusters": 5,
+      "before_success_rate": 0.0,
+      "after_success_rate": 0.0,
+      "gain_pp": 0.0,
+      "world_cluster_ci95_pp": [
+        0.0,
+        0.0
+      ],
+      "independent_training_replicates": 1,
+      "uncertainty_scope": "Conditional on these frozen runs and sampled worlds; not seed uncertainty or a population guarantee."
+    },
+    "suite_g_tool_recovery": {
+      "tasks": 10,
+      "world_clusters": 10,
+      "before_success_rate": 0.1,
+      "after_success_rate": 0.0,
+      "gain_pp": -10.0,
+      "world_cluster_ci95_pp": [
+        -30.0,
+        0.0
+      ],
+      "independent_training_replicates": 1,
+      "uncertainty_scope": "Conditional on these frozen runs and sampled worlds; not seed uncertainty or a population guarantee."
+    },
+    "suite_h_direct_computation": {
+      "tasks": 10,
+      "world_clusters": 4,
+      "before_success_rate": 1.0,
+      "after_success_rate": 1.0,
+      "gain_pp": 0.0,
+      "world_cluster_ci95_pp": [
+        0.0,
+        0.0
+      ],
+      "independent_training_replicates": 1,
+      "uncertainty_scope": "Conditional on these frozen runs and sampled worlds; not seed uncertainty or a population guarantee."
+    },
+    "suite_i_counterfactual_inversion": {
+      "tasks": 10,
+      "world_clusters": 5,
+      "before_success_rate": 0.0,
+      "after_success_rate": 0.0,
+      "gain_pp": 0.0,
+      "world_cluster_ci95_pp": [
+        0.0,
+        0.0
+      ],
+      "independent_training_replicates": 1,
+      "uncertainty_scope": "Conditional on these frozen runs and sampled worlds; not seed uncertainty or a population guarantee."
+    }
+  },
+  "strict_grounding": {
+    "tasks": 100,
+    "world_clusters": 10,
+    "before_success_rate": 0.45,
+    "after_success_rate": 0.41,
+    "gain_pp": -4.0,
+    "world_cluster_ci95_pp": [
+      -5.2632,
+      -1.9231
+    ],
+    "independent_training_replicates": 1,
+    "uncertainty_scope": "Conditional on these frozen runs and sampled worlds; not seed uncertainty or a population guarantee."
+  },
+  "strict_suites": {
+    "anti_memorization_closed_book": {
+      "tasks": 10,
+      "world_clusters": 2,
+      "before_success_rate": 1.0,
+      "after_success_rate": 1.0,
+      "gain_pp": 0.0,
+      "world_cluster_ci95_pp": [
+        0.0,
+        0.0
+      ],
+      "independent_training_replicates": 1,
+      "uncertainty_scope": "Conditional on these frozen runs and sampled worlds; not seed uncertainty or a population guarantee."
+    },
+    "anti_memorization_evidence_disabled": {
+      "tasks": 10,
+      "world_clusters": 10,
+      "before_success_rate": 0.0,
+      "after_success_rate": 0.0,
+      "gain_pp": 0.0,
+      "world_cluster_ci95_pp": [
+        0.0,
+        0.0
+      ],
+      "independent_training_replicates": 1,
+      "uncertainty_scope": "Conditional on these frozen runs and sampled worlds; not seed uncertainty or a population guarantee."
+    },
+    "suite_a_language": {
+      "tasks": 10,
+      "world_clusters": 5,
+      "before_success_rate": 1.0,
+      "after_success_rate": 1.0,
+      "gain_pp": 0.0,
+      "world_cluster_ci95_pp": [
+        0.0,
+        0.0
+      ],
+      "independent_training_replicates": 1,
+      "uncertainty_scope": "Conditional on these frozen runs and sampled worlds; not seed uncertainty or a population guarantee."
+    },
+    "suite_b_invariants": {
+      "tasks": 10,
+      "world_clusters": 5,
+      "before_success_rate": 1.0,
+      "after_success_rate": 1.0,
+      "gain_pp": 0.0,
+      "world_cluster_ci95_pp": [
+        0.0,
+        0.0
+      ],
+      "independent_training_replicates": 1,
+      "uncertainty_scope": "Conditional on these frozen runs and sampled worlds; not seed uncertainty or a population guarantee."
+    },
+    "suite_c_single_hop": {
+      "tasks": 10,
+      "world_clusters": 4,
+      "before_success_rate": 0.4,
+      "after_success_rate": 0.1,
+      "gain_pp": -30.0,
+      "world_cluster_ci95_pp": [
+        -33.3333,
+        -16.6667
+      ],
+      "independent_training_replicates": 1,
+      "uncertainty_scope": "Conditional on these frozen runs and sampled worlds; not seed uncertainty or a population guarantee."
+    },
+    "suite_e_retrieval_computation": {
+      "tasks": 10,
+      "world_clusters": 5,
+      "before_success_rate": 0.0,
+      "after_success_rate": 0.0,
+      "gain_pp": 0.0,
+      "world_cluster_ci95_pp": [
+        0.0,
+        0.0
+      ],
+      "independent_training_replicates": 1,
+      "uncertainty_scope": "Conditional on these frozen runs and sampled worlds; not seed uncertainty or a population guarantee."
+    },
+    "suite_f_missing_evidence": {
+      "tasks": 10,
+      "world_clusters": 5,
+      "before_success_rate": 0.0,
+      "after_success_rate": 0.0,
+      "gain_pp": 0.0,
+      "world_cluster_ci95_pp": [
+        0.0,
+        0.0
+      ],
+      "independent_training_replicates": 1,
+      "uncertainty_scope": "Conditional on these frozen runs and sampled worlds; not seed uncertainty or a population guarantee."
+    },
+    "suite_g_tool_recovery": {
+      "tasks": 10,
+      "world_clusters": 10,
+      "before_success_rate": 0.1,
+      "after_success_rate": 0.0,
+      "gain_pp": -10.0,
+      "world_cluster_ci95_pp": [
+        -30.0,
+        0.0
+      ],
+      "independent_training_replicates": 1,
+      "uncertainty_scope": "Conditional on these frozen runs and sampled worlds; not seed uncertainty or a population guarantee."
+    },
+    "suite_h_direct_computation": {
+      "tasks": 10,
+      "world_clusters": 4,
+      "before_success_rate": 1.0,
+      "after_success_rate": 1.0,
+      "gain_pp": 0.0,
+      "world_cluster_ci95_pp": [
+        0.0,
+        0.0
+      ],
+      "independent_training_replicates": 1,
+      "uncertainty_scope": "Conditional on these frozen runs and sampled worlds; not seed uncertainty or a population guarantee."
+    },
+    "suite_i_counterfactual_inversion": {
+      "tasks": 10,
+      "world_clusters": 5,
+      "before_success_rate": 0.0,
+      "after_success_rate": 0.0,
+      "gain_pp": 0.0,
+      "world_cluster_ci95_pp": [
+        0.0,
+        0.0
+      ],
+      "independent_training_replicates": 1,
+      "uncertainty_scope": "Conditional on these frozen runs and sampled worlds; not seed uncertainty or a population guarantee."
+    }
+  }
+}

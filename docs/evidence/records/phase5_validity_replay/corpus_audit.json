@@ -1,0 +1,94 @@
+{
+  "training_trajectories": 0,
+  "nonterminal_trajectories": 0,
+  "training_unique_questions": 0,
+  "train_eval_world_overlap": [],
+  "trajectory_families": {},
+  "suites": {
+    "suite_a_language": {
+      "count": 10,
+      "question_seen_in_training": 0,
+      "missing_required_document_lines": 0,
+      "unique_questions": 2,
+      "worlds": 5
+    },
+    "suite_b_invariants": {
+      "count": 10,
+      "question_seen_in_training": 0,
+      "missing_required_document_lines": 0,
+      "unique_questions": 10,
+      "worlds": 5
+    },
+    "suite_c_single_hop": {
+      "count": 10,
+      "question_seen_in_training": 0,
+      "missing_required_document_lines": 0,
+      "unique_questions": 10,
+      "worlds": 4
+    },
+    "suite_d_multi_hop": {
+      "count": 10,
+      "question_seen_in_training": 0,
+      "missing_required_document_lines": 0,
+      "unique_questions": 10,
+      "worlds": 6
+    },
+    "suite_e_retrieval_computation": {
+      "count": 10,
+      "question_seen_in_training": 0,
+      "missing_required_document_lines": 0,
+      "unique_questions": 10,
+      "worlds": 5
+    },
+    "suite_f_missing_evidence": {
+      "count": 10,
+      "question_seen_in_training": 0,
+      "missing_required_document_lines": 0,
+      "unique_questions": 2,
+      "worlds": 5
+    },
+    "suite_g_tool_recovery": {
+      "count": 10,
+      "question_seen_in_training": 0,
+      "missing_required_document_lines": 0,
+      "unique_questions": 10,
+      "worlds": 10
+    },
+    "suite_h_direct_computation": {
+      "count": 10,
+      "question_seen_in_training": 0,
+      "missing_required_document_lines": 0,
+      "unique_questions": 10,
+      "worlds": 4
+    },
+    "suite_i_counterfactual_inversion": {
+      "count": 10,
+      "question_seen_in_training": 0,
+      "missing_required_document_lines": 0,
+      "unique_questions": 7,
+      "worlds": 5
+    },
+    "anti_memorization_evidence_disabled": {
+      "count": 10,
+      "question_seen_in_training": 0,
+      "missing_required_document_lines": 0,
+      "withhold_flag_but_nonempty_world": 10,
+      "unique_questions": 10,
+      "worlds": 10
+    },
+    "anti_memorization_closed_book": {
+      "count": 10,
+      "question_seen_in_training": 0,
+      "missing_required_document_lines": 0,
+      "closed_book_but_nonempty_world": 10,
+      "unique_questions": 5,
+      "worlds": 2
+    }
+  },
+  "interpretation": "Question overlap is not full-context overlap for retrieval tasks. Nonterminal demonstrations and ineffective evidence withholding need separate controls.",
+  "data_hashes": {
+    "agent_sft_train.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "eval_tasks.json": "a88a3ee0ea790b9de5afbd7c7bb489f48030055677f8eb9a5d4ffd7923fbabff",
+    "eval_worlds.json": "a3fe05b6f8ee0b5dbfb49abd06de1046a4200164802317ed2adb7b147dfde17e"
+  }
+}

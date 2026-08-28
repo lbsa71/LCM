@@ -1,0 +1,88 @@
+{
+  "seed": 29,
+  "arm": "consistency_1",
+  "binding_loss_weight": 0.25,
+  "consistency_weight": 1.0,
+  "pair_count": 144,
+  "pair_batch_size": 8,
+  "sequences_per_step": 16,
+  "train_examples": 288,
+  "steps": 3200,
+  "wall_clock_seconds": 57.06,
+  "final_consistency_loss": 0.000651,
+  "split_details": {
+    "seen_form": {
+      "operation_accuracy": 0.8229,
+      "binding_accuracy": 0.8403,
+      "joint_accuracy": 0.7083
+    },
+    "unseen_form": {
+      "operation_accuracy": 0.5,
+      "binding_accuracy": 0.8333,
+      "joint_accuracy": 0.5
+    },
+    "unseen_operands_seen_form": {
+      "operation_accuracy": 0.8056,
+      "binding_accuracy": 0.8264,
+      "joint_accuracy": 0.7083
+    },
+    "minimal_contrast": {
+      "operation_accuracy": 1.0,
+      "binding_accuracy": 0.6667,
+      "joint_accuracy": 0.6667
+    }
+  },
+  "pressure_groups": {
+    "seen_form_unseen_operands": 0.8889,
+    "held_out_templates": 0.0556,
+    "lexical_shift": 0.5,
+    "syntax_order_reversal": 0.8889,
+    "discourse_distractor": 0.6111,
+    "minimal_contrast": 0.7778
+  },
+  "pressure_group_details": {
+    "seen_form_unseen_operands": {
+      "operation_accuracy": 0.8889,
+      "binding_accuracy": 0.6667,
+      "joint_accuracy": 0.6111
+    },
+    "held_out_templates": {
+      "operation_accuracy": 0.0556,
+      "binding_accuracy": 0.5,
+      "joint_accuracy": 0.0556
+    },
+    "lexical_shift": {
+      "operation_accuracy": 0.5,
+      "binding_accuracy": 0.7222,
+      "joint_accuracy": 0.2222
+    },
+    "syntax_order_reversal": {
+      "operation_accuracy": 0.8889,
+      "binding_accuracy": 0.1667,
+      "joint_accuracy": 0.1667
+    },
+    "discourse_distractor": {
+      "operation_accuracy": 0.6111,
+      "binding_accuracy": 0.6667,
+      "joint_accuracy": 0.2778
+    },
+    "minimal_contrast": {
+      "operation_accuracy": 0.7778,
+      "binding_accuracy": 1.0,
+      "joint_accuracy": 0.7778
+    }
+  },
+  "worst_robust_accuracy": 0.0556,
+  "timer": {
+    "phase": "semantic_invariance",
+    "total_steps": 3200,
+    "total_wall_clock_seconds": 57.06,
+    "avg_ms_per_step": 17.62,
+    "tokens_per_second": 114863.18,
+    "total_tokens": 6553600
+  },
+  "phase4_stagec_training_fingerprint": "af4e0038ce783aa11d2b830b5308bc3e98e016f2964bfb1adcc28b3ac46bbd99",
+  "variants_per_operation": 8,
+  "exposure_target": 177.777778,
+  "tokenizer_mode": "fixed_byte"
+}

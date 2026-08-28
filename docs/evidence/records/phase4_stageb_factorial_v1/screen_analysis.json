@@ -1,0 +1,498 @@
+{
+  "arm_effects": {
+    "weight_1_standard": {
+      "paired_seeds": [
+        17,
+        29,
+        41,
+        53,
+        67
+      ],
+      "worst_group_delta": {
+        "n": 5,
+        "mean": -0.1,
+        "sample_std": 0.0913,
+        "bootstrap_95_ci": [
+          -0.1666,
+          -0.0333
+        ]
+      },
+      "macro_operation_delta": {
+        "n": 5,
+        "mean": -0.0933,
+        "sample_std": 0.0752,
+        "bootstrap_95_ci": [
+          -0.1533,
+          -0.0267
+        ]
+      },
+      "track_operation_deltas": {
+        "held_out_templates": {
+          "n": 5,
+          "mean": -0.0556,
+          "sample_std": 0.0786,
+          "bootstrap_95_ci": [
+            -0.1222,
+            0.0
+          ]
+        },
+        "lexical_shift": {
+          "n": 5,
+          "mean": -0.1111,
+          "sample_std": 0.1039,
+          "bootstrap_95_ci": [
+            -0.1888,
+            -0.0333
+          ]
+        },
+        "syntax_order_reversal": {
+          "n": 5,
+          "mean": -0.2,
+          "sample_std": 0.1949,
+          "bootstrap_95_ci": [
+            -0.3334,
+            -0.0445
+          ]
+        },
+        "discourse_distractor": {
+          "n": 5,
+          "mean": -0.1,
+          "sample_std": 0.2056,
+          "bootstrap_95_ci": [
+            -0.2556,
+            0.0667
+          ]
+        },
+        "minimal_contrast": {
+          "n": 5,
+          "mean": 0.0,
+          "sample_std": 0.0,
+          "bootstrap_95_ci": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "gate_passed": false
+    },
+    "weight_1_scaffold": {
+      "paired_seeds": [
+        17,
+        29,
+        41,
+        53,
+        67
+      ],
+      "worst_group_delta": {
+        "n": 5,
+        "mean": 0.0,
+        "sample_std": 0.1416,
+        "bootstrap_95_ci": [
+          -0.1111,
+          0.1111
+        ]
+      },
+      "macro_operation_delta": {
+        "n": 5,
+        "mean": 0.06,
+        "sample_std": 0.0513,
+        "bootstrap_95_ci": [
+          0.0178,
+          0.0978
+        ]
+      },
+      "track_operation_deltas": {
+        "held_out_templates": {
+          "n": 5,
+          "mean": 0.1555,
+          "sample_std": 0.1068,
+          "bootstrap_95_ci": [
+            0.0889,
+            0.2444
+          ]
+        },
+        "lexical_shift": {
+          "n": 5,
+          "mean": -0.0111,
+          "sample_std": 0.1438,
+          "bootstrap_95_ci": [
+            -0.1222,
+            0.1
+          ]
+        },
+        "syntax_order_reversal": {
+          "n": 5,
+          "mean": -0.1334,
+          "sample_std": 0.1152,
+          "bootstrap_95_ci": [
+            -0.2223,
+            -0.0445
+          ]
+        },
+        "discourse_distractor": {
+          "n": 5,
+          "mean": -0.0444,
+          "sample_std": 0.0724,
+          "bootstrap_95_ci": [
+            -0.1,
+            0.0111
+          ]
+        },
+        "minimal_contrast": {
+          "n": 5,
+          "mean": 0.3334,
+          "sample_std": 0.1884,
+          "bootstrap_95_ci": [
+            0.2,
+            0.4889
+          ]
+        }
+      },
+      "gate_passed": false
+    },
+    "weight_025_standard": {
+      "paired_seeds": [
+        17,
+        29,
+        41,
+        53,
+        67
+      ],
+      "worst_group_delta": {
+        "n": 5,
+        "mean": -0.1,
+        "sample_std": 0.0913,
+        "bootstrap_95_ci": [
+          -0.1666,
+          -0.0333
+        ]
+      },
+      "macro_operation_delta": {
+        "n": 5,
+        "mean": -0.08,
+        "sample_std": 0.044,
+        "bootstrap_95_ci": [
+          -0.12,
+          -0.0533
+        ]
+      },
+      "track_operation_deltas": {
+        "held_out_templates": {
+          "n": 5,
+          "mean": -0.0222,
+          "sample_std": 0.1394,
+          "bootstrap_95_ci": [
+            -0.1333,
+            0.0889
+          ]
+        },
+        "lexical_shift": {
+          "n": 5,
+          "mean": -0.1111,
+          "sample_std": 0.1039,
+          "bootstrap_95_ci": [
+            -0.1888,
+            -0.0333
+          ]
+        },
+        "syntax_order_reversal": {
+          "n": 5,
+          "mean": -0.1889,
+          "sample_std": 0.1826,
+          "bootstrap_95_ci": [
+            -0.3334,
+            -0.0445
+          ]
+        },
+        "discourse_distractor": {
+          "n": 5,
+          "mean": -0.0778,
+          "sample_std": 0.0843,
+          "bootstrap_95_ci": [
+            -0.1445,
+            -0.0111
+          ]
+        },
+        "minimal_contrast": {
+          "n": 5,
+          "mean": 0.0,
+          "sample_std": 0.0,
+          "bootstrap_95_ci": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "gate_passed": false
+    },
+    "weight_025_scaffold": {
+      "paired_seeds": [
+        17,
+        29,
+        41,
+        53,
+        67
+      ],
+      "worst_group_delta": {
+        "n": 5,
+        "mean": 0.0111,
+        "sample_std": 0.2018,
+        "bootstrap_95_ci": [
+          -0.1666,
+          0.1555
+        ]
+      },
+      "macro_operation_delta": {
+        "n": 5,
+        "mean": 0.1267,
+        "sample_std": 0.0696,
+        "bootstrap_95_ci": [
+          0.0733,
+          0.18
+        ]
+      },
+      "track_operation_deltas": {
+        "held_out_templates": {
+          "n": 5,
+          "mean": 0.0556,
+          "sample_std": 0.1111,
+          "bootstrap_95_ci": [
+            -0.0333,
+            0.1333
+          ]
+        },
+        "lexical_shift": {
+          "n": 5,
+          "mean": 0.0445,
+          "sample_std": 0.227,
+          "bootstrap_95_ci": [
+            -0.1444,
+            0.2111
+          ]
+        },
+        "syntax_order_reversal": {
+          "n": 5,
+          "mean": -0.1,
+          "sample_std": 0.1591,
+          "bootstrap_95_ci": [
+            -0.2001,
+            0.0333
+          ]
+        },
+        "discourse_distractor": {
+          "n": 5,
+          "mean": 0.0778,
+          "sample_std": 0.0842,
+          "bootstrap_95_ci": [
+            0.0111,
+            0.1444
+          ]
+        },
+        "minimal_contrast": {
+          "n": 5,
+          "mean": 0.5556,
+          "sample_std": 0.1416,
+          "bootstrap_95_ci": [
+            0.4334,
+            0.6556
+          ]
+        }
+      },
+      "gate_passed": false
+    }
+  },
+  "factorial_effects": {
+    "scaffold_at_weight_1": {
+      "operation_worst": {
+        "n": 5,
+        "mean": 0.1,
+        "sample_std": 0.1685,
+        "bootstrap_95_ci": [
+          -0.0333,
+          0.211
+        ]
+      },
+      "operation_macro": {
+        "n": 5,
+        "mean": 0.1533,
+        "sample_std": 0.0963,
+        "bootstrap_95_ci": [
+          0.0889,
+          0.2378
+        ]
+      },
+      "binding_macro": {
+        "n": 5,
+        "mean": 0.0222,
+        "sample_std": 0.0451,
+        "bootstrap_95_ci": [
+          -0.0111,
+          0.06
+        ]
+      },
+      "joint_macro": {
+        "n": 5,
+        "mean": 0.1244,
+        "sample_std": 0.064,
+        "bootstrap_95_ci": [
+          0.0844,
+          0.18
+        ]
+      }
+    },
+    "scaffold_at_weight_025": {
+      "operation_worst": {
+        "n": 5,
+        "mean": 0.1111,
+        "sample_std": 0.1521,
+        "bootstrap_95_ci": [
+          -0.0111,
+          0.2222
+        ]
+      },
+      "operation_macro": {
+        "n": 5,
+        "mean": 0.2067,
+        "sample_std": 0.088,
+        "bootstrap_95_ci": [
+          0.14,
+          0.2733
+        ]
+      },
+      "binding_macro": {
+        "n": 5,
+        "mean": 0.0556,
+        "sample_std": 0.0782,
+        "bootstrap_95_ci": [
+          -0.0067,
+          0.1178
+        ]
+      },
+      "joint_macro": {
+        "n": 5,
+        "mean": 0.22,
+        "sample_std": 0.0467,
+        "bootstrap_95_ci": [
+          0.18,
+          0.2511
+        ]
+      }
+    },
+    "reduced_weight_standard": {
+      "operation_worst": {
+        "n": 5,
+        "mean": 0.0,
+        "sample_std": 0.0,
+        "bootstrap_95_ci": [
+          0.0,
+          0.0
+        ]
+      },
+      "operation_macro": {
+        "n": 5,
+        "mean": 0.0133,
+        "sample_std": 0.064,
+        "bootstrap_95_ci": [
+          -0.0444,
+          0.0467
+        ]
+      },
+      "binding_macro": {
+        "n": 5,
+        "mean": -0.02,
+        "sample_std": 0.0165,
+        "bootstrap_95_ci": [
+          -0.0333,
+          -0.0089
+        ]
+      },
+      "joint_macro": {
+        "n": 5,
+        "mean": -0.0089,
+        "sample_std": 0.0626,
+        "bootstrap_95_ci": [
+          -0.0622,
+          0.0333
+        ]
+      }
+    },
+    "reduced_weight_scaffold": {
+      "operation_worst": {
+        "n": 5,
+        "mean": 0.0111,
+        "sample_std": 0.2056,
+        "bootstrap_95_ci": [
+          -0.1444,
+          0.1777
+        ]
+      },
+      "operation_macro": {
+        "n": 5,
+        "mean": 0.0667,
+        "sample_std": 0.0956,
+        "bootstrap_95_ci": [
+          -0.0089,
+          0.1422
+        ]
+      },
+      "binding_macro": {
+        "n": 5,
+        "mean": 0.0133,
+        "sample_std": 0.07,
+        "bootstrap_95_ci": [
+          -0.0378,
+          0.0711
+        ]
+      },
+      "joint_macro": {
+        "n": 5,
+        "mean": 0.0867,
+        "sample_std": 0.0682,
+        "bootstrap_95_ci": [
+          0.0333,
+          0.1378
+        ]
+      }
+    },
+    "interaction": {
+      "operation_worst": {
+        "n": 5,
+        "mean": 0.0111,
+        "sample_std": 0.2056,
+        "bootstrap_95_ci": [
+          -0.1444,
+          0.1777
+        ]
+      },
+      "operation_macro": {
+        "n": 5,
+        "mean": 0.0533,
+        "sample_std": 0.081,
+        "bootstrap_95_ci": [
+          -0.0133,
+          0.1133
+        ]
+      },
+      "binding_macro": {
+        "n": 5,
+        "mean": 0.0333,
+        "sample_std": 0.0643,
+        "bootstrap_95_ci": [
+          -0.0111,
+          0.0867
+        ]
+      },
+      "joint_macro": {
+        "n": 5,
+        "mean": 0.0956,
+        "sample_std": 0.0727,
+        "bootstrap_95_ci": [
+          0.0378,
+          0.1511
+        ]
+      }
+    }
+  },
+  "selected_arm": null,
+  "sealed_confirmation_required": false
+}

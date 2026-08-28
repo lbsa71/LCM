@@ -1,0 +1,38 @@
+{
+  "experiment": "phase4_stagec_invariance_v1",
+  "config": "configs/phase4_stagec_invariance.yaml",
+  "source_validation": "PASS",
+  "seeds": [
+    17,
+    29,
+    41,
+    53,
+    67
+  ],
+  "base_schedule": {
+    "batch_size": 16,
+    "max_steps": 3200,
+    "warmup_steps": 320
+  },
+  "pair_schedule": {
+    "pair_batch_size": 8,
+    "sequences_per_step": 16,
+    "max_steps": 3200,
+    "warmup_steps": 320
+  },
+  "train_examples": 288,
+  "pair_count": 144,
+  "pairing_sha256": "31e8b2cec8e5739107199888ca8af0cf90aeb6a5adb28dc923ca475e7508d06a",
+  "development_examples": 108,
+  "arm_fingerprints": {
+    "matched_generative_baseline": "97e8af6084dc33df43d6c1dfa097e82cbe7e7e324fe4f9b8222ecd341c2e109e",
+    "lead_no_consistency": "728d5f978ad5e24d0c8e60341c5cae692a5f508f2484bf3a43ff0a8f330e5a07",
+    "consistency_025": "8de8b87a5e3567b0d2ce61575a908931907fcf9b8bb37b1de594a601175514a7",
+    "consistency_1": "af4e0038ce783aa11d2b830b5308bc3e98e016f2964bfb1adcc28b3ac46bbd99"
+  },
+  "gate": {
+    "minimum_worst_group_gain": 0.1,
+    "maximum_track_regression": 0.05
+  },
+  "sealed_suite_created": false
+}

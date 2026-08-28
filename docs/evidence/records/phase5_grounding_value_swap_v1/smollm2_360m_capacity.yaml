@@ -1,0 +1,53 @@
+agent_runtime:
+  greedy: true
+  max_exec_calls: 4
+  max_read_calls: 8
+  max_search_calls: 6
+  max_tokens_per_turn: 256
+  max_turns: 14
+  temperature: 0.0
+agent_sft:
+  batch_size: 4
+  device: auto
+  eval_interval: 250
+  gradient_accumulation_steps: 8
+  learning_rate: 0.0002
+  max_steps: 3000
+  min_learning_rate: 2.0e-05
+  save_milestones:
+  - 1000
+  - 2000
+  - 3000
+  warmup_steps: 200
+  weight_decay: 0.01
+backend: huggingface
+checkpoint_path: runs/smollm2_360m_capacity/agent_model
+corpus:
+  counterfactual_pairs_per_world: 10
+  distractor_docs_per_world: 15
+  docs_per_world: 30
+  facts_per_world: 50
+  task_types_per_world: 12
+  test_worlds: 400
+  train_worlds: 8000
+  trajectory_samples_per_world: 14
+  val_worlds: 400
+eval:
+  suites:
+  - grounding_value_swap
+evaluation_only: true
+name: smollm2_360m_capacity
+pretrained_model_name: HuggingFaceTB/SmolLM2-360M
+seed: 42
+special_tokens:
+- <PAD>
+- <BOS>
+- <EOS>
+- <UNK>
+- <USER>
+- <ASSISTANT>
+- <TOOL>
+- <OBSERVATION>
+- <PLAN>
+- <ACTION>
+- <FINAL>

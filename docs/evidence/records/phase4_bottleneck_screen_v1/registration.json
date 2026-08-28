@@ -1,0 +1,34 @@
+{
+  "experiment": "phase4_bottleneck_screen_v1",
+  "config": "configs/phase4_bottleneck_screen.yaml",
+  "source_results": "runs\\breadth_reinforcement_v2\\results.json",
+  "source_cell": "K8/R178",
+  "historical_reference_validation": "PASS",
+  "seeds": [
+    17,
+    29,
+    41,
+    53,
+    67
+  ],
+  "schedule": {
+    "batch_size": 16,
+    "max_steps": 3200,
+    "warmup_steps": 320
+  },
+  "train_examples": 288,
+  "binding_label_counts": {
+    "A_FIRST": 144,
+    "B_FIRST": 144
+  },
+  "arm_fingerprints": {
+    "matched_generative_baseline": "97e8af6084dc33df43d6c1dfa097e82cbe7e7e324fe4f9b8222ecd341c2e109e",
+    "discriminative_operation": "a98c18f49912cc2b648c922ac3435dda96c3006738d7e5d921a380b076c26025",
+    "discriminative_operation_binding": "fc854956ca238b4ee340930f786d6b5428c0411fedbe0fa33913554cfb48b26c"
+  },
+  "gate": {
+    "minimum_worst_group_gain": 0.1,
+    "maximum_track_regression": 0.05
+  },
+  "training_started": false
+}

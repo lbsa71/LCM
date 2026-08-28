@@ -1,0 +1,515 @@
+{
+  "experiment": "phase25_representation_ablation_v1",
+  "stage": "A_frozen_checkpoint_probe",
+  "source_exposure_key": "R89",
+  "variants": [
+    4,
+    8
+  ],
+  "seeds": [
+    17,
+    29,
+    41,
+    53,
+    67
+  ],
+  "development_suite_only": true,
+  "runs": {
+    "4": [
+      {
+        "seed": 17,
+        "checkpoint": "runs\\breadth_reinforcement_v2\\variants_4\\R89\\seed_17\\parser_final.pt",
+        "groups": {
+          "seen_form_unseen_operands": {
+            "decoder_operation_accuracy": 1.0,
+            "probe_operation_accuracy": 1.0,
+            "canonical_role_accuracy": 0.9444,
+            "mean_absolute_value_error": 243.7617
+          },
+          "held_out_templates": {
+            "decoder_operation_accuracy": 0.5,
+            "probe_operation_accuracy": 0.6667,
+            "canonical_role_accuracy": 0.9167,
+            "mean_absolute_value_error": 338.42
+          },
+          "lexical_shift": {
+            "decoder_operation_accuracy": 0.3333,
+            "probe_operation_accuracy": 0.3333,
+            "canonical_role_accuracy": 0.8889,
+            "mean_absolute_value_error": 280.5624
+          },
+          "syntax_order_reversal": {
+            "decoder_operation_accuracy": 0.3333,
+            "probe_operation_accuracy": 0.3333,
+            "canonical_role_accuracy": 0.8889,
+            "mean_absolute_value_error": 269.3522
+          },
+          "discourse_distractor": {
+            "decoder_operation_accuracy": 0.3333,
+            "probe_operation_accuracy": 0.6667,
+            "canonical_role_accuracy": 0.9444,
+            "mean_absolute_value_error": 140.8465
+          },
+          "minimal_contrast": {
+            "decoder_operation_accuracy": 0.3333,
+            "probe_operation_accuracy": 0.3333,
+            "canonical_role_accuracy": 0.9444,
+            "mean_absolute_value_error": 205.5989,
+            "minimal_contrast_triplet_consistency": 0.0
+          }
+        },
+        "worst_probe_operation_accuracy": 0.3333,
+        "macro_probe_operation_accuracy": 0.46665999999999996
+      },
+      {
+        "seed": 29,
+        "checkpoint": "runs\\breadth_reinforcement_v2\\variants_4\\R89\\seed_29\\parser_final.pt",
+        "groups": {
+          "seen_form_unseen_operands": {
+            "decoder_operation_accuracy": 1.0,
+            "probe_operation_accuracy": 1.0,
+            "canonical_role_accuracy": 0.8889,
+            "mean_absolute_value_error": 198.2445
+          },
+          "held_out_templates": {
+            "decoder_operation_accuracy": 0.6667,
+            "probe_operation_accuracy": 0.6667,
+            "canonical_role_accuracy": 0.9444,
+            "mean_absolute_value_error": 218.5197
+          },
+          "lexical_shift": {
+            "decoder_operation_accuracy": 0.3333,
+            "probe_operation_accuracy": 0.3333,
+            "canonical_role_accuracy": 0.9444,
+            "mean_absolute_value_error": 239.8684
+          },
+          "syntax_order_reversal": {
+            "decoder_operation_accuracy": 0.3333,
+            "probe_operation_accuracy": 0.6111,
+            "canonical_role_accuracy": 1.0,
+            "mean_absolute_value_error": 198.7415
+          },
+          "discourse_distractor": {
+            "decoder_operation_accuracy": 0.3333,
+            "probe_operation_accuracy": 0.6667,
+            "canonical_role_accuracy": 0.9444,
+            "mean_absolute_value_error": 184.5378
+          },
+          "minimal_contrast": {
+            "decoder_operation_accuracy": 0.3333,
+            "probe_operation_accuracy": 0.3333,
+            "canonical_role_accuracy": 0.9444,
+            "mean_absolute_value_error": 167.2428,
+            "minimal_contrast_triplet_consistency": 0.0
+          }
+        },
+        "worst_probe_operation_accuracy": 0.3333,
+        "macro_probe_operation_accuracy": 0.52222
+      },
+      {
+        "seed": 41,
+        "checkpoint": "runs\\breadth_reinforcement_v2\\variants_4\\R89\\seed_41\\parser_final.pt",
+        "groups": {
+          "seen_form_unseen_operands": {
+            "decoder_operation_accuracy": 1.0,
+            "probe_operation_accuracy": 1.0,
+            "canonical_role_accuracy": 0.8889,
+            "mean_absolute_value_error": 247.4953
+          },
+          "held_out_templates": {
+            "decoder_operation_accuracy": 0.6667,
+            "probe_operation_accuracy": 0.3889,
+            "canonical_role_accuracy": 0.9444,
+            "mean_absolute_value_error": 226.5277
+          },
+          "lexical_shift": {
+            "decoder_operation_accuracy": 0.3333,
+            "probe_operation_accuracy": 0.6667,
+            "canonical_role_accuracy": 0.9444,
+            "mean_absolute_value_error": 117.5443
+          },
+          "syntax_order_reversal": {
+            "decoder_operation_accuracy": 0.6667,
+            "probe_operation_accuracy": 0.6667,
+            "canonical_role_accuracy": 1.0,
+            "mean_absolute_value_error": 154.5283
+          },
+          "discourse_distractor": {
+            "decoder_operation_accuracy": 0.3333,
+            "probe_operation_accuracy": 0.3333,
+            "canonical_role_accuracy": 0.8889,
+            "mean_absolute_value_error": 202.7096
+          },
+          "minimal_contrast": {
+            "decoder_operation_accuracy": 0.3333,
+            "probe_operation_accuracy": 0.6667,
+            "canonical_role_accuracy": 1.0,
+            "mean_absolute_value_error": 250.4287,
+            "minimal_contrast_triplet_consistency": 0.0
+          }
+        },
+        "worst_probe_operation_accuracy": 0.3333,
+        "macro_probe_operation_accuracy": 0.5444599999999999
+      },
+      {
+        "seed": 53,
+        "checkpoint": "runs\\breadth_reinforcement_v2\\variants_4\\R89\\seed_53\\parser_final.pt",
+        "groups": {
+          "seen_form_unseen_operands": {
+            "decoder_operation_accuracy": 1.0,
+            "probe_operation_accuracy": 1.0,
+            "canonical_role_accuracy": 0.9444,
+            "mean_absolute_value_error": 216.1877
+          },
+          "held_out_templates": {
+            "decoder_operation_accuracy": 0.3333,
+            "probe_operation_accuracy": 0.1944,
+            "canonical_role_accuracy": 0.8611,
+            "mean_absolute_value_error": 252.2449
+          },
+          "lexical_shift": {
+            "decoder_operation_accuracy": 0.0556,
+            "probe_operation_accuracy": 0.0,
+            "canonical_role_accuracy": 1.0,
+            "mean_absolute_value_error": 235.9926
+          },
+          "syntax_order_reversal": {
+            "decoder_operation_accuracy": 0.0,
+            "probe_operation_accuracy": 0.6667,
+            "canonical_role_accuracy": 1.0,
+            "mean_absolute_value_error": 217.0388
+          },
+          "discourse_distractor": {
+            "decoder_operation_accuracy": 0.6667,
+            "probe_operation_accuracy": 0.3333,
+            "canonical_role_accuracy": 1.0,
+            "mean_absolute_value_error": 148.0917
+          },
+          "minimal_contrast": {
+            "decoder_operation_accuracy": 0.3333,
+            "probe_operation_accuracy": 0.3333,
+            "canonical_role_accuracy": 0.9444,
+            "mean_absolute_value_error": 336.747,
+            "minimal_contrast_triplet_consistency": 0.0
+          }
+        },
+        "worst_probe_operation_accuracy": 0.0,
+        "macro_probe_operation_accuracy": 0.30554
+      },
+      {
+        "seed": 67,
+        "checkpoint": "runs\\breadth_reinforcement_v2\\variants_4\\R89\\seed_67\\parser_final.pt",
+        "groups": {
+          "seen_form_unseen_operands": {
+            "decoder_operation_accuracy": 1.0,
+            "probe_operation_accuracy": 1.0,
+            "canonical_role_accuracy": 0.7222,
+            "mean_absolute_value_error": 242.6252
+          },
+          "held_out_templates": {
+            "decoder_operation_accuracy": 0.6111,
+            "probe_operation_accuracy": 0.6667,
+            "canonical_role_accuracy": 0.7778,
+            "mean_absolute_value_error": 241.8284
+          },
+          "lexical_shift": {
+            "decoder_operation_accuracy": 0.3333,
+            "probe_operation_accuracy": 0.3333,
+            "canonical_role_accuracy": 0.8889,
+            "mean_absolute_value_error": 381.2247
+          },
+          "syntax_order_reversal": {
+            "decoder_operation_accuracy": 0.0,
+            "probe_operation_accuracy": 0.4444,
+            "canonical_role_accuracy": 0.8889,
+            "mean_absolute_value_error": 240.4606
+          },
+          "discourse_distractor": {
+            "decoder_operation_accuracy": 0.6667,
+            "probe_operation_accuracy": 0.6667,
+            "canonical_role_accuracy": 0.9444,
+            "mean_absolute_value_error": 188.8703
+          },
+          "minimal_contrast": {
+            "decoder_operation_accuracy": 0.6667,
+            "probe_operation_accuracy": 0.3333,
+            "canonical_role_accuracy": 0.7778,
+            "mean_absolute_value_error": 246.5824,
+            "minimal_contrast_triplet_consistency": 0.0
+          }
+        },
+        "worst_probe_operation_accuracy": 0.3333,
+        "macro_probe_operation_accuracy": 0.48888
+      }
+    ],
+    "8": [
+      {
+        "seed": 17,
+        "checkpoint": "runs\\breadth_reinforcement_v2\\variants_8\\R89\\seed_17\\parser_final.pt",
+        "groups": {
+          "seen_form_unseen_operands": {
+            "decoder_operation_accuracy": 1.0,
+            "probe_operation_accuracy": 1.0,
+            "canonical_role_accuracy": 1.0,
+            "mean_absolute_value_error": 214.4079
+          },
+          "held_out_templates": {
+            "decoder_operation_accuracy": 0.3333,
+            "probe_operation_accuracy": 0.5,
+            "canonical_role_accuracy": 0.9167,
+            "mean_absolute_value_error": 196.8407
+          },
+          "lexical_shift": {
+            "decoder_operation_accuracy": 0.2222,
+            "probe_operation_accuracy": 0.7222,
+            "canonical_role_accuracy": 0.8889,
+            "mean_absolute_value_error": 253.4385
+          },
+          "syntax_order_reversal": {
+            "decoder_operation_accuracy": 0.6111,
+            "probe_operation_accuracy": 0.6667,
+            "canonical_role_accuracy": 0.8333,
+            "mean_absolute_value_error": 201.7392
+          },
+          "discourse_distractor": {
+            "decoder_operation_accuracy": 0.5,
+            "probe_operation_accuracy": 0.6667,
+            "canonical_role_accuracy": 1.0,
+            "mean_absolute_value_error": 210.7253
+          },
+          "minimal_contrast": {
+            "decoder_operation_accuracy": 0.6667,
+            "probe_operation_accuracy": 0.3333,
+            "canonical_role_accuracy": 0.9444,
+            "mean_absolute_value_error": 238.1495,
+            "minimal_contrast_triplet_consistency": 0.0
+          }
+        },
+        "worst_probe_operation_accuracy": 0.3333,
+        "macro_probe_operation_accuracy": 0.57778
+      },
+      {
+        "seed": 29,
+        "checkpoint": "runs\\breadth_reinforcement_v2\\variants_8\\R89\\seed_29\\parser_final.pt",
+        "groups": {
+          "seen_form_unseen_operands": {
+            "decoder_operation_accuracy": 1.0,
+            "probe_operation_accuracy": 1.0,
+            "canonical_role_accuracy": 0.9444,
+            "mean_absolute_value_error": 213.5452
+          },
+          "held_out_templates": {
+            "decoder_operation_accuracy": 0.1667,
+            "probe_operation_accuracy": 0.5,
+            "canonical_role_accuracy": 0.8889,
+            "mean_absolute_value_error": 206.8259
+          },
+          "lexical_shift": {
+            "decoder_operation_accuracy": 0.0,
+            "probe_operation_accuracy": 0.2222,
+            "canonical_role_accuracy": 0.8889,
+            "mean_absolute_value_error": 211.2975
+          },
+          "syntax_order_reversal": {
+            "decoder_operation_accuracy": 0.6667,
+            "probe_operation_accuracy": 0.6667,
+            "canonical_role_accuracy": 0.8889,
+            "mean_absolute_value_error": 181.6872
+          },
+          "discourse_distractor": {
+            "decoder_operation_accuracy": 0.3333,
+            "probe_operation_accuracy": 0.3333,
+            "canonical_role_accuracy": 0.9444,
+            "mean_absolute_value_error": 195.4905
+          },
+          "minimal_contrast": {
+            "decoder_operation_accuracy": 0.6667,
+            "probe_operation_accuracy": 0.3333,
+            "canonical_role_accuracy": 0.9444,
+            "mean_absolute_value_error": 167.3247,
+            "minimal_contrast_triplet_consistency": 0.0
+          }
+        },
+        "worst_probe_operation_accuracy": 0.2222,
+        "macro_probe_operation_accuracy": 0.41109999999999997
+      },
+      {
+        "seed": 41,
+        "checkpoint": "runs\\breadth_reinforcement_v2\\variants_8\\R89\\seed_41\\parser_final.pt",
+        "groups": {
+          "seen_form_unseen_operands": {
+            "decoder_operation_accuracy": 1.0,
+            "probe_operation_accuracy": 1.0,
+            "canonical_role_accuracy": 0.8333,
+            "mean_absolute_value_error": 223.4516
+          },
+          "held_out_templates": {
+            "decoder_operation_accuracy": 0.3333,
+            "probe_operation_accuracy": 0.5,
+            "canonical_role_accuracy": 0.9444,
+            "mean_absolute_value_error": 231.5204
+          },
+          "lexical_shift": {
+            "decoder_operation_accuracy": 0.3333,
+            "probe_operation_accuracy": 0.3333,
+            "canonical_role_accuracy": 1.0,
+            "mean_absolute_value_error": 223.6683
+          },
+          "syntax_order_reversal": {
+            "decoder_operation_accuracy": 0.5556,
+            "probe_operation_accuracy": 0.6667,
+            "canonical_role_accuracy": 0.8889,
+            "mean_absolute_value_error": 243.1859
+          },
+          "discourse_distractor": {
+            "decoder_operation_accuracy": 0.6667,
+            "probe_operation_accuracy": 0.3333,
+            "canonical_role_accuracy": 0.9444,
+            "mean_absolute_value_error": 217.3665
+          },
+          "minimal_contrast": {
+            "decoder_operation_accuracy": 0.3333,
+            "probe_operation_accuracy": 0.3333,
+            "canonical_role_accuracy": 1.0,
+            "mean_absolute_value_error": 241.607,
+            "minimal_contrast_triplet_consistency": 0.0
+          }
+        },
+        "worst_probe_operation_accuracy": 0.3333,
+        "macro_probe_operation_accuracy": 0.43332
+      },
+      {
+        "seed": 53,
+        "checkpoint": "runs\\breadth_reinforcement_v2\\variants_8\\R89\\seed_53\\parser_final.pt",
+        "groups": {
+          "seen_form_unseen_operands": {
+            "decoder_operation_accuracy": 1.0,
+            "probe_operation_accuracy": 1.0,
+            "canonical_role_accuracy": 0.9444,
+            "mean_absolute_value_error": 226.509
+          },
+          "held_out_templates": {
+            "decoder_operation_accuracy": 0.3333,
+            "probe_operation_accuracy": 0.1667,
+            "canonical_role_accuracy": 0.8889,
+            "mean_absolute_value_error": 231.6523
+          },
+          "lexical_shift": {
+            "decoder_operation_accuracy": 0.1667,
+            "probe_operation_accuracy": 0.3889,
+            "canonical_role_accuracy": 0.9444,
+            "mean_absolute_value_error": 211.3248
+          },
+          "syntax_order_reversal": {
+            "decoder_operation_accuracy": 0.6667,
+            "probe_operation_accuracy": 0.6667,
+            "canonical_role_accuracy": 0.9444,
+            "mean_absolute_value_error": 225.8807
+          },
+          "discourse_distractor": {
+            "decoder_operation_accuracy": 0.3333,
+            "probe_operation_accuracy": 0.5556,
+            "canonical_role_accuracy": 1.0,
+            "mean_absolute_value_error": 207.0765
+          },
+          "minimal_contrast": {
+            "decoder_operation_accuracy": 0.3333,
+            "probe_operation_accuracy": 0.3333,
+            "canonical_role_accuracy": 0.8889,
+            "mean_absolute_value_error": 194.1304,
+            "minimal_contrast_triplet_consistency": 0.0
+          }
+        },
+        "worst_probe_operation_accuracy": 0.1667,
+        "macro_probe_operation_accuracy": 0.42223999999999995
+      },
+      {
+        "seed": 67,
+        "checkpoint": "runs\\breadth_reinforcement_v2\\variants_8\\R89\\seed_67\\parser_final.pt",
+        "groups": {
+          "seen_form_unseen_operands": {
+            "decoder_operation_accuracy": 1.0,
+            "probe_operation_accuracy": 1.0,
+            "canonical_role_accuracy": 0.7778,
+            "mean_absolute_value_error": 228.2033
+          },
+          "held_out_templates": {
+            "decoder_operation_accuracy": 0.6667,
+            "probe_operation_accuracy": 0.6667,
+            "canonical_role_accuracy": 0.9167,
+            "mean_absolute_value_error": 250.9403
+          },
+          "lexical_shift": {
+            "decoder_operation_accuracy": 0.0,
+            "probe_operation_accuracy": 0.3333,
+            "canonical_role_accuracy": 0.7778,
+            "mean_absolute_value_error": 274.9105
+          },
+          "syntax_order_reversal": {
+            "decoder_operation_accuracy": 0.6667,
+            "probe_operation_accuracy": 0.6667,
+            "canonical_role_accuracy": 0.7778,
+            "mean_absolute_value_error": 220.1877
+          },
+          "discourse_distractor": {
+            "decoder_operation_accuracy": 0.6667,
+            "probe_operation_accuracy": 0.6667,
+            "canonical_role_accuracy": 0.9444,
+            "mean_absolute_value_error": 188.792
+          },
+          "minimal_contrast": {
+            "decoder_operation_accuracy": 0.3333,
+            "probe_operation_accuracy": 0.3333,
+            "canonical_role_accuracy": 0.9444,
+            "mean_absolute_value_error": 154.9618,
+            "minimal_contrast_triplet_consistency": 0.0
+          }
+        },
+        "worst_probe_operation_accuracy": 0.3333,
+        "macro_probe_operation_accuracy": 0.5333399999999999
+      }
+    ]
+  },
+  "summary": {
+    "4": {
+      "worst_probe_operation_accuracy": {
+        "n": 5,
+        "mean": 0.2666,
+        "sample_std": 0.1491,
+        "bootstrap_95_ci": [
+          0.1333,
+          0.3333
+        ]
+      },
+      "macro_probe_operation_accuracy": {
+        "n": 5,
+        "mean": 0.4656,
+        "sample_std": 0.0943,
+        "bootstrap_95_ci": [
+          0.3811,
+          0.5245
+        ]
+      }
+    },
+    "8": {
+      "worst_probe_operation_accuracy": {
+        "n": 5,
+        "mean": 0.2778,
+        "sample_std": 0.0785,
+        "bootstrap_95_ci": [
+          0.2111,
+          0.3333
+        ]
+      },
+      "macro_probe_operation_accuracy": {
+        "n": 5,
+        "mean": 0.4756,
+        "sample_std": 0.0751,
+        "bootstrap_95_ci": [
+          0.42,
+          0.5378
+        ]
+      }
+    }
+  }
+}

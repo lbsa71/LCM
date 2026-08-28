@@ -1,0 +1,53 @@
+{
+  "experiment": "phase29_discourse_augmentation_factorial_v1",
+  "manifests": {
+    "baseline": {
+      "tokenizer_policy": "training_examples_only",
+      "training_example_count": 288,
+      "development_example_count": 126,
+      "sealed_example_count": 0,
+      "train_development_exact_overlap_count": 0,
+      "train_sealed_exact_overlap_count": 0,
+      "development_sealed_exact_overlap_count": 0,
+      "training_corpus_sha256": "a3c9cad623ede610e1e6fefd60bd6a3c0bc4e898a56cf50d3ad18a04194a7c46",
+      "tokenizer_corpus_sha256": "a3c9cad623ede610e1e6fefd60bd6a3c0bc4e898a56cf50d3ad18a04194a7c46",
+      "validation": "PASS"
+    },
+    "counterfactual_replacement": {
+      "tokenizer_policy": "training_examples_only",
+      "training_example_count": 288,
+      "development_example_count": 126,
+      "sealed_example_count": 0,
+      "train_development_exact_overlap_count": 0,
+      "train_sealed_exact_overlap_count": 0,
+      "development_sealed_exact_overlap_count": 0,
+      "training_corpus_sha256": "49bdcd90fc8af688362580072c7fb229512d6408bdddf23837bb08196f5564bc",
+      "tokenizer_corpus_sha256": "49bdcd90fc8af688362580072c7fb229512d6408bdddf23837bb08196f5564bc",
+      "validation": "PASS"
+    },
+    "augmentation_fixed_updates": {
+      "tokenizer_policy": "training_examples_only",
+      "training_example_count": 360,
+      "development_example_count": 126,
+      "sealed_example_count": 0,
+      "train_development_exact_overlap_count": 0,
+      "train_sealed_exact_overlap_count": 0,
+      "development_sealed_exact_overlap_count": 0,
+      "training_corpus_sha256": "42cbc7cc4b88aee38d024b63d290713ed9ba233779485b98c7b7add703d6760d",
+      "tokenizer_corpus_sha256": "42cbc7cc4b88aee38d024b63d290713ed9ba233779485b98c7b7add703d6760d",
+      "validation": "PASS"
+    },
+    "augmentation_matched_exposure": {
+      "tokenizer_policy": "training_examples_only",
+      "training_example_count": 360,
+      "development_example_count": 126,
+      "sealed_example_count": 0,
+      "train_development_exact_overlap_count": 0,
+      "train_sealed_exact_overlap_count": 0,
+      "development_sealed_exact_overlap_count": 0,
+      "training_corpus_sha256": "42cbc7cc4b88aee38d024b63d290713ed9ba233779485b98c7b7add703d6760d",
+      "tokenizer_corpus_sha256": "42cbc7cc4b88aee38d024b63d290713ed9ba233779485b98c7b7add703d6760d",
+      "validation": "PASS"
+    }
+  }
+}

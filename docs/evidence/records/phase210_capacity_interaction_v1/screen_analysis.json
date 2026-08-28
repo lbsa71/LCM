@@ -1,0 +1,182 @@
+{
+  "capacity_effects": {
+    "worst_robust_accuracy": {
+      "capacity_without_augmentation": {
+        "n": 5,
+        "mean": 0.0334,
+        "sample_std": 0.2564,
+        "bootstrap_95_ci": [
+          -0.1555,
+          0.2222
+        ],
+        "paired_seeds": [
+          97,
+          101,
+          103,
+          107,
+          109
+        ]
+      },
+      "capacity_with_augmentation": {
+        "n": 5,
+        "mean": -0.0111,
+        "sample_std": 0.2009,
+        "bootstrap_95_ci": [
+          -0.1611,
+          0.15
+        ],
+        "paired_seeds": [
+          97,
+          101,
+          103,
+          107,
+          109
+        ]
+      },
+      "interaction": {
+        "n": 5,
+        "mean": -0.0445,
+        "sample_std": 0.4076,
+        "bootstrap_95_ci": [
+          -0.3278,
+          0.3222
+        ],
+        "paired_seeds": [
+          97,
+          101,
+          103,
+          107,
+          109
+        ]
+      }
+    },
+    "macro_robust_accuracy": {
+      "capacity_without_augmentation": {
+        "n": 5,
+        "mean": 0.0045,
+        "sample_std": 0.0848,
+        "bootstrap_95_ci": [
+          -0.06,
+          0.0733
+        ],
+        "paired_seeds": [
+          97,
+          101,
+          103,
+          107,
+          109
+        ]
+      },
+      "capacity_with_augmentation": {
+        "n": 5,
+        "mean": 0.0233,
+        "sample_std": 0.1041,
+        "bootstrap_95_ci": [
+          -0.0622,
+          0.1067
+        ],
+        "paired_seeds": [
+          97,
+          101,
+          103,
+          107,
+          109
+        ]
+      },
+      "interaction": {
+        "n": 5,
+        "mean": 0.0189,
+        "sample_std": 0.1472,
+        "bootstrap_95_ci": [
+          -0.0767,
+          0.1467
+        ],
+        "paired_seeds": [
+          97,
+          101,
+          103,
+          107,
+          109
+        ]
+      }
+    }
+  },
+  "wide_gate": {
+    "gate": {
+      "minimum_worst_group_gain": 0.1,
+      "paired_bootstrap_lower_bound_must_exceed": 0.0,
+      "maximum_individual_track_regression": 0.05
+    },
+    "arms": {
+      "wide_augmentation": {
+        "paired_seeds": [
+          97,
+          101,
+          103,
+          107,
+          109
+        ],
+        "worst_group_delta": {
+          "n": 5,
+          "mean": -0.1,
+          "sample_std": 0.2346,
+          "bootstrap_95_ci": [
+            -0.2611,
+            0.1056
+          ]
+        },
+        "track_deltas": {
+          "held_out_templates": {
+            "n": 5,
+            "mean": -0.1667,
+            "sample_std": 0.1483,
+            "bootstrap_95_ci": [
+              -0.2722,
+              -0.0389
+            ]
+          },
+          "lexical_shift": {
+            "n": 5,
+            "mean": -0.0111,
+            "sample_std": 0.2166,
+            "bootstrap_95_ci": [
+              -0.2,
+              0.1667
+            ]
+          },
+          "syntax_order_reversal": {
+            "n": 5,
+            "mean": 0.0222,
+            "sample_std": 0.2767,
+            "bootstrap_95_ci": [
+              -0.2,
+              0.2667
+            ]
+          },
+          "discourse_distractor": {
+            "n": 5,
+            "mean": 0.1111,
+            "sample_std": 0.3334,
+            "bootstrap_95_ci": [
+              -0.1112,
+              0.4
+            ]
+          },
+          "minimal_contrast": {
+            "n": 5,
+            "mean": -0.0111,
+            "sample_std": 0.2435,
+            "bootstrap_95_ci": [
+              -0.2,
+              0.1778
+            ]
+          }
+        },
+        "no_track_regression_over_5pp": false,
+        "passes_continuation_gate": false
+      }
+    },
+    "selected_arm": null
+  },
+  "selected_arm": null
+}

@@ -1,0 +1,67 @@
+{
+  "experiment": "phase4_stageb_factorial_v1",
+  "config": "configs/phase4_stageb_factorial.yaml",
+  "stagea_output_dir": "runs\\phase4_bottleneck_screen_v1",
+  "source_validation": "PASS",
+  "seeds": [
+    17,
+    29,
+    41,
+    53,
+    67
+  ],
+  "schedule": {
+    "batch_size": 16,
+    "max_steps": 3200,
+    "warmup_steps": 320
+  },
+  "train_examples": 288,
+  "development_examples": 108,
+  "binding_label_counts": {
+    "ordinary": {
+      "A_FIRST": 144,
+      "B_FIRST": 144
+    },
+    "scaffold": {
+      "A_FIRST": 144,
+      "B_FIRST": 144
+    }
+  },
+  "arm_fingerprints": {
+    "matched_generative_baseline": "97e8af6084dc33df43d6c1dfa097e82cbe7e7e324fe4f9b8222ecd341c2e109e",
+    "weight_1_standard": "fc854956ca238b4ee340930f786d6b5428c0411fedbe0fa33913554cfb48b26c",
+    "weight_1_scaffold": "1ada1902b2c579bc44c2adf8115a7bd54f0db41763a98576e33ea1ebb7c7ca95",
+    "weight_025_standard": "0248057480bc738520fb3228120aaad1fa700d51f54478b8c755bdcfe53253b7",
+    "weight_025_scaffold": "728d5f978ad5e24d0c8e60341c5cae692a5f508f2484bf3a43ff0a8f330e5a07"
+  },
+  "arms": {
+    "matched_generative_baseline": {
+      "requires_training": false,
+      "source_arm": "matched_generative_baseline"
+    },
+    "weight_1_standard": {
+      "requires_training": false,
+      "source_arm": "discriminative_operation_binding"
+    },
+    "weight_1_scaffold": {
+      "requires_training": true,
+      "binding_loss_weight": 1.0,
+      "corpus": "scaffold"
+    },
+    "weight_025_standard": {
+      "requires_training": true,
+      "binding_loss_weight": 0.25,
+      "corpus": "ordinary"
+    },
+    "weight_025_scaffold": {
+      "requires_training": true,
+      "binding_loss_weight": 0.25,
+      "corpus": "scaffold"
+    }
+  },
+  "gate": {
+    "minimum_worst_group_gain": 0.1,
+    "maximum_track_regression": 0.05
+  },
+  "sealed_suite_created": false
+}

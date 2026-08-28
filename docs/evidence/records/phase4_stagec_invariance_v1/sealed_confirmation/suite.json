@@ -1,0 +1,1742 @@
+{
+  "seen_form_unseen_operands": [
+    {
+      "utterance": "Combine the values 4001 and 1999.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8000,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "Combine 1999 with 4001.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8001,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "Combine the values 4127 and 2063.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8000,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "Combine 2063 with 4127.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8001,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "Combine the values 4259 and 2129.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8000,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "Combine 2129 with 4259.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8001,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "Combine the values 4391 and 2197.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8000,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "Combine 2197 with 4391.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8001,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "Combine the values 4523 and 2267.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8000,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "Combine 2267 with 4523.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8001,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "Combine the values 4657 and 2333.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8000,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "Combine 2333 with 4657.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8001,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "Starting from 4001, remove 1999.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8010,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "Remove 1999 from the starting value 4001.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8011,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "Starting from 4127, remove 2063.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8010,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "Remove 2063 from the starting value 4127.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8011,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "Starting from 4259, remove 2129.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8010,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "Remove 2129 from the starting value 4259.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8011,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "Starting from 4391, remove 2197.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8010,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "Remove 2197 from the starting value 4391.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8011,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "Starting from 4523, remove 2267.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8010,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "Remove 2267 from the starting value 4523.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8011,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "Starting from 4657, remove 2333.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8010,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "Remove 2333 from the starting value 4657.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8011,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "Determine whether 4001 is above 1999.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8020,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "Taking 1999 as the benchmark, is 4001 above it?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8021,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "Determine whether 4127 is above 2063.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8020,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "Taking 2063 as the benchmark, is 4127 above it?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8021,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "Determine whether 4259 is above 2129.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8020,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "Taking 2129 as the benchmark, is 4259 above it?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8021,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "Determine whether 4391 is above 2197.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8020,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "Taking 2197 as the benchmark, is 4391 above it?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8021,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "Determine whether 4523 is above 2267.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8020,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "Taking 2267 as the benchmark, is 4523 above it?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8021,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "Determine whether 4657 is above 2333.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8020,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "Taking 2333 as the benchmark, is 4657 above it?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8021,
+      "left": 4657,
+      "right": 2333
+    }
+  ],
+  "held_out_templates": [
+    {
+      "utterance": "What quantity emerges by merging 4001 with 1999?",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8100,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "The first part is 1999; merge it with 4001.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8101,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "What quantity emerges by merging 4127 with 2063?",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8100,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "The first part is 2063; merge it with 4127.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8101,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "What quantity emerges by merging 4259 with 2129?",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8100,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "The first part is 2129; merge it with 4259.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8101,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "What quantity emerges by merging 4391 with 2197?",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8100,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "The first part is 2197; merge it with 4391.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8101,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "What quantity emerges by merging 4523 with 2267?",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8100,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "The first part is 2267; merge it with 4523.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8101,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "What quantity emerges by merging 4657 with 2333?",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8100,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "The first part is 2333; merge it with 4657.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8101,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "How much of 4001 survives a reduction by 1999?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8110,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "The reduction is 1999; apply it to 4001 and report what survives.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8111,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "How much of 4127 survives a reduction by 2063?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8110,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "The reduction is 2063; apply it to 4127 and report what survives.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8111,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "How much of 4259 survives a reduction by 2129?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8110,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "The reduction is 2129; apply it to 4259 and report what survives.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8111,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "How much of 4391 survives a reduction by 2197?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8110,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "The reduction is 2197; apply it to 4391 and report what survives.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8111,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "How much of 4523 survives a reduction by 2267?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8110,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "The reduction is 2267; apply it to 4523 and report what survives.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8111,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "How much of 4657 survives a reduction by 2333?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8110,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "The reduction is 2333; apply it to 4657 and report what survives.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8111,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "Choose whether 4001 stands higher than 1999.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8120,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "With 1999 as the reference point, does 4001 stand higher?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8121,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "Choose whether 4127 stands higher than 2063.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8120,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "With 2063 as the reference point, does 4127 stand higher?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8121,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "Choose whether 4259 stands higher than 2129.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8120,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "With 2129 as the reference point, does 4259 stand higher?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8121,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "Choose whether 4391 stands higher than 2197.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8120,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "With 2197 as the reference point, does 4391 stand higher?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8121,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "Choose whether 4523 stands higher than 2267.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8120,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "With 2267 as the reference point, does 4523 stand higher?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8121,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "Choose whether 4657 stands higher than 2333.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8120,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "With 2333 as the reference point, does 4657 stand higher?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8121,
+      "left": 4657,
+      "right": 2333
+    }
+  ],
+  "lexical_shift": [
+    {
+      "utterance": "Accumulate 4001 together with 1999.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8200,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "Accrete 1999 onto 4001.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8201,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "Accumulate 4127 together with 2063.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8200,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "Accrete 2063 onto 4127.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8201,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "Accumulate 4259 together with 2129.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8200,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "Accrete 2129 onto 4259.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8201,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "Accumulate 4391 together with 2197.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8200,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "Accrete 2197 onto 4391.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8201,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "Accumulate 4523 together with 2267.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8200,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "Accrete 2267 onto 4523.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8201,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "Accumulate 4657 together with 2333.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8200,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "Accrete 2333 onto 4657.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8201,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "What margin does 4001 retain over 1999?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8210,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "Relative to 1999, what margin does 4001 retain?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8211,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "What margin does 4127 retain over 2063?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8210,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "Relative to 2063, what margin does 4127 retain?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8211,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "What margin does 4259 retain over 2129?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8210,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "Relative to 2129, what margin does 4259 retain?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8211,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "What margin does 4391 retain over 2197?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8210,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "Relative to 2197, what margin does 4391 retain?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8211,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "What margin does 4523 retain over 2267?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8210,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "Relative to 2267, what margin does 4523 retain?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8211,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "What margin does 4657 retain over 2333?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8210,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "Relative to 2333, what margin does 4657 retain?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8211,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "Does 4001 outrank 1999 numerically?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8220,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "Against 1999, does 4001 outrank it numerically?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8221,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "Does 4127 outrank 2063 numerically?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8220,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "Against 2063, does 4127 outrank it numerically?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8221,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "Does 4259 outrank 2129 numerically?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8220,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "Against 2129, does 4259 outrank it numerically?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8221,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "Does 4391 outrank 2197 numerically?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8220,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "Against 2197, does 4391 outrank it numerically?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8221,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "Does 4523 outrank 2267 numerically?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8220,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "Against 2267, does 4523 outrank it numerically?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8221,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "Does 4657 outrank 2333 numerically?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8220,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "Against 2333, does 4657 outrank it numerically?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8221,
+      "left": 4657,
+      "right": 2333
+    }
+  ],
+  "syntax_order_reversal": [
+    {
+      "utterance": "The total after 4001 receives 1999 is what?",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8300,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "Added to 1999, what total does 4001 produce?",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8301,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "The total after 4127 receives 2063 is what?",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8300,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "Added to 2063, what total does 4127 produce?",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8301,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "The total after 4259 receives 2129 is what?",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8300,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "Added to 2129, what total does 4259 produce?",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8301,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "The total after 4391 receives 2197 is what?",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8300,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "Added to 2197, what total does 4391 produce?",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8301,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "The total after 4523 receives 2267 is what?",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8300,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "Added to 2267, what total does 4523 produce?",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8301,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "The total after 4657 receives 2333 is what?",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8300,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "Added to 2333, what total does 4657 produce?",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8301,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "Starting at 4001, taking out 1999 leaves what?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8310,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "Taken out is 1999; the source amount is 4001. What remains?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8311,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "Starting at 4127, taking out 2063 leaves what?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8310,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "Taken out is 2063; the source amount is 4127. What remains?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8311,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "Starting at 4259, taking out 2129 leaves what?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8310,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "Taken out is 2129; the source amount is 4259. What remains?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8311,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "Starting at 4391, taking out 2197 leaves what?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8310,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "Taken out is 2197; the source amount is 4391. What remains?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8311,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "Starting at 4523, taking out 2267 leaves what?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8310,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "Taken out is 2267; the source amount is 4523. What remains?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8311,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "Starting at 4657, taking out 2333 leaves what?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8310,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "Taken out is 2333; the source amount is 4657. What remains?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8311,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "The candidate is 4001; above 1999 is it?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8320,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "The benchmark being 1999, above it is 4001?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8321,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "The candidate is 4127; above 2063 is it?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8320,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "The benchmark being 2063, above it is 4127?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8321,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "The candidate is 4259; above 2129 is it?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8320,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "The benchmark being 2129, above it is 4259?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8321,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "The candidate is 4391; above 2197 is it?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8320,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "The benchmark being 2197, above it is 4391?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8321,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "The candidate is 4523; above 2267 is it?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8320,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "The benchmark being 2267, above it is 4523?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8321,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "The candidate is 4657; above 2333 is it?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8320,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "The benchmark being 2333, above it is 4657?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8321,
+      "left": 4657,
+      "right": 2333
+    }
+  ],
+  "discourse_distractor": [
+    {
+      "utterance": "Whether 4001 exceeds 1999 is beside the point; supply their total.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8400,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "Do not subtract 1999 from 4001; supply their total.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8401,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "Whether 4127 exceeds 2063 is beside the point; supply their total.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8400,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "Do not subtract 2063 from 4127; supply their total.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8401,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "Whether 4259 exceeds 2129 is beside the point; supply their total.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8400,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "Do not subtract 2129 from 4259; supply their total.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8401,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "Whether 4391 exceeds 2197 is beside the point; supply their total.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8400,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "Do not subtract 2197 from 4391; supply their total.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8401,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "Whether 4523 exceeds 2267 is beside the point; supply their total.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8400,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "Do not subtract 2267 from 4523; supply their total.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8401,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "Whether 4657 exceeds 2333 is beside the point; supply their total.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8400,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "Do not subtract 2333 from 4657; supply their total.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8401,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "Do not report the total of 4001 and 1999; report the former minus the latter.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8410,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "Although 1999 could be compared with 4001, remove it from 4001.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8411,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "Do not report the total of 4127 and 2063; report the former minus the latter.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8410,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "Although 2063 could be compared with 4127, remove it from 4127.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8411,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "Do not report the total of 4259 and 2129; report the former minus the latter.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8410,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "Although 2129 could be compared with 4259, remove it from 4259.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8411,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "Do not report the total of 4391 and 2197; report the former minus the latter.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8410,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "Although 2197 could be compared with 4391, remove it from 4391.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8411,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "Do not report the total of 4523 and 2267; report the former minus the latter.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8410,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "Although 2267 could be compared with 4523, remove it from 4523.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8411,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "Do not report the total of 4657 and 2333; report the former minus the latter.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8410,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "Although 2333 could be compared with 4657, remove it from 4657.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8411,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "A sum of 4001 and 1999 is not requested; say whether the former is larger.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8420,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "Subtracting 1999 from 4001 is unnecessary; say whether 4001 is larger.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8421,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "A sum of 4127 and 2063 is not requested; say whether the former is larger.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8420,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "Subtracting 2063 from 4127 is unnecessary; say whether 4127 is larger.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8421,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "A sum of 4259 and 2129 is not requested; say whether the former is larger.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8420,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "Subtracting 2129 from 4259 is unnecessary; say whether 4259 is larger.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8421,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "A sum of 4391 and 2197 is not requested; say whether the former is larger.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8420,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "Subtracting 2197 from 4391 is unnecessary; say whether 4391 is larger.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8421,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "A sum of 4523 and 2267 is not requested; say whether the former is larger.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8420,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "Subtracting 2267 from 4523 is unnecessary; say whether 4523 is larger.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8421,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "A sum of 4657 and 2333 is not requested; say whether the former is larger.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8420,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "Subtracting 2333 from 4657 is unnecessary; say whether 4657 is larger.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8421,
+      "left": 4657,
+      "right": 2333
+    }
+  ],
+  "minimal_contrast": [
+    {
+      "utterance": "Two ledgers record 4001 taves and 1999 nims. Give the combined quantity.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8500,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "Two ledgers record 1999 nims and 4001 taves. Give the combined quantity.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8501,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "Two ledgers record 4127 taves and 2063 nims. Give the combined quantity.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8500,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "Two ledgers record 2063 nims and 4127 taves. Give the combined quantity.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8501,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "Two ledgers record 4259 taves and 2129 nims. Give the combined quantity.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8500,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "Two ledgers record 2129 nims and 4259 taves. Give the combined quantity.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8501,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "Two ledgers record 4391 taves and 2197 nims. Give the combined quantity.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8500,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "Two ledgers record 2197 nims and 4391 taves. Give the combined quantity.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8501,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "Two ledgers record 4523 taves and 2267 nims. Give the combined quantity.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8500,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "Two ledgers record 2267 nims and 4523 taves. Give the combined quantity.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8501,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "Two ledgers record 4657 taves and 2333 nims. Give the combined quantity.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8500,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "Two ledgers record 2333 nims and 4657 taves. Give the combined quantity.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 8501,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "Two ledgers record 4001 taves and 1999 nims. Give the tave remainder.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8510,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "Two ledgers record 1999 nims and 4001 taves. Give the tave remainder.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8511,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "Two ledgers record 4127 taves and 2063 nims. Give the tave remainder.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8510,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "Two ledgers record 2063 nims and 4127 taves. Give the tave remainder.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8511,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "Two ledgers record 4259 taves and 2129 nims. Give the tave remainder.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8510,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "Two ledgers record 2129 nims and 4259 taves. Give the tave remainder.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8511,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "Two ledgers record 4391 taves and 2197 nims. Give the tave remainder.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8510,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "Two ledgers record 2197 nims and 4391 taves. Give the tave remainder.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8511,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "Two ledgers record 4523 taves and 2267 nims. Give the tave remainder.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8510,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "Two ledgers record 2267 nims and 4523 taves. Give the tave remainder.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8511,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "Two ledgers record 4657 taves and 2333 nims. Give the tave remainder.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8510,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "Two ledgers record 2333 nims and 4657 taves. Give the tave remainder.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 8511,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "Two ledgers record 4001 taves and 1999 nims. Are taves more numerous?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8520,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "Two ledgers record 1999 nims and 4001 taves. Are taves more numerous?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8521,
+      "left": 4001,
+      "right": 1999
+    },
+    {
+      "utterance": "Two ledgers record 4127 taves and 2063 nims. Are taves more numerous?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8520,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "Two ledgers record 2063 nims and 4127 taves. Are taves more numerous?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8521,
+      "left": 4127,
+      "right": 2063
+    },
+    {
+      "utterance": "Two ledgers record 4259 taves and 2129 nims. Are taves more numerous?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8520,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "Two ledgers record 2129 nims and 4259 taves. Are taves more numerous?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8521,
+      "left": 4259,
+      "right": 2129
+    },
+    {
+      "utterance": "Two ledgers record 4391 taves and 2197 nims. Are taves more numerous?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8520,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "Two ledgers record 2197 nims and 4391 taves. Are taves more numerous?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8521,
+      "left": 4391,
+      "right": 2197
+    },
+    {
+      "utterance": "Two ledgers record 4523 taves and 2267 nims. Are taves more numerous?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8520,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "Two ledgers record 2267 nims and 4523 taves. Are taves more numerous?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8521,
+      "left": 4523,
+      "right": 2267
+    },
+    {
+      "utterance": "Two ledgers record 4657 taves and 2333 nims. Are taves more numerous?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8520,
+      "left": 4657,
+      "right": 2333
+    },
+    {
+      "utterance": "Two ledgers record 2333 nims and 4657 taves. Are taves more numerous?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 8521,
+      "left": 4657,
+      "right": 2333
+    }
+  ]
+}

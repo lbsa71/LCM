@@ -4,7 +4,7 @@ PYTHON = ./.venv/bin/python
 PYTEST = ./.venv/bin/pytest
 
 help:
-	@echo "Large Code Model (LCM) — Synthetic-Only Agentic Language Model POC"
+	@echo "LCM research artifact — project paused; training targets are historical"
 	@echo "Targets:"
 	@echo "  make synth-smoke       Generate synthetic smoke dataset"
 	@echo "  make tokenizer-smoke   Train BPE tokenizer on smoke corpus"
@@ -43,4 +43,5 @@ test:
 	$(PYTEST) tests/ -v
 
 clean:
-	rm -rf runs/ .pytest_cache/
+	rm -rf .pytest_cache/
+	@echo "Preserved ignored runs/ and scratch/ research artifacts"

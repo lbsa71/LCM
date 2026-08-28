@@ -1,0 +1,80 @@
+{
+  "total_eval_tasks": 100,
+  "overall_task_success_rate": 0.43,
+  "overall_grounded_success_rate": 0.41,
+  "unsupported_claim_rate": 0.02,
+  "overall_prior_contamination_rate": 0.01,
+  "suite_metrics": {
+    "suite_a_language": {
+      "total_tasks": 10,
+      "task_success_rate": 1.0,
+      "grounded_success_rate": 1.0,
+      "prior_contamination_rate": 0.0
+    },
+    "suite_b_invariants": {
+      "total_tasks": 10,
+      "task_success_rate": 1.0,
+      "grounded_success_rate": 1.0,
+      "prior_contamination_rate": 0.0
+    },
+    "suite_c_single_hop": {
+      "total_tasks": 10,
+      "task_success_rate": 0.3,
+      "grounded_success_rate": 0.1,
+      "prior_contamination_rate": 0.0
+    },
+    "suite_e_retrieval_computation": {
+      "total_tasks": 10,
+      "task_success_rate": 0.0,
+      "grounded_success_rate": 0.0,
+      "prior_contamination_rate": 0.0
+    },
+    "suite_f_missing_evidence": {
+      "total_tasks": 10,
+      "task_success_rate": 0.0,
+      "grounded_success_rate": 0.0,
+      "prior_contamination_rate": 0.0
+    },
+    "suite_g_tool_recovery": {
+      "total_tasks": 10,
+      "task_success_rate": 0.0,
+      "grounded_success_rate": 0.0,
+      "prior_contamination_rate": 0.0
+    },
+    "suite_h_direct_computation": {
+      "total_tasks": 10,
+      "task_success_rate": 1.0,
+      "grounded_success_rate": 1.0,
+      "prior_contamination_rate": 0.0
+    },
+    "suite_i_counterfactual_inversion": {
+      "total_tasks": 10,
+      "task_success_rate": 0.0,
+      "grounded_success_rate": 0.0,
+      "prior_contamination_rate": 0.1
+    },
+    "anti_memorization_evidence_disabled": {
+      "total_tasks": 10,
+      "task_success_rate": 0.0,
+      "grounded_success_rate": 0.0,
+      "prior_contamination_rate": 0.0
+    },
+    "anti_memorization_closed_book": {
+      "total_tasks": 10,
+      "task_success_rate": 1.0,
+      "grounded_success_rate": 1.0,
+      "prior_contamination_rate": 0.0
+    }
+  },
+  "failure_taxonomy_distribution": {
+    "COMPUTATION_OR_EXTRACTION_ERROR": 26,
+    "UNSUPPORTED_CLAIM": 2,
+    "FAILED_ABSTENTION": 20,
+    "STEP_LIMIT": 4,
+    "FAILED_RETRIEVAL": 6,
+    "PRIOR_CONTAMINATION_ERROR": 1
+  },
+  "total_episode_seconds": 565.0247,
+  "ms_per_task": 5650.25,
+  "fingerprint": "cfa6e94905a954bd65aa388792aca22c6871aeb58b2e84c57483c1565f6636fb"
+}

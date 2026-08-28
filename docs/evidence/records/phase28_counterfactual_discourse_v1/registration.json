@@ -1,0 +1,25 @@
+{
+  "experiment": "phase28_counterfactual_discourse_v1",
+  "config": "configs/phase28_discourse_coverage.yaml",
+  "status": "registered_not_run",
+  "variants_per_operation": 8,
+  "exposure": 88.888889,
+  "seeds": [
+    97,
+    101,
+    103,
+    107,
+    109
+  ],
+  "schedule": {
+    "batch_size": 16,
+    "max_steps": 1600,
+    "warmup_steps": 160
+  },
+  "new_training_runs": 10,
+  "sealed_suite_status": "not_created_not_opened",
+  "training_fingerprints": {
+    "baseline": "090fbc50eeca1204aeca4e4ffcc0ddc8673acaa4642052c424385f43512c16c9",
+    "counterfactual_discourse": "b495ba0a07e74ecfb55d8668a3b38aa3a9ca67210e00de33f1754e2706d4c3db"
+  }
+}

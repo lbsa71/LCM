@@ -1,0 +1,26 @@
+{
+  "total_eval_tasks": 20,
+  "overall_task_success_rate": 0.85,
+  "overall_grounded_success_rate": 0.85,
+  "unsupported_claim_rate": 0.0,
+  "overall_prior_contamination_rate": 0.0,
+  "suite_metrics": {
+    "grounding_value_swap": {
+      "total_tasks": 20,
+      "task_success_rate": 0.85,
+      "grounded_success_rate": 0.85,
+      "prior_contamination_rate": 0.0
+    }
+  },
+  "failure_taxonomy_distribution": {
+    "FAILED_RETRIEVAL": 2,
+    "COMPUTATION_OR_EXTRACTION_ERROR": 1
+  },
+  "total_episode_seconds": 49.4002,
+  "ms_per_task": 2470.01,
+  "fingerprint": "0d064f89d1cf36f59fe671b0bf8e2be7c5e065b7bd9c6b241f4c9f3b05638a34",
+  "strict_grounded_success_rate": 0.85,
+  "strict_suite_success_rates": {
+    "grounding_value_swap": 0.85
+  }
+}

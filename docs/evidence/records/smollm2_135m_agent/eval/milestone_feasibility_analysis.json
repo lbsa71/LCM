@@ -1,0 +1,28 @@
+{
+  "prior_step": 2000,
+  "target_step": 3000,
+  "prior_grounded_accuracy": 0.43,
+  "target_grounded_accuracy": 0.45,
+  "terminal_grounded_gain": 0.02,
+  "core_suite_grounded_accuracy": {
+    "suite_e_retrieval_computation": 0.0,
+    "suite_f_missing_evidence": 0.0,
+    "suite_g_tool_recovery": 0.1,
+    "suite_i_counterfactual_inversion": 0.0
+  },
+  "thresholds": {
+    "minimum_overall": 0.7,
+    "minimum_core": 0.4,
+    "minimum_terminal_gain": 0.05
+  },
+  "failing_core_suites": [
+    "suite_e_retrieval_computation",
+    "suite_f_missing_evidence",
+    "suite_g_tool_recovery",
+    "suite_i_counterfactual_inversion"
+  ],
+  "overall_passed": false,
+  "breadth_passed": false,
+  "terminal_slope_passed": false,
+  "readiness_passed": false
+}

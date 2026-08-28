@@ -1,0 +1,25 @@
+{
+  "project": "LCM fact-externalized language agent feasibility study",
+  "research_status": "paused",
+  "archived_at": "2026-08-28",
+  "artifact_source_commit": "4990ba4",
+  "artifact_files": 1869,
+  "artifact_bytes": 53316875958,
+  "archive_verified_at": "2026-08-28T13:13:24+02:00",
+  "verification": {
+    "size_entries_checked": 1869,
+    "missing_entries": 0,
+    "size_mismatches": 0,
+    "sha256_entries_checked": 18,
+    "sha256_mismatches": 0,
+    "critical_checkpoints_hashed": [
+      "runs/smollm2_135m_agent/agent_model/agent_step_3000/model.safetensors",
+      "runs/smollm2_360m_capacity/agent_model/agent_step_3000/model.safetensors"
+    ]
+  },
+  "manifest": "archive_manifest.csv",
+  "manifest_sha256": "f2be11c950833a266328bbcc2133cea0e7d7c9be8ad353016496e0434f9d3483",
+  "repository": "https://github.com/lbsa71/LCM",
+  "archive": "https://media.lbsa71.net/LCE/index.html",
+  "interpretation": "Historical research evidence; not production models or authorized future runs."
+}

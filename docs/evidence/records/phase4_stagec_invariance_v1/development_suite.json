@@ -1,0 +1,878 @@
+{
+  "seen_form_unseen_operands": [
+    {
+      "utterance": "What is the sum of 2129 and 1061?",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7000,
+      "left": 2129,
+      "right": 1061
+    },
+    {
+      "utterance": "Add 1129 to 2267.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7001,
+      "left": 2267,
+      "right": 1129
+    },
+    {
+      "utterance": "What is the sum of 2399 and 1193?",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7000,
+      "left": 2399,
+      "right": 1193
+    },
+    {
+      "utterance": "Add 1261 to 2531.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7001,
+      "left": 2531,
+      "right": 1261
+    },
+    {
+      "utterance": "What is the sum of 2671 and 1331?",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7000,
+      "left": 2671,
+      "right": 1331
+    },
+    {
+      "utterance": "Add 1399 to 2801.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7001,
+      "left": 2801,
+      "right": 1399
+    },
+    {
+      "utterance": "Find 2129 minus 1061.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7010,
+      "left": 2129,
+      "right": 1061
+    },
+    {
+      "utterance": "Take 1129 away from 2267.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7011,
+      "left": 2267,
+      "right": 1129
+    },
+    {
+      "utterance": "Find 2399 minus 1193.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7010,
+      "left": 2399,
+      "right": 1193
+    },
+    {
+      "utterance": "Take 1261 away from 2531.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7011,
+      "left": 2531,
+      "right": 1261
+    },
+    {
+      "utterance": "Find 2671 minus 1331.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7010,
+      "left": 2671,
+      "right": 1331
+    },
+    {
+      "utterance": "Take 1399 away from 2801.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7011,
+      "left": 2801,
+      "right": 1399
+    },
+    {
+      "utterance": "Is 2129 greater than 1061?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7020,
+      "left": 2129,
+      "right": 1061
+    },
+    {
+      "utterance": "Relative to 1129, is 2267 greater?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7021,
+      "left": 2267,
+      "right": 1129
+    },
+    {
+      "utterance": "Is 2399 greater than 1193?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7020,
+      "left": 2399,
+      "right": 1193
+    },
+    {
+      "utterance": "Relative to 1261, is 2531 greater?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7021,
+      "left": 2531,
+      "right": 1261
+    },
+    {
+      "utterance": "Is 2671 greater than 1331?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7020,
+      "left": 2671,
+      "right": 1331
+    },
+    {
+      "utterance": "Relative to 1399, is 2801 greater?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7021,
+      "left": 2801,
+      "right": 1399
+    }
+  ],
+  "held_out_templates": [
+    {
+      "utterance": "Return the total yielded by 2129 with 1061.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7100,
+      "left": 2129,
+      "right": 1061
+    },
+    {
+      "utterance": "Given 1129 first, total it with 2267.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7101,
+      "left": 2267,
+      "right": 1129
+    },
+    {
+      "utterance": "Return the total yielded by 2399 with 1193.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7100,
+      "left": 2399,
+      "right": 1193
+    },
+    {
+      "utterance": "Given 1261 first, total it with 2531.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7101,
+      "left": 2531,
+      "right": 1261
+    },
+    {
+      "utterance": "Return the total yielded by 2671 with 1331.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7100,
+      "left": 2671,
+      "right": 1331
+    },
+    {
+      "utterance": "Given 1399 first, total it with 2801.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7101,
+      "left": 2801,
+      "right": 1399
+    },
+    {
+      "utterance": "From 2129, return what remains after 1061 leaves.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7110,
+      "left": 2129,
+      "right": 1061
+    },
+    {
+      "utterance": "With 1129 removed, what remains of 2267?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7111,
+      "left": 2267,
+      "right": 1129
+    },
+    {
+      "utterance": "From 2399, return what remains after 1193 leaves.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7110,
+      "left": 2399,
+      "right": 1193
+    },
+    {
+      "utterance": "With 1261 removed, what remains of 2531?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7111,
+      "left": 2531,
+      "right": 1261
+    },
+    {
+      "utterance": "From 2671, return what remains after 1331 leaves.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7110,
+      "left": 2671,
+      "right": 1331
+    },
+    {
+      "utterance": "With 1399 removed, what remains of 2801?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7111,
+      "left": 2801,
+      "right": 1399
+    },
+    {
+      "utterance": "Judge if 2129 is the larger of 2129 and 1061.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7120,
+      "left": 2129,
+      "right": 1061
+    },
+    {
+      "utterance": "Taking 1129 as reference, judge if 2267 is larger.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7121,
+      "left": 2267,
+      "right": 1129
+    },
+    {
+      "utterance": "Judge if 2399 is the larger of 2399 and 1193.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7120,
+      "left": 2399,
+      "right": 1193
+    },
+    {
+      "utterance": "Taking 1261 as reference, judge if 2531 is larger.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7121,
+      "left": 2531,
+      "right": 1261
+    },
+    {
+      "utterance": "Judge if 2671 is the larger of 2671 and 1331.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7120,
+      "left": 2671,
+      "right": 1331
+    },
+    {
+      "utterance": "Taking 1399 as reference, judge if 2801 is larger.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7121,
+      "left": 2801,
+      "right": 1399
+    }
+  ],
+  "lexical_shift": [
+    {
+      "utterance": "Amass 2129 together with 1061.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7200,
+      "left": 2129,
+      "right": 1061
+    },
+    {
+      "utterance": "Pool 1129 with 2267.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7201,
+      "left": 2267,
+      "right": 1129
+    },
+    {
+      "utterance": "Amass 2399 together with 1193.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7200,
+      "left": 2399,
+      "right": 1193
+    },
+    {
+      "utterance": "Pool 1261 with 2531.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7201,
+      "left": 2531,
+      "right": 1261
+    },
+    {
+      "utterance": "Amass 2671 together with 1331.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7200,
+      "left": 2671,
+      "right": 1331
+    },
+    {
+      "utterance": "Pool 1399 with 2801.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7201,
+      "left": 2801,
+      "right": 1399
+    },
+    {
+      "utterance": "What residue has 2129 beyond 1061?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7210,
+      "left": 2129,
+      "right": 1061
+    },
+    {
+      "utterance": "Beyond 1129, what residue has 2267?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7211,
+      "left": 2267,
+      "right": 1129
+    },
+    {
+      "utterance": "What residue has 2399 beyond 1193?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7210,
+      "left": 2399,
+      "right": 1193
+    },
+    {
+      "utterance": "Beyond 1261, what residue has 2531?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7211,
+      "left": 2531,
+      "right": 1261
+    },
+    {
+      "utterance": "What residue has 2671 beyond 1331?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7210,
+      "left": 2671,
+      "right": 1331
+    },
+    {
+      "utterance": "Beyond 1399, what residue has 2801?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7211,
+      "left": 2801,
+      "right": 1399
+    },
+    {
+      "utterance": "Does 2129 surpass 1061?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7220,
+      "left": 2129,
+      "right": 1061
+    },
+    {
+      "utterance": "Against 1129, does 2267 surpass it?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7221,
+      "left": 2267,
+      "right": 1129
+    },
+    {
+      "utterance": "Does 2399 surpass 1193?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7220,
+      "left": 2399,
+      "right": 1193
+    },
+    {
+      "utterance": "Against 1261, does 2531 surpass it?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7221,
+      "left": 2531,
+      "right": 1261
+    },
+    {
+      "utterance": "Does 2671 surpass 1331?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7220,
+      "left": 2671,
+      "right": 1331
+    },
+    {
+      "utterance": "Against 1399, does 2801 surpass it?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7221,
+      "left": 2801,
+      "right": 1399
+    }
+  ],
+  "syntax_order_reversal": [
+    {
+      "utterance": "Joining 2129 to 1061 yields what total?",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7300,
+      "left": 2129,
+      "right": 1061
+    },
+    {
+      "utterance": "Joined to 1129, what total does 2267 yield?",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7301,
+      "left": 2267,
+      "right": 1129
+    },
+    {
+      "utterance": "Joining 2399 to 1193 yields what total?",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7300,
+      "left": 2399,
+      "right": 1193
+    },
+    {
+      "utterance": "Joined to 1261, what total does 2531 yield?",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7301,
+      "left": 2531,
+      "right": 1261
+    },
+    {
+      "utterance": "Joining 2671 to 1331 yields what total?",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7300,
+      "left": 2671,
+      "right": 1331
+    },
+    {
+      "utterance": "Joined to 1399, what total does 2801 yield?",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7301,
+      "left": 2801,
+      "right": 1399
+    },
+    {
+      "utterance": "From 2129, taking 1061 leaves what?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7310,
+      "left": 2129,
+      "right": 1061
+    },
+    {
+      "utterance": "Take away 1129; from 2267, what stays?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7311,
+      "left": 2267,
+      "right": 1129
+    },
+    {
+      "utterance": "From 2399, taking 1193 leaves what?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7310,
+      "left": 2399,
+      "right": 1193
+    },
+    {
+      "utterance": "Take away 1261; from 2531, what stays?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7311,
+      "left": 2531,
+      "right": 1261
+    },
+    {
+      "utterance": "From 2671, taking 1331 leaves what?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7310,
+      "left": 2671,
+      "right": 1331
+    },
+    {
+      "utterance": "Take away 1399; from 2801, what stays?",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7311,
+      "left": 2801,
+      "right": 1399
+    },
+    {
+      "utterance": "The first value is 2129; is it above 1061?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7320,
+      "left": 2129,
+      "right": 1061
+    },
+    {
+      "utterance": "The reference is 1129; above it is 2267?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7321,
+      "left": 2267,
+      "right": 1129
+    },
+    {
+      "utterance": "The first value is 2399; is it above 1193?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7320,
+      "left": 2399,
+      "right": 1193
+    },
+    {
+      "utterance": "The reference is 1261; above it is 2531?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7321,
+      "left": 2531,
+      "right": 1261
+    },
+    {
+      "utterance": "The first value is 2671; is it above 1331?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7320,
+      "left": 2671,
+      "right": 1331
+    },
+    {
+      "utterance": "The reference is 1399; above it is 2801?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7321,
+      "left": 2801,
+      "right": 1399
+    }
+  ],
+  "discourse_distractor": [
+    {
+      "utterance": "Their order is irrelevant; total 2129 and 1061.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7400,
+      "left": 2129,
+      "right": 1061
+    },
+    {
+      "utterance": "Although 1129 is smaller, total it with 2267.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7401,
+      "left": 2267,
+      "right": 1129
+    },
+    {
+      "utterance": "Their order is irrelevant; total 2399 and 1193.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7400,
+      "left": 2399,
+      "right": 1193
+    },
+    {
+      "utterance": "Although 1261 is smaller, total it with 2531.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7401,
+      "left": 2531,
+      "right": 1261
+    },
+    {
+      "utterance": "Their order is irrelevant; total 2671 and 1331.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7400,
+      "left": 2671,
+      "right": 1331
+    },
+    {
+      "utterance": "Although 1399 is smaller, total it with 2801.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7401,
+      "left": 2801,
+      "right": 1399
+    },
+    {
+      "utterance": "With 2129 available, ignore comparison and subtract 1061.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7410,
+      "left": 2129,
+      "right": 1061
+    },
+    {
+      "utterance": "The possible total is irrelevant; remove 1129 from 2267.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7411,
+      "left": 2267,
+      "right": 1129
+    },
+    {
+      "utterance": "With 2399 available, ignore comparison and subtract 1193.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7410,
+      "left": 2399,
+      "right": 1193
+    },
+    {
+      "utterance": "The possible total is irrelevant; remove 1261 from 2531.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7411,
+      "left": 2531,
+      "right": 1261
+    },
+    {
+      "utterance": "With 2671 available, ignore comparison and subtract 1331.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7410,
+      "left": 2671,
+      "right": 1331
+    },
+    {
+      "utterance": "The possible total is irrelevant; remove 1399 from 2801.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7411,
+      "left": 2801,
+      "right": 1399
+    },
+    {
+      "utterance": "Do not total them; decide if 2129 exceeds 1061.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7420,
+      "left": 2129,
+      "right": 1061
+    },
+    {
+      "utterance": "Ignore any difference from 1129; decide if 2267 exceeds it.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7421,
+      "left": 2267,
+      "right": 1129
+    },
+    {
+      "utterance": "Do not total them; decide if 2399 exceeds 1193.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7420,
+      "left": 2399,
+      "right": 1193
+    },
+    {
+      "utterance": "Ignore any difference from 1261; decide if 2531 exceeds it.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7421,
+      "left": 2531,
+      "right": 1261
+    },
+    {
+      "utterance": "Do not total them; decide if 2671 exceeds 1331.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7420,
+      "left": 2671,
+      "right": 1331
+    },
+    {
+      "utterance": "Ignore any difference from 1399; decide if 2801 exceeds it.",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7421,
+      "left": 2801,
+      "right": 1399
+    }
+  ],
+  "minimal_contrast": [
+    {
+      "utterance": "Two manifests show 2129 zols and 1061 binks. Give the combined amount.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7500,
+      "left": 2129,
+      "right": 1061
+    },
+    {
+      "utterance": "Two manifests show 1129 binks and 2267 zols. Give the combined amount.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7501,
+      "left": 2267,
+      "right": 1129
+    },
+    {
+      "utterance": "Two manifests show 2399 zols and 1193 binks. Give the combined amount.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7500,
+      "left": 2399,
+      "right": 1193
+    },
+    {
+      "utterance": "Two manifests show 1261 binks and 2531 zols. Give the combined amount.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7501,
+      "left": 2531,
+      "right": 1261
+    },
+    {
+      "utterance": "Two manifests show 2671 zols and 1331 binks. Give the combined amount.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7500,
+      "left": 2671,
+      "right": 1331
+    },
+    {
+      "utterance": "Two manifests show 1399 binks and 2801 zols. Give the combined amount.",
+      "target": "OP=ADD",
+      "operation": "ADD",
+      "template_id": 7501,
+      "left": 2801,
+      "right": 1399
+    },
+    {
+      "utterance": "Two manifests show 2129 zols and 1061 binks. Give the zol excess.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7510,
+      "left": 2129,
+      "right": 1061
+    },
+    {
+      "utterance": "Two manifests show 1129 binks and 2267 zols. Give the zol excess.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7511,
+      "left": 2267,
+      "right": 1129
+    },
+    {
+      "utterance": "Two manifests show 2399 zols and 1193 binks. Give the zol excess.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7510,
+      "left": 2399,
+      "right": 1193
+    },
+    {
+      "utterance": "Two manifests show 1261 binks and 2531 zols. Give the zol excess.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7511,
+      "left": 2531,
+      "right": 1261
+    },
+    {
+      "utterance": "Two manifests show 2671 zols and 1331 binks. Give the zol excess.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7510,
+      "left": 2671,
+      "right": 1331
+    },
+    {
+      "utterance": "Two manifests show 1399 binks and 2801 zols. Give the zol excess.",
+      "target": "OP=SUBTRACT",
+      "operation": "SUBTRACT",
+      "template_id": 7511,
+      "left": 2801,
+      "right": 1399
+    },
+    {
+      "utterance": "Two manifests show 2129 zols and 1061 binks. Are zols more numerous?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7520,
+      "left": 2129,
+      "right": 1061
+    },
+    {
+      "utterance": "Two manifests show 1129 binks and 2267 zols. Are zols more numerous?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7521,
+      "left": 2267,
+      "right": 1129
+    },
+    {
+      "utterance": "Two manifests show 2399 zols and 1193 binks. Are zols more numerous?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7520,
+      "left": 2399,
+      "right": 1193
+    },
+    {
+      "utterance": "Two manifests show 1261 binks and 2531 zols. Are zols more numerous?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7521,
+      "left": 2531,
+      "right": 1261
+    },
+    {
+      "utterance": "Two manifests show 2671 zols and 1331 binks. Are zols more numerous?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7520,
+      "left": 2671,
+      "right": 1331
+    },
+    {
+      "utterance": "Two manifests show 1399 binks and 2801 zols. Are zols more numerous?",
+      "target": "OP=COMPARE",
+      "operation": "COMPARE",
+      "template_id": 7521,
+      "left": 2801,
+      "right": 1399
+    }
+  ]
+}

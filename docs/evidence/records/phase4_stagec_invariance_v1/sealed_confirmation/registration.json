@@ -1,0 +1,64 @@
+{
+  "experiment": "phase4_stagec_invariance_v1_sealed_confirmation",
+  "config": "configs/phase4_stagec_invariance.yaml",
+  "selected_arm": "consistency_025",
+  "baseline_arm": "matched_generative_baseline",
+  "lead_arm": "lead_no_consistency",
+  "seeds": [
+    17,
+    29,
+    41,
+    53,
+    67
+  ],
+  "confirmation_pairs": [
+    [
+      4001,
+      1999
+    ],
+    [
+      4127,
+      2063
+    ],
+    [
+      4259,
+      2129
+    ],
+    [
+      4391,
+      2197
+    ],
+    [
+      4523,
+      2267
+    ],
+    [
+      4657,
+      2333
+    ]
+  ],
+  "sealed_examples": 216,
+  "cases_per_track": {
+    "seen_form_unseen_operands": 36,
+    "held_out_templates": 36,
+    "lexical_shift": 36,
+    "syntax_order_reversal": 36,
+    "discourse_distractor": 36,
+    "minimal_contrast": 36
+  },
+  "both_orders_per_frame": true,
+  "suite_sha256": "e436053dfeb64c61b85e3dcd103072d35daf4edf244a5f5ff8555af7d98d291e",
+  "source_fingerprints": {
+    "matched_generative_baseline": "97e8af6084dc33df43d6c1dfa097e82cbe7e7e324fe4f9b8222ecd341c2e109e",
+    "lead_no_consistency": "728d5f978ad5e24d0c8e60341c5cae692a5f508f2484bf3a43ff0a8f330e5a07",
+    "consistency_025": "8de8b87a5e3567b0d2ce61575a908931907fcf9b8bb37b1de594a601175514a7"
+  },
+  "gate": {
+    "minimum_worst_group_gain": 0.1,
+    "maximum_track_regression": 0.05
+  },
+  "sealed_suite_created": true,
+  "evaluation_started": true,
+  "evaluation_completed": true,
+  "confirmation_passed": false
+}

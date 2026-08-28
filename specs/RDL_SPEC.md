@@ -1,15 +1,34 @@
 # Retrieval Domain Language (RDL) & Host Observation Protocol (HOP) Specification
 
+> **Historical design specification.** This document records the intended
+> protocol surface. It is not a performance report, and several design goals
+> below were only partially implemented or validated. The repository
+> [README](../README.md) and [validity audit](../docs/history/phase5_validity_audit.md)
+> take precedence when interpreting scientific claims.
+
 ## 1. Overview & Core Philosophy
 
-The **Retrieval Domain Language (RDL)** and its companion **Host Observation Protocol (HOP)** form a compact, deterministic, token-optimized communication standard designed for procedural neural models ($35\text{M} - 150\text{M}$ parameters).
+The **Retrieval Domain Language (RDL)** and its companion **Host Observation
+Protocol (HOP)** were designed as a compact communication surface for
+procedural neural models and a deterministic host runtime.
 
-### Core Architectural Invariants
+### Original architectural goals
 1. **Procedural Action vs. Contingent Knowledge**: The neural policy generates pure procedural steps (in-context pointer dereferencing, AST arithmetic, evidence citations). Contingent world knowledge resides exclusively in external tools and document stores.
-2. **Zero Syntax Overhead via 1-to-1 Token Mapping**: Every opcode and protocol keyword maps directly to a discrete single token in the tokenizer vocabulary (`SEARCH`, `READ`, `FILTER`, `MATH`, `EMIT`, `ABSTAIN`, `OBS`, `LINES`, `LIMIT`, `EVIDENCE`, `REASON`). This eliminates multiline JSON serialization boilerplate (saving 60–75% of context tokens per turn) and prevents JSON delimiter crashes.
-3. **Strict Deterministic Grammars ($LL(1)$ with 0 Lookahead)**: String literals for search queries and entity names are enclosed in double quotes (`"..."`), eliminating shift/reduce keyword collisions.
-4. **Pure Numeric Arithmetic Safety**: The `MATH` opcode evaluates safe, constant-time infix numeric expressions with zero allowed identifiers or variables.
-5. **First-Class Epistemic Provenance & Abstention**: Final assertions require verifiable line-level citations (`EMIT <ans> EVIDENCE [<doc_id>:<line>, ...]`) scored against the hidden `ProofGraph` in `eval/metrics.py`. Held-out missing evidence queries must be met with explicit `ABSTAIN` primitives.
+2. **Compact tokenization**: Opcodes and protocol keywords are intended to be
+   inexpensive to tokenize. The current tokenizer does not guarantee that each
+   keyword occupies exactly one token, and no general context-saving percentage
+   was established.
+3. **Deterministic parsing**: Quoted string literals and explicit delimiters are
+   intended to keep the grammar unambiguous and parseable with bounded
+   lookahead.
+4. **Restricted numeric arithmetic**: `MATH` accepts a small numeric expression
+   language with no identifiers or variables. Runtime scales with expression
+   length; it is not constant-time in the formal sense.
+5. **Epistemic provenance and abstention**: `EMIT` carries line-level citations
+   and `ABSTAIN` represents missing or conflicting evidence. Historical
+   evaluation did not fully enforce that every cited proof line had been
+   observed, so this remains a resumption requirement rather than a guaranteed
+   property.
 
 ---
 
@@ -174,9 +193,12 @@ pub trait EvidenceProvider: Send + Sync {
 
 ---
 
-## 7. Deterministic $O(1)$ Trajectory Compilation from `ProofGraph`
+## 7. Deterministic trajectory synthesis from `ProofGraph`
 
-Training trajectories for SFT and pretraining are compiled directly from the world generator's `ProofGraph` in $O(1)$ time per task, yielding canonical RDL actions and HOP observations without exponential search.
+Training trajectories for SFT and pretraining are synthesized from the world
+generator's `ProofGraph`, yielding canonical RDL actions and HOP observations
+without a model-side search procedure. Work still scales with the emitted
+trajectory, evidence, and tool observations.
 
 ---
 

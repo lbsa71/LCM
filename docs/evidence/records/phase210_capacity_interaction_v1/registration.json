@@ -1,0 +1,41 @@
+{
+  "experiment": "phase210_capacity_interaction_v1",
+  "config": "configs/phase210_capacity_interaction.yaml",
+  "status": "registered_not_run",
+  "seeds": [
+    97,
+    101,
+    103,
+    107,
+    109
+  ],
+  "schedule": {
+    "batch_size": 16,
+    "max_steps": 1600,
+    "warmup_steps": 160
+  },
+  "narrow_hidden_size": 96,
+  "wide_hidden_size": 144,
+  "new_training_runs": 10,
+  "sealed_suite_status": "not_created_not_opened",
+  "training_fingerprints": {
+    "narrow_baseline": "090fbc50eeca1204aeca4e4ffcc0ddc8673acaa4642052c424385f43512c16c9",
+    "narrow_augmentation": "130fbf58a4d6ba861f4c54d0cb72d7703dd3419a749f913ee09487c01ad162e5",
+    "wide_baseline": "df687d5a463068e5e2bc3cefc6333b336720e3f6c94652197226dd16c5de447d",
+    "wide_augmentation": "9643230a6a35d38f315d039f02245f61aa87a911f2ddb4c153c226910af1bae2"
+  },
+  "source_reuse_validation": {
+    "validation": "PASS",
+    "arms": [
+      "narrow_baseline",
+      "narrow_augmentation"
+    ],
+    "seeds": [
+      97,
+      101,
+      103,
+      107,
+      109
+    ]
+  }
+}

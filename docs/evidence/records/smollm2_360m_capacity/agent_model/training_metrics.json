@@ -1,0 +1,22 @@
+{
+  "phase": "agent_sft",
+  "preset": "smollm2_360m_capacity",
+  "backend": "huggingface",
+  "seed": 42,
+  "total_steps": 3000,
+  "microsteps": 3000,
+  "optimizer_updates": 375,
+  "sequences_processed": 12000,
+  "tokens_processed": 12288000,
+  "effective_batch_size": 32,
+  "total_wall_clock_seconds": 30601.89,
+  "ms_per_step": 10200.63,
+  "tokens_per_second": 401.54,
+  "total_tokens_processed": 12288000,
+  "final_loss": 0.0516,
+  "milestone_timings": {
+    "1000": 10196.14,
+    "2000": 20513.93,
+    "3000": 30600.56
+  }
+}

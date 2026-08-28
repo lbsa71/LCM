@@ -1,0 +1,678 @@
+{
+  "experiment": "phase210_capacity_interaction_v1",
+  "stage": "phase210_width_by_augmentation_screen",
+  "config": "configs/phase210_capacity_interaction.yaml",
+  "seeds": [
+    97,
+    101,
+    103,
+    107,
+    109
+  ],
+  "schedule": {
+    "batch_size": 16,
+    "max_steps": 1600,
+    "warmup_steps": 160
+  },
+  "sealed_suite_status": "not_created_not_opened",
+  "arms": {
+    "narrow_baseline": [
+      {
+        "seed": 97,
+        "train_examples": 288,
+        "steps": 1600,
+        "wall_clock_seconds": 85.72,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.375,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 1.0,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 1600,
+          "total_wall_clock_seconds": 85.73,
+          "avg_ms_per_step": 51.93,
+          "tokens_per_second": 38224.22,
+          "total_tokens": 3276800
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.3333,
+          "lexical_shift": 0.3333,
+          "syntax_order_reversal": 0.6667,
+          "discourse_distractor": 0.6111,
+          "minimal_contrast": 0.3333
+        },
+        "worst_robust_accuracy": 0.3333,
+        "phase28_arm": "baseline",
+        "phase28_training_fingerprint": "090fbc50eeca1204aeca4e4ffcc0ddc8673acaa4642052c424385f43512c16c9",
+        "variants_per_operation": 8,
+        "exposure_target": 88.888889
+      },
+      {
+        "seed": 101,
+        "train_examples": 288,
+        "steps": 1600,
+        "wall_clock_seconds": 128.37,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.3333,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 1.0,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 1600,
+          "total_wall_clock_seconds": 128.37,
+          "avg_ms_per_step": 78.22,
+          "tokens_per_second": 25525.55,
+          "total_tokens": 3276800
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.5,
+          "lexical_shift": 0.0,
+          "syntax_order_reversal": 0.6667,
+          "discourse_distractor": 0.3333,
+          "minimal_contrast": 0.6667
+        },
+        "worst_robust_accuracy": 0.0,
+        "phase28_arm": "baseline",
+        "phase28_training_fingerprint": "090fbc50eeca1204aeca4e4ffcc0ddc8673acaa4642052c424385f43512c16c9",
+        "variants_per_operation": 8,
+        "exposure_target": 88.888889
+      },
+      {
+        "seed": 103,
+        "train_examples": 288,
+        "steps": 1600,
+        "wall_clock_seconds": 111.56,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.3333,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 1.0,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 1600,
+          "total_wall_clock_seconds": 111.56,
+          "avg_ms_per_step": 67.44,
+          "tokens_per_second": 29373.3,
+          "total_tokens": 3276800
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.3333,
+          "lexical_shift": 0.3333,
+          "syntax_order_reversal": 0.7778,
+          "discourse_distractor": 0.3333,
+          "minimal_contrast": 0.3333
+        },
+        "worst_robust_accuracy": 0.3333,
+        "phase28_arm": "baseline",
+        "phase28_training_fingerprint": "090fbc50eeca1204aeca4e4ffcc0ddc8673acaa4642052c424385f43512c16c9",
+        "variants_per_operation": 8,
+        "exposure_target": 88.888889
+      },
+      {
+        "seed": 107,
+        "train_examples": 288,
+        "steps": 1600,
+        "wall_clock_seconds": 126.5,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.3333,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 1.0,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 1600,
+          "total_wall_clock_seconds": 126.5,
+          "avg_ms_per_step": 77.2,
+          "tokens_per_second": 25903.98,
+          "total_tokens": 3276800
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.3333,
+          "lexical_shift": 0.3333,
+          "syntax_order_reversal": 0.4444,
+          "discourse_distractor": 0.3333,
+          "minimal_contrast": 0.3333
+        },
+        "worst_robust_accuracy": 0.3333,
+        "phase28_arm": "baseline",
+        "phase28_training_fingerprint": "090fbc50eeca1204aeca4e4ffcc0ddc8673acaa4642052c424385f43512c16c9",
+        "variants_per_operation": 8,
+        "exposure_target": 88.888889
+      },
+      {
+        "seed": 109,
+        "train_examples": 288,
+        "steps": 1600,
+        "wall_clock_seconds": 81.74,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.6528,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 1.0,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 1600,
+          "total_wall_clock_seconds": 81.75,
+          "avg_ms_per_step": 49.76,
+          "tokens_per_second": 40084.35,
+          "total_tokens": 3276800
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.5,
+          "lexical_shift": 0.0,
+          "syntax_order_reversal": 0.6667,
+          "discourse_distractor": 0.3333,
+          "minimal_contrast": 0.3333
+        },
+        "worst_robust_accuracy": 0.0,
+        "phase28_arm": "baseline",
+        "phase28_training_fingerprint": "090fbc50eeca1204aeca4e4ffcc0ddc8673acaa4642052c424385f43512c16c9",
+        "variants_per_operation": 8,
+        "exposure_target": 88.888889
+      }
+    ],
+    "narrow_augmentation": [
+      {
+        "seed": 97,
+        "train_examples": 360,
+        "steps": 1600,
+        "wall_clock_seconds": 80.82,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.3333,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 1.0,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 1600,
+          "total_wall_clock_seconds": 80.82,
+          "avg_ms_per_step": 49.04,
+          "tokens_per_second": 40544.21,
+          "total_tokens": 3276800
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.1667,
+          "lexical_shift": 0.2222,
+          "syntax_order_reversal": 0.6667,
+          "discourse_distractor": 0.3333,
+          "minimal_contrast": 0.6667
+        },
+        "worst_robust_accuracy": 0.1667,
+        "phase29_arm": "augmentation_fixed_updates",
+        "phase29_training_fingerprint": "130fbf58a4d6ba861f4c54d0cb72d7703dd3419a749f913ee09487c01ad162e5",
+        "variants_per_operation": 8,
+        "exposure_target": 71.111111
+      },
+      {
+        "seed": 101,
+        "train_examples": 360,
+        "steps": 1600,
+        "wall_clock_seconds": 81.56,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.3333,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 1.0,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 1600,
+          "total_wall_clock_seconds": 81.56,
+          "avg_ms_per_step": 49.53,
+          "tokens_per_second": 40174.31,
+          "total_tokens": 3276800
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.2222,
+          "lexical_shift": 0.3333,
+          "syntax_order_reversal": 0.4444,
+          "discourse_distractor": 0.5556,
+          "minimal_contrast": 0.3333
+        },
+        "worst_robust_accuracy": 0.2222,
+        "phase29_arm": "augmentation_fixed_updates",
+        "phase29_training_fingerprint": "130fbf58a4d6ba861f4c54d0cb72d7703dd3419a749f913ee09487c01ad162e5",
+        "variants_per_operation": 8,
+        "exposure_target": 71.111111
+      },
+      {
+        "seed": 103,
+        "train_examples": 360,
+        "steps": 1600,
+        "wall_clock_seconds": 94.69,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.0,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 1.0,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 1600,
+          "total_wall_clock_seconds": 94.69,
+          "avg_ms_per_step": 57.87,
+          "tokens_per_second": 34605.61,
+          "total_tokens": 3276800
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.0,
+          "lexical_shift": 0.0,
+          "syntax_order_reversal": 0.3333,
+          "discourse_distractor": 0.4444,
+          "minimal_contrast": 0.6667
+        },
+        "worst_robust_accuracy": 0.0,
+        "phase29_arm": "augmentation_fixed_updates",
+        "phase29_training_fingerprint": "130fbf58a4d6ba861f4c54d0cb72d7703dd3419a749f913ee09487c01ad162e5",
+        "variants_per_operation": 8,
+        "exposure_target": 71.111111
+      },
+      {
+        "seed": 107,
+        "train_examples": 360,
+        "steps": 1600,
+        "wall_clock_seconds": 128.37,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.5139,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 1.0,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 1600,
+          "total_wall_clock_seconds": 128.37,
+          "avg_ms_per_step": 78.09,
+          "tokens_per_second": 25526.26,
+          "total_tokens": 3276800
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.3611,
+          "lexical_shift": 0.1667,
+          "syntax_order_reversal": 0.3333,
+          "discourse_distractor": 0.6667,
+          "minimal_contrast": 0.3333
+        },
+        "worst_robust_accuracy": 0.1667,
+        "phase29_arm": "augmentation_fixed_updates",
+        "phase29_training_fingerprint": "130fbf58a4d6ba861f4c54d0cb72d7703dd3419a749f913ee09487c01ad162e5",
+        "variants_per_operation": 8,
+        "exposure_target": 71.111111
+      },
+      {
+        "seed": 109,
+        "train_examples": 360,
+        "steps": 1600,
+        "wall_clock_seconds": 92.13,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.375,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 1.0,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 1600,
+          "total_wall_clock_seconds": 92.13,
+          "avg_ms_per_step": 56.22,
+          "tokens_per_second": 35567.31,
+          "total_tokens": 3276800
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.1667,
+          "lexical_shift": 0.3333,
+          "syntax_order_reversal": 0.6667,
+          "discourse_distractor": 0.3333,
+          "minimal_contrast": 0.6667
+        },
+        "worst_robust_accuracy": 0.1667,
+        "phase29_arm": "augmentation_fixed_updates",
+        "phase29_training_fingerprint": "130fbf58a4d6ba861f4c54d0cb72d7703dd3419a749f913ee09487c01ad162e5",
+        "variants_per_operation": 8,
+        "exposure_target": 71.111111
+      }
+    ],
+    "wide_baseline": [
+      {
+        "seed": 97,
+        "train_examples": 288,
+        "steps": 1600,
+        "wall_clock_seconds": 106.53,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.2083,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 1.0,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 1600,
+          "total_wall_clock_seconds": 106.53,
+          "avg_ms_per_step": 65.17,
+          "tokens_per_second": 30759.9,
+          "total_tokens": 3276800
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.2778,
+          "lexical_shift": 0.3333,
+          "syntax_order_reversal": 0.6667,
+          "discourse_distractor": 0.3333,
+          "minimal_contrast": 0.4444
+        },
+        "worst_robust_accuracy": 0.2778,
+        "phase210_arm": "wide_baseline",
+        "phase210_training_fingerprint": "df687d5a463068e5e2bc3cefc6333b336720e3f6c94652197226dd16c5de447d",
+        "variants_per_operation": 8,
+        "exposure_target": 88.888889,
+        "hidden_size": 144
+      },
+      {
+        "seed": 101,
+        "train_examples": 288,
+        "steps": 1600,
+        "wall_clock_seconds": 152.3,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.3333,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 1.0,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 1600,
+          "total_wall_clock_seconds": 152.3,
+          "avg_ms_per_step": 93.84,
+          "tokens_per_second": 21515.81,
+          "total_tokens": 3276800
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.3333,
+          "lexical_shift": 0.2778,
+          "syntax_order_reversal": 0.6667,
+          "discourse_distractor": 0.5556,
+          "minimal_contrast": 0.3333
+        },
+        "worst_robust_accuracy": 0.2778,
+        "phase210_arm": "wide_baseline",
+        "phase210_training_fingerprint": "df687d5a463068e5e2bc3cefc6333b336720e3f6c94652197226dd16c5de447d",
+        "variants_per_operation": 8,
+        "exposure_target": 88.888889,
+        "hidden_size": 144
+      },
+      {
+        "seed": 103,
+        "train_examples": 288,
+        "steps": 1600,
+        "wall_clock_seconds": 94.98,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.1667,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 1.0,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 1600,
+          "total_wall_clock_seconds": 94.98,
+          "avg_ms_per_step": 57.94,
+          "tokens_per_second": 34498.36,
+          "total_tokens": 3276800
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.3889,
+          "lexical_shift": 0.3333,
+          "syntax_order_reversal": 0.2222,
+          "discourse_distractor": 0.0,
+          "minimal_contrast": 0.6667
+        },
+        "worst_robust_accuracy": 0.0,
+        "phase210_arm": "wide_baseline",
+        "phase210_training_fingerprint": "df687d5a463068e5e2bc3cefc6333b336720e3f6c94652197226dd16c5de447d",
+        "variants_per_operation": 8,
+        "exposure_target": 88.888889,
+        "hidden_size": 144
+      },
+      {
+        "seed": 107,
+        "train_examples": 288,
+        "steps": 1600,
+        "wall_clock_seconds": 121.23,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.3333,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 1.0,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 1600,
+          "total_wall_clock_seconds": 121.23,
+          "avg_ms_per_step": 73.85,
+          "tokens_per_second": 27030.09,
+          "total_tokens": 3276800
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.3333,
+          "lexical_shift": 0.3333,
+          "syntax_order_reversal": 0.6667,
+          "discourse_distractor": 0.3333,
+          "minimal_contrast": 0.3333
+        },
+        "worst_robust_accuracy": 0.3333,
+        "phase210_arm": "wide_baseline",
+        "phase210_training_fingerprint": "df687d5a463068e5e2bc3cefc6333b336720e3f6c94652197226dd16c5de447d",
+        "variants_per_operation": 8,
+        "exposure_target": 88.888889,
+        "hidden_size": 144
+      },
+      {
+        "seed": 109,
+        "train_examples": 288,
+        "steps": 1600,
+        "wall_clock_seconds": 100.24,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.5,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 1.0,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 1600,
+          "total_wall_clock_seconds": 100.25,
+          "avg_ms_per_step": 61.31,
+          "tokens_per_second": 32687.6,
+          "total_tokens": 3276800
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.5,
+          "lexical_shift": 0.3333,
+          "syntax_order_reversal": 0.6667,
+          "discourse_distractor": 0.6667,
+          "minimal_contrast": 0.2778
+        },
+        "worst_robust_accuracy": 0.2778,
+        "phase210_arm": "wide_baseline",
+        "phase210_training_fingerprint": "df687d5a463068e5e2bc3cefc6333b336720e3f6c94652197226dd16c5de447d",
+        "variants_per_operation": 8,
+        "exposure_target": 88.888889,
+        "hidden_size": 144
+      }
+    ],
+    "wide_augmentation": [
+      {
+        "seed": 97,
+        "train_examples": 360,
+        "steps": 1600,
+        "wall_clock_seconds": 143.92,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.5972,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 1.0,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 1600,
+          "total_wall_clock_seconds": 143.92,
+          "avg_ms_per_step": 88.33,
+          "tokens_per_second": 22767.75,
+          "total_tokens": 3276800
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.3333,
+          "lexical_shift": 0.0,
+          "syntax_order_reversal": 0.3333,
+          "discourse_distractor": 0.4444,
+          "minimal_contrast": 0.3333
+        },
+        "worst_robust_accuracy": 0.0,
+        "phase210_arm": "wide_augmentation",
+        "phase210_training_fingerprint": "9643230a6a35d38f315d039f02245f61aa87a911f2ddb4c153c226910af1bae2",
+        "variants_per_operation": 8,
+        "exposure_target": 71.111111,
+        "hidden_size": 144
+      },
+      {
+        "seed": 101,
+        "train_examples": 360,
+        "steps": 1600,
+        "wall_clock_seconds": 87.27,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.375,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 1.0,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 1600,
+          "total_wall_clock_seconds": 87.27,
+          "avg_ms_per_step": 53.39,
+          "tokens_per_second": 37548.91,
+          "total_tokens": 3276800
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.0,
+          "lexical_shift": 0.5556,
+          "syntax_order_reversal": 0.6667,
+          "discourse_distractor": 0.3333,
+          "minimal_contrast": 0.3333
+        },
+        "worst_robust_accuracy": 0.0,
+        "phase210_arm": "wide_augmentation",
+        "phase210_training_fingerprint": "9643230a6a35d38f315d039f02245f61aa87a911f2ddb4c153c226910af1bae2",
+        "variants_per_operation": 8,
+        "exposure_target": 71.111111,
+        "hidden_size": 144
+      },
+      {
+        "seed": 103,
+        "train_examples": 360,
+        "steps": 1600,
+        "wall_clock_seconds": 137.23,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.5,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 1.0,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 1600,
+          "total_wall_clock_seconds": 137.23,
+          "avg_ms_per_step": 84.41,
+          "tokens_per_second": 23878.01,
+          "total_tokens": 3276800
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.2778,
+          "lexical_shift": 0.3333,
+          "syntax_order_reversal": 0.6667,
+          "discourse_distractor": 0.6667,
+          "minimal_contrast": 0.3333
+        },
+        "worst_robust_accuracy": 0.2778,
+        "phase210_arm": "wide_augmentation",
+        "phase210_training_fingerprint": "9643230a6a35d38f315d039f02245f61aa87a911f2ddb4c153c226910af1bae2",
+        "variants_per_operation": 8,
+        "exposure_target": 71.111111,
+        "hidden_size": 144
+      },
+      {
+        "seed": 107,
+        "train_examples": 360,
+        "steps": 1600,
+        "wall_clock_seconds": 84.34,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.2778,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 1.0,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 1600,
+          "total_wall_clock_seconds": 84.34,
+          "avg_ms_per_step": 51.52,
+          "tokens_per_second": 38850.54,
+          "total_tokens": 3276800
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.1389,
+          "lexical_shift": 0.3333,
+          "syntax_order_reversal": 0.6667,
+          "discourse_distractor": 0.3333,
+          "minimal_contrast": 0.6667
+        },
+        "worst_robust_accuracy": 0.1389,
+        "phase210_arm": "wide_augmentation",
+        "phase210_training_fingerprint": "9643230a6a35d38f315d039f02245f61aa87a911f2ddb4c153c226910af1bae2",
+        "variants_per_operation": 8,
+        "exposure_target": 71.111111,
+        "hidden_size": 144
+      },
+      {
+        "seed": 109,
+        "train_examples": 360,
+        "steps": 1600,
+        "wall_clock_seconds": 91.75,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.7083,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 1.0,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 1600,
+          "total_wall_clock_seconds": 91.75,
+          "avg_ms_per_step": 56.11,
+          "tokens_per_second": 35713.22,
+          "total_tokens": 3276800
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.25,
+          "lexical_shift": 0.3333,
+          "syntax_order_reversal": 0.6667,
+          "discourse_distractor": 0.6667,
+          "minimal_contrast": 0.3333
+        },
+        "worst_robust_accuracy": 0.25,
+        "phase210_arm": "wide_augmentation",
+        "phase210_training_fingerprint": "9643230a6a35d38f315d039f02245f61aa87a911f2ddb4c153c226910af1bae2",
+        "variants_per_operation": 8,
+        "exposure_target": 71.111111,
+        "hidden_size": 144
+      }
+    ]
+  }
+}

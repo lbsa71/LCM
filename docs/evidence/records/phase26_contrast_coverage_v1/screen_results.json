@@ -1,0 +1,678 @@
+{
+  "experiment": "phase26_contrast_coverage_factorial_v1",
+  "stage": "phase26_minimal_by_lexical_screen",
+  "config": "configs/phase26_contrast_coverage.yaml",
+  "seeds": [
+    17,
+    29,
+    41,
+    53,
+    67
+  ],
+  "schedule": {
+    "batch_size": 16,
+    "max_steps": 800,
+    "warmup_steps": 80
+  },
+  "sealed_suite_status": "not_created_not_opened",
+  "arms": {
+    "baseline": [
+      {
+        "seed": 17,
+        "train_examples": 144,
+        "steps": 800,
+        "wall_clock_seconds": 33.12,
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.3981,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 0.6667,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 800,
+          "total_wall_clock_seconds": 33.88,
+          "avg_ms_per_step": 40.88,
+          "tokens_per_second": 48353.63,
+          "total_tokens": 1638400
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.5,
+          "lexical_shift": 0.3333,
+          "syntax_order_reversal": 0.3333,
+          "discourse_distractor": 0.3333,
+          "minimal_contrast": 0.3333
+        },
+        "worst_robust_accuracy": 0.3333,
+        "variants_per_operation": 4,
+        "exposure_target": 88.888889,
+        "exposure_actual": 88.888889,
+        "evaluation_batch_size": 64,
+        "tokenizer_mode": "fixed_byte",
+        "phase25_training_fingerprint": "3562d3949534a32f51225827a45087d2e40a575f67af2edc3753fae349e0dfa7",
+        "reused_from": "runs\\breadth_reinforcement_v2\\variants_4\\R89\\seed_17"
+      },
+      {
+        "seed": 29,
+        "train_examples": 144,
+        "steps": 800,
+        "wall_clock_seconds": 33.05,
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.4444,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 0.6667,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 800,
+          "total_wall_clock_seconds": 33.72,
+          "avg_ms_per_step": 40.8,
+          "tokens_per_second": 48582.08,
+          "total_tokens": 1638400
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.6667,
+          "lexical_shift": 0.3333,
+          "syntax_order_reversal": 0.3333,
+          "discourse_distractor": 0.3333,
+          "minimal_contrast": 0.3333
+        },
+        "worst_robust_accuracy": 0.3333,
+        "variants_per_operation": 4,
+        "exposure_target": 88.888889,
+        "exposure_actual": 88.888889,
+        "evaluation_batch_size": 64,
+        "tokenizer_mode": "fixed_byte",
+        "phase25_training_fingerprint": "3562d3949534a32f51225827a45087d2e40a575f67af2edc3753fae349e0dfa7",
+        "reused_from": "runs\\breadth_reinforcement_v2\\variants_4\\R89\\seed_29"
+      },
+      {
+        "seed": 41,
+        "train_examples": 144,
+        "steps": 800,
+        "wall_clock_seconds": 33.11,
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.4444,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 0.6667,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 800,
+          "total_wall_clock_seconds": 33.95,
+          "avg_ms_per_step": 40.86,
+          "tokens_per_second": 48261.92,
+          "total_tokens": 1638400
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.6667,
+          "lexical_shift": 0.3333,
+          "syntax_order_reversal": 0.6667,
+          "discourse_distractor": 0.3333,
+          "minimal_contrast": 0.3333
+        },
+        "worst_robust_accuracy": 0.3333,
+        "variants_per_operation": 4,
+        "exposure_target": 88.888889,
+        "exposure_actual": 88.888889,
+        "evaluation_batch_size": 64,
+        "tokenizer_mode": "fixed_byte",
+        "phase25_training_fingerprint": "3562d3949534a32f51225827a45087d2e40a575f67af2edc3753fae349e0dfa7",
+        "reused_from": "runs\\breadth_reinforcement_v2\\variants_4\\R89\\seed_41"
+      },
+      {
+        "seed": 53,
+        "train_examples": 144,
+        "steps": 800,
+        "wall_clock_seconds": 32.55,
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.3935,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 0.6667,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 800,
+          "total_wall_clock_seconds": 33.33,
+          "avg_ms_per_step": 40.19,
+          "tokens_per_second": 49159.61,
+          "total_tokens": 1638400
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.3333,
+          "lexical_shift": 0.0556,
+          "syntax_order_reversal": 0.0,
+          "discourse_distractor": 0.6667,
+          "minimal_contrast": 0.3333
+        },
+        "worst_robust_accuracy": 0.0,
+        "variants_per_operation": 4,
+        "exposure_target": 88.888889,
+        "exposure_actual": 88.888889,
+        "evaluation_batch_size": 64,
+        "tokenizer_mode": "fixed_byte",
+        "phase25_training_fingerprint": "3562d3949534a32f51225827a45087d2e40a575f67af2edc3753fae349e0dfa7",
+        "reused_from": "runs\\breadth_reinforcement_v2\\variants_4\\R89\\seed_53"
+      },
+      {
+        "seed": 67,
+        "train_examples": 144,
+        "steps": 800,
+        "wall_clock_seconds": 34.18,
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.4954,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 0.6667,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 800,
+          "total_wall_clock_seconds": 34.94,
+          "avg_ms_per_step": 42.19,
+          "tokens_per_second": 46895.81,
+          "total_tokens": 1638400
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.6111,
+          "lexical_shift": 0.3333,
+          "syntax_order_reversal": 0.0,
+          "discourse_distractor": 0.6667,
+          "minimal_contrast": 0.6667
+        },
+        "worst_robust_accuracy": 0.0,
+        "variants_per_operation": 4,
+        "exposure_target": 88.888889,
+        "exposure_actual": 88.888889,
+        "evaluation_batch_size": 64,
+        "tokenizer_mode": "fixed_byte",
+        "phase25_training_fingerprint": "3562d3949534a32f51225827a45087d2e40a575f67af2edc3753fae349e0dfa7",
+        "reused_from": "runs\\breadth_reinforcement_v2\\variants_4\\R89\\seed_67"
+      }
+    ],
+    "minimal_contrast": [
+      {
+        "seed": 17,
+        "train_examples": 144,
+        "steps": 800,
+        "wall_clock_seconds": 42.97,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.5,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 0.6667,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 800,
+          "total_wall_clock_seconds": 42.97,
+          "avg_ms_per_step": 51.83,
+          "tokens_per_second": 38127.42,
+          "total_tokens": 1638400
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.8333,
+          "lexical_shift": 0.3333,
+          "syntax_order_reversal": 0.3333,
+          "discourse_distractor": 0.6667,
+          "minimal_contrast": 0.5556
+        },
+        "worst_robust_accuracy": 0.3333,
+        "phase25_arm": "minimal_contrast",
+        "phase25_training_fingerprint": "10ef40aaf9ecf736e0fb3c7b9186fbed06ca3590b73684c337a4bfc8067975f8",
+        "variants_per_operation": 4,
+        "exposure_target": 88.888889
+      },
+      {
+        "seed": 29,
+        "train_examples": 144,
+        "steps": 800,
+        "wall_clock_seconds": 34.94,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.5556,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 0.6667,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 800,
+          "total_wall_clock_seconds": 34.94,
+          "avg_ms_per_step": 42.27,
+          "tokens_per_second": 46889.01,
+          "total_tokens": 1638400
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.6667,
+          "lexical_shift": 0.3333,
+          "syntax_order_reversal": 0.3333,
+          "discourse_distractor": 0.6667,
+          "minimal_contrast": 0.7778
+        },
+        "worst_robust_accuracy": 0.3333,
+        "phase25_arm": "minimal_contrast",
+        "phase25_training_fingerprint": "10ef40aaf9ecf736e0fb3c7b9186fbed06ca3590b73684c337a4bfc8067975f8",
+        "variants_per_operation": 4,
+        "exposure_target": 88.888889
+      },
+      {
+        "seed": 41,
+        "train_examples": 144,
+        "steps": 800,
+        "wall_clock_seconds": 42.86,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.5,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 0.6667,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 800,
+          "total_wall_clock_seconds": 42.86,
+          "avg_ms_per_step": 51.63,
+          "tokens_per_second": 38225.07,
+          "total_tokens": 1638400
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.6111,
+          "lexical_shift": 0.6667,
+          "syntax_order_reversal": 0.6667,
+          "discourse_distractor": 0.3333,
+          "minimal_contrast": 0.7222
+        },
+        "worst_robust_accuracy": 0.3333,
+        "phase25_arm": "minimal_contrast",
+        "phase25_training_fingerprint": "10ef40aaf9ecf736e0fb3c7b9186fbed06ca3590b73684c337a4bfc8067975f8",
+        "variants_per_operation": 4,
+        "exposure_target": 88.888889
+      },
+      {
+        "seed": 53,
+        "train_examples": 144,
+        "steps": 800,
+        "wall_clock_seconds": 38.19,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.3889,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 0.6667,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 800,
+          "total_wall_clock_seconds": 38.19,
+          "avg_ms_per_step": 46.12,
+          "tokens_per_second": 42896.12,
+          "total_tokens": 1638400
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.4444,
+          "lexical_shift": 0.3333,
+          "syntax_order_reversal": 0.4444,
+          "discourse_distractor": 0.6667,
+          "minimal_contrast": 0.6667
+        },
+        "worst_robust_accuracy": 0.3333,
+        "phase25_arm": "minimal_contrast",
+        "phase25_training_fingerprint": "10ef40aaf9ecf736e0fb3c7b9186fbed06ca3590b73684c337a4bfc8067975f8",
+        "variants_per_operation": 4,
+        "exposure_target": 88.888889
+      },
+      {
+        "seed": 67,
+        "train_examples": 144,
+        "steps": 800,
+        "wall_clock_seconds": 35.38,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.4444,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 0.6667,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 800,
+          "total_wall_clock_seconds": 35.38,
+          "avg_ms_per_step": 42.63,
+          "tokens_per_second": 46310.7,
+          "total_tokens": 1638400
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.6667,
+          "lexical_shift": 0.3333,
+          "syntax_order_reversal": 0.6667,
+          "discourse_distractor": 0.6667,
+          "minimal_contrast": 1.0
+        },
+        "worst_robust_accuracy": 0.3333,
+        "phase25_arm": "minimal_contrast",
+        "phase25_training_fingerprint": "10ef40aaf9ecf736e0fb3c7b9186fbed06ca3590b73684c337a4bfc8067975f8",
+        "variants_per_operation": 4,
+        "exposure_target": 88.888889
+      }
+    ],
+    "lexical_contrast": [
+      {
+        "seed": 17,
+        "train_examples": 144,
+        "steps": 800,
+        "wall_clock_seconds": 79.15,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.412,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 0.6667,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 800,
+          "total_wall_clock_seconds": 79.16,
+          "avg_ms_per_step": 95.47,
+          "tokens_per_second": 20697.15,
+          "total_tokens": 1638400
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.4722,
+          "lexical_shift": 0.3333,
+          "syntax_order_reversal": 0.6667,
+          "discourse_distractor": 0.5,
+          "minimal_contrast": 0.3333
+        },
+        "worst_robust_accuracy": 0.3333,
+        "phase26_arm": "lexical_contrast",
+        "phase26_training_fingerprint": "acacbd264b469034003310c60cd4260d1dc8ad6a37ed35424eefbe40692e3f03",
+        "variants_per_operation": 4,
+        "exposure_target": 88.888889
+      },
+      {
+        "seed": 29,
+        "train_examples": 144,
+        "steps": 800,
+        "wall_clock_seconds": 68.87,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.4861,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 0.6667,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 800,
+          "total_wall_clock_seconds": 68.87,
+          "avg_ms_per_step": 82.53,
+          "tokens_per_second": 23790.31,
+          "total_tokens": 1638400
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.6667,
+          "lexical_shift": 0.3333,
+          "syntax_order_reversal": 0.3333,
+          "discourse_distractor": 0.6667,
+          "minimal_contrast": 0.3333
+        },
+        "worst_robust_accuracy": 0.3333,
+        "phase26_arm": "lexical_contrast",
+        "phase26_training_fingerprint": "acacbd264b469034003310c60cd4260d1dc8ad6a37ed35424eefbe40692e3f03",
+        "variants_per_operation": 4,
+        "exposure_target": 88.888889
+      },
+      {
+        "seed": 41,
+        "train_examples": 144,
+        "steps": 800,
+        "wall_clock_seconds": 91.83,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.3889,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 0.6667,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 800,
+          "total_wall_clock_seconds": 91.84,
+          "avg_ms_per_step": 109.88,
+          "tokens_per_second": 17840.37,
+          "total_tokens": 1638400
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.4444,
+          "lexical_shift": 0.5,
+          "syntax_order_reversal": 0.6667,
+          "discourse_distractor": 0.3333,
+          "minimal_contrast": 0.3333
+        },
+        "worst_robust_accuracy": 0.3333,
+        "phase26_arm": "lexical_contrast",
+        "phase26_training_fingerprint": "acacbd264b469034003310c60cd4260d1dc8ad6a37ed35424eefbe40692e3f03",
+        "variants_per_operation": 4,
+        "exposure_target": 88.888889
+      },
+      {
+        "seed": 53,
+        "train_examples": 144,
+        "steps": 800,
+        "wall_clock_seconds": 93.15,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.3889,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 0.6667,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 800,
+          "total_wall_clock_seconds": 93.15,
+          "avg_ms_per_step": 113.1,
+          "tokens_per_second": 17588.33,
+          "total_tokens": 1638400
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.3333,
+          "lexical_shift": 0.3333,
+          "syntax_order_reversal": 0.4444,
+          "discourse_distractor": 0.3333,
+          "minimal_contrast": 0.3333
+        },
+        "worst_robust_accuracy": 0.3333,
+        "phase26_arm": "lexical_contrast",
+        "phase26_training_fingerprint": "acacbd264b469034003310c60cd4260d1dc8ad6a37ed35424eefbe40692e3f03",
+        "variants_per_operation": 4,
+        "exposure_target": 88.888889
+      },
+      {
+        "seed": 67,
+        "train_examples": 144,
+        "steps": 800,
+        "wall_clock_seconds": 67.58,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.5046,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 0.6667,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 800,
+          "total_wall_clock_seconds": 67.58,
+          "avg_ms_per_step": 80.7,
+          "tokens_per_second": 24243.52,
+          "total_tokens": 1638400
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.5556,
+          "lexical_shift": 0.6667,
+          "syntax_order_reversal": 0.0,
+          "discourse_distractor": 0.6667,
+          "minimal_contrast": 0.3333
+        },
+        "worst_robust_accuracy": 0.0,
+        "phase26_arm": "lexical_contrast",
+        "phase26_training_fingerprint": "acacbd264b469034003310c60cd4260d1dc8ad6a37ed35424eefbe40692e3f03",
+        "variants_per_operation": 4,
+        "exposure_target": 88.888889
+      }
+    ],
+    "minimal_lexical_contrast": [
+      {
+        "seed": 17,
+        "train_examples": 144,
+        "steps": 800,
+        "wall_clock_seconds": 70.53,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.4352,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 0.6667,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 800,
+          "total_wall_clock_seconds": 70.53,
+          "avg_ms_per_step": 85.08,
+          "tokens_per_second": 23228.26,
+          "total_tokens": 1638400
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.3889,
+          "lexical_shift": 0.3333,
+          "syntax_order_reversal": 0.3333,
+          "discourse_distractor": 0.3333,
+          "minimal_contrast": 0.6667
+        },
+        "worst_robust_accuracy": 0.3333,
+        "phase26_arm": "minimal_lexical_contrast",
+        "phase26_training_fingerprint": "0d9379af61bad296c699c5f48770b2b23e5169773f6535226de1c8180e9ae1cd",
+        "variants_per_operation": 4,
+        "exposure_target": 88.888889
+      },
+      {
+        "seed": 29,
+        "train_examples": 144,
+        "steps": 800,
+        "wall_clock_seconds": 94.75,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.5463,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 0.6667,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 800,
+          "total_wall_clock_seconds": 94.75,
+          "avg_ms_per_step": 113.88,
+          "tokens_per_second": 17292.09,
+          "total_tokens": 1638400
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.8333,
+          "lexical_shift": 0.3333,
+          "syntax_order_reversal": 0.3333,
+          "discourse_distractor": 0.6667,
+          "minimal_contrast": 1.0
+        },
+        "worst_robust_accuracy": 0.3333,
+        "phase26_arm": "minimal_lexical_contrast",
+        "phase26_training_fingerprint": "0d9379af61bad296c699c5f48770b2b23e5169773f6535226de1c8180e9ae1cd",
+        "variants_per_operation": 4,
+        "exposure_target": 88.888889
+      },
+      {
+        "seed": 41,
+        "train_examples": 144,
+        "steps": 800,
+        "wall_clock_seconds": 97.54,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.537,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 0.6667,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 800,
+          "total_wall_clock_seconds": 97.54,
+          "avg_ms_per_step": 118.53,
+          "tokens_per_second": 16796.53,
+          "total_tokens": 1638400
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 0.8889,
+          "held_out_templates": 0.5,
+          "lexical_shift": 0.6667,
+          "syntax_order_reversal": 0.5,
+          "discourse_distractor": 0.6667,
+          "minimal_contrast": 1.0
+        },
+        "worst_robust_accuracy": 0.5,
+        "phase26_arm": "minimal_lexical_contrast",
+        "phase26_training_fingerprint": "0d9379af61bad296c699c5f48770b2b23e5169773f6535226de1c8180e9ae1cd",
+        "variants_per_operation": 4,
+        "exposure_target": 88.888889
+      },
+      {
+        "seed": 53,
+        "train_examples": 144,
+        "steps": 800,
+        "wall_clock_seconds": 77.15,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.4213,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 0.6667,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 800,
+          "total_wall_clock_seconds": 77.15,
+          "avg_ms_per_step": 93.46,
+          "tokens_per_second": 21235.47,
+          "total_tokens": 1638400
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.4444,
+          "lexical_shift": 0.4444,
+          "syntax_order_reversal": 0.4444,
+          "discourse_distractor": 0.6667,
+          "minimal_contrast": 1.0
+        },
+        "worst_robust_accuracy": 0.4444,
+        "phase26_arm": "minimal_lexical_contrast",
+        "phase26_training_fingerprint": "0d9379af61bad296c699c5f48770b2b23e5169773f6535226de1c8180e9ae1cd",
+        "variants_per_operation": 4,
+        "exposure_target": 88.888889
+      },
+      {
+        "seed": 67,
+        "train_examples": 144,
+        "steps": 800,
+        "wall_clock_seconds": 82.1,
+        "parser_target_mode": "operation",
+        "seen_form_accuracy": 1.0,
+        "unseen_form_accuracy": 0.5,
+        "unseen_operands_seen_form_accuracy": 1.0,
+        "minimal_contrast_accuracy": 0.6667,
+        "timer": {
+          "phase": "form_variation_parser",
+          "total_steps": 800,
+          "total_wall_clock_seconds": 82.1,
+          "avg_ms_per_step": 99.17,
+          "tokens_per_second": 19955.47,
+          "total_tokens": 1638400
+        },
+        "pressure_groups": {
+          "seen_form_unseen_operands": 1.0,
+          "held_out_templates": 0.6111,
+          "lexical_shift": 0.6667,
+          "syntax_order_reversal": 0.4444,
+          "discourse_distractor": 0.6667,
+          "minimal_contrast": 1.0
+        },
+        "worst_robust_accuracy": 0.4444,
+        "phase26_arm": "minimal_lexical_contrast",
+        "phase26_training_fingerprint": "0d9379af61bad296c699c5f48770b2b23e5169773f6535226de1c8180e9ae1cd",
+        "variants_per_operation": 4,
+        "exposure_target": 88.888889
+      }
+    ]
+  }
+}

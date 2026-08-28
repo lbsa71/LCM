@@ -1,0 +1,2597 @@
+{
+  "sha256": "31e8b2cec8e5739107199888ca8af0cf90aeb6a5adb28dc923ca475e7508d06a",
+  "pairs": [
+    [
+      {
+        "operation": "ADD",
+        "left": 11,
+        "right": 7,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Calculate 11 plus 7."
+      },
+      {
+        "operation": "ADD",
+        "left": 11,
+        "right": 7,
+        "template_id": 4003,
+        "binding": 1,
+        "utterance": "First consider 7; combine it with 11 and report the total."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 11,
+        "right": 7,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "What is the sum of 11 and 7?"
+      },
+      {
+        "operation": "ADD",
+        "left": 11,
+        "right": 7,
+        "template_id": 4002,
+        "binding": 1,
+        "utterance": "Starting with the mention of 7, add the value 11."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 11,
+        "right": 7,
+        "template_id": 3,
+        "binding": 0,
+        "utterance": "What do 11 and 7 total?"
+      },
+      {
+        "operation": "ADD",
+        "left": 11,
+        "right": 7,
+        "template_id": 5001,
+        "binding": 1,
+        "utterance": "Two registers list 7 binks and 11 zols. Give their combined count."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 11,
+        "right": 7,
+        "template_id": 5000,
+        "binding": 0,
+        "utterance": "Two registers list 11 zols and 7 binks. Give their combined count."
+      },
+      {
+        "operation": "ADD",
+        "left": 11,
+        "right": 7,
+        "template_id": 4001,
+        "binding": 1,
+        "utterance": "The amounts are 7 and then 11; calculate their sum."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 13,
+        "right": 8,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Calculate 13 plus 8."
+      },
+      {
+        "operation": "ADD",
+        "left": 13,
+        "right": 8,
+        "template_id": 5001,
+        "binding": 1,
+        "utterance": "Two registers list 8 binks and 13 zols. Give their combined count."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 13,
+        "right": 8,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "What is the sum of 13 and 8?"
+      },
+      {
+        "operation": "ADD",
+        "left": 13,
+        "right": 8,
+        "template_id": 4003,
+        "binding": 1,
+        "utterance": "First consider 8; combine it with 13 and report the total."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 13,
+        "right": 8,
+        "template_id": 3,
+        "binding": 0,
+        "utterance": "What do 13 and 8 total?"
+      },
+      {
+        "operation": "ADD",
+        "left": 13,
+        "right": 8,
+        "template_id": 4000,
+        "binding": 1,
+        "utterance": "Alongside 8 binks are 13 zols. How many are there altogether?"
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 13,
+        "right": 8,
+        "template_id": 5000,
+        "binding": 0,
+        "utterance": "Two registers list 13 zols and 8 binks. Give their combined count."
+      },
+      {
+        "operation": "ADD",
+        "left": 13,
+        "right": 8,
+        "template_id": 4001,
+        "binding": 1,
+        "utterance": "The amounts are 8 and then 13; calculate their sum."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 17,
+        "right": 9,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Calculate 17 plus 9."
+      },
+      {
+        "operation": "ADD",
+        "left": 17,
+        "right": 9,
+        "template_id": 4001,
+        "binding": 1,
+        "utterance": "The amounts are 9 and then 17; calculate their sum."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 17,
+        "right": 9,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "What is the sum of 17 and 9?"
+      },
+      {
+        "operation": "ADD",
+        "left": 17,
+        "right": 9,
+        "template_id": 5001,
+        "binding": 1,
+        "utterance": "Two registers list 9 binks and 17 zols. Give their combined count."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 17,
+        "right": 9,
+        "template_id": 3,
+        "binding": 0,
+        "utterance": "What do 17 and 9 total?"
+      },
+      {
+        "operation": "ADD",
+        "left": 17,
+        "right": 9,
+        "template_id": 4003,
+        "binding": 1,
+        "utterance": "First consider 9; combine it with 17 and report the total."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 17,
+        "right": 9,
+        "template_id": 5000,
+        "binding": 0,
+        "utterance": "Two registers list 17 zols and 9 binks. Give their combined count."
+      },
+      {
+        "operation": "ADD",
+        "left": 17,
+        "right": 9,
+        "template_id": 4000,
+        "binding": 1,
+        "utterance": "Alongside 9 binks are 17 zols. How many are there altogether?"
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 19,
+        "right": 12,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Calculate 19 plus 12."
+      },
+      {
+        "operation": "ADD",
+        "left": 19,
+        "right": 12,
+        "template_id": 4001,
+        "binding": 1,
+        "utterance": "The amounts are 12 and then 19; calculate their sum."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 19,
+        "right": 12,
+        "template_id": 2,
+        "binding": 0,
+        "utterance": "Add 19 to 12."
+      },
+      {
+        "operation": "ADD",
+        "left": 19,
+        "right": 12,
+        "template_id": 4003,
+        "binding": 1,
+        "utterance": "First consider 12; combine it with 19 and report the total."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 19,
+        "right": 12,
+        "template_id": 3,
+        "binding": 0,
+        "utterance": "What do 19 and 12 total?"
+      },
+      {
+        "operation": "ADD",
+        "left": 19,
+        "right": 12,
+        "template_id": 4000,
+        "binding": 1,
+        "utterance": "Alongside 12 binks are 19 zols. How many are there altogether?"
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 19,
+        "right": 12,
+        "template_id": 5000,
+        "binding": 0,
+        "utterance": "Two registers list 19 zols and 12 binks. Give their combined count."
+      },
+      {
+        "operation": "ADD",
+        "left": 19,
+        "right": 12,
+        "template_id": 5001,
+        "binding": 1,
+        "utterance": "Two registers list 12 binks and 19 zols. Give their combined count."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 23,
+        "right": 14,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Calculate 23 plus 14."
+      },
+      {
+        "operation": "ADD",
+        "left": 23,
+        "right": 14,
+        "template_id": 4002,
+        "binding": 1,
+        "utterance": "Starting with the mention of 14, add the value 23."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 23,
+        "right": 14,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "What is the sum of 23 and 14?"
+      },
+      {
+        "operation": "ADD",
+        "left": 23,
+        "right": 14,
+        "template_id": 4003,
+        "binding": 1,
+        "utterance": "First consider 14; combine it with 23 and report the total."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 23,
+        "right": 14,
+        "template_id": 3,
+        "binding": 0,
+        "utterance": "What do 23 and 14 total?"
+      },
+      {
+        "operation": "ADD",
+        "left": 23,
+        "right": 14,
+        "template_id": 5001,
+        "binding": 1,
+        "utterance": "Two registers list 14 binks and 23 zols. Give their combined count."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 23,
+        "right": 14,
+        "template_id": 5000,
+        "binding": 0,
+        "utterance": "Two registers list 23 zols and 14 binks. Give their combined count."
+      },
+      {
+        "operation": "ADD",
+        "left": 23,
+        "right": 14,
+        "template_id": 4001,
+        "binding": 1,
+        "utterance": "The amounts are 14 and then 23; calculate their sum."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 29,
+        "right": 16,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Calculate 29 plus 16."
+      },
+      {
+        "operation": "ADD",
+        "left": 29,
+        "right": 16,
+        "template_id": 4001,
+        "binding": 1,
+        "utterance": "The amounts are 16 and then 29; calculate their sum."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 29,
+        "right": 16,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "What is the sum of 29 and 16?"
+      },
+      {
+        "operation": "ADD",
+        "left": 29,
+        "right": 16,
+        "template_id": 5001,
+        "binding": 1,
+        "utterance": "Two registers list 16 binks and 29 zols. Give their combined count."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 29,
+        "right": 16,
+        "template_id": 2,
+        "binding": 0,
+        "utterance": "Add 29 to 16."
+      },
+      {
+        "operation": "ADD",
+        "left": 29,
+        "right": 16,
+        "template_id": 4002,
+        "binding": 1,
+        "utterance": "Starting with the mention of 16, add the value 29."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 29,
+        "right": 16,
+        "template_id": 5000,
+        "binding": 0,
+        "utterance": "Two registers list 29 zols and 16 binks. Give their combined count."
+      },
+      {
+        "operation": "ADD",
+        "left": 29,
+        "right": 16,
+        "template_id": 4000,
+        "binding": 1,
+        "utterance": "Alongside 16 binks are 29 zols. How many are there altogether?"
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 31,
+        "right": 18,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Calculate 31 plus 18."
+      },
+      {
+        "operation": "ADD",
+        "left": 31,
+        "right": 18,
+        "template_id": 4003,
+        "binding": 1,
+        "utterance": "First consider 18; combine it with 31 and report the total."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 31,
+        "right": 18,
+        "template_id": 2,
+        "binding": 0,
+        "utterance": "Add 31 to 18."
+      },
+      {
+        "operation": "ADD",
+        "left": 31,
+        "right": 18,
+        "template_id": 4001,
+        "binding": 1,
+        "utterance": "The amounts are 18 and then 31; calculate their sum."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 31,
+        "right": 18,
+        "template_id": 3,
+        "binding": 0,
+        "utterance": "What do 31 and 18 total?"
+      },
+      {
+        "operation": "ADD",
+        "left": 31,
+        "right": 18,
+        "template_id": 4000,
+        "binding": 1,
+        "utterance": "Alongside 18 binks are 31 zols. How many are there altogether?"
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 31,
+        "right": 18,
+        "template_id": 5000,
+        "binding": 0,
+        "utterance": "Two registers list 31 zols and 18 binks. Give their combined count."
+      },
+      {
+        "operation": "ADD",
+        "left": 31,
+        "right": 18,
+        "template_id": 5001,
+        "binding": 1,
+        "utterance": "Two registers list 18 binks and 31 zols. Give their combined count."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 37,
+        "right": 21,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "What is the sum of 37 and 21?"
+      },
+      {
+        "operation": "ADD",
+        "left": 37,
+        "right": 21,
+        "template_id": 4002,
+        "binding": 1,
+        "utterance": "Starting with the mention of 21, add the value 37."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 37,
+        "right": 21,
+        "template_id": 2,
+        "binding": 0,
+        "utterance": "Add 37 to 21."
+      },
+      {
+        "operation": "ADD",
+        "left": 37,
+        "right": 21,
+        "template_id": 5001,
+        "binding": 1,
+        "utterance": "Two registers list 21 binks and 37 zols. Give their combined count."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 37,
+        "right": 21,
+        "template_id": 3,
+        "binding": 0,
+        "utterance": "What do 37 and 21 total?"
+      },
+      {
+        "operation": "ADD",
+        "left": 37,
+        "right": 21,
+        "template_id": 4000,
+        "binding": 1,
+        "utterance": "Alongside 21 binks are 37 zols. How many are there altogether?"
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 37,
+        "right": 21,
+        "template_id": 5000,
+        "binding": 0,
+        "utterance": "Two registers list 37 zols and 21 binks. Give their combined count."
+      },
+      {
+        "operation": "ADD",
+        "left": 37,
+        "right": 21,
+        "template_id": 4003,
+        "binding": 1,
+        "utterance": "First consider 21; combine it with 37 and report the total."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 41,
+        "right": 22,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Calculate 41 plus 22."
+      },
+      {
+        "operation": "ADD",
+        "left": 41,
+        "right": 22,
+        "template_id": 4000,
+        "binding": 1,
+        "utterance": "Alongside 22 binks are 41 zols. How many are there altogether?"
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 41,
+        "right": 22,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "What is the sum of 41 and 22?"
+      },
+      {
+        "operation": "ADD",
+        "left": 41,
+        "right": 22,
+        "template_id": 4003,
+        "binding": 1,
+        "utterance": "First consider 22; combine it with 41 and report the total."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 41,
+        "right": 22,
+        "template_id": 3,
+        "binding": 0,
+        "utterance": "What do 41 and 22 total?"
+      },
+      {
+        "operation": "ADD",
+        "left": 41,
+        "right": 22,
+        "template_id": 4001,
+        "binding": 1,
+        "utterance": "The amounts are 22 and then 41; calculate their sum."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 41,
+        "right": 22,
+        "template_id": 5000,
+        "binding": 0,
+        "utterance": "Two registers list 41 zols and 22 binks. Give their combined count."
+      },
+      {
+        "operation": "ADD",
+        "left": 41,
+        "right": 22,
+        "template_id": 5001,
+        "binding": 1,
+        "utterance": "Two registers list 22 binks and 41 zols. Give their combined count."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 43,
+        "right": 24,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Calculate 43 plus 24."
+      },
+      {
+        "operation": "ADD",
+        "left": 43,
+        "right": 24,
+        "template_id": 4003,
+        "binding": 1,
+        "utterance": "First consider 24; combine it with 43 and report the total."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 43,
+        "right": 24,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "What is the sum of 43 and 24?"
+      },
+      {
+        "operation": "ADD",
+        "left": 43,
+        "right": 24,
+        "template_id": 5001,
+        "binding": 1,
+        "utterance": "Two registers list 24 binks and 43 zols. Give their combined count."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 43,
+        "right": 24,
+        "template_id": 2,
+        "binding": 0,
+        "utterance": "Add 43 to 24."
+      },
+      {
+        "operation": "ADD",
+        "left": 43,
+        "right": 24,
+        "template_id": 4000,
+        "binding": 1,
+        "utterance": "Alongside 24 binks are 43 zols. How many are there altogether?"
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 43,
+        "right": 24,
+        "template_id": 5000,
+        "binding": 0,
+        "utterance": "Two registers list 43 zols and 24 binks. Give their combined count."
+      },
+      {
+        "operation": "ADD",
+        "left": 43,
+        "right": 24,
+        "template_id": 4002,
+        "binding": 1,
+        "utterance": "Starting with the mention of 24, add the value 43."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 47,
+        "right": 26,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Calculate 47 plus 26."
+      },
+      {
+        "operation": "ADD",
+        "left": 47,
+        "right": 26,
+        "template_id": 4003,
+        "binding": 1,
+        "utterance": "First consider 26; combine it with 47 and report the total."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 47,
+        "right": 26,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "What is the sum of 47 and 26?"
+      },
+      {
+        "operation": "ADD",
+        "left": 47,
+        "right": 26,
+        "template_id": 4002,
+        "binding": 1,
+        "utterance": "Starting with the mention of 26, add the value 47."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 47,
+        "right": 26,
+        "template_id": 3,
+        "binding": 0,
+        "utterance": "What do 47 and 26 total?"
+      },
+      {
+        "operation": "ADD",
+        "left": 47,
+        "right": 26,
+        "template_id": 5001,
+        "binding": 1,
+        "utterance": "Two registers list 26 binks and 47 zols. Give their combined count."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 47,
+        "right": 26,
+        "template_id": 5000,
+        "binding": 0,
+        "utterance": "Two registers list 47 zols and 26 binks. Give their combined count."
+      },
+      {
+        "operation": "ADD",
+        "left": 47,
+        "right": 26,
+        "template_id": 4000,
+        "binding": 1,
+        "utterance": "Alongside 26 binks are 47 zols. How many are there altogether?"
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 53,
+        "right": 28,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Calculate 53 plus 28."
+      },
+      {
+        "operation": "ADD",
+        "left": 53,
+        "right": 28,
+        "template_id": 5001,
+        "binding": 1,
+        "utterance": "Two registers list 28 binks and 53 zols. Give their combined count."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 53,
+        "right": 28,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "What is the sum of 53 and 28?"
+      },
+      {
+        "operation": "ADD",
+        "left": 53,
+        "right": 28,
+        "template_id": 4003,
+        "binding": 1,
+        "utterance": "First consider 28; combine it with 53 and report the total."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 53,
+        "right": 28,
+        "template_id": 3,
+        "binding": 0,
+        "utterance": "What do 53 and 28 total?"
+      },
+      {
+        "operation": "ADD",
+        "left": 53,
+        "right": 28,
+        "template_id": 4001,
+        "binding": 1,
+        "utterance": "The amounts are 28 and then 53; calculate their sum."
+      }
+    ],
+    [
+      {
+        "operation": "ADD",
+        "left": 53,
+        "right": 28,
+        "template_id": 5000,
+        "binding": 0,
+        "utterance": "Two registers list 53 zols and 28 binks. Give their combined count."
+      },
+      {
+        "operation": "ADD",
+        "left": 53,
+        "right": 28,
+        "template_id": 4000,
+        "binding": 1,
+        "utterance": "Alongside 28 binks are 53 zols. How many are there altogether?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 11,
+        "right": 7,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "Does 11 exceed 7?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 11,
+        "right": 7,
+        "template_id": 5021,
+        "binding": 1,
+        "utterance": "Two registers list 7 binks and 11 zols. Do zols outnumber binks?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 11,
+        "right": 7,
+        "template_id": 2,
+        "binding": 0,
+        "utterance": "Which quantity is larger: 11 or 7?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 11,
+        "right": 7,
+        "template_id": 4022,
+        "binding": 1,
+        "utterance": "Between 7 and 11, is the latter quantity greater?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 11,
+        "right": 7,
+        "template_id": 3,
+        "binding": 0,
+        "utterance": "Are there more zols than binks when there are 11 zols and 7 binks?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 11,
+        "right": 7,
+        "template_id": 4020,
+        "binding": 1,
+        "utterance": "Relative to 7, is 11 larger?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 11,
+        "right": 7,
+        "template_id": 5020,
+        "binding": 0,
+        "utterance": "Two registers list 11 zols and 7 binks. Do zols outnumber binks?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 11,
+        "right": 7,
+        "template_id": 4023,
+        "binding": 1,
+        "utterance": "First consider 7; now decide whether 11 is larger."
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 13,
+        "right": 8,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "Does 13 exceed 8?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 13,
+        "right": 8,
+        "template_id": 4022,
+        "binding": 1,
+        "utterance": "Between 8 and 13, is the latter quantity greater?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 13,
+        "right": 8,
+        "template_id": 2,
+        "binding": 0,
+        "utterance": "Which quantity is larger: 13 or 8?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 13,
+        "right": 8,
+        "template_id": 5021,
+        "binding": 1,
+        "utterance": "Two registers list 8 binks and 13 zols. Do zols outnumber binks?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 13,
+        "right": 8,
+        "template_id": 3,
+        "binding": 0,
+        "utterance": "Are there more zols than binks when there are 13 zols and 8 binks?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 13,
+        "right": 8,
+        "template_id": 4021,
+        "binding": 1,
+        "utterance": "Use 8 as the reference; does 13 exceed it?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 13,
+        "right": 8,
+        "template_id": 5020,
+        "binding": 0,
+        "utterance": "Two registers list 13 zols and 8 binks. Do zols outnumber binks?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 13,
+        "right": 8,
+        "template_id": 4020,
+        "binding": 1,
+        "utterance": "Relative to 8, is 13 larger?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 17,
+        "right": 9,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "Does 17 exceed 9?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 17,
+        "right": 9,
+        "template_id": 4021,
+        "binding": 1,
+        "utterance": "Use 9 as the reference; does 17 exceed it?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 17,
+        "right": 9,
+        "template_id": 2,
+        "binding": 0,
+        "utterance": "Which quantity is larger: 17 or 9?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 17,
+        "right": 9,
+        "template_id": 4022,
+        "binding": 1,
+        "utterance": "Between 9 and 17, is the latter quantity greater?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 17,
+        "right": 9,
+        "template_id": 3,
+        "binding": 0,
+        "utterance": "Are there more zols than binks when there are 17 zols and 9 binks?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 17,
+        "right": 9,
+        "template_id": 5021,
+        "binding": 1,
+        "utterance": "Two registers list 9 binks and 17 zols. Do zols outnumber binks?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 17,
+        "right": 9,
+        "template_id": 5020,
+        "binding": 0,
+        "utterance": "Two registers list 17 zols and 9 binks. Do zols outnumber binks?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 17,
+        "right": 9,
+        "template_id": 4023,
+        "binding": 1,
+        "utterance": "First consider 9; now decide whether 17 is larger."
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 19,
+        "right": 12,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Are 19 greater than 12?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 19,
+        "right": 12,
+        "template_id": 5021,
+        "binding": 1,
+        "utterance": "Two registers list 12 binks and 19 zols. Do zols outnumber binks?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 19,
+        "right": 12,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "Does 19 exceed 12?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 19,
+        "right": 12,
+        "template_id": 4021,
+        "binding": 1,
+        "utterance": "Use 12 as the reference; does 19 exceed it?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 19,
+        "right": 12,
+        "template_id": 3,
+        "binding": 0,
+        "utterance": "Are there more zols than binks when there are 19 zols and 12 binks?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 19,
+        "right": 12,
+        "template_id": 4023,
+        "binding": 1,
+        "utterance": "First consider 12; now decide whether 19 is larger."
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 19,
+        "right": 12,
+        "template_id": 5020,
+        "binding": 0,
+        "utterance": "Two registers list 19 zols and 12 binks. Do zols outnumber binks?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 19,
+        "right": 12,
+        "template_id": 4022,
+        "binding": 1,
+        "utterance": "Between 12 and 19, is the latter quantity greater?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 23,
+        "right": 14,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Are 23 greater than 14?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 23,
+        "right": 14,
+        "template_id": 4021,
+        "binding": 1,
+        "utterance": "Use 14 as the reference; does 23 exceed it?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 23,
+        "right": 14,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "Does 23 exceed 14?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 23,
+        "right": 14,
+        "template_id": 5021,
+        "binding": 1,
+        "utterance": "Two registers list 14 binks and 23 zols. Do zols outnumber binks?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 23,
+        "right": 14,
+        "template_id": 2,
+        "binding": 0,
+        "utterance": "Which quantity is larger: 23 or 14?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 23,
+        "right": 14,
+        "template_id": 4022,
+        "binding": 1,
+        "utterance": "Between 14 and 23, is the latter quantity greater?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 23,
+        "right": 14,
+        "template_id": 5020,
+        "binding": 0,
+        "utterance": "Two registers list 23 zols and 14 binks. Do zols outnumber binks?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 23,
+        "right": 14,
+        "template_id": 4020,
+        "binding": 1,
+        "utterance": "Relative to 14, is 23 larger?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 29,
+        "right": 16,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Are 29 greater than 16?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 29,
+        "right": 16,
+        "template_id": 4022,
+        "binding": 1,
+        "utterance": "Between 16 and 29, is the latter quantity greater?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 29,
+        "right": 16,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "Does 29 exceed 16?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 29,
+        "right": 16,
+        "template_id": 5021,
+        "binding": 1,
+        "utterance": "Two registers list 16 binks and 29 zols. Do zols outnumber binks?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 29,
+        "right": 16,
+        "template_id": 2,
+        "binding": 0,
+        "utterance": "Which quantity is larger: 29 or 16?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 29,
+        "right": 16,
+        "template_id": 4021,
+        "binding": 1,
+        "utterance": "Use 16 as the reference; does 29 exceed it?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 29,
+        "right": 16,
+        "template_id": 5020,
+        "binding": 0,
+        "utterance": "Two registers list 29 zols and 16 binks. Do zols outnumber binks?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 29,
+        "right": 16,
+        "template_id": 4023,
+        "binding": 1,
+        "utterance": "First consider 16; now decide whether 29 is larger."
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 31,
+        "right": 18,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Are 31 greater than 18?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 31,
+        "right": 18,
+        "template_id": 5021,
+        "binding": 1,
+        "utterance": "Two registers list 18 binks and 31 zols. Do zols outnumber binks?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 31,
+        "right": 18,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "Does 31 exceed 18?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 31,
+        "right": 18,
+        "template_id": 4022,
+        "binding": 1,
+        "utterance": "Between 18 and 31, is the latter quantity greater?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 31,
+        "right": 18,
+        "template_id": 2,
+        "binding": 0,
+        "utterance": "Which quantity is larger: 31 or 18?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 31,
+        "right": 18,
+        "template_id": 4021,
+        "binding": 1,
+        "utterance": "Use 18 as the reference; does 31 exceed it?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 31,
+        "right": 18,
+        "template_id": 5020,
+        "binding": 0,
+        "utterance": "Two registers list 31 zols and 18 binks. Do zols outnumber binks?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 31,
+        "right": 18,
+        "template_id": 4020,
+        "binding": 1,
+        "utterance": "Relative to 18, is 31 larger?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 37,
+        "right": 21,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Are 37 greater than 21?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 37,
+        "right": 21,
+        "template_id": 4021,
+        "binding": 1,
+        "utterance": "Use 21 as the reference; does 37 exceed it?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 37,
+        "right": 21,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "Does 37 exceed 21?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 37,
+        "right": 21,
+        "template_id": 4022,
+        "binding": 1,
+        "utterance": "Between 21 and 37, is the latter quantity greater?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 37,
+        "right": 21,
+        "template_id": 2,
+        "binding": 0,
+        "utterance": "Which quantity is larger: 37 or 21?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 37,
+        "right": 21,
+        "template_id": 4023,
+        "binding": 1,
+        "utterance": "First consider 21; now decide whether 37 is larger."
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 37,
+        "right": 21,
+        "template_id": 5020,
+        "binding": 0,
+        "utterance": "Two registers list 37 zols and 21 binks. Do zols outnumber binks?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 37,
+        "right": 21,
+        "template_id": 5021,
+        "binding": 1,
+        "utterance": "Two registers list 21 binks and 37 zols. Do zols outnumber binks?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 41,
+        "right": 22,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Are 41 greater than 22?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 41,
+        "right": 22,
+        "template_id": 4020,
+        "binding": 1,
+        "utterance": "Relative to 22, is 41 larger?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 41,
+        "right": 22,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "Does 41 exceed 22?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 41,
+        "right": 22,
+        "template_id": 4023,
+        "binding": 1,
+        "utterance": "First consider 22; now decide whether 41 is larger."
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 41,
+        "right": 22,
+        "template_id": 3,
+        "binding": 0,
+        "utterance": "Are there more zols than binks when there are 41 zols and 22 binks?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 41,
+        "right": 22,
+        "template_id": 5021,
+        "binding": 1,
+        "utterance": "Two registers list 22 binks and 41 zols. Do zols outnumber binks?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 41,
+        "right": 22,
+        "template_id": 5020,
+        "binding": 0,
+        "utterance": "Two registers list 41 zols and 22 binks. Do zols outnumber binks?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 41,
+        "right": 22,
+        "template_id": 4022,
+        "binding": 1,
+        "utterance": "Between 22 and 41, is the latter quantity greater?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 43,
+        "right": 24,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Are 43 greater than 24?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 43,
+        "right": 24,
+        "template_id": 4020,
+        "binding": 1,
+        "utterance": "Relative to 24, is 43 larger?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 43,
+        "right": 24,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "Does 43 exceed 24?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 43,
+        "right": 24,
+        "template_id": 5021,
+        "binding": 1,
+        "utterance": "Two registers list 24 binks and 43 zols. Do zols outnumber binks?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 43,
+        "right": 24,
+        "template_id": 3,
+        "binding": 0,
+        "utterance": "Are there more zols than binks when there are 43 zols and 24 binks?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 43,
+        "right": 24,
+        "template_id": 4023,
+        "binding": 1,
+        "utterance": "First consider 24; now decide whether 43 is larger."
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 43,
+        "right": 24,
+        "template_id": 5020,
+        "binding": 0,
+        "utterance": "Two registers list 43 zols and 24 binks. Do zols outnumber binks?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 43,
+        "right": 24,
+        "template_id": 4022,
+        "binding": 1,
+        "utterance": "Between 24 and 43, is the latter quantity greater?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 47,
+        "right": 26,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Are 47 greater than 26?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 47,
+        "right": 26,
+        "template_id": 4022,
+        "binding": 1,
+        "utterance": "Between 26 and 47, is the latter quantity greater?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 47,
+        "right": 26,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "Does 47 exceed 26?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 47,
+        "right": 26,
+        "template_id": 5021,
+        "binding": 1,
+        "utterance": "Two registers list 26 binks and 47 zols. Do zols outnumber binks?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 47,
+        "right": 26,
+        "template_id": 3,
+        "binding": 0,
+        "utterance": "Are there more zols than binks when there are 47 zols and 26 binks?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 47,
+        "right": 26,
+        "template_id": 4023,
+        "binding": 1,
+        "utterance": "First consider 26; now decide whether 47 is larger."
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 47,
+        "right": 26,
+        "template_id": 5020,
+        "binding": 0,
+        "utterance": "Two registers list 47 zols and 26 binks. Do zols outnumber binks?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 47,
+        "right": 26,
+        "template_id": 4020,
+        "binding": 1,
+        "utterance": "Relative to 26, is 47 larger?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 53,
+        "right": 28,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Are 53 greater than 28?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 53,
+        "right": 28,
+        "template_id": 4023,
+        "binding": 1,
+        "utterance": "First consider 28; now decide whether 53 is larger."
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 53,
+        "right": 28,
+        "template_id": 2,
+        "binding": 0,
+        "utterance": "Which quantity is larger: 53 or 28?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 53,
+        "right": 28,
+        "template_id": 5021,
+        "binding": 1,
+        "utterance": "Two registers list 28 binks and 53 zols. Do zols outnumber binks?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 53,
+        "right": 28,
+        "template_id": 3,
+        "binding": 0,
+        "utterance": "Are there more zols than binks when there are 53 zols and 28 binks?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 53,
+        "right": 28,
+        "template_id": 4020,
+        "binding": 1,
+        "utterance": "Relative to 28, is 53 larger?"
+      }
+    ],
+    [
+      {
+        "operation": "COMPARE",
+        "left": 53,
+        "right": 28,
+        "template_id": 5020,
+        "binding": 0,
+        "utterance": "Two registers list 53 zols and 28 binks. Do zols outnumber binks?"
+      },
+      {
+        "operation": "COMPARE",
+        "left": 53,
+        "right": 28,
+        "template_id": 4021,
+        "binding": 1,
+        "utterance": "Use 28 as the reference; does 53 exceed it?"
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 11,
+        "right": 7,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "What is the difference between 11 and 7?"
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 11,
+        "right": 7,
+        "template_id": 4010,
+        "binding": 1,
+        "utterance": "Take 7 away from 11; what remains?"
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 11,
+        "right": 7,
+        "template_id": 3,
+        "binding": 0,
+        "utterance": "How many more zols are there than binks when there are 11 zols and 7 binks?"
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 11,
+        "right": 7,
+        "template_id": 5,
+        "binding": 1,
+        "utterance": "Find the amount left after taking 7 away from 11."
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 11,
+        "right": 7,
+        "template_id": 4,
+        "binding": 0,
+        "utterance": "Start with 11 items and remove 7. How many remain?"
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 11,
+        "right": 7,
+        "template_id": 7,
+        "binding": 1,
+        "utterance": "What remains if 7 is deducted from 11?"
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 11,
+        "right": 7,
+        "template_id": 5010,
+        "binding": 0,
+        "utterance": "Two registers list 11 zols and 7 binks. Give the zol surplus."
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 11,
+        "right": 7,
+        "template_id": 5011,
+        "binding": 1,
+        "utterance": "Two registers list 7 binks and 11 zols. Give the zol surplus."
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 13,
+        "right": 8,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Calculate 13 minus 8."
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 13,
+        "right": 8,
+        "template_id": 7,
+        "binding": 1,
+        "utterance": "What remains if 8 is deducted from 13?"
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 13,
+        "right": 8,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "What is the difference between 13 and 8?"
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 13,
+        "right": 8,
+        "template_id": 5011,
+        "binding": 1,
+        "utterance": "Two registers list 8 binks and 13 zols. Give the zol surplus."
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 13,
+        "right": 8,
+        "template_id": 3,
+        "binding": 0,
+        "utterance": "How many more zols are there than binks when there are 13 zols and 8 binks?"
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 13,
+        "right": 8,
+        "template_id": 2,
+        "binding": 1,
+        "utterance": "Subtract 8 from 13."
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 13,
+        "right": 8,
+        "template_id": 5010,
+        "binding": 0,
+        "utterance": "Two registers list 13 zols and 8 binks. Give the zol surplus."
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 13,
+        "right": 8,
+        "template_id": 4010,
+        "binding": 1,
+        "utterance": "Take 8 away from 13; what remains?"
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 17,
+        "right": 9,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Calculate 17 minus 9."
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 17,
+        "right": 9,
+        "template_id": 5011,
+        "binding": 1,
+        "utterance": "Two registers list 9 binks and 17 zols. Give the zol surplus."
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 17,
+        "right": 9,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "What is the difference between 17 and 9?"
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 17,
+        "right": 9,
+        "template_id": 7,
+        "binding": 1,
+        "utterance": "What remains if 9 is deducted from 17?"
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 17,
+        "right": 9,
+        "template_id": 4,
+        "binding": 0,
+        "utterance": "Start with 17 items and remove 9. How many remain?"
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 17,
+        "right": 9,
+        "template_id": 5,
+        "binding": 1,
+        "utterance": "Find the amount left after taking 9 away from 17."
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 17,
+        "right": 9,
+        "template_id": 5010,
+        "binding": 0,
+        "utterance": "Two registers list 17 zols and 9 binks. Give the zol surplus."
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 17,
+        "right": 9,
+        "template_id": 2,
+        "binding": 1,
+        "utterance": "Subtract 9 from 17."
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 19,
+        "right": 12,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "What is the difference between 19 and 12?"
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 19,
+        "right": 12,
+        "template_id": 7,
+        "binding": 1,
+        "utterance": "What remains if 12 is deducted from 19?"
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 19,
+        "right": 12,
+        "template_id": 3,
+        "binding": 0,
+        "utterance": "How many more zols are there than binks when there are 19 zols and 12 binks?"
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 19,
+        "right": 12,
+        "template_id": 5011,
+        "binding": 1,
+        "utterance": "Two registers list 12 binks and 19 zols. Give the zol surplus."
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 19,
+        "right": 12,
+        "template_id": 4,
+        "binding": 0,
+        "utterance": "Start with 19 items and remove 12. How many remain?"
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 19,
+        "right": 12,
+        "template_id": 5,
+        "binding": 1,
+        "utterance": "Find the amount left after taking 12 away from 19."
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 19,
+        "right": 12,
+        "template_id": 5010,
+        "binding": 0,
+        "utterance": "Two registers list 19 zols and 12 binks. Give the zol surplus."
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 19,
+        "right": 12,
+        "template_id": 4010,
+        "binding": 1,
+        "utterance": "Take 12 away from 19; what remains?"
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 23,
+        "right": 14,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Calculate 23 minus 14."
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 23,
+        "right": 14,
+        "template_id": 5011,
+        "binding": 1,
+        "utterance": "Two registers list 14 binks and 23 zols. Give the zol surplus."
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 23,
+        "right": 14,
+        "template_id": 3,
+        "binding": 0,
+        "utterance": "How many more zols are there than binks when there are 23 zols and 14 binks?"
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 23,
+        "right": 14,
+        "template_id": 5,
+        "binding": 1,
+        "utterance": "Find the amount left after taking 14 away from 23."
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 23,
+        "right": 14,
+        "template_id": 4,
+        "binding": 0,
+        "utterance": "Start with 23 items and remove 14. How many remain?"
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 23,
+        "right": 14,
+        "template_id": 2,
+        "binding": 1,
+        "utterance": "Subtract 14 from 23."
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 23,
+        "right": 14,
+        "template_id": 5010,
+        "binding": 0,
+        "utterance": "Two registers list 23 zols and 14 binks. Give the zol surplus."
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 23,
+        "right": 14,
+        "template_id": 7,
+        "binding": 1,
+        "utterance": "What remains if 14 is deducted from 23?"
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 29,
+        "right": 16,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Calculate 29 minus 16."
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 29,
+        "right": 16,
+        "template_id": 2,
+        "binding": 1,
+        "utterance": "Subtract 16 from 29."
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 29,
+        "right": 16,
+        "template_id": 3,
+        "binding": 0,
+        "utterance": "How many more zols are there than binks when there are 29 zols and 16 binks?"
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 29,
+        "right": 16,
+        "template_id": 5,
+        "binding": 1,
+        "utterance": "Find the amount left after taking 16 away from 29."
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 29,
+        "right": 16,
+        "template_id": 4,
+        "binding": 0,
+        "utterance": "Start with 29 items and remove 16. How many remain?"
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 29,
+        "right": 16,
+        "template_id": 7,
+        "binding": 1,
+        "utterance": "What remains if 16 is deducted from 29?"
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 29,
+        "right": 16,
+        "template_id": 5010,
+        "binding": 0,
+        "utterance": "Two registers list 29 zols and 16 binks. Give the zol surplus."
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 29,
+        "right": 16,
+        "template_id": 5011,
+        "binding": 1,
+        "utterance": "Two registers list 16 binks and 29 zols. Give the zol surplus."
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 31,
+        "right": 18,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Calculate 31 minus 18."
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 31,
+        "right": 18,
+        "template_id": 4010,
+        "binding": 1,
+        "utterance": "Take 18 away from 31; what remains?"
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 31,
+        "right": 18,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "What is the difference between 31 and 18?"
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 31,
+        "right": 18,
+        "template_id": 2,
+        "binding": 1,
+        "utterance": "Subtract 18 from 31."
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 31,
+        "right": 18,
+        "template_id": 3,
+        "binding": 0,
+        "utterance": "How many more zols are there than binks when there are 31 zols and 18 binks?"
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 31,
+        "right": 18,
+        "template_id": 5011,
+        "binding": 1,
+        "utterance": "Two registers list 18 binks and 31 zols. Give the zol surplus."
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 31,
+        "right": 18,
+        "template_id": 5010,
+        "binding": 0,
+        "utterance": "Two registers list 31 zols and 18 binks. Give the zol surplus."
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 31,
+        "right": 18,
+        "template_id": 7,
+        "binding": 1,
+        "utterance": "What remains if 18 is deducted from 31?"
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 37,
+        "right": 21,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Calculate 37 minus 21."
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 37,
+        "right": 21,
+        "template_id": 2,
+        "binding": 1,
+        "utterance": "Subtract 21 from 37."
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 37,
+        "right": 21,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "What is the difference between 37 and 21?"
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 37,
+        "right": 21,
+        "template_id": 5011,
+        "binding": 1,
+        "utterance": "Two registers list 21 binks and 37 zols. Give the zol surplus."
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 37,
+        "right": 21,
+        "template_id": 3,
+        "binding": 0,
+        "utterance": "How many more zols are there than binks when there are 37 zols and 21 binks?"
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 37,
+        "right": 21,
+        "template_id": 4010,
+        "binding": 1,
+        "utterance": "Take 21 away from 37; what remains?"
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 37,
+        "right": 21,
+        "template_id": 5010,
+        "binding": 0,
+        "utterance": "Two registers list 37 zols and 21 binks. Give the zol surplus."
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 37,
+        "right": 21,
+        "template_id": 7,
+        "binding": 1,
+        "utterance": "What remains if 21 is deducted from 37?"
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 41,
+        "right": 22,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "What is the difference between 41 and 22?"
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 41,
+        "right": 22,
+        "template_id": 2,
+        "binding": 1,
+        "utterance": "Subtract 22 from 41."
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 41,
+        "right": 22,
+        "template_id": 3,
+        "binding": 0,
+        "utterance": "How many more zols are there than binks when there are 41 zols and 22 binks?"
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 41,
+        "right": 22,
+        "template_id": 7,
+        "binding": 1,
+        "utterance": "What remains if 22 is deducted from 41?"
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 41,
+        "right": 22,
+        "template_id": 4,
+        "binding": 0,
+        "utterance": "Start with 41 items and remove 22. How many remain?"
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 41,
+        "right": 22,
+        "template_id": 4010,
+        "binding": 1,
+        "utterance": "Take 22 away from 41; what remains?"
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 41,
+        "right": 22,
+        "template_id": 5010,
+        "binding": 0,
+        "utterance": "Two registers list 41 zols and 22 binks. Give the zol surplus."
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 41,
+        "right": 22,
+        "template_id": 5011,
+        "binding": 1,
+        "utterance": "Two registers list 22 binks and 41 zols. Give the zol surplus."
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 43,
+        "right": 24,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Calculate 43 minus 24."
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 43,
+        "right": 24,
+        "template_id": 5,
+        "binding": 1,
+        "utterance": "Find the amount left after taking 24 away from 43."
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 43,
+        "right": 24,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "What is the difference between 43 and 24?"
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 43,
+        "right": 24,
+        "template_id": 5011,
+        "binding": 1,
+        "utterance": "Two registers list 24 binks and 43 zols. Give the zol surplus."
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 43,
+        "right": 24,
+        "template_id": 4,
+        "binding": 0,
+        "utterance": "Start with 43 items and remove 24. How many remain?"
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 43,
+        "right": 24,
+        "template_id": 2,
+        "binding": 1,
+        "utterance": "Subtract 24 from 43."
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 43,
+        "right": 24,
+        "template_id": 5010,
+        "binding": 0,
+        "utterance": "Two registers list 43 zols and 24 binks. Give the zol surplus."
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 43,
+        "right": 24,
+        "template_id": 7,
+        "binding": 1,
+        "utterance": "What remains if 24 is deducted from 43?"
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 47,
+        "right": 26,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Calculate 47 minus 26."
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 47,
+        "right": 26,
+        "template_id": 7,
+        "binding": 1,
+        "utterance": "What remains if 26 is deducted from 47?"
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 47,
+        "right": 26,
+        "template_id": 3,
+        "binding": 0,
+        "utterance": "How many more zols are there than binks when there are 47 zols and 26 binks?"
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 47,
+        "right": 26,
+        "template_id": 4010,
+        "binding": 1,
+        "utterance": "Take 26 away from 47; what remains?"
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 47,
+        "right": 26,
+        "template_id": 4,
+        "binding": 0,
+        "utterance": "Start with 47 items and remove 26. How many remain?"
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 47,
+        "right": 26,
+        "template_id": 2,
+        "binding": 1,
+        "utterance": "Subtract 26 from 47."
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 47,
+        "right": 26,
+        "template_id": 5010,
+        "binding": 0,
+        "utterance": "Two registers list 47 zols and 26 binks. Give the zol surplus."
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 47,
+        "right": 26,
+        "template_id": 5011,
+        "binding": 1,
+        "utterance": "Two registers list 26 binks and 47 zols. Give the zol surplus."
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 53,
+        "right": 28,
+        "template_id": 0,
+        "binding": 0,
+        "utterance": "Calculate 53 minus 28."
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 53,
+        "right": 28,
+        "template_id": 5,
+        "binding": 1,
+        "utterance": "Find the amount left after taking 28 away from 53."
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 53,
+        "right": 28,
+        "template_id": 1,
+        "binding": 0,
+        "utterance": "What is the difference between 53 and 28?"
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 53,
+        "right": 28,
+        "template_id": 7,
+        "binding": 1,
+        "utterance": "What remains if 28 is deducted from 53?"
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 53,
+        "right": 28,
+        "template_id": 4,
+        "binding": 0,
+        "utterance": "Start with 53 items and remove 28. How many remain?"
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 53,
+        "right": 28,
+        "template_id": 5011,
+        "binding": 1,
+        "utterance": "Two registers list 28 binks and 53 zols. Give the zol surplus."
+      }
+    ],
+    [
+      {
+        "operation": "SUBTRACT",
+        "left": 53,
+        "right": 28,
+        "template_id": 5010,
+        "binding": 0,
+        "utterance": "Two registers list 53 zols and 28 binks. Give the zol surplus."
+      },
+      {
+        "operation": "SUBTRACT",
+        "left": 53,
+        "right": 28,
+        "template_id": 2,
+        "binding": 1,
+        "utterance": "Subtract 28 from 53."
+      }
+    ]
+  ]
+}

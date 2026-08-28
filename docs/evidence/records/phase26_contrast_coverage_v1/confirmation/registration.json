@@ -1,0 +1,41 @@
+{
+  "experiment": "phase26_contrast_coverage_confirmation_v1",
+  "config": "configs/phase26_confirmation.yaml",
+  "status": "registered_not_run",
+  "selected_arm": "minimal_lexical_contrast",
+  "variants_per_operation": [
+    4,
+    8
+  ],
+  "seeds": [
+    71,
+    73,
+    79,
+    83,
+    89
+  ],
+  "new_training_runs": 20,
+  "sealed_suite_status": "created_but_not_evaluated",
+  "schedules": {
+    "4": {
+      "batch_size": 16,
+      "max_steps": 800,
+      "warmup_steps": 80
+    },
+    "8": {
+      "batch_size": 16,
+      "max_steps": 1600,
+      "warmup_steps": 160
+    }
+  },
+  "training_fingerprints": {
+    "4": {
+      "baseline": "3562d3949534a32f51225827a45087d2e40a575f67af2edc3753fae349e0dfa7",
+      "minimal_lexical_contrast": "0d9379af61bad296c699c5f48770b2b23e5169773f6535226de1c8180e9ae1cd"
+    },
+    "8": {
+      "baseline": "090fbc50eeca1204aeca4e4ffcc0ddc8673acaa4642052c424385f43512c16c9",
+      "minimal_lexical_contrast": "dd8457f6f47454c6863ca80faae0b9dd57b3999bc63067b5e4e8cb2ed62e9a36"
+    }
+  }
+}

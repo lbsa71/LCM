@@ -1,0 +1,49 @@
+{
+  "experiment": "form_variation_clean_v2",
+  "manifests": {
+    "1": {
+      "tokenizer_policy": "training_examples_only",
+      "training_example_count": 36,
+      "pressure_example_count": 126,
+      "training_unique_utterance_count": 36,
+      "pressure_unique_utterance_count": 126,
+      "exact_utterance_overlap_count": 0,
+      "training_corpus_sha256": "d17464ac9a7e08f0fd0b71558789ff21c66e33d6287a3db6672f7f766a1a2eec",
+      "tokenizer_corpus_sha256": "d17464ac9a7e08f0fd0b71558789ff21c66e33d6287a3db6672f7f766a1a2eec",
+      "validation": "PASS"
+    },
+    "2": {
+      "tokenizer_policy": "training_examples_only",
+      "training_example_count": 72,
+      "pressure_example_count": 126,
+      "training_unique_utterance_count": 72,
+      "pressure_unique_utterance_count": 126,
+      "exact_utterance_overlap_count": 0,
+      "training_corpus_sha256": "22d819e81402b0d957c70992d82c76e69df6c951a06149d56b53b6f8c826cf78",
+      "tokenizer_corpus_sha256": "22d819e81402b0d957c70992d82c76e69df6c951a06149d56b53b6f8c826cf78",
+      "validation": "PASS"
+    },
+    "4": {
+      "tokenizer_policy": "training_examples_only",
+      "training_example_count": 144,
+      "pressure_example_count": 126,
+      "training_unique_utterance_count": 144,
+      "pressure_unique_utterance_count": 126,
+      "exact_utterance_overlap_count": 0,
+      "training_corpus_sha256": "a3c1be658dae33d52c124fe5973e2a6c66efefca84e8aab1d4267a8cf3543eba",
+      "tokenizer_corpus_sha256": "a3c1be658dae33d52c124fe5973e2a6c66efefca84e8aab1d4267a8cf3543eba",
+      "validation": "PASS"
+    },
+    "8": {
+      "tokenizer_policy": "training_examples_only",
+      "training_example_count": 288,
+      "pressure_example_count": 126,
+      "training_unique_utterance_count": 288,
+      "pressure_unique_utterance_count": 126,
+      "exact_utterance_overlap_count": 0,
+      "training_corpus_sha256": "a3c9cad623ede610e1e6fefd60bd6a3c0bc4e898a56cf50d3ad18a04194a7c46",
+      "tokenizer_corpus_sha256": "a3c9cad623ede610e1e6fefd60bd6a3c0bc4e898a56cf50d3ad18a04194a7c46",
+      "validation": "PASS"
+    }
+  }
+}

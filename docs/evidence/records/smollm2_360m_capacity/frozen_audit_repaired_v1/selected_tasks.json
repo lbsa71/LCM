@@ -1,0 +1,1920 @@
+[
+  {
+    "task_id": "task_a_w_te_281027_1",
+    "task_type": "language_logic",
+    "suite": "suite_a_language",
+    "question": "All zorps are plinks. Gax is a zorp. Is Gax a plink?",
+    "gold_answer": "true",
+    "world_id": "w_te_281027",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_a_w_te_281027_2",
+    "task_type": "language_logic",
+    "suite": "suite_a_language",
+    "question": "No qux is a blip. Fend is a qux. Is Fend a blip?",
+    "gold_answer": "false",
+    "world_id": "w_te_281027",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_a_w_te_281028_1",
+    "task_type": "language_logic",
+    "suite": "suite_a_language",
+    "question": "All zorps are plinks. Gax is a zorp. Is Gax a plink?",
+    "gold_answer": "true",
+    "world_id": "w_te_281028",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_a_w_te_281028_2",
+    "task_type": "language_logic",
+    "suite": "suite_a_language",
+    "question": "No qux is a blip. Fend is a qux. Is Fend a blip?",
+    "gold_answer": "false",
+    "world_id": "w_te_281028",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_a_w_te_281029_1",
+    "task_type": "language_logic",
+    "suite": "suite_a_language",
+    "question": "All zorps are plinks. Gax is a zorp. Is Gax a plink?",
+    "gold_answer": "true",
+    "world_id": "w_te_281029",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_a_w_te_281029_2",
+    "task_type": "language_logic",
+    "suite": "suite_a_language",
+    "question": "No qux is a blip. Fend is a qux. Is Fend a blip?",
+    "gold_answer": "false",
+    "world_id": "w_te_281029",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_a_w_te_281030_1",
+    "task_type": "language_logic",
+    "suite": "suite_a_language",
+    "question": "All zorps are plinks. Gax is a zorp. Is Gax a plink?",
+    "gold_answer": "true",
+    "world_id": "w_te_281030",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_a_w_te_281030_2",
+    "task_type": "language_logic",
+    "suite": "suite_a_language",
+    "question": "No qux is a blip. Fend is a qux. Is Fend a blip?",
+    "gold_answer": "false",
+    "world_id": "w_te_281030",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_a_w_te_281031_1",
+    "task_type": "language_logic",
+    "suite": "suite_a_language",
+    "question": "All zorps are plinks. Gax is a zorp. Is Gax a plink?",
+    "gold_answer": "true",
+    "world_id": "w_te_281031",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_a_w_te_281031_2",
+    "task_type": "language_logic",
+    "suite": "suite_a_language",
+    "question": "No qux is a blip. Fend is a qux. Is Fend a blip?",
+    "gold_answer": "false",
+    "world_id": "w_te_281031",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_b_w_te_281027_1",
+    "task_type": "ontology_invariants",
+    "suite": "suite_b_invariants",
+    "question": "Context: Measurement Alpha: 80. Measurement Beta: 95. What is the sum of Measurement Alpha and Measurement Beta?",
+    "gold_answer": "175",
+    "world_id": "w_te_281027",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": "Measurement Alpha: 80. Measurement Beta: 95.",
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_b_w_te_281027_2",
+    "task_type": "ontology_invariants",
+    "suite": "suite_b_invariants",
+    "question": "Context: Measurement Alpha: 89. Measurement Beta: 33. What is the sum of Measurement Alpha and Measurement Beta?",
+    "gold_answer": "122",
+    "world_id": "w_te_281027",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": "Measurement Alpha: 89. Measurement Beta: 33.",
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_b_w_te_281028_1",
+    "task_type": "ontology_invariants",
+    "suite": "suite_b_invariants",
+    "question": "Context: Measurement Alpha: 25. Measurement Beta: 74. What is the sum of Measurement Alpha and Measurement Beta?",
+    "gold_answer": "99",
+    "world_id": "w_te_281028",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": "Measurement Alpha: 25. Measurement Beta: 74.",
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_b_w_te_281028_2",
+    "task_type": "ontology_invariants",
+    "suite": "suite_b_invariants",
+    "question": "Context: Measurement Alpha: 76. Measurement Beta: 39. What is the sum of Measurement Alpha and Measurement Beta?",
+    "gold_answer": "115",
+    "world_id": "w_te_281028",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": "Measurement Alpha: 76. Measurement Beta: 39.",
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_b_w_te_281029_1",
+    "task_type": "ontology_invariants",
+    "suite": "suite_b_invariants",
+    "question": "Context: Measurement Alpha: 37. Measurement Beta: 31. What is the sum of Measurement Alpha and Measurement Beta?",
+    "gold_answer": "68",
+    "world_id": "w_te_281029",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": "Measurement Alpha: 37. Measurement Beta: 31.",
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_b_w_te_281029_2",
+    "task_type": "ontology_invariants",
+    "suite": "suite_b_invariants",
+    "question": "Context: Measurement Alpha: 11. Measurement Beta: 74. What is the sum of Measurement Alpha and Measurement Beta?",
+    "gold_answer": "85",
+    "world_id": "w_te_281029",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": "Measurement Alpha: 11. Measurement Beta: 74.",
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_b_w_te_281030_1",
+    "task_type": "ontology_invariants",
+    "suite": "suite_b_invariants",
+    "question": "Context: Measurement Alpha: 89. Measurement Beta: 50. What is the sum of Measurement Alpha and Measurement Beta?",
+    "gold_answer": "139",
+    "world_id": "w_te_281030",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": "Measurement Alpha: 89. Measurement Beta: 50.",
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_b_w_te_281030_2",
+    "task_type": "ontology_invariants",
+    "suite": "suite_b_invariants",
+    "question": "Context: Measurement Alpha: 62. Measurement Beta: 47. What is the sum of Measurement Alpha and Measurement Beta?",
+    "gold_answer": "109",
+    "world_id": "w_te_281030",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": "Measurement Alpha: 62. Measurement Beta: 47.",
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_b_w_te_281031_1",
+    "task_type": "ontology_invariants",
+    "suite": "suite_b_invariants",
+    "question": "Context: Measurement Alpha: 21. Measurement Beta: 96. What is the sum of Measurement Alpha and Measurement Beta?",
+    "gold_answer": "117",
+    "world_id": "w_te_281031",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": "Measurement Alpha: 21. Measurement Beta: 96.",
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_b_w_te_281031_2",
+    "task_type": "ontology_invariants",
+    "suite": "suite_b_invariants",
+    "question": "Context: Measurement Alpha: 54. Measurement Beta: 41. What is the sum of Measurement Alpha and Measurement Beta?",
+    "gold_answer": "95",
+    "world_id": "w_te_281031",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": "Measurement Alpha: 54. Measurement Beta: 41.",
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_c_w_te_281027_1",
+    "task_type": "single_hop_retrieval",
+    "suite": "suite_c_single_hop",
+    "question": "Retrieve the measurement recorded for torunir.",
+    "gold_answer": "416",
+    "world_id": "w_te_281027",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D08": [
+        1
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_c_w_te_281027_2",
+    "task_type": "single_hop_retrieval",
+    "suite": "suite_c_single_hop",
+    "question": "What is the current status of vesesith?",
+    "gold_answer": "primary",
+    "world_id": "w_te_281027",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D09": [
+        1
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_c_w_te_281027_3",
+    "task_type": "single_hop_retrieval",
+    "suite": "suite_c_single_hop",
+    "question": "Where is kexolis located?",
+    "gold_answer": "e1",
+    "world_id": "w_te_281027",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D04": [
+        1
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_c_w_te_281028_1",
+    "task_type": "single_hop_retrieval",
+    "suite": "suite_c_single_hop",
+    "question": "What contains the entity glyelin?",
+    "gold_answer": "e2",
+    "world_id": "w_te_281028",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D06": [
+        1
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_c_w_te_281028_2",
+    "task_type": "single_hop_retrieval",
+    "suite": "suite_c_single_hop",
+    "question": "In which zone or region is reneka situated?",
+    "gold_answer": "e2",
+    "world_id": "w_te_281028",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D03": [
+        3
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_c_w_te_281028_3",
+    "task_type": "single_hop_retrieval",
+    "suite": "suite_c_single_hop",
+    "question": "Retrieve the measurement recorded for karnosara.",
+    "gold_answer": "286",
+    "world_id": "w_te_281028",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D08": [
+        3
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_c_w_te_281029_1",
+    "task_type": "single_hop_retrieval",
+    "suite": "suite_c_single_hop",
+    "question": "Retrieve the population count of rixurul.",
+    "gold_answer": "448",
+    "world_id": "w_te_281029",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D01": [
+        2
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_c_w_te_281029_2",
+    "task_type": "single_hop_retrieval",
+    "suite": "suite_c_single_hop",
+    "question": "What is the current status of lesoda?",
+    "gold_answer": "primary",
+    "world_id": "w_te_281029",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D07": [
+        2
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_c_w_te_281029_3",
+    "task_type": "single_hop_retrieval",
+    "suite": "suite_c_single_hop",
+    "question": "Which region contains vunenium?",
+    "gold_answer": "e3",
+    "world_id": "w_te_281029",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D05": [
+        2
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_c_w_te_281030_1",
+    "task_type": "single_hop_retrieval",
+    "suite": "suite_c_single_hop",
+    "question": "What reading is recorded for karnimat?",
+    "gold_answer": "219",
+    "world_id": "w_te_281030",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D07": [
+        1
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_d_w_te_281027_3",
+    "task_type": "multi_hop_traversal",
+    "suite": "suite_d_multi_hop",
+    "question": "Which settlement in joridak has the higher recorded population, pelimis or zanolet?",
+    "gold_answer": "pelimis",
+    "world_id": "w_te_281027",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D05": [
+        3
+      ],
+      "D04": [
+        3
+      ],
+      "D01": [
+        1
+      ],
+      "D02": [
+        1
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_d_w_te_281028_1",
+    "task_type": "multi_hop_traversal",
+    "suite": "suite_d_multi_hop",
+    "question": "Which settlement in junakion has the higher recorded population, reneka or glyelin?",
+    "gold_answer": "glyelin",
+    "world_id": "w_te_281028",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D03": [
+        3
+      ],
+      "D06": [
+        1
+      ],
+      "D01": [
+        1,
+        3
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_d_w_te_281028_3",
+    "task_type": "multi_hop_traversal",
+    "suite": "suite_d_multi_hop",
+    "question": "Which settlement in wexedu has the higher recorded population, pelesyn or kinisyx?",
+    "gold_answer": "pelesyn",
+    "world_id": "w_te_281028",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D05": [
+        1
+      ],
+      "D03": [
+        1
+      ],
+      "D02": [
+        2,
+        3
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_d_w_te_281029_1",
+    "task_type": "multi_hop_traversal",
+    "suite": "suite_d_multi_hop",
+    "question": "Which settlement in jexisela has the higher recorded population, kalior or kalodor?",
+    "gold_answer": "kalodor",
+    "world_id": "w_te_281029",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D03": [
+        2
+      ],
+      "D04": [
+        1
+      ],
+      "D01": [
+        3
+      ],
+      "D02": [
+        2
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_d_w_te_281029_2",
+    "task_type": "multi_hop_traversal",
+    "suite": "suite_d_multi_hop",
+    "question": "Which settlement in tirurka has the higher recorded population, vunenium or rixurul?",
+    "gold_answer": "vunenium",
+    "world_id": "w_te_281029",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D05": [
+        2
+      ],
+      "D04": [
+        3
+      ],
+      "D02": [
+        3
+      ],
+      "D01": [
+        2
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_d_w_te_281030_1",
+    "task_type": "multi_hop_traversal",
+    "suite": "suite_d_multi_hop",
+    "question": "Which settlement in talesath has the higher recorded population, renana or barusia?",
+    "gold_answer": "renana",
+    "world_id": "w_te_281030",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D04": [
+        3
+      ],
+      "D03": [
+        1
+      ],
+      "D01": [
+        1,
+        3
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_d_w_te_281030_2",
+    "task_type": "multi_hop_traversal",
+    "suite": "suite_d_multi_hop",
+    "question": "Which settlement in talakia has the higher recorded population, keleris or noxuneld?",
+    "gold_answer": "noxuneld",
+    "world_id": "w_te_281030",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D04": [
+        1
+      ],
+      "D05": [
+        1
+      ],
+      "D02": [
+        1,
+        2
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_d_w_te_281031_2",
+    "task_type": "multi_hop_traversal",
+    "suite": "suite_d_multi_hop",
+    "question": "Which settlement in calith has the higher recorded population, mipekix or karnaska?",
+    "gold_answer": "karnaska",
+    "world_id": "w_te_281031",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D04": [
+        2
+      ],
+      "D06": [
+        1
+      ],
+      "D02": [
+        1
+      ],
+      "D01": [
+        3
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_d_w_te_281031_3",
+    "task_type": "multi_hop_traversal",
+    "suite": "suite_d_multi_hop",
+    "question": "Which settlement in mipamin has the higher recorded population, zanususk or zelodan?",
+    "gold_answer": "zanususk",
+    "world_id": "w_te_281031",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D03": [
+        3
+      ],
+      "D05": [
+        3
+      ],
+      "D02": [
+        2,
+        3
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_d_w_te_281032_1",
+    "task_type": "multi_hop_traversal",
+    "suite": "suite_d_multi_hop",
+    "question": "Which settlement in kalukos has the higher recorded population, silois or noraryx?",
+    "gold_answer": "silois",
+    "world_id": "w_te_281032",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D04": [
+        1,
+        2
+      ],
+      "D01": [
+        2,
+        3
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_e_w_te_281027_1",
+    "task_type": "retrieval_computation",
+    "suite": "suite_e_retrieval_computation",
+    "question": "What is the combined population of wyrurux and kexolis?",
+    "gold_answer": "1410",
+    "world_id": "w_te_281027",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D01": [
+        2
+      ],
+      "D02": [
+        2
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_e_w_te_281027_2",
+    "task_type": "retrieval_computation",
+    "suite": "suite_e_retrieval_computation",
+    "question": "What is the combined population of dakurith and zanolet?",
+    "gold_answer": "1234",
+    "world_id": "w_te_281027",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D02": [
+        3,
+        1
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_e_w_te_281028_1",
+    "task_type": "retrieval_computation",
+    "suite": "suite_e_retrieval_computation",
+    "question": "What is the combined population of mipunia and pelesyn?",
+    "gold_answer": "880",
+    "world_id": "w_te_281028",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D01": [
+        2
+      ],
+      "D02": [
+        2
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_e_w_te_281028_2",
+    "task_type": "retrieval_computation",
+    "suite": "suite_e_retrieval_computation",
+    "question": "What is the combined population of falenun and kinisyx?",
+    "gold_answer": "725",
+    "world_id": "w_te_281028",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D02": [
+        1,
+        3
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_e_w_te_281029_1",
+    "task_type": "retrieval_computation",
+    "suite": "suite_e_retrieval_computation",
+    "question": "What is the combined population of junidis and yulusan?",
+    "gold_answer": "1622",
+    "world_id": "w_te_281029",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D02": [
+        1
+      ],
+      "D01": [
+        1
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_e_w_te_281029_2",
+    "task_type": "retrieval_computation",
+    "suite": "suite_e_retrieval_computation",
+    "question": "What is the combined population of vunenium and rixurul?",
+    "gold_answer": "1155",
+    "world_id": "w_te_281029",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D02": [
+        3
+      ],
+      "D01": [
+        2
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_e_w_te_281030_1",
+    "task_type": "retrieval_computation",
+    "suite": "suite_e_retrieval_computation",
+    "question": "What is the combined population of riximor and barusia?",
+    "gold_answer": "645",
+    "world_id": "w_te_281030",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D01": [
+        2,
+        1
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_e_w_te_281030_2",
+    "task_type": "retrieval_computation",
+    "suite": "suite_e_retrieval_computation",
+    "question": "What is the combined population of keleris and kelarux?",
+    "gold_answer": "613",
+    "world_id": "w_te_281030",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D02": [
+        1,
+        3
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_e_w_te_281031_1",
+    "task_type": "retrieval_computation",
+    "suite": "suite_e_retrieval_computation",
+    "question": "What is the combined population of mipekix and helaor?",
+    "gold_answer": "1551",
+    "world_id": "w_te_281031",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D02": [
+        1
+      ],
+      "D01": [
+        1
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_e_w_te_281031_2",
+    "task_type": "retrieval_computation",
+    "suite": "suite_e_retrieval_computation",
+    "question": "What is the combined population of karnaska and zanususk?",
+    "gold_answer": "1856",
+    "world_id": "w_te_281031",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D01": [
+        3
+      ],
+      "D02": [
+        2
+      ]
+    },
+    "metadata": {}
+  },
+  {
+    "task_id": "task_f_w_te_281027_1",
+    "task_type": "missing_evidence_abstention",
+    "suite": "suite_f_missing_evidence",
+    "question": "What is the recorded population of Eldoria?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281027",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_f_w_te_281027_2",
+    "task_type": "missing_evidence_abstention",
+    "suite": "suite_f_missing_evidence",
+    "question": "What is the recorded population of Valtoria?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281027",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_f_w_te_281028_1",
+    "task_type": "missing_evidence_abstention",
+    "suite": "suite_f_missing_evidence",
+    "question": "What is the recorded population of Eldoria?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281028",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_f_w_te_281028_2",
+    "task_type": "missing_evidence_abstention",
+    "suite": "suite_f_missing_evidence",
+    "question": "What is the recorded population of Valtoria?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281028",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_f_w_te_281029_1",
+    "task_type": "missing_evidence_abstention",
+    "suite": "suite_f_missing_evidence",
+    "question": "What is the recorded population of Eldoria?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281029",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_f_w_te_281029_2",
+    "task_type": "missing_evidence_abstention",
+    "suite": "suite_f_missing_evidence",
+    "question": "What is the recorded population of Valtoria?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281029",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_f_w_te_281030_1",
+    "task_type": "missing_evidence_abstention",
+    "suite": "suite_f_missing_evidence",
+    "question": "What is the recorded population of Eldoria?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281030",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_f_w_te_281030_2",
+    "task_type": "missing_evidence_abstention",
+    "suite": "suite_f_missing_evidence",
+    "question": "What is the recorded population of Valtoria?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281030",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_f_w_te_281031_1",
+    "task_type": "missing_evidence_abstention",
+    "suite": "suite_f_missing_evidence",
+    "question": "What is the recorded population of Eldoria?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281031",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_f_w_te_281031_2",
+    "task_type": "missing_evidence_abstention",
+    "suite": "suite_f_missing_evidence",
+    "question": "What is the recorded population of Valtoria?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281031",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_g_w_te_281027_1",
+    "task_type": "tool_error_recovery",
+    "suite": "suite_g_tool_recovery",
+    "question": "Determine the current operating status for tirux.",
+    "gold_answer": "uncalibrated",
+    "world_id": "w_te_281027",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D08": [
+        2
+      ]
+    },
+    "metadata": {
+      "inject_error_on_first_search": true
+    }
+  },
+  {
+    "task_id": "task_g_w_te_281028_1",
+    "task_type": "tool_error_recovery",
+    "suite": "suite_g_tool_recovery",
+    "question": "Determine the current operating status for heleon.",
+    "gold_answer": "stable",
+    "world_id": "w_te_281028",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D08": [
+        2
+      ]
+    },
+    "metadata": {
+      "inject_error_on_first_search": true
+    }
+  },
+  {
+    "task_id": "task_g_w_te_281029_1",
+    "task_type": "tool_error_recovery",
+    "suite": "suite_g_tool_recovery",
+    "question": "Determine the current operating status for lesoda.",
+    "gold_answer": "primary",
+    "world_id": "w_te_281029",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D07": [
+        2
+      ]
+    },
+    "metadata": {
+      "inject_error_on_first_search": true
+    }
+  },
+  {
+    "task_id": "task_g_w_te_281030_1",
+    "task_type": "tool_error_recovery",
+    "suite": "suite_g_tool_recovery",
+    "question": "Determine the current operating status for moronorx.",
+    "gold_answer": "active",
+    "world_id": "w_te_281030",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D09": [
+        2
+      ]
+    },
+    "metadata": {
+      "inject_error_on_first_search": true
+    }
+  },
+  {
+    "task_id": "task_g_w_te_281031_1",
+    "task_type": "tool_error_recovery",
+    "suite": "suite_g_tool_recovery",
+    "question": "Determine the current operating status for glyiryr.",
+    "gold_answer": "open",
+    "world_id": "w_te_281031",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D08": [
+        2
+      ]
+    },
+    "metadata": {
+      "inject_error_on_first_search": true
+    }
+  },
+  {
+    "task_id": "task_g_w_te_281032_1",
+    "task_type": "tool_error_recovery",
+    "suite": "suite_g_tool_recovery",
+    "question": "Determine the current operating status for zaneren.",
+    "gold_answer": "primary",
+    "world_id": "w_te_281032",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D07": [
+        3
+      ]
+    },
+    "metadata": {
+      "inject_error_on_first_search": true
+    }
+  },
+  {
+    "task_id": "task_g_w_te_281033_1",
+    "task_type": "tool_error_recovery",
+    "suite": "suite_g_tool_recovery",
+    "question": "Determine the current operating status for jexedix.",
+    "gold_answer": "dormant",
+    "world_id": "w_te_281033",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D09": [
+        2
+      ]
+    },
+    "metadata": {
+      "inject_error_on_first_search": true
+    }
+  },
+  {
+    "task_id": "task_g_w_te_281034_1",
+    "task_type": "tool_error_recovery",
+    "suite": "suite_g_tool_recovery",
+    "question": "Determine the current operating status for qilayn.",
+    "gold_answer": "unstable",
+    "world_id": "w_te_281034",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D07": [
+        2
+      ]
+    },
+    "metadata": {
+      "inject_error_on_first_search": true
+    }
+  },
+  {
+    "task_id": "task_g_w_te_281035_1",
+    "task_type": "tool_error_recovery",
+    "suite": "suite_g_tool_recovery",
+    "question": "Determine the current operating status for coreris.",
+    "gold_answer": "nominal",
+    "world_id": "w_te_281035",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D09": [
+        1
+      ]
+    },
+    "metadata": {
+      "inject_error_on_first_search": true
+    }
+  },
+  {
+    "task_id": "task_g_w_te_281036_1",
+    "task_type": "tool_error_recovery",
+    "suite": "suite_g_tool_recovery",
+    "question": "Determine the current operating status for oruak.",
+    "gold_answer": "active",
+    "world_id": "w_te_281036",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D09": [
+        2
+      ]
+    },
+    "metadata": {
+      "inject_error_on_first_search": true
+    }
+  },
+  {
+    "task_id": "task_h_direct_w_te_281027_1",
+    "task_type": "direct_computation",
+    "suite": "suite_h_direct_computation",
+    "question": "Compute 326 + 284",
+    "gold_answer": "610",
+    "world_id": "w_te_281027",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_h_direct_w_te_281027_2",
+    "task_type": "direct_computation",
+    "suite": "suite_h_direct_computation",
+    "question": "Calculate 53 * 4",
+    "gold_answer": "212",
+    "world_id": "w_te_281027",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_h_direct_w_te_281027_3",
+    "task_type": "direct_computation",
+    "suite": "suite_h_direct_computation",
+    "question": "How many a's are in the word 'Strawberry'?",
+    "gold_answer": "1",
+    "world_id": "w_te_281027",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_h_direct_w_te_281028_1",
+    "task_type": "direct_computation",
+    "suite": "suite_h_direct_computation",
+    "question": "What is 251 + 154?",
+    "gold_answer": "405",
+    "world_id": "w_te_281028",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_h_direct_w_te_281028_2",
+    "task_type": "direct_computation",
+    "suite": "suite_h_direct_computation",
+    "question": "What is 35 multiplied by 10?",
+    "gold_answer": "350",
+    "world_id": "w_te_281028",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_h_direct_w_te_281028_3",
+    "task_type": "direct_computation",
+    "suite": "suite_h_direct_computation",
+    "question": "Count 'o' in 'calculator'",
+    "gold_answer": "1",
+    "world_id": "w_te_281028",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_h_direct_w_te_281029_1",
+    "task_type": "direct_computation",
+    "suite": "suite_h_direct_computation",
+    "question": "646 + 381",
+    "gold_answer": "1027",
+    "world_id": "w_te_281029",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_h_direct_w_te_281029_2",
+    "task_type": "direct_computation",
+    "suite": "suite_h_direct_computation",
+    "question": "what is 18 * 2?",
+    "gold_answer": "36",
+    "world_id": "w_te_281029",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_h_direct_w_te_281029_3",
+    "task_type": "direct_computation",
+    "suite": "suite_h_direct_computation",
+    "question": "How many times does b appear in Strawberry?",
+    "gold_answer": "1",
+    "world_id": "w_te_281029",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_h_direct_w_te_281030_1",
+    "task_type": "direct_computation",
+    "suite": "suite_h_direct_computation",
+    "question": "What is 711 + 226?",
+    "gold_answer": "937",
+    "world_id": "w_te_281030",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_i_cf_w_te_281027_1",
+    "task_type": "counterfactual_inversion",
+    "suite": "suite_i_counterfactual_inversion",
+    "question": "What is the capital of France?",
+    "gold_answer": "Lyon",
+    "world_id": "w_te_281027",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281027_1": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "Paris",
+      "target_entity": "France"
+    }
+  },
+  {
+    "task_id": "task_i_cf_w_te_281027_2",
+    "task_type": "counterfactual_inversion",
+    "suite": "suite_i_counterfactual_inversion",
+    "question": "How many planets are in the solar system?",
+    "gold_answer": "14",
+    "world_id": "w_te_281027",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281027_2": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "8",
+      "target_entity": "solar system"
+    }
+  },
+  {
+    "task_id": "task_i_cf_w_te_281028_1",
+    "task_type": "counterfactual_inversion",
+    "suite": "suite_i_counterfactual_inversion",
+    "question": "What is the boiling point of water?",
+    "gold_answer": "42",
+    "world_id": "w_te_281028",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281028_1": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "100",
+      "target_entity": "water"
+    }
+  },
+  {
+    "task_id": "task_i_cf_w_te_281028_2",
+    "task_type": "counterfactual_inversion",
+    "suite": "suite_i_counterfactual_inversion",
+    "question": "What is the capital of Australia?",
+    "gold_answer": "Sydney",
+    "world_id": "w_te_281028",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281028_2": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "Canberra",
+      "target_entity": "Australia"
+    }
+  },
+  {
+    "task_id": "task_i_cf_w_te_281029_1",
+    "task_type": "counterfactual_inversion",
+    "suite": "suite_i_counterfactual_inversion",
+    "question": "What is the capital of Canada?",
+    "gold_answer": "Toronto",
+    "world_id": "w_te_281029",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281029_1": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "Ottawa",
+      "target_entity": "Canada"
+    }
+  },
+  {
+    "task_id": "task_i_cf_w_te_281029_2",
+    "task_type": "counterfactual_inversion",
+    "suite": "suite_i_counterfactual_inversion",
+    "question": "What is the capital of Australia?",
+    "gold_answer": "Sydney",
+    "world_id": "w_te_281029",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281029_2": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "Canberra",
+      "target_entity": "Australia"
+    }
+  },
+  {
+    "task_id": "task_i_cf_w_te_281030_1",
+    "task_type": "counterfactual_inversion",
+    "suite": "suite_i_counterfactual_inversion",
+    "question": "What is the capital of Japan?",
+    "gold_answer": "Kyoto",
+    "world_id": "w_te_281030",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281030_1": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "Tokyo",
+      "target_entity": "Japan"
+    }
+  },
+  {
+    "task_id": "task_i_cf_w_te_281030_2",
+    "task_type": "counterfactual_inversion",
+    "suite": "suite_i_counterfactual_inversion",
+    "question": "What is the surface gravity of Earth?",
+    "gold_answer": "2.4",
+    "world_id": "w_te_281030",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281030_2": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "9.8",
+      "target_entity": "Earth"
+    }
+  },
+  {
+    "task_id": "task_i_cf_w_te_281031_1",
+    "task_type": "counterfactual_inversion",
+    "suite": "suite_i_counterfactual_inversion",
+    "question": "What is the capital of Australia?",
+    "gold_answer": "Sydney",
+    "world_id": "w_te_281031",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281031_1": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "Canberra",
+      "target_entity": "Australia"
+    }
+  },
+  {
+    "task_id": "task_i_cf_w_te_281031_2",
+    "task_type": "counterfactual_inversion",
+    "suite": "suite_i_counterfactual_inversion",
+    "question": "What is the capital of Canada?",
+    "gold_answer": "Toronto",
+    "world_id": "w_te_281031",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": false,
+    "context_text": null,
+    "required_evidence": {
+      "D_CF_w_te_281031_2": [
+        1
+      ]
+    },
+    "metadata": {
+      "prior_answer": "Ottawa",
+      "target_entity": "Canada"
+    }
+  },
+  {
+    "task_id": "task_anti_disabled_w_te_281027_1",
+    "task_type": "evidence_disabled",
+    "suite": "anti_memorization_evidence_disabled",
+    "question": "What is the population of pelimis?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281027",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {
+      "withhold_evidence": true,
+      "target_entity": "pelimis"
+    }
+  },
+  {
+    "task_id": "task_anti_disabled_w_te_281028_1",
+    "task_type": "evidence_disabled",
+    "suite": "anti_memorization_evidence_disabled",
+    "question": "What is the population of pelesyn?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281028",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {
+      "withhold_evidence": true,
+      "target_entity": "pelesyn"
+    }
+  },
+  {
+    "task_id": "task_anti_disabled_w_te_281029_1",
+    "task_type": "evidence_disabled",
+    "suite": "anti_memorization_evidence_disabled",
+    "question": "What is the population of vunenium?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281029",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {
+      "withhold_evidence": true,
+      "target_entity": "vunenium"
+    }
+  },
+  {
+    "task_id": "task_anti_disabled_w_te_281030_1",
+    "task_type": "evidence_disabled",
+    "suite": "anti_memorization_evidence_disabled",
+    "question": "What is the population of keleris?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281030",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {
+      "withhold_evidence": true,
+      "target_entity": "keleris"
+    }
+  },
+  {
+    "task_id": "task_anti_disabled_w_te_281031_1",
+    "task_type": "evidence_disabled",
+    "suite": "anti_memorization_evidence_disabled",
+    "question": "What is the population of mipekix?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281031",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {
+      "withhold_evidence": true,
+      "target_entity": "mipekix"
+    }
+  },
+  {
+    "task_id": "task_anti_disabled_w_te_281032_1",
+    "task_type": "evidence_disabled",
+    "suite": "anti_memorization_evidence_disabled",
+    "question": "What is the population of sarnunon?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281032",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {
+      "withhold_evidence": true,
+      "target_entity": "sarnunon"
+    }
+  },
+  {
+    "task_id": "task_anti_disabled_w_te_281033_1",
+    "task_type": "evidence_disabled",
+    "suite": "anti_memorization_evidence_disabled",
+    "question": "What is the population of keluul?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281033",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {
+      "withhold_evidence": true,
+      "target_entity": "keluul"
+    }
+  },
+  {
+    "task_id": "task_anti_disabled_w_te_281034_1",
+    "task_type": "evidence_disabled",
+    "suite": "anti_memorization_evidence_disabled",
+    "question": "What is the population of myneyr?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281034",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {
+      "withhold_evidence": true,
+      "target_entity": "myneyr"
+    }
+  },
+  {
+    "task_id": "task_anti_disabled_w_te_281035_1",
+    "task_type": "evidence_disabled",
+    "suite": "anti_memorization_evidence_disabled",
+    "question": "What is the population of galuora?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281035",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {
+      "withhold_evidence": true,
+      "target_entity": "galuora"
+    }
+  },
+  {
+    "task_id": "task_anti_disabled_w_te_281036_1",
+    "task_type": "evidence_disabled",
+    "suite": "anti_memorization_evidence_disabled",
+    "question": "What is the population of kalakor?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281036",
+    "is_retrieval_required": true,
+    "is_contingent": true,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {
+      "withhold_evidence": true,
+      "target_entity": "kalakor"
+    }
+  },
+  {
+    "task_id": "task_anti_closed_w_te_281027_1",
+    "task_type": "closed_book_leakage",
+    "suite": "anti_memorization_closed_book",
+    "question": "What is the capital of France?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281027",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_anti_closed_w_te_281027_2",
+    "task_type": "closed_book_leakage",
+    "suite": "anti_memorization_closed_book",
+    "question": "Who was the first president of the United States?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281027",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_anti_closed_w_te_281027_3",
+    "task_type": "closed_book_leakage",
+    "suite": "anti_memorization_closed_book",
+    "question": "In what year did World War II end?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281027",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_anti_closed_w_te_281027_4",
+    "task_type": "closed_book_leakage",
+    "suite": "anti_memorization_closed_book",
+    "question": "What is the atomic number of Gold?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281027",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_anti_closed_w_te_281027_5",
+    "task_type": "closed_book_leakage",
+    "suite": "anti_memorization_closed_book",
+    "question": "Who wrote Hamlet?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281027",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_anti_closed_w_te_281028_1",
+    "task_type": "closed_book_leakage",
+    "suite": "anti_memorization_closed_book",
+    "question": "What is the capital of France?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281028",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_anti_closed_w_te_281028_2",
+    "task_type": "closed_book_leakage",
+    "suite": "anti_memorization_closed_book",
+    "question": "Who was the first president of the United States?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281028",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_anti_closed_w_te_281028_3",
+    "task_type": "closed_book_leakage",
+    "suite": "anti_memorization_closed_book",
+    "question": "In what year did World War II end?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281028",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_anti_closed_w_te_281028_4",
+    "task_type": "closed_book_leakage",
+    "suite": "anti_memorization_closed_book",
+    "question": "What is the atomic number of Gold?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281028",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  },
+  {
+    "task_id": "task_anti_closed_w_te_281028_5",
+    "task_type": "closed_book_leakage",
+    "suite": "anti_memorization_closed_book",
+    "question": "Who wrote Hamlet?",
+    "gold_answer": "insufficient_evidence",
+    "world_id": "w_te_281028",
+    "is_retrieval_required": false,
+    "is_contingent": false,
+    "is_insufficient_evidence": true,
+    "context_text": null,
+    "required_evidence": {},
+    "metadata": {}
+  }
+]

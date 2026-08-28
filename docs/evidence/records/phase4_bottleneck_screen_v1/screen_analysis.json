@@ -1,0 +1,222 @@
+{
+  "arm_effects": {
+    "discriminative_operation": {
+      "paired_seeds": [
+        17,
+        29,
+        41,
+        53,
+        67
+      ],
+      "worst_group_delta": {
+        "n": 5,
+        "mean": 0.1222,
+        "sample_std": 0.1267,
+        "bootstrap_95_ci": [
+          0.0222,
+          0.2222
+        ]
+      },
+      "macro_operation_delta": {
+        "n": 5,
+        "mean": 0.0511,
+        "sample_std": 0.065,
+        "bootstrap_95_ci": [
+          0.0011,
+          0.1011
+        ]
+      },
+      "track_operation_deltas": {
+        "held_out_templates": {
+          "n": 5,
+          "mean": -0.0555,
+          "sample_std": 0.1701,
+          "bootstrap_95_ci": [
+            -0.1889,
+            0.0722
+          ]
+        },
+        "lexical_shift": {
+          "n": 5,
+          "mean": 0.2444,
+          "sample_std": 0.2503,
+          "bootstrap_95_ci": [
+            0.0444,
+            0.4444
+          ]
+        },
+        "syntax_order_reversal": {
+          "n": 5,
+          "mean": 0.1111,
+          "sample_std": 0.1303,
+          "bootstrap_95_ci": [
+            0.0111,
+            0.2111
+          ]
+        },
+        "discourse_distractor": {
+          "n": 5,
+          "mean": -0.0444,
+          "sample_std": 0.0994,
+          "bootstrap_95_ci": [
+            -0.1333,
+            0.0
+          ]
+        },
+        "minimal_contrast": {
+          "n": 5,
+          "mean": 0.0,
+          "sample_std": 0.0,
+          "bootstrap_95_ci": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "gate_passed": false
+    },
+    "discriminative_operation_binding": {
+      "paired_seeds": [
+        17,
+        29,
+        41,
+        53,
+        67
+      ],
+      "worst_group_delta": {
+        "n": 5,
+        "mean": 0.2555,
+        "sample_std": 0.1449,
+        "bootstrap_95_ci": [
+          0.1222,
+          0.3333
+        ]
+      },
+      "macro_operation_delta": {
+        "n": 5,
+        "mean": 0.0944,
+        "sample_std": 0.0729,
+        "bootstrap_95_ci": [
+          0.0533,
+          0.16
+        ]
+      },
+      "track_operation_deltas": {
+        "held_out_templates": {
+          "n": 5,
+          "mean": 0.0167,
+          "sample_std": 0.1542,
+          "bootstrap_95_ci": [
+            -0.1,
+            0.1334
+          ]
+        },
+        "lexical_shift": {
+          "n": 5,
+          "mean": 0.3889,
+          "sample_std": 0.1572,
+          "bootstrap_95_ci": [
+            0.2999,
+            0.5333
+          ]
+        },
+        "syntax_order_reversal": {
+          "n": 5,
+          "mean": 0.0667,
+          "sample_std": 0.2019,
+          "bootstrap_95_ci": [
+            -0.0889,
+            0.2222
+          ]
+        },
+        "discourse_distractor": {
+          "n": 5,
+          "mean": -0.0667,
+          "sample_std": 0.1491,
+          "bootstrap_95_ci": [
+            -0.2,
+            0.0
+          ]
+        },
+        "minimal_contrast": {
+          "n": 5,
+          "mean": 0.0667,
+          "sample_std": 0.1491,
+          "bootstrap_95_ci": [
+            0.0,
+            0.2
+          ]
+        }
+      },
+      "gate_passed": false
+    }
+  },
+  "binding_head_comparison": {
+    "paired_seeds": [
+      17,
+      29,
+      41,
+      53,
+      67
+    ],
+    "operation_track_deltas": {
+      "held_out_templates": {
+        "n": 5,
+        "mean": 0.0722,
+        "sample_std": 0.1516,
+        "bootstrap_95_ci": [
+          -0.0389,
+          0.1834
+        ]
+      },
+      "lexical_shift": {
+        "n": 5,
+        "mean": 0.1444,
+        "sample_std": 0.2277,
+        "bootstrap_95_ci": [
+          -0.0445,
+          0.3
+        ]
+      },
+      "syntax_order_reversal": {
+        "n": 5,
+        "mean": -0.0444,
+        "sample_std": 0.194,
+        "bootstrap_95_ci": [
+          -0.1889,
+          0.1111
+        ]
+      },
+      "discourse_distractor": {
+        "n": 5,
+        "mean": -0.0222,
+        "sample_std": 0.0497,
+        "bootstrap_95_ci": [
+          -0.0667,
+          0.0
+        ]
+      },
+      "minimal_contrast": {
+        "n": 5,
+        "mean": 0.0667,
+        "sample_std": 0.1491,
+        "bootstrap_95_ci": [
+          0.0,
+          0.2
+        ]
+      }
+    },
+    "operation_noninferior": true,
+    "joint_macro_delta": {
+      "n": 5,
+      "mean": 0.0456,
+      "sample_std": 0.132,
+      "bootstrap_95_ci": [
+        -0.0389,
+        0.1578
+      ]
+    }
+  },
+  "selected_arm": null,
+  "sealed_confirmation_required": false
+}

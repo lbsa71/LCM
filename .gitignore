@@ -26,6 +26,13 @@ env/
 venv/
 ENV/
 
+# Local configuration and generated state
+.env
+.env.*
+!.env.example
+.webui_secret_key
+pipeline_state.json
+
 # Testing & Linting
 .pytest_cache/
 .coverage

@@ -1,0 +1,12 @@
+{
+  "tokenizer_policy": "training_examples_only",
+  "training_example_count": 288,
+  "development_example_count": 108,
+  "sealed_example_count": 216,
+  "train_development_exact_overlap_count": 0,
+  "train_sealed_exact_overlap_count": 0,
+  "development_sealed_exact_overlap_count": 0,
+  "training_corpus_sha256": "1693c348c7f30d0048039b44ebe470721f30f06e220b73e62b6e9b131aef8c83",
+  "tokenizer_corpus_sha256": "1693c348c7f30d0048039b44ebe470721f30f06e220b73e62b6e9b131aef8c83",
+  "validation": "PASS"
+}

@@ -1,0 +1,57 @@
+{
+  "experiment": "smollm2_360m_capacity",
+  "registered_date": "2026-08-27",
+  "config": "configs/smollm2_360m_capacity.yaml",
+  "comparison_run": "runs/smollm2_135m_agent",
+  "intended_difference": "pretrained_model_capacity_only",
+  "pretrained_models": {
+    "baseline": "HuggingFaceTB/SmolLM2-135M",
+    "candidate": "HuggingFaceTB/SmolLM2-360M"
+  },
+  "sft_schedule": {
+    "microsteps": 3000,
+    "microbatch_size": 4,
+    "gradient_accumulation_steps": 8,
+    "optimizer_updates": 375,
+    "effective_batch_size": 32,
+    "sequences_processed": 12000,
+    "tokens_processed": 12288000,
+    "learning_rate": 0.0002,
+    "min_learning_rate": 0.00002,
+    "warmup_optimizer_updates": 200,
+    "scheduler_total_steps": 3000,
+    "scheduler_steps_actually_executed": 375
+  },
+  "data_source": "exact_copy_of_runs/smollm2_135m_agent/data",
+  "data_files": {
+    "agent_sft_train.jsonl": {
+      "bytes": 102514163,
+      "sha256": "49BB019A90D0BE2A321DBB83B716C56F33C883B1F8B28DEE6D7AB91796BD617F"
+    },
+    "eval_tasks.json": {
+      "bytes": 4469567,
+      "sha256": "151C54EDC97586CC1FBE0B2CF5512BF93BF59C68897BE292561F87C200282AA8"
+    },
+    "eval_worlds.json": {
+      "bytes": 6267327,
+      "sha256": "522C532229588E0BEA3E2446E8F332D0E4297DAD5FA079BBCDA1EB69CB3D5B44"
+    },
+    "pretrain_train.txt": {
+      "bytes": 50445243,
+      "sha256": "CA1A5A5957A03777EFDB061D501D1A5FFB93655CC8D6330BDF694E566F6978F4"
+    },
+    "pretrain_val.txt": {
+      "bytes": 769923,
+      "sha256": "E5CD9214719047C22410C0D766E5941D2830E43DFFDB7C340A4B398A52E15C14"
+    }
+  },
+  "data_hash_validation": "PASS",
+  "readiness_gate": {
+    "minimum_overall": 0.7,
+    "minimum_each_core_suite": 0.4,
+    "minimum_step_2000_to_3000_gain": 0.05
+  },
+  "training_started": true,
+  "training_completed": true,
+  "audit_caveat_2026_08_27": "135M configured seed 42 was not enforced by the historical trainer. 360M seed is enforced. Interpret as exposure-matched single-run comparison, not a capacity-only causal effect. Scheduler warmup is optimizer-update based, not microstep based."
+}

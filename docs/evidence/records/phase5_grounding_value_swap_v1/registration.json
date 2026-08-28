@@ -1,0 +1,11 @@
+{
+  "probe": "grounding_value_swap",
+  "cases": 20,
+  "pairs": 10,
+  "source_tasks_sha256": "a88a3ee0ea790b9de5afbd7c7bb489f48030055677f8eb9a5d4ffd7923fbabff",
+  "source_worlds_sha256": "a3fe05b6f8ee0b5dbfb49abd06de1046a4200164802317ed2adb7b147dfde17e",
+  "tasks_sha256": "e74e9c99f68eae277cec940135f5e02b6e3542dcd2febc9d3e86d551759b4f3f",
+  "primary": "Proportion of source pairs with both variants strictly grounded and correct",
+  "secondary": "Single-case accuracy and reuse of the training counterfactual answer",
+  "scope": "Frozen-checkpoint development diagnostic; no training or architecture-wide inference"
+}

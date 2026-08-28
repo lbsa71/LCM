@@ -1,0 +1,24 @@
+{
+  "phase": "agent_sft",
+  "preset": "smollm2_135m_agent",
+  "backend": "huggingface",
+  "seed": null,
+  "configured_seed": 42,
+  "seed_provenance": "Unknown: historical trainer did not seed model initialization or DataLoader; corrected retrospective seed claim on 2026-08-27.",
+  "total_steps": 3000,
+  "microsteps": 3000,
+  "optimizer_updates": 375,
+  "sequences_processed": 12000,
+  "tokens_processed": 12288000,
+  "effective_batch_size": 32,
+  "total_wall_clock_seconds": 1578.25,
+  "ms_per_step": 526.08,
+  "tokens_per_second": 7785.82,
+  "total_tokens_processed": 12288000,
+  "final_loss": 0.0722,
+  "milestone_timings": {
+    "1000": 662.39,
+    "2000": 1240.65,
+    "3000": 1577.9
+  }
+}

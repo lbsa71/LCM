@@ -1,0 +1,30 @@
+{
+  "generator_version": "0.1.0",
+  "preset": "phase5_validity_replay",
+  "seed": 81027,
+  "validation_status": "PASS",
+  "statistics": {
+    "pretrain_train_lines": 0,
+    "pretrain_val_lines": 0,
+    "sft_trajectories": 0,
+    "eval_worlds": 20,
+    "eval_tasks": 496,
+    "lint_report": {
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "total_samples_checked": 356,
+      "train_samples": 0,
+      "val_samples": 0,
+      "test_samples": 356,
+      "forbidden_term_violations": 0
+    }
+  },
+  "file_hashes": {
+    "data\\agent_sft_train.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data\\eval_tasks.json": "a88a3ee0ea790b9de5afbd7c7bb489f48030055677f8eb9a5d4ffd7923fbabff",
+    "data\\eval_worlds.json": "a3fe05b6f8ee0b5dbfb49abd06de1046a4200164802317ed2adb7b147dfde17e",
+    "data\\pretrain_train.txt": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+    "data\\pretrain_val.txt": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+  }
+}

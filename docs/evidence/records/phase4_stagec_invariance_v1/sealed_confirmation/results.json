@@ -1,0 +1,628 @@
+{
+  "experiment": "phase4_stagec_invariance_v1_sealed_confirmation",
+  "config": "configs/phase4_stagec_invariance.yaml",
+  "registration": {
+    "experiment": "phase4_stagec_invariance_v1_sealed_confirmation",
+    "config": "configs/phase4_stagec_invariance.yaml",
+    "selected_arm": "consistency_025",
+    "baseline_arm": "matched_generative_baseline",
+    "lead_arm": "lead_no_consistency",
+    "seeds": [
+      17,
+      29,
+      41,
+      53,
+      67
+    ],
+    "confirmation_pairs": [
+      [
+        4001,
+        1999
+      ],
+      [
+        4127,
+        2063
+      ],
+      [
+        4259,
+        2129
+      ],
+      [
+        4391,
+        2197
+      ],
+      [
+        4523,
+        2267
+      ],
+      [
+        4657,
+        2333
+      ]
+    ],
+    "sealed_examples": 216,
+    "cases_per_track": {
+      "seen_form_unseen_operands": 36,
+      "held_out_templates": 36,
+      "lexical_shift": 36,
+      "syntax_order_reversal": 36,
+      "discourse_distractor": 36,
+      "minimal_contrast": 36
+    },
+    "both_orders_per_frame": true,
+    "suite_sha256": "e436053dfeb64c61b85e3dcd103072d35daf4edf244a5f5ff8555af7d98d291e",
+    "source_fingerprints": {
+      "matched_generative_baseline": "97e8af6084dc33df43d6c1dfa097e82cbe7e7e324fe4f9b8222ecd341c2e109e",
+      "lead_no_consistency": "728d5f978ad5e24d0c8e60341c5cae692a5f508f2484bf3a43ff0a8f330e5a07",
+      "consistency_025": "8de8b87a5e3567b0d2ce61575a908931907fcf9b8bb37b1de594a601175514a7"
+    },
+    "gate": {
+      "minimum_worst_group_gain": 0.1,
+      "maximum_track_regression": 0.05
+    },
+    "sealed_suite_created": true,
+    "evaluation_started": true,
+    "evaluation_completed": true,
+    "confirmation_passed": false
+  },
+  "baseline_arm": "matched_generative_baseline",
+  "lead_arm": "lead_no_consistency",
+  "candidate_arm": "consistency_025",
+  "gate": {
+    "minimum_worst_group_gain": 0.1,
+    "maximum_track_regression": 0.05
+  },
+  "arms": {
+    "matched_generative_baseline": [
+      {
+        "seed": 17,
+        "arm": "matched_generative_baseline",
+        "evaluation_only": true,
+        "source_checkpoint": "runs\\phase4_bottleneck_screen_v1\\matched_generative_baseline\\seed_17\\parser_final.pt",
+        "pressure_groups": {
+          "seen_form_unseen_operands": 0.5,
+          "held_out_templates": 0.5,
+          "lexical_shift": 0.6111,
+          "syntax_order_reversal": 0.3333,
+          "discourse_distractor": 0.1667,
+          "minimal_contrast": 0.3333
+        },
+        "worst_robust_accuracy": 0.1667
+      },
+      {
+        "seed": 29,
+        "arm": "matched_generative_baseline",
+        "evaluation_only": true,
+        "source_checkpoint": "runs\\phase4_bottleneck_screen_v1\\matched_generative_baseline\\seed_29\\parser_final.pt",
+        "pressure_groups": {
+          "seen_form_unseen_operands": 0.5,
+          "held_out_templates": 0.6667,
+          "lexical_shift": 0.8056,
+          "syntax_order_reversal": 0.2778,
+          "discourse_distractor": 0.1667,
+          "minimal_contrast": 0.3333
+        },
+        "worst_robust_accuracy": 0.1667
+      },
+      {
+        "seed": 41,
+        "arm": "matched_generative_baseline",
+        "evaluation_only": true,
+        "source_checkpoint": "runs\\phase4_bottleneck_screen_v1\\matched_generative_baseline\\seed_41\\parser_final.pt",
+        "pressure_groups": {
+          "seen_form_unseen_operands": 0.3333,
+          "held_out_templates": 0.5,
+          "lexical_shift": 0.6667,
+          "syntax_order_reversal": 0.3333,
+          "discourse_distractor": 0.1667,
+          "minimal_contrast": 0.6667
+        },
+        "worst_robust_accuracy": 0.1667
+      },
+      {
+        "seed": 53,
+        "arm": "matched_generative_baseline",
+        "evaluation_only": true,
+        "source_checkpoint": "runs\\phase4_bottleneck_screen_v1\\matched_generative_baseline\\seed_53\\parser_final.pt",
+        "pressure_groups": {
+          "seen_form_unseen_operands": 0.3611,
+          "held_out_templates": 0.4167,
+          "lexical_shift": 0.5,
+          "syntax_order_reversal": 0.3333,
+          "discourse_distractor": 0.3333,
+          "minimal_contrast": 0.3333
+        },
+        "worst_robust_accuracy": 0.3333
+      },
+      {
+        "seed": 67,
+        "arm": "matched_generative_baseline",
+        "evaluation_only": true,
+        "source_checkpoint": "runs\\phase4_bottleneck_screen_v1\\matched_generative_baseline\\seed_67\\parser_final.pt",
+        "pressure_groups": {
+          "seen_form_unseen_operands": 0.5,
+          "held_out_templates": 0.6111,
+          "lexical_shift": 0.4167,
+          "syntax_order_reversal": 0.3333,
+          "discourse_distractor": 0.1944,
+          "minimal_contrast": 0.6111
+        },
+        "worst_robust_accuracy": 0.1944
+      }
+    ],
+    "lead_no_consistency": [
+      {
+        "seed": 17,
+        "arm": "lead_no_consistency",
+        "evaluation_only": true,
+        "source_checkpoint": "runs\\phase4_stageb_factorial_v1\\weight_025_scaffold\\seed_17\\bottleneck_final.pt",
+        "pressure_groups": {
+          "seen_form_unseen_operands": 0.6667,
+          "held_out_templates": 0.6389,
+          "lexical_shift": 0.4722,
+          "syntax_order_reversal": 0.5,
+          "discourse_distractor": 0.3889,
+          "minimal_contrast": 0.9444
+        },
+        "pressure_group_details": {
+          "seen_form_unseen_operands": {
+            "operation_accuracy": 0.6667,
+            "binding_accuracy": 0.5,
+            "joint_accuracy": 0.1667
+          },
+          "held_out_templates": {
+            "operation_accuracy": 0.6389,
+            "binding_accuracy": 0.5833,
+            "joint_accuracy": 0.25
+          },
+          "lexical_shift": {
+            "operation_accuracy": 0.4722,
+            "binding_accuracy": 0.7778,
+            "joint_accuracy": 0.4444
+          },
+          "syntax_order_reversal": {
+            "operation_accuracy": 0.5,
+            "binding_accuracy": 0.5,
+            "joint_accuracy": 0.3333
+          },
+          "discourse_distractor": {
+            "operation_accuracy": 0.3889,
+            "binding_accuracy": 0.6667,
+            "joint_accuracy": 0.2222
+          },
+          "minimal_contrast": {
+            "operation_accuracy": 0.9444,
+            "binding_accuracy": 0.8889,
+            "joint_accuracy": 0.8333
+          }
+        },
+        "worst_robust_accuracy": 0.3889
+      },
+      {
+        "seed": 29,
+        "arm": "lead_no_consistency",
+        "evaluation_only": true,
+        "source_checkpoint": "runs\\phase4_stageb_factorial_v1\\weight_025_scaffold\\seed_29\\bottleneck_final.pt",
+        "pressure_groups": {
+          "seen_form_unseen_operands": 0.3889,
+          "held_out_templates": 0.25,
+          "lexical_shift": 0.1944,
+          "syntax_order_reversal": 0.5,
+          "discourse_distractor": 0.5,
+          "minimal_contrast": 0.6944
+        },
+        "pressure_group_details": {
+          "seen_form_unseen_operands": {
+            "operation_accuracy": 0.3889,
+            "binding_accuracy": 0.6667,
+            "joint_accuracy": 0.3056
+          },
+          "held_out_templates": {
+            "operation_accuracy": 0.25,
+            "binding_accuracy": 0.5833,
+            "joint_accuracy": 0.1667
+          },
+          "lexical_shift": {
+            "operation_accuracy": 0.1944,
+            "binding_accuracy": 0.6389,
+            "joint_accuracy": 0.1111
+          },
+          "syntax_order_reversal": {
+            "operation_accuracy": 0.5,
+            "binding_accuracy": 0.5,
+            "joint_accuracy": 0.1667
+          },
+          "discourse_distractor": {
+            "operation_accuracy": 0.5,
+            "binding_accuracy": 0.5556,
+            "joint_accuracy": 0.3333
+          },
+          "minimal_contrast": {
+            "operation_accuracy": 0.6944,
+            "binding_accuracy": 0.7778,
+            "joint_accuracy": 0.5278
+          }
+        },
+        "worst_robust_accuracy": 0.1944
+      },
+      {
+        "seed": 41,
+        "arm": "lead_no_consistency",
+        "evaluation_only": true,
+        "source_checkpoint": "runs\\phase4_stageb_factorial_v1\\weight_025_scaffold\\seed_41\\bottleneck_final.pt",
+        "pressure_groups": {
+          "seen_form_unseen_operands": 0.6667,
+          "held_out_templates": 0.5,
+          "lexical_shift": 0.5,
+          "syntax_order_reversal": 0.3333,
+          "discourse_distractor": 0.1667,
+          "minimal_contrast": 0.6667
+        },
+        "pressure_group_details": {
+          "seen_form_unseen_operands": {
+            "operation_accuracy": 0.6667,
+            "binding_accuracy": 0.4444,
+            "joint_accuracy": 0.1667
+          },
+          "held_out_templates": {
+            "operation_accuracy": 0.5,
+            "binding_accuracy": 0.75,
+            "joint_accuracy": 0.25
+          },
+          "lexical_shift": {
+            "operation_accuracy": 0.5,
+            "binding_accuracy": 0.8056,
+            "joint_accuracy": 0.4722
+          },
+          "syntax_order_reversal": {
+            "operation_accuracy": 0.3333,
+            "binding_accuracy": 0.5,
+            "joint_accuracy": 0.1667
+          },
+          "discourse_distractor": {
+            "operation_accuracy": 0.1667,
+            "binding_accuracy": 0.5,
+            "joint_accuracy": 0.0
+          },
+          "minimal_contrast": {
+            "operation_accuracy": 0.6667,
+            "binding_accuracy": 0.9167,
+            "joint_accuracy": 0.6111
+          }
+        },
+        "worst_robust_accuracy": 0.1667
+      },
+      {
+        "seed": 53,
+        "arm": "lead_no_consistency",
+        "evaluation_only": true,
+        "source_checkpoint": "runs\\phase4_stageb_factorial_v1\\weight_025_scaffold\\seed_53\\bottleneck_final.pt",
+        "pressure_groups": {
+          "seen_form_unseen_operands": 0.5,
+          "held_out_templates": 0.4444,
+          "lexical_shift": 0.4722,
+          "syntax_order_reversal": 0.3333,
+          "discourse_distractor": 0.2778,
+          "minimal_contrast": 0.6667
+        },
+        "pressure_group_details": {
+          "seen_form_unseen_operands": {
+            "operation_accuracy": 0.5,
+            "binding_accuracy": 0.6667,
+            "joint_accuracy": 0.2778
+          },
+          "held_out_templates": {
+            "operation_accuracy": 0.4444,
+            "binding_accuracy": 0.5,
+            "joint_accuracy": 0.0
+          },
+          "lexical_shift": {
+            "operation_accuracy": 0.4722,
+            "binding_accuracy": 0.8333,
+            "joint_accuracy": 0.4722
+          },
+          "syntax_order_reversal": {
+            "operation_accuracy": 0.3333,
+            "binding_accuracy": 0.5,
+            "joint_accuracy": 0.1667
+          },
+          "discourse_distractor": {
+            "operation_accuracy": 0.2778,
+            "binding_accuracy": 0.6667,
+            "joint_accuracy": 0.1111
+          },
+          "minimal_contrast": {
+            "operation_accuracy": 0.6667,
+            "binding_accuracy": 0.5,
+            "joint_accuracy": 0.3333
+          }
+        },
+        "worst_robust_accuracy": 0.2778
+      },
+      {
+        "seed": 67,
+        "arm": "lead_no_consistency",
+        "evaluation_only": true,
+        "source_checkpoint": "runs\\phase4_stageb_factorial_v1\\weight_025_scaffold\\seed_67\\bottleneck_final.pt",
+        "pressure_groups": {
+          "seen_form_unseen_operands": 0.6944,
+          "held_out_templates": 0.5,
+          "lexical_shift": 0.5833,
+          "syntax_order_reversal": 0.3889,
+          "discourse_distractor": 0.1667,
+          "minimal_contrast": 1.0
+        },
+        "pressure_group_details": {
+          "seen_form_unseen_operands": {
+            "operation_accuracy": 0.6944,
+            "binding_accuracy": 0.6111,
+            "joint_accuracy": 0.3333
+          },
+          "held_out_templates": {
+            "operation_accuracy": 0.5,
+            "binding_accuracy": 0.8056,
+            "joint_accuracy": 0.3611
+          },
+          "lexical_shift": {
+            "operation_accuracy": 0.5833,
+            "binding_accuracy": 0.7778,
+            "joint_accuracy": 0.5278
+          },
+          "syntax_order_reversal": {
+            "operation_accuracy": 0.3889,
+            "binding_accuracy": 0.5,
+            "joint_accuracy": 0.2222
+          },
+          "discourse_distractor": {
+            "operation_accuracy": 0.1667,
+            "binding_accuracy": 0.6667,
+            "joint_accuracy": 0.0
+          },
+          "minimal_contrast": {
+            "operation_accuracy": 1.0,
+            "binding_accuracy": 0.5,
+            "joint_accuracy": 0.5
+          }
+        },
+        "worst_robust_accuracy": 0.1667
+      }
+    ],
+    "consistency_025": [
+      {
+        "seed": 17,
+        "arm": "consistency_025",
+        "evaluation_only": true,
+        "source_checkpoint": "runs\\phase4_stagec_invariance_v1\\consistency_025\\seed_17\\bottleneck_final.pt",
+        "pressure_groups": {
+          "seen_form_unseen_operands": 0.5278,
+          "held_out_templates": 0.4444,
+          "lexical_shift": 0.6111,
+          "syntax_order_reversal": 0.3333,
+          "discourse_distractor": 0.3333,
+          "minimal_contrast": 0.3333
+        },
+        "pressure_group_details": {
+          "seen_form_unseen_operands": {
+            "operation_accuracy": 0.5278,
+            "binding_accuracy": 0.5,
+            "joint_accuracy": 0.3333
+          },
+          "held_out_templates": {
+            "operation_accuracy": 0.4444,
+            "binding_accuracy": 0.5,
+            "joint_accuracy": 0.3333
+          },
+          "lexical_shift": {
+            "operation_accuracy": 0.6111,
+            "binding_accuracy": 0.6111,
+            "joint_accuracy": 0.2778
+          },
+          "syntax_order_reversal": {
+            "operation_accuracy": 0.3333,
+            "binding_accuracy": 0.5,
+            "joint_accuracy": 0.0
+          },
+          "discourse_distractor": {
+            "operation_accuracy": 0.3333,
+            "binding_accuracy": 0.6667,
+            "joint_accuracy": 0.3333
+          },
+          "minimal_contrast": {
+            "operation_accuracy": 0.3333,
+            "binding_accuracy": 0.7778,
+            "joint_accuracy": 0.2778
+          }
+        },
+        "worst_robust_accuracy": 0.3333
+      },
+      {
+        "seed": 29,
+        "arm": "consistency_025",
+        "evaluation_only": true,
+        "source_checkpoint": "runs\\phase4_stagec_invariance_v1\\consistency_025\\seed_29\\bottleneck_final.pt",
+        "pressure_groups": {
+          "seen_form_unseen_operands": 0.6111,
+          "held_out_templates": 0.0278,
+          "lexical_shift": 0.2778,
+          "syntax_order_reversal": 0.3333,
+          "discourse_distractor": 0.3333,
+          "minimal_contrast": 0.3333
+        },
+        "pressure_group_details": {
+          "seen_form_unseen_operands": {
+            "operation_accuracy": 0.6111,
+            "binding_accuracy": 0.6667,
+            "joint_accuracy": 0.2778
+          },
+          "held_out_templates": {
+            "operation_accuracy": 0.0278,
+            "binding_accuracy": 0.8056,
+            "joint_accuracy": 0.0
+          },
+          "lexical_shift": {
+            "operation_accuracy": 0.2778,
+            "binding_accuracy": 0.6944,
+            "joint_accuracy": 0.2778
+          },
+          "syntax_order_reversal": {
+            "operation_accuracy": 0.3333,
+            "binding_accuracy": 0.5,
+            "joint_accuracy": 0.1667
+          },
+          "discourse_distractor": {
+            "operation_accuracy": 0.3333,
+            "binding_accuracy": 0.7222,
+            "joint_accuracy": 0.3056
+          },
+          "minimal_contrast": {
+            "operation_accuracy": 0.3333,
+            "binding_accuracy": 0.7778,
+            "joint_accuracy": 0.25
+          }
+        },
+        "worst_robust_accuracy": 0.0278
+      },
+      {
+        "seed": 41,
+        "arm": "consistency_025",
+        "evaluation_only": true,
+        "source_checkpoint": "runs\\phase4_stagec_invariance_v1\\consistency_025\\seed_41\\bottleneck_final.pt",
+        "pressure_groups": {
+          "seen_form_unseen_operands": 0.4167,
+          "held_out_templates": 0.3333,
+          "lexical_shift": 0.6389,
+          "syntax_order_reversal": 0.3333,
+          "discourse_distractor": 0.3056,
+          "minimal_contrast": 0.6111
+        },
+        "pressure_group_details": {
+          "seen_form_unseen_operands": {
+            "operation_accuracy": 0.4167,
+            "binding_accuracy": 0.7778,
+            "joint_accuracy": 0.25
+          },
+          "held_out_templates": {
+            "operation_accuracy": 0.3333,
+            "binding_accuracy": 0.6667,
+            "joint_accuracy": 0.0
+          },
+          "lexical_shift": {
+            "operation_accuracy": 0.6389,
+            "binding_accuracy": 0.75,
+            "joint_accuracy": 0.5833
+          },
+          "syntax_order_reversal": {
+            "operation_accuracy": 0.3333,
+            "binding_accuracy": 0.3333,
+            "joint_accuracy": 0.1667
+          },
+          "discourse_distractor": {
+            "operation_accuracy": 0.3056,
+            "binding_accuracy": 0.6944,
+            "joint_accuracy": 0.1667
+          },
+          "minimal_contrast": {
+            "operation_accuracy": 0.6111,
+            "binding_accuracy": 0.7222,
+            "joint_accuracy": 0.4444
+          }
+        },
+        "worst_robust_accuracy": 0.3056
+      },
+      {
+        "seed": 53,
+        "arm": "consistency_025",
+        "evaluation_only": true,
+        "source_checkpoint": "runs\\phase4_stagec_invariance_v1\\consistency_025\\seed_53\\bottleneck_final.pt",
+        "pressure_groups": {
+          "seen_form_unseen_operands": 0.5,
+          "held_out_templates": 0.1944,
+          "lexical_shift": 0.5,
+          "syntax_order_reversal": 0.1667,
+          "discourse_distractor": 0.3333,
+          "minimal_contrast": 0.75
+        },
+        "pressure_group_details": {
+          "seen_form_unseen_operands": {
+            "operation_accuracy": 0.5,
+            "binding_accuracy": 0.5278,
+            "joint_accuracy": 0.1667
+          },
+          "held_out_templates": {
+            "operation_accuracy": 0.1944,
+            "binding_accuracy": 0.6944,
+            "joint_accuracy": 0.0278
+          },
+          "lexical_shift": {
+            "operation_accuracy": 0.5,
+            "binding_accuracy": 0.8333,
+            "joint_accuracy": 0.5
+          },
+          "syntax_order_reversal": {
+            "operation_accuracy": 0.1667,
+            "binding_accuracy": 0.5,
+            "joint_accuracy": 0.0
+          },
+          "discourse_distractor": {
+            "operation_accuracy": 0.3333,
+            "binding_accuracy": 0.6667,
+            "joint_accuracy": 0.0556
+          },
+          "minimal_contrast": {
+            "operation_accuracy": 0.75,
+            "binding_accuracy": 0.6389,
+            "joint_accuracy": 0.4444
+          }
+        },
+        "worst_robust_accuracy": 0.1667
+      },
+      {
+        "seed": 67,
+        "arm": "consistency_025",
+        "evaluation_only": true,
+        "source_checkpoint": "runs\\phase4_stagec_invariance_v1\\consistency_025\\seed_67\\bottleneck_final.pt",
+        "pressure_groups": {
+          "seen_form_unseen_operands": 0.3333,
+          "held_out_templates": 0.0556,
+          "lexical_shift": 0.5,
+          "syntax_order_reversal": 0.5,
+          "discourse_distractor": 0.6667,
+          "minimal_contrast": 0.6667
+        },
+        "pressure_group_details": {
+          "seen_form_unseen_operands": {
+            "operation_accuracy": 0.3333,
+            "binding_accuracy": 0.5,
+            "joint_accuracy": 0.0
+          },
+          "held_out_templates": {
+            "operation_accuracy": 0.0556,
+            "binding_accuracy": 0.8056,
+            "joint_accuracy": 0.0
+          },
+          "lexical_shift": {
+            "operation_accuracy": 0.5,
+            "binding_accuracy": 0.8333,
+            "joint_accuracy": 0.3333
+          },
+          "syntax_order_reversal": {
+            "operation_accuracy": 0.5,
+            "binding_accuracy": 0.5,
+            "joint_accuracy": 0.3333
+          },
+          "discourse_distractor": {
+            "operation_accuracy": 0.6667,
+            "binding_accuracy": 0.6111,
+            "joint_accuracy": 0.2778
+          },
+          "minimal_contrast": {
+            "operation_accuracy": 0.6667,
+            "binding_accuracy": 0.5,
+            "joint_accuracy": 0.3333
+          }
+        },
+        "worst_robust_accuracy": 0.0556
+      }
+    ]
+  }
+}

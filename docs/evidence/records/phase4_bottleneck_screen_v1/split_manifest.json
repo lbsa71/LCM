@@ -1,0 +1,11 @@
+{
+  "tokenizer_policy": "training_examples_only",
+  "training_example_count": 288,
+  "pressure_example_count": 126,
+  "training_unique_utterance_count": 288,
+  "pressure_unique_utterance_count": 126,
+  "exact_utterance_overlap_count": 0,
+  "training_corpus_sha256": "5ceaf9d713569eec347054ee19cd810eacfb9f04e36032f232451ea7cba06b11",
+  "tokenizer_corpus_sha256": "5ceaf9d713569eec347054ee19cd810eacfb9f04e36032f232451ea7cba06b11",
+  "validation": "PASS"
+}

@@ -1,0 +1,99 @@
+{
+  "total_eval_tasks": 110,
+  "overall_task_success_rate": 0.5091,
+  "overall_grounded_success_rate": 0.5,
+  "unsupported_claim_rate": 0.0091,
+  "overall_prior_contamination_rate": 0.0,
+  "suite_metrics": {
+    "suite_a_language": {
+      "total_tasks": 10,
+      "task_success_rate": 1.0,
+      "grounded_success_rate": 1.0,
+      "prior_contamination_rate": 0.0
+    },
+    "suite_b_invariants": {
+      "total_tasks": 10,
+      "task_success_rate": 1.0,
+      "grounded_success_rate": 1.0,
+      "prior_contamination_rate": 0.0
+    },
+    "suite_c_single_hop": {
+      "total_tasks": 10,
+      "task_success_rate": 0.2,
+      "grounded_success_rate": 0.1,
+      "prior_contamination_rate": 0.0
+    },
+    "suite_d_multi_hop": {
+      "total_tasks": 10,
+      "task_success_rate": 0.0,
+      "grounded_success_rate": 0.0,
+      "prior_contamination_rate": 0.0
+    },
+    "suite_e_retrieval_computation": {
+      "total_tasks": 10,
+      "task_success_rate": 0.1,
+      "grounded_success_rate": 0.1,
+      "prior_contamination_rate": 0.0
+    },
+    "suite_f_missing_evidence": {
+      "total_tasks": 10,
+      "task_success_rate": 0.0,
+      "grounded_success_rate": 0.0,
+      "prior_contamination_rate": 0.0
+    },
+    "suite_g_tool_recovery": {
+      "total_tasks": 10,
+      "task_success_rate": 0.4,
+      "grounded_success_rate": 0.4,
+      "prior_contamination_rate": 0.0
+    },
+    "suite_h_direct_computation": {
+      "total_tasks": 10,
+      "task_success_rate": 1.0,
+      "grounded_success_rate": 1.0,
+      "prior_contamination_rate": 0.0
+    },
+    "suite_i_counterfactual_inversion": {
+      "total_tasks": 10,
+      "task_success_rate": 0.9,
+      "grounded_success_rate": 0.9,
+      "prior_contamination_rate": 0.0
+    },
+    "anti_memorization_evidence_disabled": {
+      "total_tasks": 10,
+      "task_success_rate": 0.0,
+      "grounded_success_rate": 0.0,
+      "prior_contamination_rate": 0.0
+    },
+    "anti_memorization_closed_book": {
+      "total_tasks": 10,
+      "task_success_rate": 1.0,
+      "grounded_success_rate": 1.0,
+      "prior_contamination_rate": 0.0
+    }
+  },
+  "failure_taxonomy_distribution": {
+    "COMPUTATION_OR_EXTRACTION_ERROR": 32,
+    "UNSUPPORTED_CLAIM": 1,
+    "STEP_LIMIT": 2,
+    "FAILED_ABSTENTION": 19,
+    "FAILED_RETRIEVAL": 1
+  },
+  "total_episode_seconds": 539.7829,
+  "ms_per_task": 4907.12,
+  "fingerprint": "aeb500aca0f12e3801e669053c1af78140accbfce23e8ee961d828526c7869f1",
+  "strict_grounded_success_rate": 0.5,
+  "strict_suite_success_rates": {
+    "anti_memorization_closed_book": 1.0,
+    "anti_memorization_evidence_disabled": 0.0,
+    "suite_a_language": 1.0,
+    "suite_b_invariants": 1.0,
+    "suite_c_single_hop": 0.1,
+    "suite_d_multi_hop": 0.0,
+    "suite_e_retrieval_computation": 0.1,
+    "suite_f_missing_evidence": 0.0,
+    "suite_g_tool_recovery": 0.4,
+    "suite_h_direct_computation": 1.0,
+    "suite_i_counterfactual_inversion": 0.9
+  }
+}

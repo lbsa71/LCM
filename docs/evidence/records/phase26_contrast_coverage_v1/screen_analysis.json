@@ -1,0 +1,377 @@
+{
+  "gate": {
+    "minimum_worst_group_gain": 0.1,
+    "paired_bootstrap_lower_bound_must_exceed": 0.0,
+    "maximum_individual_track_regression": 0.05
+  },
+  "arms": {
+    "minimal_contrast": {
+      "paired_seeds": [
+        17,
+        29,
+        41,
+        53,
+        67
+      ],
+      "worst_group_delta": {
+        "n": 5,
+        "mean": 0.1333,
+        "sample_std": 0.1826,
+        "bootstrap_95_ci": [
+          0.0,
+          0.2666
+        ]
+      },
+      "track_deltas": {
+        "held_out_templates": {
+          "n": 5,
+          "mean": 0.0889,
+          "sample_std": 0.1501,
+          "bootstrap_95_ci": [
+            -0.0111,
+            0.2222
+          ]
+        },
+        "lexical_shift": {
+          "n": 5,
+          "mean": 0.1222,
+          "sample_std": 0.1685,
+          "bootstrap_95_ci": [
+            0.0,
+            0.2556
+          ]
+        },
+        "syntax_order_reversal": {
+          "n": 5,
+          "mean": 0.2222,
+          "sample_std": 0.3143,
+          "bootstrap_95_ci": [
+            0.0,
+            0.4889
+          ]
+        },
+        "discourse_distractor": {
+          "n": 5,
+          "mean": 0.1334,
+          "sample_std": 0.1826,
+          "bootstrap_95_ci": [
+            0.0,
+            0.2667
+          ]
+        },
+        "minimal_contrast": {
+          "n": 5,
+          "mean": 0.3445,
+          "sample_std": 0.0824,
+          "bootstrap_95_ci": [
+            0.2778,
+            0.4111
+          ]
+        }
+      },
+      "no_track_regression_over_5pp": true,
+      "passes_continuation_gate": false
+    },
+    "lexical_contrast": {
+      "paired_seeds": [
+        17,
+        29,
+        41,
+        53,
+        67
+      ],
+      "worst_group_delta": {
+        "n": 5,
+        "mean": 0.0667,
+        "sample_std": 0.1491,
+        "bootstrap_95_ci": [
+          0.0,
+          0.2
+        ]
+      },
+      "track_deltas": {
+        "held_out_templates": {
+          "n": 5,
+          "mean": -0.0611,
+          "sample_std": 0.093,
+          "bootstrap_95_ci": [
+            -0.1445,
+            -0.0056
+          ]
+        },
+        "lexical_shift": {
+          "n": 5,
+          "mean": 0.1556,
+          "sample_std": 0.1542,
+          "bootstrap_95_ci": [
+            0.0333,
+            0.2778
+          ]
+        },
+        "syntax_order_reversal": {
+          "n": 5,
+          "mean": 0.1556,
+          "sample_std": 0.2166,
+          "bootstrap_95_ci": [
+            0.0,
+            0.3333
+          ]
+        },
+        "discourse_distractor": {
+          "n": 5,
+          "mean": 0.0333,
+          "sample_std": 0.2473,
+          "bootstrap_95_ci": [
+            -0.1667,
+            0.2
+          ]
+        },
+        "minimal_contrast": {
+          "n": 5,
+          "mean": -0.0667,
+          "sample_std": 0.1491,
+          "bootstrap_95_ci": [
+            -0.2,
+            0.0
+          ]
+        }
+      },
+      "no_track_regression_over_5pp": false,
+      "passes_continuation_gate": false
+    },
+    "minimal_lexical_contrast": {
+      "paired_seeds": [
+        17,
+        29,
+        41,
+        53,
+        67
+      ],
+      "worst_group_delta": {
+        "n": 5,
+        "mean": 0.2111,
+        "sample_std": 0.2236,
+        "bootstrap_95_ci": [
+          0.0333,
+          0.3889
+        ]
+      },
+      "track_deltas": {
+        "held_out_templates": {
+          "n": 5,
+          "mean": -0.0,
+          "sample_std": 0.1416,
+          "bootstrap_95_ci": [
+            -0.1111,
+            0.1111
+          ]
+        },
+        "lexical_shift": {
+          "n": 5,
+          "mean": 0.2111,
+          "sample_std": 0.194,
+          "bootstrap_95_ci": [
+            0.0667,
+            0.3556
+          ]
+        },
+        "syntax_order_reversal": {
+          "n": 5,
+          "mean": 0.1444,
+          "sample_std": 0.2822,
+          "bootstrap_95_ci": [
+            -0.0667,
+            0.3555
+          ]
+        },
+        "discourse_distractor": {
+          "n": 5,
+          "mean": 0.1334,
+          "sample_std": 0.1826,
+          "bootstrap_95_ci": [
+            0.0,
+            0.2667
+          ]
+        },
+        "minimal_contrast": {
+          "n": 5,
+          "mean": 0.5334,
+          "sample_std": 0.1826,
+          "bootstrap_95_ci": [
+            0.4,
+            0.6667
+          ]
+        }
+      },
+      "no_track_regression_over_5pp": true,
+      "passes_continuation_gate": true
+    }
+  },
+  "selected_arm": "minimal_lexical_contrast",
+  "factorial_effects": {
+    "worst_robust_accuracy": {
+      "minimal_without_lexical": {
+        "n": 5,
+        "mean": 0.1333,
+        "sample_std": 0.1826,
+        "bootstrap_95_ci": [
+          0.0,
+          0.2666
+        ],
+        "paired_seeds": [
+          17,
+          29,
+          41,
+          53,
+          67
+        ]
+      },
+      "lexical_without_minimal": {
+        "n": 5,
+        "mean": 0.0667,
+        "sample_std": 0.1491,
+        "bootstrap_95_ci": [
+          0.0,
+          0.2
+        ],
+        "paired_seeds": [
+          17,
+          29,
+          41,
+          53,
+          67
+        ]
+      },
+      "minimal_with_lexical": {
+        "n": 5,
+        "mean": 0.1444,
+        "sample_std": 0.1826,
+        "bootstrap_95_ci": [
+          0.0222,
+          0.3
+        ],
+        "paired_seeds": [
+          17,
+          29,
+          41,
+          53,
+          67
+        ]
+      },
+      "lexical_with_minimal": {
+        "n": 5,
+        "mean": 0.0778,
+        "sample_std": 0.0745,
+        "bootstrap_95_ci": [
+          0.0222,
+          0.1333
+        ],
+        "paired_seeds": [
+          17,
+          29,
+          41,
+          53,
+          67
+        ]
+      },
+      "interaction": {
+        "n": 5,
+        "mean": 0.0111,
+        "sample_std": 0.1491,
+        "bootstrap_95_ci": [
+          -0.1111,
+          0.1222
+        ],
+        "paired_seeds": [
+          17,
+          29,
+          41,
+          53,
+          67
+        ]
+      }
+    },
+    "macro_robust_accuracy": {
+      "minimal_without_lexical": {
+        "n": 5,
+        "mean": 0.1822,
+        "sample_std": 0.0405,
+        "bootstrap_95_ci": [
+          0.1511,
+          0.2133
+        ],
+        "paired_seeds": [
+          17,
+          29,
+          41,
+          53,
+          67
+        ]
+      },
+      "lexical_without_minimal": {
+        "n": 5,
+        "mean": 0.0433,
+        "sample_std": 0.0507,
+        "bootstrap_95_ci": [
+          0.0044,
+          0.0822
+        ],
+        "paired_seeds": [
+          17,
+          29,
+          41,
+          53,
+          67
+        ]
+      },
+      "minimal_with_lexical": {
+        "n": 5,
+        "mean": 0.1611,
+        "sample_std": 0.1217,
+        "bootstrap_95_ci": [
+          0.0522,
+          0.2333
+        ],
+        "paired_seeds": [
+          17,
+          29,
+          41,
+          53,
+          67
+        ]
+      },
+      "lexical_with_minimal": {
+        "n": 5,
+        "mean": 0.0222,
+        "sample_std": 0.092,
+        "bootstrap_95_ci": [
+          -0.0622,
+          0.08
+        ],
+        "paired_seeds": [
+          17,
+          29,
+          41,
+          53,
+          67
+        ]
+      },
+      "interaction": {
+        "n": 5,
+        "mean": -0.0211,
+        "sample_std": 0.1188,
+        "bootstrap_95_ci": [
+          -0.13,
+          0.0511
+        ],
+        "paired_seeds": [
+          17,
+          29,
+          41,
+          53,
+          67
+        ]
+      }
+    }
+  }
+}
